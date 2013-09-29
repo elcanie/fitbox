@@ -19,13 +19,12 @@ public class Usuario {
     /*
      * Consultas
      */
-    public static final int NUMERO_CONSULTAS = 3;
     public static final String INSERT_USUARIO = "INSERT INTO  `fitbox`.`usuario` (`id` ,`nombre` ,`password`) VALUES (NULL, ";
     public static final String TODOS_USUARIOS = "select * from usuario";
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 4;
+    public static final int NUMERO_ATRIBUTOS = 3;
     private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre = new SimpleStringProperty("");
     private final SimpleStringProperty password = new SimpleStringProperty("");

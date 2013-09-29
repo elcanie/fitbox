@@ -49,7 +49,7 @@ public class Dao<T extends Object> {
     private Collection<T> recorrerResultSet(ResultSet _rs) {
         Collection<T> datos = new LinkedList<>();
         try {
-            Integer a = claseT.getDeclaredField("NUMERO_CONSULTAS").getInt(null);
+            Integer a = claseT.getDeclaredField("NUMERO_ATRIBUTOS").getInt(null);
             System.out.println(a);
             while(_rs.next()){
                 Integer i = 0;
