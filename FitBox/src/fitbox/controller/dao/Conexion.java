@@ -22,14 +22,14 @@ public class Conexion {
 
     private void conectar() {
         try {
-            System.out.println("Intentando cargar el conector...");
+            Logger.getLogger("Conexion").info("Intentando cargar el conector...");
             Class.forName("com.mysql.jdbc.Driver");
 
             //Intentamos conectarnos a la base de Datos en este caso una base
-            System.out.println("Conectando a la base...");
+            Logger.getLogger("Conexion").info("Conectando a la base...");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost/fitbox", "root", "");
-            System.out.println("Conexion a BD establecida");
+            Logger.getLogger("Conexion").info("Conexion a BD establecida");
 
 
         } catch (SQLException ex) {
