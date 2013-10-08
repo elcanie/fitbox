@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
  
 /**
@@ -27,9 +28,14 @@ import javafx.util.Duration;
  */
 public class ScreensController extends StackPane{
     private HashMap<String,Node> screens=new HashMap<>();
+    private Stage stage;
+    public ScreensController(Stage stage){
+        this.stage=stage;
+    }
     public void addScreen(String name, Node screen){
         screens.put(name,screen);
     }
+ 
     public boolean loadScreen(String name,String resource,ScreensFramework main){
         try{
             FXMLLoader myLoader=new FXMLLoader(getClass().getResource(resource));

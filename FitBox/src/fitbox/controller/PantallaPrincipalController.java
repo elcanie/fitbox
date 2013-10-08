@@ -9,6 +9,7 @@ package fitbox.controller;
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
 import fitbox.view.ScreensFramework;
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -25,6 +26,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -86,7 +88,8 @@ public class PantallaPrincipalController implements Initializable,ControlledScre
     }
      @FXML
     public void abrirActividades(MouseEvent event) throws IOException{
-       // myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
+         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, main);
+        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
         
     }
       @FXML
@@ -141,6 +144,9 @@ public class PantallaPrincipalController implements Initializable,ControlledScre
         inicioReloj();
         inicioGaleria();
         cargarEventos();
+       
+        
+    
     }
     public void cargarEventos(){
         /*
