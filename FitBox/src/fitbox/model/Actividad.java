@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleDoubleProperty;
 
 
 /**
@@ -32,7 +33,7 @@ public class Actividad {
     private final SimpleIntegerProperty id=new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre=new SimpleStringProperty("");
     private final SimpleStringProperty descripcion=new SimpleStringProperty("");
-    private final SimpleIntegerProperty factor=new SimpleIntegerProperty(0);
+    private final SimpleDoubleProperty factor=new SimpleDoubleProperty(0);
     private final SimpleStringProperty video=new SimpleStringProperty("");
     private final SimpleStringProperty categoria=new SimpleStringProperty("");
     private final SimpleStringProperty objetivo=new SimpleStringProperty("");
@@ -40,15 +41,15 @@ public class Actividad {
     private String valores[] = new String[NUMERO_ATRIBUTOS];
 
     public Actividad() {
-        this(new Integer(0), "", "",new Integer(0),"","","");
+        this(new Integer(0), "", "",new Double(3.0),"","","");
         
     }
 
     public Actividad(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2),(int)array.get(3),(String)array.get(4),(String)array.get(5),(String)array.get(6));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2),(double)array.get(3),(String)array.get(4),(String)array.get(5),(String)array.get(6));
     }
 
-    public Actividad(int id, String nombre, String descripcion,int factor,String video,String categoria, String objetivo) {
+    public Actividad(int id, String nombre, String descripcion,double factor,String video,String categoria, String objetivo) {
         setValores(id, nombre, descripcion,factor,video,categoria,objetivo);
         setId(id);
         setNombre(nombre);
@@ -59,17 +60,21 @@ public class Actividad {
         setObjetivo(objetivo);
  
     }
-    public int getFactor(){
+    public double getFactor(){
         return factor.get();
     }
-    public void setFactor(int factor){
-        this.factor.set(factor);
+        /**
+     *
+     * @param fName
+     */
+    public void setFactor(double fName){
+        this.factor.set(fName);
     }
     public String getCategoria(){
         return categoria.get();
     }
-    public void setCategoria(String categoria){
-        this.categoria.set(categoria);
+    public void setCategoria(String fName){
+        this.categoria.set(fName);
     }
     public int getId() {
         return id.get();
@@ -101,22 +106,23 @@ public class Actividad {
     public String getVideo(){
         return video.get();
     }
+        public void setVideo(String fName){
+        this.video.set(fName);
+    }
     public String getObjetivo(){
         return objetivo.get();
     }
-    
-    public void setVideo(String urlVideo){
-        this.video.set(urlVideo);
+       public void setObjetivo(String fName){
+        this.objetivo.set(fName);
     }
-    public void setObjetivo(String objetivo){
-        this.objetivo.set(objetivo);
-    }
+
+ 
     @Override
     public String toString() {
         return nombre.get();
     }
 
-    private void setValores(int id, String nombre, String descripcion,int factor, String video,String categoria,String objetivo) {
+    private void setValores(int id, String nombre, String descripcion,double factor, String video,String categoria,String objetivo) {
         valores[0] = id + "";
         valores[1] = nombre + "";
         valores[2] = descripcion + "";
