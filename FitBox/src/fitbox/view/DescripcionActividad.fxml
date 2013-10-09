@@ -6,6 +6,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -38,7 +39,18 @@
         </TextArea>
       </children>
     </AnchorPane>
-    <Button fx:id="bGo" layoutX="97.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#irActividad" prefHeight="51.0" prefWidth="91.0" text="GO" />
+    <Button fx:id="bGo" cancelButton="false" defaultButton="false" disable="false" layoutX="91.0" layoutY="404.0" minHeight="106.0" minWidth="118.0" mnemonicParsing="false" onMouseClicked="#irActividad" prefHeight="106.0" prefWidth="118.0" text="">
+      <graphic>
+        <ImageView fitHeight="104.99990000000253" fitWidth="104.99990000000253" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../imagenes/Button-Next-icon.png" />
+          </image>
+        </ImageView>
+      </graphic>
+      <stylesheets>
+        <URL value="@Styledescripcionactividad.css" />
+      </stylesheets>
+    </Button>
     <TextField fx:id="nRepeticiones" layoutX="135.0" layoutY="67.0" prefWidth="135.0001220703125">
       <effect>
         <SepiaTone fx:id="x2" />

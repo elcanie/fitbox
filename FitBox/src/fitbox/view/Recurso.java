@@ -13,11 +13,14 @@ import java.util.ResourceBundle;
  *
  * @author RUBEN
  */
-public class Recurso <T extends Object> extends ResourceBundle{
-    Hashtable<String,T> recursos;
-    public Recurso(){
-        recursos=new Hashtable<String,T>();
+public class Recurso<T extends Object> extends ResourceBundle {
+
+    Hashtable<String, T> recursos;
+
+    public Recurso() {
+        recursos = new Hashtable<String, T>();
     }
+
     @Override
     protected Object handleGetObject(String key) {
         return recursos.get(key); //To change body of generated methods, choose Tools | Templates.
@@ -26,10 +29,10 @@ public class Recurso <T extends Object> extends ResourceBundle{
     @Override
     public Enumeration<String> getKeys() {
         return recursos.keys();
-        
+
     }
-    public void putObject(String key,T objeto){
+
+    public void putObject(String key, T objeto) {
         recursos.put(key, objeto);
     }
-    
 }

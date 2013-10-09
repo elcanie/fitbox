@@ -48,10 +48,13 @@ public class AccederActividadesController implements Initializable, ControlledSc
      */
     private ScreensController myController;
     private ScreensFramework main;
-    @FXML ListView listaCategorias;
-    @FXML AnchorPane panelActividades;
-    private Hashtable<String,Actividad> botonActividad=new Hashtable<String,Actividad>();
-    @FXML Button botonHome;
+    @FXML
+    ListView listaCategorias;
+    @FXML
+    AnchorPane panelActividades;
+    private Hashtable<String, Actividad> botonActividad = new Hashtable<String, Actividad>();
+    @FXML
+    Button botonHome;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,94 +64,98 @@ public class AccederActividadesController implements Initializable, ControlledSc
         ScreensFramework.stage.setWidth(916);
         ScreensFramework.stage.setHeight(522);
         ScreensFramework.stage.centerOnScreen();
-        
+
         //myController.setSize(600, 400);
     }
-    public void cargarCategorias(){
-        ObservableList<String> data= FXCollections.observableArrayList();
-        data.addAll("Torso","Cardio","Pierna","Abdominales","Hit","Estiramientos");
+
+    public void cargarCategorias() {
+        ObservableList<String> data = FXCollections.observableArrayList();
+        data.addAll("Torso", "Cardio", "Pierna", "Abdominales", "Hit", "Estiramientos");
         listaCategorias.setItems(data);
-        
-        
+
+
     }
-    @FXML 
-    public void goToHome(MouseEvent event){
+
+    @FXML
+    public void goToHome(MouseEvent event) {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, main);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
     }
+
     @FXML
-    public void cargarActividades(MouseEvent event){
-       Dal dal = Dal.getDal();
-       int indice=listaCategorias.getSelectionModel().getSelectedIndex();
-       String elemento=(String)listaCategorias.getItems().get(indice);
-       elemento=elemento.toLowerCase();
-       //La sentencia SQL debe cambiar a todas las actividades de esa categoria
-        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADES,Actividad.class);
-        Iterator<Actividad> it=datos.iterator();
-        Actividad actividad=null;
-        int i=0,j=0,contador=1;
-        int contadorImagen=0;
-        while(it.hasNext()) {
-            if(i%2==0 && i!=0){j++;contador++;i=0;}
-            actividad=it.next();
-            Image im=new Image (getClass().getResource("/imagenes/"+elemento+contadorImagen+".jpg").toExternalForm());
-            ImageView imageView=new ImageView(im);
+    public void cargarActividades(MouseEvent event) {
+        Dal dal = Dal.getDal();
+        int indice = listaCategorias.getSelectionModel().getSelectedIndex();
+        String elemento = (String) listaCategorias.getItems().get(indice);
+        elemento = elemento.toLowerCase();
+        //La sentencia SQL debe cambiar a todas las actividades de esa categoria
+        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADES, Actividad.class);
+        Iterator<Actividad> it = datos.iterator();
+        Actividad actividad = null;
+        int i = 0, j = 0, contador = 1;
+        int contadorImagen = 0;
+        while (it.hasNext()) {
+            if (i % 2 == 0 && i != 0) {
+                j++;
+                contador++;
+                i = 0;
+            }
+            actividad = it.next();
+            Image im = new Image(getClass().getResource("/imagenes/" + elemento + contadorImagen + ".jpg").toExternalForm());
+            ImageView imageView = new ImageView(im);
             imageView.setFitWidth(150);
             imageView.setFitHeight(150);
-            Button boton=new Button(actividad.getNombre());
-           
-            boton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            Button boton = new Button(actividad.getNombre());
 
+            boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-                    Button botonPulsado=(Button)t.getSource();
-                    
-                    Actividad actividad= botonActividad.get(botonPulsado.getText());
-                    Stage s=new Stage();
-                        Parent root=null;
+                    Button botonPulsado = (Button) t.getSource();
+
+                    Actividad actividad = botonActividad.get(botonPulsado.getText());
+                    Stage s = new Stage();
+                    Parent root = null;
                     try {
-                        Recurso recurso=new Recurso();
+                        Recurso recurso = new Recurso();
                         recurso.putObject("Actividad", actividad);
-                        
-                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"),recurso);
+
+                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), recurso);
                     } catch (IOException ex) {
                         Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-        
+
                     Scene scene = new Scene(root);
                     s.setScene(scene);
                     s.show();
                     ScreensFramework.stage.toBack();
-        
+
                     //To change body of generated methods, choose Tools | Templates.
                 }
-            
-            }
-                    );
+            });
             panelActividades.getChildren().add(boton);
-            boton.setLayoutX(20+((i*imageView.getFitWidth())+(10*i)));
-            boton.setLayoutY(20+((contador*imageView.getFitHeight())+(j*boton.getHeight())+(30*j)));
+            boton.setLayoutX(20 + ((i * imageView.getFitWidth()) + (10 * i)));
+            boton.setLayoutY(20 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
             botonActividad.put(actividad.getNombre(), actividad);
 
             panelActividades.getChildren().add(imageView);
-            imageView.setLayoutX(20+((i*imageView.getFitWidth())+(10*i)));
-            imageView.setLayoutY(20+((j*imageView.getFitHeight())+(30*j)+(boton.getHeight()*j)));
+            imageView.setLayoutX(20 + ((i * imageView.getFitWidth()) + (10 * i)));
+            imageView.setLayoutY(20 + ((j * imageView.getFitHeight()) + (30 * j) + (boton.getHeight() * j)));
             i++;
             contadorImagen++;
-        
-       }
+
+        }
     }
+
     @Override
     public void setMain(ScreensFramework main) {
         this.main = main;
         main.getStage().setResizable(true);
-  
+
     }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

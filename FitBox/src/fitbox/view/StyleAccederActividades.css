@@ -15,4 +15,23 @@
         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
     
 }
+#botonHome{
+    
+
+   
+     -fx-background-radius: 10; 
+     -fx-background-color: 
+            radial-gradient(radius 100%, 
+                             derive(-fx-base,-60%), 
+                             derive(-fx-base,-80%)), 
+            derive(-fx-base,-40%), 
+            radial-gradient(radius 100%, 
+                             derive(-fx-base,-60%), 
+                             derive(-fx-base,-80%)); 
+     -fx-background-insets: 0,1,2; 
+   
+}
+#botonHome:hover{
+    background-color:red;
+}
 

@@ -23,27 +23,33 @@ import javafx.scene.input.MouseEvent;
  */
 public class DescripcionActividadController implements Initializable {
     
-    @FXML Button bGo;
-    @FXML TextArea tDescripcion;
-    @FXML TextField factor, objetivo, categoria, nRepeticiones;
-    @FXML Label nombreActividad;
+    @FXML
+    Button bGo;
+    @FXML
+    TextArea tDescripcion;
+    @FXML
+    TextField factor, objetivo, categoria, nRepeticiones;
+    @FXML
+    Label nombreActividad;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Recurso recurso=(Recurso)rb;
-        Actividad actividad=(Actividad)recurso.getObject("Actividad");
+        Recurso recurso = (Recurso) rb;
+        Actividad actividad = (Actividad) recurso.getObject("Actividad");
         nombreActividad.setText(actividad.getNombre().toUpperCase());
         tDescripcion.setText(actividad.getDescripcion());
-        factor.setText(actividad.getFactor()+"");
+        factor.setText(actividad.getFactor() + "");
         categoria.setText(actividad.getCategoria());
-        nRepeticiones.setText(((int)(actividad.getFactor()*9.75))+"");
+        nRepeticiones.setText(((int) (actividad.getFactor() * 9.75)) + "");
+        objetivo.setText(actividad.getObjetivo());
         
-    }  
+    }    
     
     @FXML
-    public void irActividad(MouseEvent event){
+    public void irActividad(MouseEvent event) {
         
         
     }

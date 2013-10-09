@@ -6,6 +6,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -17,7 +18,15 @@
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="53.0" prefWidth="916.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Button fx:id="botonHome" mnemonicParsing="false" onMouseClicked="#goToHome" text="HOME" />
+                <Button fx:id="botonHome" minHeight="72.0" minWidth="93.0" mnemonicParsing="false" onMouseClicked="#goToHome" prefHeight="72.0" prefWidth="93.0" text="">
+                  <graphic>
+                    <ImageView fitHeight="70.25" fitWidth="70.25" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
+                      <image>
+                        <Image url="@../../imagenes/Action-button-home-icon.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
                 <Separator prefWidth="200.0" visible="false" />
                 <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="26.0" prefWidth="313.0" text="ACTIVIDADES" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" wrapText="false">
                   <effect>

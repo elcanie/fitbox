@@ -12,7 +12,8 @@ import fitbox.controller.ScreensController;
  */
 public interface ControlledScreen {
     //Permite la injeccion del padre
+
     public void setScreenParent(ScreensController screenParent);
+
     public void setMain(ScreensFramework main);
-    
 }
