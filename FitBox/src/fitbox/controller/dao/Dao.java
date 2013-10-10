@@ -4,6 +4,7 @@
  */
 package fitbox.controller.dao;
 
+import com.mysql.jdbc.PreparedStatement;
 import fitbox.model.Usuario;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,13 +33,22 @@ public class Dao<T extends Object> {
         conexion = Conexion.getConexion();
     }
 
-    public Collection<T> find(String consulta) {
+    public List<T> find(String consulta,Object[] parametros) {
 
-        Statement s = conexion.createStatement();
+        PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+        int i=1;
+        for(Object o : parametros){
+            try {
+                s.setObject(i, o);
+                i++;
+            } catch (SQLException ex) {
+                Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         ResultSet rs;
-        Collection<T> datos = null;
+        List<T> datos = null;
         try {
-            rs = s.executeQuery(consulta);
+            rs = s.executeQuery();
             datos = recorrerResultSet(rs);
 
         } catch (SQLException ex) {
@@ -46,8 +57,8 @@ public class Dao<T extends Object> {
         return datos;
     }
 
-    private Collection<T> recorrerResultSet(ResultSet _rs) {
-        Collection<T> datos = new LinkedList<>();
+    private List<T> recorrerResultSet(ResultSet _rs) {
+        List<T> datos = new LinkedList<>();
         try {
             Integer a = claseT.getDeclaredField("NUMERO_ATRIBUTOS").getInt(null);
             System.out.println(a);

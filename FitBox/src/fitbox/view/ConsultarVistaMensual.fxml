@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100" minWidth="100" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensual">
+  <children>
+    <ListView fx:id="semana1List" layoutX="74.0" layoutY="46.0" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
+    <ListView layoutX="74.0" layoutY="138.0" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
+    <ListView layoutX="74.0" layoutY="223.0" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
+    <ListView layoutX="74.0" layoutY="304.0" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
+  </children>
+</AnchorPane>

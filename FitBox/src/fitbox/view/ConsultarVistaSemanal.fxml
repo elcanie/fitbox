@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="426.999977929685" prefWidth="810.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaSemanal">
+  <children>
+    <ListView fx:id="lunesList" layoutX="73.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0">
+      <stylesheets>
+        <URL value="@../../com/sai/javafx/calendar/styles/calendar_styles.css" />
+      </stylesheets>
+    </ListView>
+    <Label layoutX="102.0" layoutY="76.0" text="Lunes" />
+    <Label layoutX="11.0" layoutY="114.0" text="8:00 - 9:00" />
+    <ListView fx:id="martesList" layoutX="175.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="198.0" layoutY="76.0" text="Martes" />
+    <ListView layoutX="278.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="296.0" layoutY="76.0" text="Miercoles" />
+    <ListView layoutX="383.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="401.0" layoutY="76.0" text="Jueves" />
+    <ListView layoutX="488.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="506.0" layoutY="76.0" text="Viernes" />
+    <ListView layoutX="593.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="611.0" layoutY="76.0" text="Sabado" />
+    <ListView layoutX="698.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="716.0" layoutY="76.0" text="Domingo" />
+  </children>
+</AnchorPane>

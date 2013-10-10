@@ -4,11 +4,11 @@
  */
 package fitbox.controller.dao;
 
-import fitbox.model.Actividad;
 import fitbox.model.Usuario;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,7 +22,6 @@ public class Dal {
     private Dal(){
         daos =  new HashMap<String,Dao>();
         daos.put("Usuario", new Dao<Usuario>(Usuario.class));
-        daos.put("Actividad", new Dao<Actividad>(Actividad.class));
     }
     
     public static Dal getDal(){
@@ -30,9 +29,9 @@ public class Dal {
     return dal;
     }
     
-    public Collection find(String consulta,Class tipoClase){
+    public List find(String consulta,Object[] parametros,Class tipoClase){
         Dao dao = daos.get(tipoClase.getSimpleName());
-        return dao.find(consulta);
+        return dao.find(consulta,parametros);
     }
 
     public void insert(Usuario usuario) {
