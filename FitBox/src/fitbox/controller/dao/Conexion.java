@@ -41,7 +41,15 @@ public class Conexion {
         }
     }
 
-    Statement createStatement() {
+    PreparedStatement createStatement(String consulta) {
+        try {
+            return connection.prepareStatement(consulta);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     Statement createStatement() {
         try {
             return connection.createStatement();
         } catch (SQLException ex) {
@@ -49,4 +57,5 @@ public class Conexion {
         }
         return null;
     }
+
 }

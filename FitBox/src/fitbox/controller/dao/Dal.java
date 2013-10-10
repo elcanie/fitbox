@@ -8,6 +8,7 @@ import fitbox.model.Usuario;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,9 +29,9 @@ public class Dal {
     return dal;
     }
     
-    public Collection find(String consulta,Class tipoClase){
+    public List find(String consulta,Object[] parametros,Class tipoClase){
         Dao dao = daos.get(tipoClase.getSimpleName());
-        return dao.find(consulta);
+        return dao.find(consulta,parametros);
     }
 
     public void insert(Usuario usuario) {

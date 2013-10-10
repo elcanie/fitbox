@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fitbox.view;
+package fitbox;
 
+import fitbox.controller.ConsultarCalendarioController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,14 +15,14 @@ import javafx.stage.Stage;
  *
  * @author Elias
  */
-public class FitBox extends Application {
+public class LanzadorConsultarVistaMensual extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Prueba.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fitbox/view/ConsultarVistaMensual.fxml"));
         
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
