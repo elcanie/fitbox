@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 public class ScreensFramework extends Application{
     public static final String PANTALLA_PRINCIPAL= "PantallaPrincipal"; 
      public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml"; 
+     public static final String PANTALLA_REALIZARATCIVIDAD="RealizarActividad";
+     public static final String PANTALLA_REALIZARACTIVIDAD_FXML = "/fitbox/view/RealizarActividad.fxml"; 
+
      public Stage stage;
    /*  public static final String PANTALLA_PRUEBA= "Actividad"; 
      public static final String PANTALLA_PRUEBA_FXML = "Actividad.fxml";*/
@@ -35,6 +38,8 @@ public class ScreensFramework extends Application{
        ScreensController mainContainer = new ScreensController(); 
        mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, 
                             ScreensFramework.PANTALLA_PRINCIPAL_FXML,this); 
+        /*mainContainer.loadScreen(ScreensFramework.PANTALLA_REALIZARATCIVIDAD, 
+                            ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML,this); */
       // mainContainer.loadScreen(ScreensFramework.PANTALLA_PRUEBA,ScreensFramework.PANTALLA_PRUEBA_FXML);
 
        mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL); 

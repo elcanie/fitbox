@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.Media?>
+<?import javafx.scene.media.MediaPlayer?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="realizarActividad" focusTraversable="false" prefHeight="548.9999000000025" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.RealizarActividadController">
+  <children>
+    <Pane fx:id="panellateral" layoutX="514.0" prefHeight="549.0" prefWidth="270.0" style="" AnchorPane.bottomAnchor="0.0">
+      <children>
+        <Label layoutX="40.0" layoutY="125.0" text="MONITORIZACIÓN" textFill="WHITE" wrapText="false">
+          <font>
+            <Font name="Verdana" size="20.0" />
+          </font>
+        </Label>
+        <Button fx:id="botonhome" layoutX="0.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="70.0" fitWidth="70.0">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="botonpausa" layoutX="90.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="" text="">
+          <graphic>
+            <ImageView id="Button-Pause-icon.png" fitHeight="70.0" fitWidth="70.0">
+              <image>
+                <Image url="@../../imagenes/Button-Pause-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="botongrabar" layoutX="180.0" layoutY="1.0" minHeight="90.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="" text="">
+          <graphic>
+            <ImageView id="Camera-icon.png" fitHeight="80.0" fitWidth="80.0" mouseTransparent="true">
+              <image>
+                <Image url="@../../imagenes/Camera-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Label layoutX="21.0" layoutY="192.0" prefHeight="30.28125" prefWidth="70.0" text="Tiempo:" textFill="WHITE" />
+        <Label layoutX="21.0" layoutY="235.0" text="Calorías consumidas:" textFill="WHITE" />
+        <Label layoutX="21.0" layoutY="274.0" text="Pulsaciones:" textFill="WHITE" />
+        <Label layoutX="21.0" layoutY="318.0" text="Grado de correción:" textFill="WHITE" />
+        <Label layoutX="176.0" layoutY="196.0" text="0:00:00">
+          <textFill>
+            <Color blue="1.000" green="0.952" red="0.600" fx:id="x1" />
+          </textFill>
+        </Label>
+        <Label alignment="CENTER_RIGHT" contentDisplay="LEFT" layoutX="186.0" layoutY="235.0" prefWidth="38.0" text="0" textAlignment="RIGHT" textFill="$x1" />
+        <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="274.0" prefWidth="38.0" text="0" textAlignment="RIGHT" textFill="$x1" />
+        <Label alignment="CENTER_RIGHT" layoutX="183.0" layoutY="318.0" prefWidth="38.0" text="-" textAlignment="RIGHT" textFill="#99fff3" />
+      </children>
+    </Pane>
+    <Pane fx:id="panelinferior" layoutX="0.0" mouseTransparent="true" prefHeight="111.0" prefWidth="514.0" style="" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="427.0">
+      <children>
+        <ImageView id="Clock-icon.png" fitHeight="100.0" fitWidth="100.0" layoutX="15.0" layoutY="10.0">
+          <image>
+            <Image url="@../../imagenes/Clock-icon.png" preserveRatio="true" smooth="true" />
+          </image>
+        </ImageView>
+        <Button id="botonhome" fx:id="botonayuda" defaultButton="false" layoutX="394.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="121.9998779296875" prefWidth="121.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Help-icon.png" fitHeight="90.0" fitWidth="90.0" mouseTransparent="true">
+              <image>
+                <Image url="@../../imagenes/Help-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Label layoutX="150.0" layoutY="30.0" text="00:00:00" textFill="WHITE">
+          <font>
+            <Font name="System Bold" size="36.0" />
+          </font>
+        </Label>
+      </children>
+    </Pane>
+    <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="425.0" prefWidth="514.0" />
+  </children>
+  <stylesheets>
+    <URL value="@stylerealizaractivdad.css" />
+  </stylesheets>
+</AnchorPane>
