@@ -5,10 +5,10 @@
  */
 package fitbox.controller;
 
-
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
 import fitbox.view.ScreensFramework;
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -25,6 +25,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,12 +50,11 @@ import javafx.util.Duration;
  *
  * @author RUBEN
  */
-public class PantallaPrincipalController implements Initializable,ControlledScreen {
+public class PantallaPrincipalController implements Initializable, ControlledScreen {
 
     /**
      * Initializes the controller class.
      */
-    private ScreensFramework main;
     private FadeTransition fadeTransition;
     private FadeTransition fadeTransition1;
     private FadeTransition fadeTransition2;
@@ -66,174 +66,183 @@ public class PantallaPrincipalController implements Initializable,ControlledScre
     @FXML
     Parent root;
     @FXML
-    private AnchorPane zonaReloj,panelGaleria,ventana;
-   @FXML
-   private ListView listaEventos,listaNews;
-   @FXML
-   private TableView
-           tablaActividad;
+    private AnchorPane zonaReloj, panelGaleria, ventana;
     @FXML
-    private TableColumn columnaHora,columnaActividad;
-   @FXML
-     private TextArea textoResumen;
-           
-    
+    private ListView listaEventos, listaNews;
+    @FXML
+    private TableView tablaActividad;
+    @FXML
+    private TableColumn columnaHora, columnaActividad;
+    @FXML
+    private TextArea textoResumen;
 
     @FXML
-    public void abrirPerfil(MouseEvent event) throws IOException{
-      //  myController.setScreen(ScreensFramework.PANTALLA_PERFIL);
-       // ResourceBundle d=new ResourceBundle();
+    public void abrirPerfil(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_PERFIL);
+        // ResourceBundle d=new ResourceBundle();
     }
-     @FXML
-    public void abrirActividades(MouseEvent event) throws IOException{
-       // myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
-        
+
+    @FXML
+    public void abrirActividades(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, null);
+        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
+
     }
-      @FXML
-    public void abrirCalendario(MouseEvent event) throws IOException{
-      //  myController.setScreen(ScreensFramework.PANTALLA_CALENDARIO);
-        
+
+    @FXML
+    public void abrirCalendario(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_CALENDARIO);
     }
-       @FXML
-    public void abrirEstadisticas(MouseEvent event) throws IOException{
-      //  myController.setScreen(ScreensFramework.PANTALLA_ESTADISTICAS);
-        
+
+    @FXML
+    public void abrirEstadisticas(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_ESTADISTICAS);
     }
-        @FXML
-    public void actualizar(MouseEvent event) throws IOException{
-      //  myController.setScreen(ScreensFramework.PANTALLA_ACTUALIZAR);
-        
+
+    @FXML
+    public void actualizar(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_ACTUALIZAR);
     }
-         @FXML
-    public void abrirEquipo(MouseEvent event) throws IOException{
-       // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
-        
+
+    @FXML
+    public void abrirEquipo(MouseEvent event) throws IOException {
+        // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
     }
-          @FXML
-    public void abrirEventos(MouseEvent event) throws IOException{
-      //  myController.setScreen(ScreensFramework.PANTALLA_EVENTOS);
-        
+
+    @FXML
+    public void abrirEventos(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_EVENTOS);
     }
-           @FXML
-    public void abrirClasificacion(MouseEvent event) throws IOException{
-       // myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
-        
+
+    @FXML
+    public void abrirClasificacion(MouseEvent event) throws IOException {
+        // myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
-            @FXML
-    public void abrirAjustes(MouseEvent event) throws IOException{
+
+    @FXML
+    public void abrirAjustes(MouseEvent event) throws IOException {
         //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
-        
     }
-    public void setMain(ScreensFramework main){
-        this.main=main;
-        this.main.getStage().setWidth(921);
-        this.main.getStage().setHeight(590);
-        this.main.getStage().setResizable(false);
-        
+
+    public void setMain(ScreensFramework main) {
+
+
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-      //  Stage stage=(Stage)lo.getScene().getWindow();
-       // stage.setResizable(false);
+        //  Stage stage=(Stage)lo.getScene().getWindow();
+        // stage.setResizable(false);
         inicioReloj();
         inicioGaleria();
         cargarEventos();
-    }
-    public void cargarEventos(){
-        /*
-       Dal dal = Dal.getDal();
-       Collection<Evento> datos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,Evento.class);
-       ObservableList<String> eventos=FXCollections.observableArrayList(datos);
-       listaEventos.setItems(eventos);
-       
-        */
         
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
+        ScreensFramework.stage.setResizable(false);
+
+
+
     }
-    public void cargarResumen(){
+
+    public void cargarEventos() {
+        /*
+         Dal dal = Dal.getDal();
+         Collection<Evento> datos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,Evento.class);
+         ObservableList<String> eventos=FXCollections.observableArrayList(datos);
+         listaEventos.setItems(eventos);
+       
+         */
+    }
+
+    public void cargarResumen() {
         //Hoy tienes X actividades para realizar y has realizado Y.
-     
     }
-    public void cargarTablaActividades(){
-     /*   ObservableList<Actividad> datos=FXCollections.observableArrayList();
-        columnaHora.setCellValueFactory(new PropertyValueFactory("hora"));
-        columnaActividad.setCellFactory(new PropertyValueFactory("nombre"));
-        tablaActividad.setItems(datos);
-        */
-}
-    public void inicioReloj(){
-        clock=new Clock(Color.rgb(57,168,155), Color.rgb(53,64,62));
+
+    public void cargarTablaActividades() {
+        /*   ObservableList<Actividad> datos=FXCollections.observableArrayList();
+         columnaHora.setCellValueFactory(new PropertyValueFactory("hora"));
+         columnaActividad.setCellFactory(new PropertyValueFactory("nombre"));
+         tablaActividad.setItems(datos);
+         */
+    }
+
+    public void inicioReloj() {
+        clock = new Clock(Color.rgb(57, 168, 155), Color.rgb(53, 64, 62));
         clock.setLayoutX(10);
         clock.setLayoutY(30);
-        clock.getTransforms().add(new Scale(0.4f,0.4f,0,0));
+        clock.getTransforms().add(new Scale(0.4f, 0.4f, 0, 0));
         zonaReloj.getChildren().add(clock);
         clock.play();
     }
-    public void inicioGaleria(){
 
-    
-    
-   
+    public void inicioGaleria() {
+
+
+
+
         Image[] images = new Image[3];
-        images[0] = new Image("http://kalorien-guru.de/wp-content/uploads/2013/06/MQ-30.jpg",false);
-        images[1] = new Image("http://i2.wp.com/runfitners.com/wp-content/uploads/2012/04/imagen-con-frase-motivadora-para-corredores11.jpg",false);
-        images[2] = new Image("http://3.bp.blogspot.com/-dLwJkzM8iZU/UTywrD6b5CI/AAAAAAAABF8/T0BtZKjnbIY/s1600/imagen-con-frase-motivadora-para-corredores5050.jpg",false);
+        images[0] = new Image("http://kalorien-guru.de/wp-content/uploads/2013/06/MQ-30.jpg", false);
+        images[1] = new Image("http://i2.wp.com/runfitners.com/wp-content/uploads/2012/04/imagen-con-frase-motivadora-para-corredores11.jpg", false);
+        images[2] = new Image("http://3.bp.blogspot.com/-dLwJkzM8iZU/UTywrD6b5CI/AAAAAAAABF8/T0BtZKjnbIY/s1600/imagen-con-frase-motivadora-para-corredores5050.jpg", false);
 
 
         ImageView image = new ImageView(images[0]);
         ImageView image1 = new ImageView(images[1]);
         ImageView image2 = new ImageView(images[2]);
-        
+
         image.setFitHeight(500);
         image.setFitWidth(586);
         image1.setFitHeight(500);
         image1.setFitWidth(586);
         image2.setFitHeight(500);
         image2.setFitWidth(586);
-        
-        panelGaleria.getChildren().addAll(image,image1,image2);
-        
-       fadeTransition = FadeTransitionBuilder.create()
-            .duration(Duration.seconds(5))
-            .node(image2)  
-            .fromValue(1)
-            .toValue(0)
-            .build();
-        
-       pauseTransition = PauseTransitionBuilder.create()
-                    .duration(Duration.seconds(4))
-                    .build();
-       
-        fadeTransition1 = FadeTransitionBuilder.create()
-            .duration(Duration.seconds(5))
-             .node(image1)
-            .fromValue(1)
-            .toValue(0)
-            .build();
-             fadeTransition2 = FadeTransitionBuilder.create()
-            .duration(Duration.seconds(5))
-            .node(image2)
-            .fromValue(0)
-            .toValue(1)
-            .build();
 
-         sequentialTransition = SequentialTransitionBuilder.create()
+        panelGaleria.getChildren().addAll(image, image1, image2);
+
+        fadeTransition = FadeTransitionBuilder.create()
+                .duration(Duration.seconds(5))
+                .node(image2)
+                .fromValue(1)
+                .toValue(0)
+                .build();
+
+        pauseTransition = PauseTransitionBuilder.create()
+                .duration(Duration.seconds(4))
+                .build();
+
+        fadeTransition1 = FadeTransitionBuilder.create()
+                .duration(Duration.seconds(5))
                 .node(image1)
-                .children(fadeTransition,pauseTransition, fadeTransition1,pauseTransition,fadeTransition2)
+                .fromValue(1)
+                .toValue(0)
+                .build();
+        fadeTransition2 = FadeTransitionBuilder.create()
+                .duration(Duration.seconds(5))
+                .node(image2)
+                .fromValue(0)
+                .toValue(1)
+                .build();
+
+        sequentialTransition = SequentialTransitionBuilder.create()
+                .node(image1)
+                .children(fadeTransition, pauseTransition, fadeTransition1, pauseTransition, fadeTransition2)
                 .cycleCount(Timeline.INDEFINITE)
                 .autoReverse(true)
                 .build();
         sequentialTransition.play();
     }
-    
+
     @FXML
-    private void goToMain(ActionEvent event){
+    private void goToMain(ActionEvent event) {
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
+
     @Override
     public void setScreenParent(ScreensController screenParent) {
-        myController=screenParent; //To change body of generated methods, choose Tools | Templates.
+        myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
 }
