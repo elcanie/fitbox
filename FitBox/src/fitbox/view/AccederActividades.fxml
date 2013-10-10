@@ -18,7 +18,10 @@
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="53.0" prefWidth="916.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Button fx:id="botonHome" minHeight="72.0" minWidth="93.0" mnemonicParsing="false" onMouseClicked="#goToHome" prefHeight="72.0" prefWidth="93.0" text="">
+                <Button fx:id="botonHome" cancelButton="false" defaultButton="false" minHeight="72.0" minWidth="93.0" mnemonicParsing="false" onMouseClicked="#goToHome" prefHeight="72.0" prefWidth="93.0" text="">
+                  <effect>
+                    <DropShadow color="#33ffb6" />
+                  </effect>
                   <graphic>
                     <ImageView fitHeight="70.25" fitWidth="70.25" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
                       <image>

@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="realizarActividad" focusTraversable="false" prefHeight="548.9999000000025" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.RealizarActividadController">
+<AnchorPane id="AnchorPane" fx:id="realizarActividad" focusTraversable="false" prefHeight="548.9999000000025" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.RealizarActividadController">
   <children>
     <Pane fx:id="panellateral" layoutX="514.0" prefHeight="549.0" prefWidth="270.0" style="" AnchorPane.bottomAnchor="0.0">
       <children>
@@ -86,7 +86,7 @@
         </Label>
       </children>
     </Pane>
-    <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="425.0" prefWidth="514.0" />
+    <AnchorPane fx:id="zonavideo" layoutX="0.0" layoutY="0.0" prefHeight="425.0" prefWidth="514.0" />
   </children>
   <stylesheets>
     <URL value="@stylerealizaractivdad.css" />

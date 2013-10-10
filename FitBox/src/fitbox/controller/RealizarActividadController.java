@@ -5,7 +5,7 @@
  */
 package fitbox.controller;
 
-import fitbox.AdvancedMedia.MediaControl;
+import fitbox.view.MediaControl;
 import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
@@ -25,10 +25,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
 
-    @FXML
-    private Label label;
     private ScreensController myController;
-    private ScreensFramework main;
     @FXML
     private AnchorPane zonavideo;
     MediaControl reproductor;
@@ -36,15 +33,9 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private MediaControl mediaControl;
     private MediaPlayer mediaPlayer;
 
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+ 
 
-    public void setMain(ScreensFramework main) {
-        this.main = main;
-    }
+
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
@@ -53,14 +44,17 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ScreensFramework.stage.setWidth(784);
+        ScreensFramework.stage.setHeight(549);
 
         mediaPlayer = new MediaPlayer(new Media(MEDIA_URL));
         mediaPlayer.setAutoPlay(true);
         mediaControl = new MediaControl(mediaPlayer);
-        mediaControl.setMinSize(480, 280);
-        mediaControl.setPrefSize(480, 280);
-        mediaControl.setMaxSize(480, 280);
+        mediaControl.setMinSize(514, 455);
+        mediaControl.setPrefSize(514, 455);
+        mediaControl.setMaxSize(514, 455);
         zonavideo.getChildren().add(mediaControl);
+        
     }
 
 }

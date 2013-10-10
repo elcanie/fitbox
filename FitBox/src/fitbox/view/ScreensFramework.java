@@ -23,8 +23,10 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_PRINCIPAL = "PantallaPrincipal";
     public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml";
     public static Stage stage;
-    public static final String PANTALLA_ACTIVIDADES = "AccederActividades";
+     public static final String PANTALLA_ACTIVIDADES = "AccederActividades";
     public static final String PANTALLA_ACTIVIDADES_FXML = "/fitbox/view/AccederActividades.fxml";
+    public static final String PANTALLA_REALIZARACTIVIDAD = "RealizarActividad";
+    public static final String PANTALLA_REALIZARACTIVIDAD_FXML = "/fitbox/view/RealizarActividad.fxml";
 
     @Override
     public void start(Stage primeraPantalla) throws Exception {
@@ -37,7 +39,6 @@ public class ScreensFramework extends Application {
         ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
                 ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
-        //mainContainer.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES,ScreensFramework.PANTALLA_ACTIVIDADES_FXML,this);
 
         mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 

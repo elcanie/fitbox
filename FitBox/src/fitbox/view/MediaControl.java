@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package fitbox;
+package fitbox.view;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -55,8 +55,8 @@ public class MediaControl extends BorderPane {
         private Label playTime;
         private Slider volumeSlider;
         private HBox mediaBar;
-        private final Image PlayButtonImage = new Image(AdvancedMedia.class.getResourceAsStream("playbutton.png"));
-        private final Image PauseButtonImage = new Image(AdvancedMedia.class.getResourceAsStream("pausebutton.png"));
+        private final Image PlayButtonImage = new Image(getClass().getResource("/imagenes/playbutton.png").toExternalForm());
+        private final Image PauseButtonImage = new Image(getClass().getResource("/imagenes/pausebutton.png").toExternalForm());
         ImageView imageViewPlay = new ImageView(PlayButtonImage);
         ImageView imageViewPause = new ImageView(PauseButtonImage);
         private Pane mvPane;

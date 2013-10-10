@@ -91,7 +91,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
-        //  myController.setScreen(ScreensFramework.PANTALLA_CALENDARIO);
+               myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD,ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML,null);
+                       myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+
+
     }
 
     @FXML
