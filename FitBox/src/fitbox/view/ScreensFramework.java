@@ -36,7 +36,7 @@ public class ScreensFramework extends Application {
         this.stage = primeraPantalla;
         ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
-                ScreensFramework.PANTALLA_PRINCIPAL_FXML, this);
+                ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
         //mainContainer.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES,ScreensFramework.PANTALLA_ACTIVIDADES_FXML,this);
 
         mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);

@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author RUBEN
  */
-public class DescripcionActividadController implements Initializable {
+public class DescripcionActividadController implements Initializable{
     
     @FXML
     Button bGo;

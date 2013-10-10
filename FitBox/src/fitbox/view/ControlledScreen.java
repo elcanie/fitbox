@@ -15,5 +15,4 @@ public interface ControlledScreen {
 
     public void setScreenParent(ScreensController screenParent);
 
-    public void setMain(ScreensFramework main);
 }

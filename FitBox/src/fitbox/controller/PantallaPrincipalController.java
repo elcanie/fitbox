@@ -55,7 +55,6 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     /**
      * Initializes the controller class.
      */
-    private ScreensFramework main;
     private FadeTransition fadeTransition;
     private FadeTransition fadeTransition1;
     private FadeTransition fadeTransition2;
@@ -85,7 +84,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, main);
+        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, null);
         myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
     }
@@ -126,10 +125,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void setMain(ScreensFramework main) {
-        this.main = main;
-        this.main.getStage().setWidth(921);
-        this.main.getStage().setHeight(590);
-        this.main.getStage().setResizable(false);
+
 
 
     }
@@ -143,6 +139,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         inicioReloj();
         inicioGaleria();
         cargarEventos();
+        
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
+        ScreensFramework.stage.setResizable(false);
 
 
 

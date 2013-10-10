@@ -47,7 +47,6 @@ public class AccederActividadesController implements Initializable, ControlledSc
      * Initializes the controller class.
      */
     private ScreensController myController;
-    private ScreensFramework main;
     @FXML
     ListView listaCategorias;
     @FXML
@@ -78,7 +77,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
 
     @FXML
     public void goToHome(MouseEvent event) {
-        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, main);
+        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
     }
@@ -96,7 +95,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
         int i = 0, j = 0, contador = 1;
         int contadorImagen = 0;
         while (it.hasNext()) {
-            if (i % 2 == 0 && i != 0) {
+            if (i % 3 == 0 && i != 0) {
                 j++;
                 contador++;
                 i = 0;
@@ -134,12 +133,12 @@ public class AccederActividadesController implements Initializable, ControlledSc
                 }
             });
             panelActividades.getChildren().add(boton);
-            boton.setLayoutX(20 + ((i * imageView.getFitWidth()) + (10 * i)));
+            boton.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
             boton.setLayoutY(20 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
             botonActividad.put(actividad.getNombre(), actividad);
 
             panelActividades.getChildren().add(imageView);
-            imageView.setLayoutX(20 + ((i * imageView.getFitWidth()) + (10 * i)));
+            imageView.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
             imageView.setLayoutY(20 + ((j * imageView.getFitHeight()) + (30 * j) + (boton.getHeight() * j)));
             i++;
             contadorImagen++;
@@ -147,12 +146,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
         }
     }
 
-    @Override
-    public void setMain(ScreensFramework main) {
-        this.main = main;
-        main.getStage().setResizable(true);
 
-    }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {

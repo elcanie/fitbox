@@ -5,15 +5,13 @@
 package fitbox.controller;
 
 import fitbox.view.ControlledScreen;
-import fitbox.view.ControlledScreen;
-import fitbox.view.ScreensFramework;
+import fitbox.view.Recurso;
 import java.util.HashMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -39,13 +37,12 @@ public class ScreensController extends StackPane {
         screens.put(name, screen);
     }
 
-    public boolean loadScreen(String name, String resource, ScreensFramework main) {
+    public boolean loadScreen(String name, String resource, Recurso recurso) {
         try {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),recurso);
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             myScreenControler.setScreenParent(this);
-            myScreenControler.setMain(main);
             addScreen(name, loadScreen);
             return true;
         } catch (Exception e) {
