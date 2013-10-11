@@ -89,7 +89,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
         String elemento = (String) listaCategorias.getItems().get(indice);
         elemento = elemento.toLowerCase();
         //La sentencia SQL debe cambiar a todas las actividades de esa categoria
-        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADES, Actividad.class);
+        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADESbyCATEGORIA, new Object[]{elemento},Actividad.class);
         Iterator<Actividad> it = datos.iterator();
         Actividad actividad = null;
         int i = 0, j = 0, contador = 1;
