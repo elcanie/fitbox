@@ -30,10 +30,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -54,7 +57,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     private Hashtable<String, Actividad> botonActividad = new Hashtable<String, Actividad>();
     @FXML
     Button botonHome;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -66,22 +69,22 @@ public class AccederActividadesController implements Initializable, ControlledSc
 
         //myController.setSize(600, 400);
     }
-
+    
     public void cargarCategorias() {
         ObservableList<String> data = FXCollections.observableArrayList();
         data.addAll("Torso", "Cardio", "Pierna", "Abdominales", "Hit", "Estiramientos");
         listaCategorias.setItems(data);
-
-
+        
+        
     }
-
+    
     @FXML
     public void goToHome(MouseEvent event) {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-
+        
     }
-
+    
     @FXML
     public void cargarActividades(MouseEvent event) {
         Dal dal = Dal.getDal();
@@ -89,7 +92,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
         String elemento = (String) listaCategorias.getItems().get(indice);
         elemento = elemento.toLowerCase();
         //La sentencia SQL debe cambiar a todas las actividades de esa categoria
-        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADESbyCATEGORIA, new Object[]{elemento},Actividad.class);
+        Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADESbyCATEGORIA, new Object[]{elemento}, Actividad.class);
         Iterator<Actividad> it = datos.iterator();
         Actividad actividad = null;
         int i = 0, j = 0, contador = 1;
@@ -106,24 +109,29 @@ public class AccederActividadesController implements Initializable, ControlledSc
             imageView.setFitWidth(150);
             imageView.setFitHeight(150);
             Button boton = new Button(actividad.getNombre());
-
+            boton.setEffect(new Shadow());
+            boton.setStyle("    -fx-background-radius: 10; \n" +
+"\n" +
+"    -fx-background-insets: 0,1,2; \n" +
+"\n" +
+"        -fx-background-color: aquamarine;");
             boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
                     Button botonPulsado = (Button) t.getSource();
-
+                    
                     Actividad actividad = botonActividad.get(botonPulsado.getText());
                     Stage s = new Stage();
                     Parent root = null;
                     try {
                         Recurso recurso = new Recurso();
                         recurso.putObject("Actividad", actividad);
-
+                        
                         root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), recurso);
                     } catch (IOException ex) {
                         Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    
                     Scene scene = new Scene(root);
                     s.setScene(scene);
                     s.show();
@@ -136,18 +144,16 @@ public class AccederActividadesController implements Initializable, ControlledSc
             boton.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
             boton.setLayoutY(20 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
             botonActividad.put(actividad.getNombre(), actividad);
-
+            
             panelActividades.getChildren().add(imageView);
             imageView.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
             imageView.setLayoutY(20 + ((j * imageView.getFitHeight()) + (30 * j) + (boton.getHeight() * j)));
             i++;
             contadorImagen++;
-
+            
         }
     }
-
-
-
+    
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
