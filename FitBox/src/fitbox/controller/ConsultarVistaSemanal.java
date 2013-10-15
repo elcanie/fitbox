@@ -33,6 +33,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
 
 /**
  *
@@ -46,6 +48,11 @@ public class ConsultarVistaSemanal implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+               LocalDate now = new LocalDate();
+              
+int lunes = Integer.parseInt(now.withDayOfWeek(DateTimeConstants.MONDAY).toString());
+int domingo = Integer.parseInt(now.withDayOfWeek(DateTimeConstants.SUNDAY).toString());
+        
         ObservableList<String> list = FXCollections.observableArrayList("correr",null,"saltar");
     lunesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
         @Override
