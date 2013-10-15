@@ -35,7 +35,7 @@ public class Dao<T extends Object> {
 
     public List<T> find(String consulta,Object[] parametros) {
 
-        PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+        PreparedStatement s = (PreparedStatement)conexion.createStatement(consulta);
         int i=1;
         for(Object o : parametros){
             try {
