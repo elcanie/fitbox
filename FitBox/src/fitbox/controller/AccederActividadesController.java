@@ -87,6 +87,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     
     @FXML
     public void cargarActividades(MouseEvent event) {
+        panelActividades.getChildren().clear();
         Dal dal = Dal.getDal();
         int indice = listaCategorias.getSelectionModel().getSelectedIndex();
         String elemento = (String) listaCategorias.getItems().get(indice);
@@ -104,17 +105,16 @@ public class AccederActividadesController implements Initializable, ControlledSc
                 i = 0;
             }
             actividad = it.next();
-            Image im = new Image(getClass().getResource("/imagenes/" + elemento + contadorImagen + ".jpg").toExternalForm());
+            Image im = new Image(getClass().getResource("/imagenes/" + actividad.getNombreImagen() + ".jpg").toExternalForm());
             ImageView imageView = new ImageView(im);
             imageView.setFitWidth(150);
             imageView.setFitHeight(150);
             Button boton = new Button(actividad.getNombre());
-            boton.setEffect(new Shadow());
             boton.setStyle("    -fx-background-radius: 10; \n" +
 "\n" +
 "    -fx-background-insets: 0,1,2; \n" +
 "\n" +
-"        -fx-background-color: aquamarine;");
+"        -fx-background-color:#0099FF;");
             boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
@@ -141,8 +141,8 @@ public class AccederActividadesController implements Initializable, ControlledSc
                 }
             });
             panelActividades.getChildren().add(boton);
-            boton.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
-            boton.setLayoutY(20 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
+            boton.setLayoutX(26 + ((i * imageView.getFitWidth()) + (50 * i)));
+            boton.setLayoutY(25 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
             botonActividad.put(actividad.getNombre(), actividad);
             
             panelActividades.getChildren().add(imageView);

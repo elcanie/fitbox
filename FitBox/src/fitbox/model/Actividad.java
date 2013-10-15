@@ -29,7 +29,7 @@ public class Actividad {
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 7;
+    public static final int NUMERO_ATRIBUTOS = 8;
     private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre = new SimpleStringProperty("");
     private final SimpleStringProperty descripcion = new SimpleStringProperty("");
@@ -37,19 +37,20 @@ public class Actividad {
     private final SimpleStringProperty video = new SimpleStringProperty("");
     private final SimpleStringProperty categoria = new SimpleStringProperty("");
     private final SimpleStringProperty objetivo = new SimpleStringProperty("");
+     private final SimpleStringProperty nombreImagen = new SimpleStringProperty("");
     private String valores[] = new String[NUMERO_ATRIBUTOS];
 
     public Actividad() {
-        this(new Integer(0), "", "", new Double(3.0), "", "", "");
+        this(new Integer(0), "", "", new Double(3.0), "", "", "","");
 
     }
 
     public Actividad(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (String) array.get(4), (String) array.get(5), (String) array.get(6));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (String) array.get(4), (String) array.get(5), (String) array.get(6),(String)array.get(7));
     }
 
-    public Actividad(int id, String nombre, String descripcion, double factor, String video, String categoria, String objetivo) {
-        setValores(id, nombre, descripcion, factor, video, categoria, objetivo);
+    public Actividad(int id, String nombre, String descripcion, double factor, String video, String categoria, String objetivo,String nombreImagen) {
+        setValores(id, nombre, descripcion, factor, video, categoria, objetivo,nombreImagen);
         setId(id);
         setNombre(nombre);
         setDescripcion(descripcion);
@@ -57,6 +58,7 @@ public class Actividad {
         setVideo(video);
         setCategoria(categoria);
         setObjetivo(objetivo);
+        setNombreImagen(nombreImagen);
 
     }
 
@@ -78,6 +80,13 @@ public class Actividad {
 
     public void setCategoria(String fName) {
         this.categoria.set(fName);
+    }
+     public String getNombreImagen() {
+        return nombreImagen.get();
+    }
+
+    public void setNombreImagen(String fName) {
+        this.nombreImagen.set(fName);
     }
 
     public int getId() {
@@ -129,14 +138,15 @@ public class Actividad {
         return nombre.get();
     }
 
-    private void setValores(int id, String nombre, String descripcion, double factor, String video, String categoria, String objetivo) {
+    private void setValores(int id, String nombre, String descripcion, double factor, String video, String categoria, String objetivo,String nombreImagen) {
         valores[0] = id + "";
         valores[1] = nombre + "";
         valores[2] = descripcion + "";
         valores[3] = factor + "";
         valores[4] = video + "";
         valores[5] = categoria + "";
-        valores[5] = objetivo + "";
+        valores[6] = objetivo + "";
+        valores[7]=nombreImagen+"";
 
     }
 
