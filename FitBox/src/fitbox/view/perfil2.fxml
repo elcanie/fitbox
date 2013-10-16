@@ -13,15 +13,6 @@
   <children>
     <Line endX="-46.0" endY="233.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
     <Label layoutX="197.0" layoutY="47.0" text="¿Cada cuánto realiza ejercicio?" />
-    <ComboBox fx:id="comboDias" layoutX="374.0" layoutY="47.0" prefHeight="21.0" prefWidth="53.0">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
-        </FXCollections>
-      </items>
-    </ComboBox>
     <Label layoutX="441.0" layoutY="47.0" text="días" />
     <Label layoutX="197.0" layoutY="78.0" text="¿Qué tipo de ejercicio suele realizar?" />
     <CheckBox fx:id="correrCB" layoutX="217.0" layoutY="114.0" mnemonicParsing="false" text="Correr" />
@@ -34,16 +25,17 @@
     <Label layoutX="197.0" layoutY="183.0" text="Indique que otros ejercicios suele realizar" />
     <TextField fx:id="otrosEjerTF" layoutX="197.0" layoutY="207.0" prefWidth="430.0" />
     <Label layoutX="197.0" layoutY="240.0" text="Marque las categorías en las que esté interesado:" />
-    <CheckBox layoutX="213.0" layoutY="265.0" mnemonicParsing="false" text="CheckBox" />
-    <CheckBox layoutX="322.0" layoutY="265.0" mnemonicParsing="false" text="CheckBox" />
-    <CheckBox layoutX="213.0" layoutY="294.0" mnemonicParsing="false" text="CheckBox" />
-    <CheckBox layoutX="322.0" layoutY="294.0" mnemonicParsing="false" text="CheckBox" />
+    <CheckBox fx:id="categoria1" layoutX="213.0" layoutY="265.0" mnemonicParsing="false" text="Categoria1" />
+    <CheckBox fx:id="categoria3" layoutX="322.0" layoutY="265.0" mnemonicParsing="false" text="Categoria3" />
+    <CheckBox fx:id="categoria2" layoutX="213.0" layoutY="294.0" mnemonicParsing="false" text="Categoria2" />
+    <CheckBox fx:id="categoria4" layoutX="322.0" layoutY="294.0" mnemonicParsing="false" text="Categoria4" />
     <Label layoutX="335.0" layoutY="14.0" text="ACTIVIDAD" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="true" wrapText="false">
       <font>
         <Font name="Arial Rounded MT Bold" size="20.0" />
       </font>
     </Label>
     <Button fx:id="anteriorBT" layoutX="535.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleButtonAtras" text="Anterior" />
-    <Button fx:id="siguienteBT" layoutX="611.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Button fx:id="siguienteBT" layoutX="611.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleButtonSiguiente" text="Siguiente" />
+    <TextField fx:id="diasT" layoutX="394.0" layoutY="45.0" prefWidth="34.0" />
   </children>
 </AnchorPane>

@@ -26,12 +26,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import jfx.messagebox.MessageBox;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
 
 /**
  *
  * @author Alejandro
  */
-public class perfil1Controller implements Initializable,ControlledScreen {
+public class perfil1Controller implements Initializable, ControlledScreen {
 
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -52,9 +53,9 @@ public class perfil1Controller implements Initializable,ControlledScreen {
     @FXML
     private TextField correoText;
     @FXML
-    private TextField contrasenyaText;
+    private PasswordField contrasenyaText;
     @FXML
-    private TextField repContrasenyaText;
+    private PasswordField repContrasenyaText;
     @FXML
     private Button siguienteBt;
     @FXML
@@ -88,10 +89,11 @@ public class perfil1Controller implements Initializable,ControlledScreen {
     private String sexo;
     private datosUsuario usuario;
     private ScreensController myController;
+    private Recurso recurso;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-           
+
         nombre = nombreText.getText();
         apellidos = apellidosText.getText();
 
@@ -222,7 +224,7 @@ public class perfil1Controller implements Initializable,ControlledScreen {
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
         }
 
-        //Validar fecha
+        //Validar fecha!
         Calendar c = Calendar.getInstance();
         int d = c.get(Calendar.DATE);
         int m = c.get(Calendar.MONTH);
@@ -230,7 +232,6 @@ public class perfil1Controller implements Initializable,ControlledScreen {
 
 
         if (valido) {
-            usuario=new datosUsuario();
             usuario.setNombre(nombre);
             usuario.setApellidos(apellidos);
             usuario.setDia(dia);
@@ -241,13 +242,12 @@ public class perfil1Controller implements Initializable,ControlledScreen {
             usuario.setCorreo(correo);
             usuario.setPass(pass);
             usuario.setSexo(sexo);
+
             //siguiente
-            Recurso r=new Recurso();
-            r.putObject("usuario", usuario);
-            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL2,ScreensFramework.PANTALLA_PERFIL2_FXML,r);
+            recurso = new Recurso();
+            recurso.putObject("usuario", usuario);
+            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
-            
-            System.out.println("TODO OK");
         }
 
 
@@ -275,12 +275,34 @@ public class perfil1Controller implements Initializable,ControlledScreen {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rellenarComboAnyo();
+        usuario = new datosUsuario();
+        recurso = (Recurso) rb;
+        if (recurso != null) {
+            usuario = (datosUsuario) recurso.getObject("usuario");
+            nombreText.setText(usuario.getNombre());
+            apellidosText.setText(usuario.getApellidos());
+            //Rellenar fecha
+        /* diaComboB
+             mesComboB
+             anyoComboB*/
+            if (usuario.getSexo().equals("hombre")) {
+                hombreRadioBt.setSelected(true);
+            } else {
+                mujerRadioBt.setSelected(true);
+            }
+            alturaText.setText(usuario.getAltura());
+            pesoText.setText(usuario.getPeso());
+            correoText.setText(usuario.getCorreo());
+            
+        }
+        
+        
         ScreensFramework.stage.setWidth(718);
-        ScreensFramework.stage.setHeight(365);
+        ScreensFramework.stage.setHeight(369);
     }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
-       myController=screenParent;
+        myController = screenParent;
     }
 }
