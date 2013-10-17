@@ -224,11 +224,13 @@ public class perfil1Controller implements Initializable, ControlledScreen {
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
         }
 
-        //Validar fecha!
+        
+        /*
         Calendar c = Calendar.getInstance();
         int d = c.get(Calendar.DATE);
         int m = c.get(Calendar.MONTH);
         int a = c.get(Calendar.YEAR);
+        */
 
 
         if (valido) {
@@ -281,10 +283,11 @@ public class perfil1Controller implements Initializable, ControlledScreen {
             usuario = (datosUsuario) recurso.getObject("usuario");
             nombreText.setText(usuario.getNombre());
             apellidosText.setText(usuario.getApellidos());
-            //Rellenar fecha
-        /* diaComboB
-             mesComboB
-             anyoComboB*/
+            diaComboB.setValue(usuario.getDia());
+            mesComboB.setValue(usuario.getMes());
+            anyoComboB.setValue(usuario.getAnyo());
+
+
             if (usuario.getSexo().equals("hombre")) {
                 hombreRadioBt.setSelected(true);
             } else {
@@ -293,12 +296,12 @@ public class perfil1Controller implements Initializable, ControlledScreen {
             alturaText.setText(usuario.getAltura());
             pesoText.setText(usuario.getPeso());
             correoText.setText(usuario.getCorreo());
-            
+
         }
-        
-        
+
+
         ScreensFramework.stage.setWidth(718);
-        ScreensFramework.stage.setHeight(369);
+        ScreensFramework.stage.setHeight(400);
     }
 
     @Override

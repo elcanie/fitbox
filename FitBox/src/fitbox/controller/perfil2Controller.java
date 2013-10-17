@@ -5,7 +5,7 @@
 package fitbox.controller;
 
 import fitbox.model.Actividad;
-import fitbox.model.datosAct;
+import fitbox.model.datosUsuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
@@ -56,7 +56,7 @@ public class perfil2Controller implements Initializable, ControlledScreen {
     private CheckBox categoria3;
     @FXML
     private CheckBox categoria4;
-    private datosAct actividad;
+    private datosUsuario usuario;
     private ScreensController myController;
     private Recurso recurso;
 
@@ -83,21 +83,21 @@ public class perfil2Controller implements Initializable, ControlledScreen {
 
         }
         if (valido) {
-            actividad.setDias(diasT.getText());
-            actividad.setCorrerCB(correrCB.isSelected());
-            actividad.setBicicletaCB(bicicletaCB.isSelected());
-            actividad.setPesasCB(pesasCB.isSelected());
-            actividad.setFutbolCB(futbolCB.isSelected());
-            actividad.setBaloncestoCB(baloncestoCB.isSelected());
-            actividad.setAbdominalesCB(abdominalesCB.isSelected());
-            actividad.setOtrosCB(otrosCB.isSelected());
-            actividad.setOtrosEjerTF(otrosEjerTF.getText());
-            actividad.setCategoria1(categoria1.isSelected());
-            actividad.setCategoria2(categoria2.isSelected());
-            actividad.setCategoria3(categoria3.isSelected());
-            actividad.setCategoria4(categoria4.isSelected());
+            usuario.setDias(diasT.getText());
+            usuario.setCorrerCB(correrCB.isSelected());
+            usuario.setBicicletaCB(bicicletaCB.isSelected());
+            usuario.setPesasCB(pesasCB.isSelected());
+            usuario.setFutbolCB(futbolCB.isSelected());
+            usuario.setBaloncestoCB(baloncestoCB.isSelected());
+            usuario.setAbdominalesCB(abdominalesCB.isSelected());
+            usuario.setOtrosCB(otrosCB.isSelected());
+            usuario.setOtrosEjerTF(otrosEjerTF.getText());
+            usuario.setCategoria1(categoria1.isSelected());
+            usuario.setCategoria2(categoria2.isSelected());
+            usuario.setCategoria3(categoria3.isSelected());
+            usuario.setCategoria4(categoria4.isSelected());
 
-            recurso.putObject("actividad", actividad);
+            recurso.putObject("usuario", usuario);
             myController.loadScreen(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
 
@@ -130,19 +130,19 @@ public class perfil2Controller implements Initializable, ControlledScreen {
         }
         if (valido) {
 
-            actividad.setDias(diasT.getText());
-            actividad.setCorrerCB(correrCB.isSelected());
-            actividad.setBicicletaCB(bicicletaCB.isSelected());
-            actividad.setPesasCB(pesasCB.isSelected());
-            actividad.setFutbolCB(futbolCB.isSelected());
-            actividad.setBaloncestoCB(baloncestoCB.isSelected());
-            actividad.setAbdominalesCB(abdominalesCB.isSelected());
-            actividad.setOtrosCB(otrosCB.isSelected());
-            actividad.setOtrosEjerTF(otrosEjerTF.getText());
-            actividad.setCategoria1(categoria1.isSelected());
-            actividad.setCategoria2(categoria2.isSelected());
-            actividad.setCategoria3(categoria3.isSelected());
-            actividad.setCategoria4(categoria4.isSelected());
+            usuario.setDias(diasT.getText());
+            usuario.setCorrerCB(correrCB.isSelected());
+            usuario.setBicicletaCB(bicicletaCB.isSelected());
+            usuario.setPesasCB(pesasCB.isSelected());
+            usuario.setFutbolCB(futbolCB.isSelected());
+            usuario.setBaloncestoCB(baloncestoCB.isSelected());
+            usuario.setAbdominalesCB(abdominalesCB.isSelected());
+            usuario.setOtrosCB(otrosCB.isSelected());
+            usuario.setOtrosEjerTF(otrosEjerTF.getText());
+            usuario.setCategoria1(categoria1.isSelected());
+            usuario.setCategoria2(categoria2.isSelected());
+            usuario.setCategoria3(categoria3.isSelected());
+            usuario.setCategoria4(categoria4.isSelected());
 
             myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
@@ -151,27 +151,58 @@ public class perfil2Controller implements Initializable, ControlledScreen {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        actividad = new datosAct();
+        usuario = new datosUsuario();
         recurso = (Recurso) rb;
-        if (recurso != null) {
-            actividad = (datosAct) recurso.getObject("actividades");
-            diasT.setText(actividad.getDias());
-            correrCB.setSelected(actividad.getCorrerCB());
-            bicicletaCB.setSelected(actividad.getBicicletaCB());
-            pesasCB.setSelected(actividad.getPesasCB());
-            futbolCB.setSelected(actividad.getFutbolCB());
-            baloncestoCB.setSelected(actividad.getBaloncestoCB());
-            abdominalesCB.setSelected(actividad.getAbdominalesCB());
-            otrosCB.setSelected(actividad.getOtrosCB());
-            otrosEjerTF.setText(actividad.getOtrosEjerTF());
-            categoria1.setSelected(actividad.getCategoria1());
-            categoria2.setSelected(actividad.getCategoria2());
-            categoria3.setSelected(actividad.getCategoria3());
-            categoria4.setSelected(actividad.getCategoria4());
-
+        usuario = (datosUsuario) recurso.getObject("usuario");
+        diasT.setText(usuario.getDias());
+        try {
+            correrCB.setSelected(usuario.getCorrerCB());
+        } catch (Exception e) {
         }
-        ScreensFramework.stage.setWidth(718);
-        ScreensFramework.stage.setHeight(369);
+        try {
+            bicicletaCB.setSelected(usuario.getBicicletaCB());
+        } catch (Exception e) {
+        }
+        try {
+            pesasCB.setSelected(usuario.getPesasCB());
+        } catch (Exception e) {
+        }
+        try {
+            futbolCB.setSelected(usuario.getFutbolCB());
+        } catch (Exception e) {
+        }
+        try {
+            baloncestoCB.setSelected(usuario.getBaloncestoCB());
+        } catch (Exception e) {
+        }
+        try {
+            abdominalesCB.setSelected(usuario.getAbdominalesCB());
+        } catch (Exception e) {
+        }
+        try {
+            otrosCB.setSelected(usuario.getOtrosCB());
+        } catch (Exception e) {
+        }
+        try {
+            categoria1.setSelected(usuario.getCategoria1());
+        } catch (Exception e) {
+        }
+        try {
+            categoria2.setSelected(usuario.getCategoria2());
+        } catch (Exception e) {
+        }
+        try {
+            categoria3.setSelected(usuario.getCategoria3());
+        } catch (Exception e) {
+        }
+        try {
+            categoria4.setSelected(usuario.getCategoria4());
+        } catch (Exception e) {
+        }
+
+        otrosEjerTF.setText(usuario.getOtrosEjerTF());
+
+
     }
 
     @Override

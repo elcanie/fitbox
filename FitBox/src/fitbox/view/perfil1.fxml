@@ -38,7 +38,7 @@
     <TextField id="alturaBt" fx:id="alturaText" layoutX="240.0" layoutY="172.0" prefWidth="83.0" />
     <TextField fx:id="pesoText" layoutX="445.0" layoutY="172.0" prefWidth="83.0" />
     <TextField fx:id="correoText" layoutX="240.0" layoutY="213.0" prefWidth="191.0" />
-    <Button fx:id="siguienteBt" layoutX="615.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Button fx:id="siguienteBt" layoutX="615.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
     <ImageView fx:id="imagCorreoOK" fitHeight="30.0" fitWidth="40.0" layoutX="445.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../../imagenes/correcto_1.png" />

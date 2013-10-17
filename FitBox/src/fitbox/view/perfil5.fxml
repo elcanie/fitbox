@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="718.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.perfilController5">
+  <children>
+    <Line endX="-46.0" endY="233.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
+    <Button id="anteriorBT" layoutX="535.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAnterior" text="Anterior" />
+    <Button id="siguienteBT" layoutX="611.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Label layoutX="239.0" layoutY="14.0" text="PRIVACIDAD Y CONDICIONES" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="true" wrapText="false">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="20.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
