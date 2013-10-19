@@ -41,13 +41,14 @@ public class perfilController4 implements Initializable, ControlledScreen {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        
+         recurso.putObject("usuario", usuario);
         myController.loadScreen(ScreensFramework.PANTALLA_PERFIL5, ScreensFramework.PANTALLA_PERFIL5_FXML, recurso);
            myController.setScreen(ScreensFramework.PANTALLA_PERFIL5);
     }
 
     @FXML
     private void handleButtonAnterior(ActionEvent event) {
+        recurso.putObject("usuario", usuario);
          myController.loadScreen(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
            myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
     }

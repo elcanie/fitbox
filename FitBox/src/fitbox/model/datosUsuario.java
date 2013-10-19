@@ -45,7 +45,92 @@ public class datosUsuario {
     private Boolean sabadoCB;
     private Boolean domingoCB;
 
-    //4
+    //5
+    private boolean mostrarNombre;
+    private boolean mostrarApellidos;
+    private boolean mostrarGenero;
+    private boolean mostrarPeso;
+    private boolean mostrarEdad;
+    private boolean mostrarActividad;
+    private boolean mostrarFechaNac;
+    private boolean mostrarLogros;
+    private boolean aceptar;
+
+    public boolean isAceptar() {
+        return aceptar;
+    }
+
+    public void setAceptar(boolean aceptar) {
+        this.aceptar = aceptar;
+    }
+    
+    
+
+    public boolean isMostrarNombre() {
+        return mostrarNombre;
+    }
+
+    public void setMostrarNombre(boolean mostrarNombre) {
+        this.mostrarNombre = mostrarNombre;
+    }
+
+    public boolean isMostrarApellidos() {
+        return mostrarApellidos;
+    }
+
+    public void setMostrarApellidos(boolean mostrarApellidos) {
+        this.mostrarApellidos = mostrarApellidos;
+    }
+
+    public boolean isMostrarGenero() {
+        return mostrarGenero;
+    }
+
+    public void setMostrarGenero(boolean mostrarGenero) {
+        this.mostrarGenero = mostrarGenero;
+    }
+
+    public boolean isMostrarPeso() {
+        return mostrarPeso;
+    }
+
+    public void setMostrarPeso(boolean mostrarPeso) {
+        this.mostrarPeso = mostrarPeso;
+    }
+
+    public boolean isMostrarEdad() {
+        return mostrarEdad;
+    }
+
+    public void setMostrarEdad(boolean mostrarEdad) {
+        this.mostrarEdad = mostrarEdad;
+    }
+
+    public boolean isMostrarActividad() {
+        return mostrarActividad;
+    }
+
+    public void setMostrarActividad(boolean mostrarActividad) {
+        this.mostrarActividad = mostrarActividad;
+    }
+
+    public boolean isMostrarFechaNac() {
+        return mostrarFechaNac;
+    }
+
+    public void setMostrarFechaNac(boolean mostrarFechaNac) {
+        this.mostrarFechaNac = mostrarFechaNac;
+    }
+
+    public boolean isMostrarLogros() {
+        return mostrarLogros;
+    }
+
+    public void setMostrarLogros(boolean mostrarLogros) {
+        this.mostrarLogros = mostrarLogros;
+    }
+    
+
     public Boolean getLunesCB() {
         return lunesCB;
     }

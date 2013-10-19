@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="718.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.perfilController4">
   <children>
-    <Line endX="-46.0" endY="233.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
+    <Line endX="-45.0" endY="239.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
     <Label layoutX="335.0" layoutY="14.0" text="RESUMEN" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="true" wrapText="false">
       <font>
         <Font name="Arial Rounded MT Bold" size="20.0" />
@@ -35,5 +35,10 @@
     <Label layoutX="494.0" layoutY="98.0" text="Cm" />
     <Button id="anteriorBT" layoutX="537.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAnterior" text="Anterior" />
     <Button id="siguienteBT" layoutX="613.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="1.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="1) Datos Usuario" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="74.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="2) Actividad" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="147.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="3) Horario" visible="true" />
+    <Button disable="false" focusTraversable="false" layoutX="1.0" layoutY="220.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="4) Resumen" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="293.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="5) Privacidad" visible="true" />
   </children>
 </AnchorPane>
