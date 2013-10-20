@@ -5,16 +5,14 @@
  */
 package fitbox.controller;
 
+import fitbox.model.Usuario;
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
+import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
-import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
 import javafx.animation.PauseTransition;
@@ -22,27 +20,20 @@ import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransition;
 import javafx.animation.SequentialTransitionBuilder;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -62,6 +53,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private PauseTransition pauseTransition;
     private SequentialTransition sequentialTransition;
     ScreensController myController;
+    private Recurso recurso;
+    private Usuario user;
     private Clock clock;
     @FXML
     Parent root;
@@ -139,6 +132,9 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
         //  Stage stage=(Stage)lo.getScene().getWindow();
         // stage.setResizable(false);
+        this.recurso=(Recurso)rb;
+        this.user=(Usuario)recurso.getObject("usuario");
+
         inicioReloj();
         inicioGaleria();
         cargarEventos();
@@ -146,6 +142,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
         ScreensFramework.stage.setResizable(false);
+        ScreensFramework.stage.centerOnScreen();
 
 
 

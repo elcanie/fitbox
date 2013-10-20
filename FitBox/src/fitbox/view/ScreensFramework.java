@@ -25,6 +25,8 @@ public class ScreensFramework extends Application {
     public static Stage stage;
     public static final String PANTALLA_ACTIVIDADES = "AccederActividades";
     public static final String PANTALLA_ACTIVIDADES_FXML = "/fitbox/view/AccederActividades.fxml";
+    public static final String PANTALLA_LOGIN = "LOGIN";
+    public static final String PANTALLA_LOGIN_FXML = "/fitbox/view/Login.fxml";
     public static final String PANTALLA_REALIZARACTIVIDAD = "RealizarActividad";
     public static final String PANTALLA_REALIZARACTIVIDAD_FXML = "/fitbox/view/RealizarActividad.fxml";
     public static final String PANTALLA_PERFIL1_FXML = "/fitbox/view/perfil1.fxml";
@@ -46,7 +48,7 @@ public class ScreensFramework extends Application {
          *
          */
         this.stage = primeraPantalla;
-
+/*
         ScreensController mainContainer = new ScreensController(stage);
          mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
          ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
@@ -57,8 +59,14 @@ public class ScreensFramework extends Application {
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
                 ScreensFramework.PANTALLA_PERFIL1_FXML, null);
 
-        mainContainer.setScreen(ScreensFramework.PANTALLA_PERFIL1);
-*/
+
+       ScreensController mainContainer = new ScreensController(stage);
+        mainContainer.loadScreen(ScreensFramework.PANTALLA_LOGIN,
+                ScreensFramework.PANTALLA_LOGIN_FXML, null);
+
+        mainContainer.setScreen(ScreensFramework.PANTALLA_LOGIN);
+
+
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
