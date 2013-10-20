@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="718.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.perfil3Controller">
+  <children>
+    <Line endX="-45.0" endY="235.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
+    <Label layoutX="340.0" layoutY="14.0" text="HORARIO" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="true" wrapText="false">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="20.0" />
+      </font>
+    </Label>
+    <Label layoutX="170.0" layoutY="66.0" text="Selecciona tus dias libres:" />
+    <CheckBox fx:id="lunesCB" layoutX="323.0" layoutY="68.0" mnemonicParsing="false" text="Lunes" />
+    <CheckBox fx:id="martesCB" layoutX="323.0" layoutY="98.0" mnemonicParsing="false" text="Martes" />
+    <CheckBox fx:id="miercolesCB" layoutX="323.0" layoutY="128.0" mnemonicParsing="false" text="Miercoles" />
+    <CheckBox fx:id="juevesCB" layoutX="324.0" layoutY="158.0" mnemonicParsing="false" text="Jueves" />
+    <CheckBox fx:id="viernesCB" layoutX="323.0" layoutY="188.0" mnemonicParsing="false" text="Viernes" />
+    <CheckBox fx:id="sabadoCB" layoutX="323.0" layoutY="218.0" mnemonicParsing="false" text="Sabado" />
+    <CheckBox fx:id="domingoCB" layoutX="323.0" layoutY="248.0" mnemonicParsing="false" text="Domingo" />
+    <Button fx:id="anteriorBT" layoutX="535.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAnterior" text="Anterior" />
+    <Button fx:id="siguienteBT" layoutX="611.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="0.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="1) Datos Usuario" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="73.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="2) Actividad" visible="true" />
+    <Button disable="false" focusTraversable="false" layoutX="1.0" layoutY="146.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="3) Horario" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="219.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="4) Resumen" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="292.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="5) Privacidad" visible="true" />
+  </children>
+</AnchorPane>
