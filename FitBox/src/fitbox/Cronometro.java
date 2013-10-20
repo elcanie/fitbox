@@ -16,9 +16,11 @@ import javafx.scene.control.Label;
  * @author Jose
  */
 public class Cronometro implements Runnable {
+    final double constanteTiempo = 0.321;
     int segundos, minutos, horas, centesimas;
+    double puntos;
     RealizarActividadController padre;
-    boolean pausado;
+    boolean finalizado = false;
 
     public Cronometro(RealizarActividadController padre) {
         this.padre = padre;
@@ -27,24 +29,24 @@ public class Cronometro implements Runnable {
     public void run() {
         try {
             for (;;) {
-                pausado = false;
-                if (centesimas == 99){
-                    centesimas = 0;
-                    segundos++;
-                }
-                if (segundos == 59) {
-                    segundos = 0;
-                    minutos++;
-                }
-                if (minutos == 59) {
-                    minutos = 0;
-                    horas++;
-                }
-                centesimas++;
+                if(!finalizado){
+                    if (centesimas == 99){
+                        centesimas = 0;
+                        segundos++;
+                    }
+                    if (segundos == 59) {
+                        segundos = 0;
+                        minutos++;
+                    }
+                    if (minutos == 59) {
+                        minutos = 0;
+                        horas++;
+                    }
+                    centesimas++;
                 
-                padre.actualizaLabels(horas,minutos,segundos,centesimas);
-                sleep(10);
-                System.out.println(this.toString());
+                    padre.actualizaLabels(horas,minutos,segundos,centesimas);
+                    sleep(10);
+                }
             }
             
         } catch (InterruptedException e) {
@@ -52,20 +54,19 @@ public class Cronometro implements Runnable {
         }
     
     }
-
-    public void resume(){
-        pausado=false;
-        resume();
-    }
-    public void pause(){
-        if(pausado){
-            pausado=true;
-            //wait();
-        }
-
-    }
     
-    public void finalize(){
-        this.finalize();
+        public void finalize(){
+        if(!finalizado){
+            this.finalizado=true;            
+        }
+        }
+    public void resume(){
+        if(finalizado){
+            this.finalizado=false;
+        }
+    }
+    public double getPuntos(){
+        puntos = (((horas*3600)+(minutos*60)+segundos)*constanteTiempo);
+        return puntos;
     }
 }

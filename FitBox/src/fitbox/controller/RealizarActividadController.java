@@ -26,6 +26,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import jfx.messagebox.MessageBox;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
 
@@ -39,6 +40,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     @FXML
     private Label crono2;
     private Cronometro crono;
+    double puntos = 0;
     
     
     
@@ -54,9 +56,31 @@ public class RealizarActividadController implements Initializable, ControlledScr
     }
     @FXML
     public void pausaGrabacion(){
-        if (crono!=null){
-            crono.pause();
-        }
+        crono.finalize();
+        int answer = MessageBox.show(ScreensFramework.stage,
+						"¿Desea finalizar el ejercicio?",
+						"Information dialog", 
+						MessageBox.ICON_INFORMATION| MessageBox.OK | MessageBox.CANCEL);
+ 
+		if (answer == MessageBox.OK) {
+                    puntos = crono.getPuntos();
+                    answer = MessageBox.show(ScreensFramework.stage,
+						"Genial!! Has acumulado "+puntos+"\nAcumula puntos y gana puestos en el ranking!!",
+						"Information dialog", 
+						MessageBox.ICON_INFORMATION| MessageBox.OK);
+                    
+ 
+		if (answer == MessageBox.OK) {
+			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
+                        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
+		} else if (answer == MessageBox.CANCEL) {
+		}
+                    
+		} else if (answer == MessageBox.CANCEL) {
+                    crono.resume();
+		}
+            
+        
     }
     public void actualizaLabels(final int h, final int m, final int s, final int c){
 
@@ -97,8 +121,23 @@ public class RealizarActividadController implements Initializable, ControlledScr
     }
     @FXML
     public void home(){
-        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);        
+        /*int answer = MessageBox.show(ScreensFramework.stage,
+                    "Por favor, rellena todos los campos.",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);*/
+        int answer = MessageBox.show(ScreensFramework.stage,
+						"¿Desea volver al menú principal?",
+						"Information dialog", 
+						MessageBox.ICON_INFORMATION| MessageBox.OK | MessageBox.CANCEL);
+ 
+		if (answer == MessageBox.OK) {
+			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
+                        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
+		} else if (answer == MessageBox.CANCEL) {
+		}
+ 
+
+              
     }
     
 

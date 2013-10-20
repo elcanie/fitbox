@@ -47,18 +47,18 @@ public class ScreensFramework extends Application {
          */
         this.stage = primeraPantalla;
 
-        /*ScreensController mainContainer = new ScreensController(stage);
+        ScreensController mainContainer = new ScreensController(stage);
          mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
          ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
 
-         mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);*/
+         mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
-        ScreensController mainContainer = new ScreensController(stage);
+        /*ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
                 ScreensFramework.PANTALLA_PERFIL1_FXML, null);
 
         mainContainer.setScreen(ScreensFramework.PANTALLA_PERFIL1);
-
+*/
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
