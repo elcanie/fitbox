@@ -6,6 +6,7 @@ package fitbox.controller.dao;
 
 import fitbox.model.Actividad;
 import fitbox.model.Usuario;
+import fitbox.model.Video;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class Dal {
         daos =  new HashMap<String,Dao>();
         daos.put("Usuario", new Dao<Usuario>(Usuario.class));
         daos.put("Actividad",new Dao<Actividad>(Actividad.class));
+        daos.put("Video",new Dao<Video>(Video.class));
     }
     
     public static Dal getDal(){
