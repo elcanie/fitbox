@@ -19,7 +19,7 @@ public class MuestraUsoBaseDatos {
         Dal dal = Dal.getDal();
        //Usuario usuario = new Usuario(0,"Name","Apl1");
        //dal.insert(usuario);
-       Collection<Usuario> datos = dal.find(Usuario.USUARIOSBYID,new Object[]{1},Usuario.class);
+       Collection<Usuario> datos = dal.find(Usuario.USUARIOSBYID,new Object[]{1,"pepe"},Usuario.class);
        for(Usuario u : datos) System.out.println(u.getNombre());
         
     }

@@ -33,6 +33,10 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_PERFIL2 = "Perfil2";
     public static final String PANTALLA_PERFIL3_FXML = "/fitbox/view/perfil3.fxml";
     public static final String PANTALLA_PERFIL3 = "Perfil3";
+    public static final String PANTALLA_PERFIL4_FXML = "/fitbox/view/perfil4.fxml";
+    public static final String PANTALLA_PERFIL4 = "Perfil4";
+    public static final String PANTALLA_PERFIL5_FXML = "/fitbox/view/perfil5.fxml";
+    public static final String PANTALLA_PERFIL5 = "Perfil5";
 
     @Override
     public void start(Stage primeraPantalla) throws Exception {
@@ -49,11 +53,19 @@ public class ScreensFramework extends Application {
 
          mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
+<<<<<<< HEAD
       /*  ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL2,
                 ScreensFramework.PANTALLA_PERFIL2_FXML, null);
 
         mainContainer.setScreen(ScreensFramework.PANTALLA_PERFIL2);*/
+=======
+        ScreensController mainContainer = new ScreensController(stage);
+        mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
+                ScreensFramework.PANTALLA_PERFIL1_FXML, null);
+
+        mainContainer.setScreen(ScreensFramework.PANTALLA_PERFIL1);
+>>>>>>> c6583b7e910adba6888f85a2e601321979c56938
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);

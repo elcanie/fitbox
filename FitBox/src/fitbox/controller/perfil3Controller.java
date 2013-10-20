@@ -4,7 +4,9 @@
  */
 package fitbox.controller;
 
+import fitbox.model.datosUsuario;
 import fitbox.view.ControlledScreen;
+import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,31 +36,79 @@ public class perfil3Controller implements Initializable, ControlledScreen{
     @FXML
     private CheckBox domingoCB;
     
-    //private Horario horario;
     private ScreensController myController;
+    private datosUsuario usuario;
+    private Recurso recurso;
     
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-    
-     /*  horario=new Horario();
-       horario.setLunes(true);
-       horario.setMartes(true);
-       horario.setLunes(true);
-       horario.setLunes(true);*/
+        
+           usuario.setLunesCB(lunesCB.isSelected());
+           usuario.setMartesCB(martesCB.isSelected());
+           usuario.setMiercolesCB(miercolesCB.isSelected());
+           usuario.setJuevesCB(juevesCB.isSelected());
+           usuario.setViernesCB(viernesCB.isSelected());
+           usuario.setSabadoCB(sabadoCB.isSelected());
+           usuario.setDomingoCB(domingoCB.isSelected());
+           
+           recurso.putObject("usuario", usuario);   
+           myController.loadScreen(ScreensFramework.PANTALLA_PERFIL4, ScreensFramework.PANTALLA_PERFIL4_FXML, recurso);
+           myController.setScreen(ScreensFramework.PANTALLA_PERFIL4);
+        
+
     }
     
     
     @FXML
     private void handleButtonAnterior(ActionEvent event) {
-    
+           usuario.setLunesCB(lunesCB.isSelected());
+           usuario.setMartesCB(martesCB.isSelected());
+           usuario.setMiercolesCB(miercolesCB.isSelected());
+           usuario.setJuevesCB(juevesCB.isSelected());
+           usuario.setViernesCB(viernesCB.isSelected());
+           usuario.setSabadoCB(sabadoCB.isSelected());
+           usuario.setDomingoCB(domingoCB.isSelected());
+  
+            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
+            myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(718);
-        ScreensFramework.stage.setHeight(369);
+        usuario = new datosUsuario();
+        recurso = (Recurso) rb;
+        usuario = (datosUsuario) recurso.getObject("usuario");
        
+        try {
+            lunesCB.setSelected(usuario.getLunesCB());
+        } catch (Exception e) {
+        }
+        try {
+            martesCB.setSelected(usuario.getMartesCB());
+        } catch (Exception e) {
+        }
+        try {
+            miercolesCB.setSelected(usuario.getMiercolesCB());
+        } catch (Exception e) {
+        }
+        try {
+            juevesCB.setSelected(usuario.getJuevesCB());
+        } catch (Exception e) {
+        }
+        try {
+            viernesCB.setSelected(usuario.getViernesCB());
+        } catch (Exception e) {
+        }
+        try {
+            sabadoCB.setSelected(usuario.getSabadoCB());
+        } catch (Exception e) {
+        }
+        try {
+            domingoCB.setSelected(usuario.getDomingoCB());
+        } catch (Exception e) {
+        }
+   
     }
 
     @Override

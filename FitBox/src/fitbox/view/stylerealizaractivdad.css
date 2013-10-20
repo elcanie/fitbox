@@ -46,3 +46,13 @@
 	-fx-font-style: normal;
 
 }
+#videoCaptura{
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+}
+#videoMuestra{
+    -fx-background-color:#000000;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    
+}

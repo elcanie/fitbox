@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="718.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.perfilController5">
+  <children>
+    <Line endX="-47.0" endY="238.0" layoutX="156.0" layoutY="129.0" startX="-46.0" startY="-128.0" />
+    <Button id="anteriorBT" layoutX="535.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAnterior" text="Anterior" />
+    <Button id="siguienteBT" layoutX="611.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Siguiente" />
+    <Label layoutX="239.0" layoutY="14.0" text="PRIVACIDAD Y CONDICIONES" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="true" wrapText="false">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="20.0" />
+      </font>
+    </Label>
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="1.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="1) Datos Usuario" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="74.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="2) Actividad" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="147.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="3) Horario" visible="true" />
+    <Button disable="true" focusTraversable="false" layoutX="1.0" layoutY="220.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="4) Resumen" visible="true" />
+    <Button disable="false" focusTraversable="false" layoutX="1.0" layoutY="293.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="73.0" prefWidth="108.0" text="5) Privacidad" visible="true" />
+    <Label layoutX="187.0" layoutY="83.0" text="Indique los campos que desea visibles en el perfil web:" />
+    <Label layoutX="159.0" layoutY="58.0" text="Privacidad web">
+      <font>
+        <Font size="10.0" />
+      </font>
+    </Label>
+    <CheckBox fx:id="nombre" layoutX="185.0" layoutY="112.0" mnemonicParsing="false" text="Nombre" />
+    <CheckBox fx:id="genero" layoutX="185.0" layoutY="139.0" mnemonicParsing="false" text="Género" />
+    <CheckBox fx:id="apellidos" layoutX="264.0" layoutY="111.0" mnemonicParsing="false" text="Apellidos" />
+    <CheckBox fx:id="peso" layoutX="264.0" layoutY="139.0" mnemonicParsing="false" text="Peso" />
+    <CheckBox fx:id="edad" layoutX="358.0" layoutY="111.0" mnemonicParsing="false" text="Edad" />
+    <CheckBox fx:id="actividad" layoutX="358.0" layoutY="139.0" mnemonicParsing="false" text="Actividad" />
+    <CheckBox fx:id="fechaNac" layoutX="445.0" layoutY="111.0" mnemonicParsing="false" text="Fecha nacimiento" />
+    <CheckBox fx:id="logros" layoutX="445.0" layoutY="139.0" mnemonicParsing="false" text="Logros" />
+    <Label layoutX="162.0" layoutY="183.0" text="Terminos y condiciones" />
+    <TextArea layoutX="160.0" layoutY="203.0" prefHeight="73.0" prefWidth="473.0" text="....&#10;....&#10;....&#10;....&#10;...&#10;....&#10;...&#10;...&#10;..." wrapText="true" />
+    <CheckBox fx:id="aceptar" layoutX="162.0" layoutY="293.0" mnemonicParsing="false" text="He leído y acepto el contrato" />
+    <Line endX="250.0" endY="1.0" layoutX="332.0" layoutY="66.0" startX="-100.0" strokeWidth="0.5" />
+    <Line endX="330.0" endY="1.0" layoutX="254.0" layoutY="173.0" startX="-100.0" strokeWidth="0.5" />
+    <Line endX="6.0" layoutX="630.0" layoutY="121.0" rotate="90.0" startX="-100.0" strokeWidth="0.5" />
+    <Line endX="6.0" layoutX="200.0" layoutY="120.0" rotate="90.0" startX="-100.0" strokeWidth="0.5" />
+  </children>
+</AnchorPane>
