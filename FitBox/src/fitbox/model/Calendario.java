@@ -5,11 +5,16 @@
 package fitbox.model;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -19,74 +24,133 @@ public class Calendario {
     /*
      * Consultas
      */
-    public static final String INSERT_USUARIO = "INSERT INTO  `fitbox`.`usuario` (`id` ,`nombre` ,`password`) VALUES (NULL, ";
-    public static final String TODOS_USUARIOS = "select * from usuario";
-    public static final String USUARIOSBYID = "select * from usuario u WHERE u.id = ?";
+    public static final String INSERT_CALENDARIO = "INSERT INTO  `fitbox`.`calendario` (`id` ,`fecha` ,`idActividad`,`estadoActividad`,`idJugador`) VALUES (NULL, ";
+    public static final String TODOS_CALENDARIOS = "select * from calendario";
+    public static final String CALENDARIOBYJUGADORID = "select * from calendario c WHERE c.idJugador = ?";
+    public static final String CALENDARIOSPORAÑODIAYJUGADOR = "SELECT * FROM calendario c WHERE c.fecha LIKE ? AND c.idJugador = ?";
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 3;
-    private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
-    private final SimpleIntegerProperty mes = new SimpleIntegerProperty(0);
-    private final SimpleStringProperty 
-    private final SimpleIntegerProperty hora = new SimpleIntegerProperty(0);
-    private String valores[] = new String[3];
+    public static final int NUMERO_ATRIBUTOS = 5;
+    private int id;
+    private String fechaStr;
+    private DateTime fecha;
+    private int idActividad;
+    private int estadoActividad;
+    private int idJugador;
+    private Object valores[] = new Object[NUMERO_ATRIBUTOS];
 
-    public Calendario() {
-        this(new Integer(0), "", "");
-            }
-
+    
     public Calendario(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2));
+        this((int) array.get(0), (String) array.get(1), (int) array.get(2), (int) array.get(3), (int) array.get(4));
     }
 
-    public Calendario(int id, String nombre, String password) {
-        setValores(id, nombre, password);
+    public Calendario(int id, String fechaStr, int idActividad, int estadoActividad, int idJugador) {
+        setValores(id,fechaStr,idActividad,estadoActividad,idJugador);
         setId(id);
-        setNombre(nombre);
-        setFactor(password);
+        setIdActividad(idActividad);
+        setEstadoActividad(estadoActividad);
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm:ss");
+fecha = formatter.parseDateTime(fechaStr);
     }
 
-    public int getId() {
-        return id.get();
+
+    private void setValores(int id, String fecha, int idActividad, int estadoActividad, int idJugador) {
+        valores[0] = id ;
+        valores[1] = fecha;
+        valores[2] = idActividad;
+        valores[3] = estadoActividad;
+        valores[4] = idJugador;
+    }
+
+    public Object[] getValores() {
+        return valores;
     }
 
     /**
-     *
-     * @param fName
+     * @return the id
      */
-    public void setId(int fName) {
-        id.set(fName);
+    public int getId() {
+        return id;
     }
 
-    public String getNombre() {
-        return nombre.get();
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNombre(String fName) {
-        nombre.set(fName);
+    /**
+     * @return the fecha
+     */
+    public DateTime getFecha() {
+        return fecha;
     }
 
-    public String getPassword() {
-        return password.get();
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(DateTime fecha) {
+        this.fecha = fecha;
     }
 
-    public void setFactor(String fName) {
-        password.set(fName);
+    /**
+     * @return the idActividad
+     */
+    public int getIdActividad() {
+        return idActividad;
     }
 
+    /**
+     * @param idActividad the idActividad to set
+     */
+    public void setIdActividad(int idActividad) {
+        this.idActividad = idActividad;
+    }
+
+    /**
+     * @return the estadoActividad
+     */
+    public int getEstadoActividad() {
+        return estadoActividad;
+    }
+
+    /**
+     * @param estadoActividad the estadoActividad to set
+     */
+    public void setEstadoActividad(int estadoActividad) {
+        this.estadoActividad = estadoActividad;
+    }
+
+    /**
+     * @return the idJugador
+     */
+    public int getIdJugador() {
+        return idJugador;
+    }
+
+    /**
+     * @param idJugador the idJugador to set
+     */
+    public void setIdJugador(int idJugador) {
+        this.idJugador = idJugador;
+    }
+
+    /**
+     * @param valores the valores to set
+     */
+    public void setValores(Object[] valores) {
+        this.valores = valores;
+    }
+    
     @Override
-    public String toString() {
-        return nombre.get();
+    public String toString(){
+        if(getIdActividad()<9999) return "Actividades";
+    return getFecha().getDayOfMonth()+"\n Nada";
     }
-
-    private void setValores(int id, String nombre, String password) {
-        valores[0] = id + "";
-        valores[1] = nombre + "";
-        valores[2] = password + "";
-    }
-
-    public String[] getValores() {
-        return valores;
+    
+    public String toString2(){
+       return (getFecha().getHourOfDay()+" "+getIdActividad());
     }
 }

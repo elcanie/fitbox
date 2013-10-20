@@ -4,7 +4,7 @@
  */
 package fitbox;
 
-import fitbox.controller.ConsultarCalendarioController;
+import fitbox.controller.ConsultarVistaDiariaController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,16 +15,16 @@ import javafx.stage.Stage;
  *
  * @author Elias
  */
-public class LanzadorConsultarCalendario extends Application {
+public class LanzadorConsultarVistaDiaria extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fitbox/view/ConsultarCalendario.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fitbox/view/ConsultarVistaDiaria.fxml"));
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
 
-        ConsultarCalendarioController.setScene(scene);
+        ConsultarVistaDiariaController.setScene(scene);
         stage.setScene(scene);
         stage.show();
     }
