@@ -10,6 +10,7 @@ import fitbox.view.MediaControl;
 import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
+import fitbox.controller.dao.Dal;
 import fitbox.view.ControlledScreen;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
@@ -41,10 +42,12 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Label crono2;
     private Cronometro crono;
     double puntos = 0;
+    //Dal dal = Dal.getDal();
     
     
     
-    private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU?fs=1\" frameborder=\"0\" allowfullscreen></iframe>";
+    //private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU?fs=1\" frameborder=\"0\" allowfullscreen></iframe>";
+    private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU\" frameborder=\"0\" allowfullscreen></iframe>";
    
     @FXML
     public void grabar(){
