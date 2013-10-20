@@ -6,6 +6,7 @@ package fitbox.controller;
 
 import fitbox.model.Actividad;
 import fitbox.view.Recurso;
+import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,8 +22,8 @@ import javafx.scene.input.MouseEvent;
  *
  * @author RUBEN
  */
-public class DescripcionActividadController implements Initializable{
-    
+public class DescripcionActividadController implements Initializable {
+
     @FXML
     Button bGo;
     @FXML
@@ -31,13 +32,15 @@ public class DescripcionActividadController implements Initializable{
     TextField factor, objetivo, categoria, nRepeticiones;
     @FXML
     Label nombreActividad;
+    private Recurso recurso;
+    private ScreensController myController;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Recurso recurso = (Recurso) rb;
+        recurso = (Recurso) rb;
         Actividad actividad = (Actividad) recurso.getObject("Actividad");
         nombreActividad.setText(actividad.getNombre().toUpperCase());
         tDescripcion.setText(actividad.getDescripcion());
@@ -45,12 +48,14 @@ public class DescripcionActividadController implements Initializable{
         categoria.setText(actividad.getCategoria());
         nRepeticiones.setText(((int) (actividad.getFactor() * 9.75)) + "");
         objetivo.setText(actividad.getObjetivo());
-        
-    }    
-    
+
+    }
+
     @FXML
     public void irActividad(MouseEvent event) {
-        
-        
+        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+
+
     }
 }

@@ -57,10 +57,12 @@ public class AccederActividadesController implements Initializable, ControlledSc
     private Hashtable<String, Actividad> botonActividad = new Hashtable<String, Actividad>();
     @FXML
     Button botonHome;
+    private Recurso recurso;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.recurso=(Recurso)rb;
         cargarCategorias();
         ScreensFramework.stage.setResizable(true);
         ScreensFramework.stage.setWidth(916);
@@ -80,7 +82,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     
     @FXML
     public void goToHome(MouseEvent event) {
-        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
+        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         
     }
@@ -124,10 +126,10 @@ public class AccederActividadesController implements Initializable, ControlledSc
                     Stage s = new Stage();
                     Parent root = null;
                     try {
-                        Recurso recurso = new Recurso();
-                        recurso.putObject("Actividad", actividad);
+                        Recurso resource = new Recurso();
+                        resource.putObject("Actividad", actividad);
                         
-                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), recurso);
+                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), resource);
                     } catch (IOException ex) {
                         Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
                     }

@@ -27,6 +27,8 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_ACTIVIDADES_FXML = "/fitbox/view/AccederActividades.fxml";
     public static final String PANTALLA_LOGIN = "LOGIN";
     public static final String PANTALLA_LOGIN_FXML = "/fitbox/view/Login.fxml";
+        public static final String PANTALLA_SEGUIMIENTO = "SeguimientoVideos";
+    public static final String PANTALLA_SEGUIMIENTO_FXML = "/fitbox/view/videos.fxml";
     public static final String PANTALLA_REALIZARACTIVIDAD = "RealizarActividad";
     public static final String PANTALLA_REALIZARACTIVIDAD_FXML = "/fitbox/view/RealizarActividad.fxml";
     public static final String PANTALLA_PERFIL1_FXML = "/fitbox/view/perfil1.fxml";

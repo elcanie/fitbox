@@ -11,9 +11,13 @@ import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
 import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
+import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
+import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,9 +46,13 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Label crono2;
     private Cronometro crono;
     double puntos = 0;
-    //Dal dal = Dal.getDal();
+    double puntosAct;
+    private Recurso recurso;
+    private String URL = "UNvAy1N6jvU";
+    private Usuario usuario;
     
-    private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU\" frameborder=\"0\" allowfullscreen></iframe>";
+    
+    private final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/"+URL+"\" frameborder=\"0\" allowfullscreen></iframe>";
    
     @FXML
     public void grabar(){
@@ -71,8 +79,13 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     
  
 		if (answer == MessageBox.OK) {
-			//myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
-                        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
+//			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        
+        //CONSULTA PARA OBTENER PUNTOS ACTUALES Pun
+        
+        //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
+        
 		} else if (answer == MessageBox.CANCEL) {
 		}
                     
@@ -101,13 +114,17 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Dal dal = Dal.getDal();
+        usuario=(Usuario) recurso.getObject("usuario");
+        this.recurso=(Recurso)rb;
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         WebEngine webEngine= videoMuestra.getEngine();
         webEngine.loadContent(MEDIA_URL);
         videoMuestra.setLayoutX(-5);
         videoMuestra.setLayoutY(-4);
-        //zonavideo.getChildren().add(videoMuestra);
+        //this.URL=dal.find(, parametros, null)
+                //zonavideo.getChildren().add(videoMuestra);
         
 //        mediaPlayer = new MediaPlayer(new Media(MEDIA_URL));
 //        mediaPlayer.setAutoPlay(true);
@@ -127,8 +144,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
 						MessageBox.ICON_INFORMATION| MessageBox.OK | MessageBox.CANCEL);
  
 		if (answer == MessageBox.OK) {
-			//myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
-                        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
+//			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL); 
 		} else if (answer == MessageBox.CANCEL) {
 		}
     }

@@ -77,7 +77,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, null);
+        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
     }
@@ -92,7 +92,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirEstadisticas(MouseEvent event) throws IOException {
-        //  myController.setScreen(ScreensFramework.PANTALLA_ESTADISTICAS);
+                       myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO,ScreensFramework.PANTALLA_SEGUIMIENTO_FXML,recurso);
+                       myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
+
+         
     }
 
     @FXML
