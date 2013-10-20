@@ -59,7 +59,7 @@ public class ScreensFramework extends Application {
         mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
                 ScreensFramework.PANTALLA_PERFIL1_FXML, null);
 
-
+*/
        ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_LOGIN,
                 ScreensFramework.PANTALLA_LOGIN_FXML, null);
