@@ -4,7 +4,7 @@
  */
 package fitbox;
 
-import fitbox.controller.ConsultarCalendarioController;
+import fitbox.controller.ConsultarVistaDiariaController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

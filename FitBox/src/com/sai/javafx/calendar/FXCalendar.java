@@ -1,5 +1,6 @@
 package com.sai.javafx.calendar;
 
+import fitbox.controller.ConsultarVistaSemanalController;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -19,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -46,12 +49,13 @@ public class FXCalendar extends HBox {
 	public FXCalendar() {
 		super();
 		super.getStyleClass().add(DEFAULT_STYLE_CLASS);
-		this.locale.set(Locale.ENGLISH);
+		this.locale.set(new Locale("es","ES"));
 		this.baseColor.set(Color.web("#313131"));
 		//setSpacing(6);
 		setAlignment(Pos.CENTER);
 		configureCalendar();
 		configureListeners();
+                dateTxtField.setDisable(true);
 	}
 
 	private void configureCalendar() {
@@ -105,7 +109,7 @@ public class FXCalendar extends HBox {
 		/* Creating the date button. */
 		Button popupButton = new Button();
 		popupButton.getStyleClass().add("dateButton");
-		popupButton.setGraphic(FXCalendarUtility.getDateImage());
+		popupButton.setGraphic(new ImageView(new Image("/imagenes/Sport-dumbbell-icon32px.png")));
 		popupButton.setFocusTraversable(false);
 		popupButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -134,6 +138,7 @@ public class FXCalendar extends HBox {
 						valueProperty().set(cu.convertStringtoDate(d));
 					}
 					setTriggered(false);
+                                        ConsultarVistaSemanalController.cambiarFecha();
 				}
 			}
 		});
@@ -436,7 +441,7 @@ public class FXCalendar extends HBox {
 		public DateTextField() {
 			setEditable(true);
 			setPrefHeight(22);
-			setPromptText("Select Date");
+			setPromptText("Selecccione fecha");
 		}
 
 		public Node getNode() {

@@ -61,7 +61,6 @@ public class Dao<T extends Object> {
         List<T> datos = new LinkedList<>();
         try {
             Integer a = claseT.getDeclaredField("NUMERO_ATRIBUTOS").getInt(null);
-            System.out.println(a);
             while(_rs.next()){
                 Integer i = 0;
                 LinkedList<Object> array = new LinkedList<Object>();
@@ -82,7 +81,7 @@ public class Dao<T extends Object> {
         try {
             Statement s = conexion.createStatement();
             Collection<T> datos = null;
-            String valores[] = (String[]) (claseT.getMethod("getValores", null)).invoke(t, null);
+            Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
             String consulta = null;
             consulta = (String) claseT.getDeclaredField("INSERT_" + claseT.getSimpleName().toUpperCase()).get(null);
 
