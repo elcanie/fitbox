@@ -217,7 +217,7 @@
                                 </ImageView>
                               </graphic>
                             </Button>
-                            <Button fx:id="botonClasificacion" defaultButton="false" layoutX="106.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#abrirClasificacion" prefHeight="86.0" prefWidth="105.0" text="">
+                            <Button fx:id="botonClasificacion" defaultButton="false" layoutX="106.0" layoutY="8.0" mnemonicParsing="false" onAction="#abrirClasificacion" onMouseClicked="#abrirClasificacion" prefHeight="86.0" prefWidth="105.0" text="">
                               <graphic>
                                 <ImageView fitHeight="80.49996948242188" fitWidth="80.49996948242188" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                   <image>

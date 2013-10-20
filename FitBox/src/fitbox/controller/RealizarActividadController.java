@@ -44,9 +44,6 @@ public class RealizarActividadController implements Initializable, ControlledScr
     double puntos = 0;
     //Dal dal = Dal.getDal();
     
-    
-    
-    //private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU?fs=1\" frameborder=\"0\" allowfullscreen></iframe>";
     private static final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/UNvAy1N6jvU\" frameborder=\"0\" allowfullscreen></iframe>";
    
     @FXML
@@ -74,7 +71,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     
  
 		if (answer == MessageBox.OK) {
-			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
+			//myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
                         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
 		} else if (answer == MessageBox.CANCEL) {
 		}
@@ -104,7 +101,6 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //WebView videoMuestra = new WebView();
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         WebEngine webEngine= videoMuestra.getEngine();
@@ -124,24 +120,17 @@ public class RealizarActividadController implements Initializable, ControlledScr
     }
     @FXML
     public void home(){
-        /*int answer = MessageBox.show(ScreensFramework.stage,
-                    "Por favor, rellena todos los campos.",
-                    "Information dialog",
-                    MessageBox.ICON_INFORMATION | MessageBox.OK);*/
+        
         int answer = MessageBox.show(ScreensFramework.stage,
 						"¿Desea volver al menú principal?",
 						"Information dialog", 
 						MessageBox.ICON_INFORMATION| MessageBox.OK | MessageBox.CANCEL);
  
 		if (answer == MessageBox.OK) {
-			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
+			//myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
                         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);  
 		} else if (answer == MessageBox.CANCEL) {
 		}
- 
-
-              
     }
-    
 
 }

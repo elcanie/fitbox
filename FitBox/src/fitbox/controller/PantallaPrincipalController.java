@@ -112,7 +112,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirClasificacion(MouseEvent event) throws IOException {
-         //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+         myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION,ScreensFramework.PANTALLA_CLASIFICACION_FXML,null);
+                       myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML
