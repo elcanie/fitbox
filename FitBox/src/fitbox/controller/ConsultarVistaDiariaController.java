@@ -4,26 +4,22 @@
  */
 package fitbox.controller;
 
-import static fitbox.controller.ConsultarVistaSemanalController.fxcalendar;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Calendario;
-<<<<<<< HEAD
-=======
+
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-<<<<<<< HEAD
-=======
+
 import javafx.event.ActionEvent;
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -39,19 +35,14 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
-<<<<<<< HEAD
-public class ConsultarVistaDiariaController implements Initializable {
 
-    static Scene scene;
-    private static ConsultarVistaDiariaController consultarVistaDiaria;
-=======
 public class ConsultarVistaDiariaController implements Initializable, ControlledScreen {
 
     static Scene scene;
     private static ConsultarVistaDiariaController consultarVistaDiaria;
     private Recurso recurso;
     private Usuario user;
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
+
 
     public static void setScene(Scene _scene) {
         scene = _scene;
@@ -62,21 +53,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     private AnchorPane anchorPane;
     @FXML
     private Label diaLabel;
-<<<<<<< HEAD
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        LocalDate hoy = new LocalDate();
-        updateVista(hoy.getYear(),hoy.getMonthOfYear(),16);
-    }
-   public void updateVista(int _año, int _mes, int _dia) {
-        System.out.println(_año+" "+_mes+" "+_dia);
-        diaLabel.setText("Dia: "+_dia);
-        LocalDate now = new LocalDate(_año, _mes, _dia);
-
-        Dal dal = Dal.getDal();
-        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{10}, Calendario.class);
-=======
     LocalDate now;
 
     @Override
@@ -94,27 +71,19 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
         Dal dal = Dal.getDal();
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
+
         System.out.println("Actividades: " + calendarios.size());
         List<Calendario> listDiaStr = new LinkedList<>();
 
 
         diaListView.setItems(null);
-<<<<<<< HEAD
+
         
         for (Calendario cal : calendarios)
             if (cal.getFecha().getDayOfMonth()==now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear()==now.getMonthOfYear()))
                 listDiaStr.add(cal);
                 
-=======
 
-        for (Calendario cal : calendarios) {
-            if (cal.getFecha().getDayOfMonth() == now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear())) {
-                listDiaStr.add(cal);
-            }
-        }
-
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
         ObservableList<Calendario> listDia = FXCollections.observableArrayList(listDiaStr);
         diaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
@@ -127,11 +96,9 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-<<<<<<< HEAD
+
                                 text = new Text(((Calendario)item).toString2());
-=======
-                                text = new Text(((Calendario) item).toString2());
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
+
                                 text.setWrappingWidth(diaListView.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -145,13 +112,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         diaListView.setItems(listDia);
 
     }
-<<<<<<< HEAD
 
-   
-
-}
-
-=======
     ScreensController myController;
 
     @Override
@@ -187,4 +148,4 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 }
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
+

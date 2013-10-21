@@ -50,6 +50,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Recurso recurso;
     private String URL = "UNvAy1N6jvU";
     private Usuario usuario;
+    private Actividad actividad;
     
     
     private final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/"+URL+"\" frameborder=\"0\" allowfullscreen></iframe>";
@@ -79,6 +80,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     
  
 		if (answer == MessageBox.OK) {
+                    ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
 //			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         
@@ -115,8 +118,9 @@ public class RealizarActividadController implements Initializable, ControlledScr
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Dal dal = Dal.getDal();
-        usuario=(Usuario) recurso.getObject("usuario");
         this.recurso=(Recurso)rb;
+        usuario=(Usuario) recurso.getObject("usuario");
+        //actividad=(Actividad) recurso.getObject("actividad");
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         WebEngine webEngine= videoMuestra.getEngine();
@@ -145,6 +149,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
  
 		if (answer == MessageBox.OK) {
 //			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+                    ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL); 
 		} else if (answer == MessageBox.CANCEL) {
 		}
