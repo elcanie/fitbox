@@ -22,12 +22,18 @@ public class ScreensFramework extends Application {
 
     public static final String PANTALLA_PRINCIPAL = "PantallaPrincipal";
     public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml";
+    public static final String PANTALLA_VISTAMENSUAL = "VistaMensual";
+    public static final String PANTALLA_VISTAMENSUAL_FXML = "/fitbox/view/ConsultarVistaMensual.fxml";
+    public static final String PANTALLA_VISTADIARIA = "VistaDiaria";
+    public static final String PANTALLA_VISTADIARIA_FXML = "/fitbox/view/ConsultarVistaDiaria.fxml";
+    public static final String PANTALLA_VISTASEMANAL = "VistaSemanal";
+    public static final String PANTALLA_VISTASEMANAL_FXML = "/fitbox/view/ConsultarVistaSemanal.fxml";
     public static Stage stage;
     public static final String PANTALLA_ACTIVIDADES = "AccederActividades";
     public static final String PANTALLA_ACTIVIDADES_FXML = "/fitbox/view/AccederActividades.fxml";
     public static final String PANTALLA_LOGIN = "LOGIN";
     public static final String PANTALLA_LOGIN_FXML = "/fitbox/view/Login.fxml";
-        public static final String PANTALLA_SEGUIMIENTO = "SeguimientoVideos";
+    public static final String PANTALLA_SEGUIMIENTO = "SeguimientoVideos";
     public static final String PANTALLA_SEGUIMIENTO_FXML = "/fitbox/view/videos.fxml";
     public static final String PANTALLA_REALIZARACTIVIDAD = "RealizarActividad";
     public static final String PANTALLA_REALIZARACTIVIDAD_FXML = "/fitbox/view/RealizarActividad.fxml";
@@ -50,19 +56,19 @@ public class ScreensFramework extends Application {
          *
          */
         this.stage = primeraPantalla;
-/*
-        ScreensController mainContainer = new ScreensController(stage);
+        /*
+         ScreensController mainContainer = new ScreensController(stage);
          mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
          ScreensFramework.PANTALLA_PRINCIPAL_FXML, null);
 
          mainContainer.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
-        /*ScreensController mainContainer = new ScreensController(stage);
-        mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
-                ScreensFramework.PANTALLA_PERFIL1_FXML, null);
+         /*ScreensController mainContainer = new ScreensController(stage);
+         mainContainer.loadScreen(ScreensFramework.PANTALLA_PERFIL1,
+         ScreensFramework.PANTALLA_PERFIL1_FXML, null);
 
-*/
-       ScreensController mainContainer = new ScreensController(stage);
+         */
+        ScreensController mainContainer = new ScreensController(stage);
         mainContainer.loadScreen(ScreensFramework.PANTALLA_LOGIN,
                 ScreensFramework.PANTALLA_LOGIN_FXML, null);
 
@@ -83,6 +89,9 @@ public class ScreensFramework extends Application {
 
     public Stage getStage() {
         return stage;
-
+    }
+    
+    public static Stage getStage2() {
+        return stage;
     }
 }

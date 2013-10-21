@@ -84,18 +84,18 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
-               myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD,ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML,null);
-                       myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
 
 
     }
 
     @FXML
     public void abrirEstadisticas(MouseEvent event) throws IOException {
-                       myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO,ScreensFramework.PANTALLA_SEGUIMIENTO_FXML,recurso);
-                       myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
+        myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
 
-         
+
     }
 
     @FXML
@@ -124,9 +124,6 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void setMain(ScreensFramework main) {
-
-
-
     }
 
     @Override
@@ -135,13 +132,13 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
         //  Stage stage=(Stage)lo.getScene().getWindow();
         // stage.setResizable(false);
-        this.recurso=(Recurso)rb;
-        this.user=(Usuario)recurso.getObject("usuario");
+        this.recurso = (Recurso) rb;
+        this.user = (Usuario) recurso.getObject("usuario");
 
         inicioReloj();
         inicioGaleria();
         cargarEventos();
-        
+
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
         ScreensFramework.stage.setResizable(false);
