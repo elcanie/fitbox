@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 public class ConsultarClasificacionController implements Initializable, ControlledScreen{
     private ScreensController myController;
 
+    @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }

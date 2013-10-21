@@ -4,9 +4,9 @@
  */
 package fitbox.controller;
 
-import static fitbox.controller.ConsultarVistaSemanalController.fxcalendar;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Calendario;
+
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -33,12 +35,14 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
+
 public class ConsultarVistaDiariaController implements Initializable, ControlledScreen {
 
     static Scene scene;
     private static ConsultarVistaDiariaController consultarVistaDiaria;
     private Recurso recurso;
     private Usuario user;
+
 
     public static void setScene(Scene _scene) {
         scene = _scene;
@@ -49,6 +53,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     private AnchorPane anchorPane;
     @FXML
     private Label diaLabel;
+
     LocalDate now;
 
     @Override
@@ -66,17 +71,18 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
         Dal dal = Dal.getDal();
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
+
         System.out.println("Actividades: " + calendarios.size());
         List<Calendario> listDiaStr = new LinkedList<>();
 
 
         diaListView.setItems(null);
 
-        for (Calendario cal : calendarios) {
-            if (cal.getFecha().getDayOfMonth() == now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear())) {
+        
+        for (Calendario cal : calendarios)
+            if (cal.getFecha().getDayOfMonth()==now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear()==now.getMonthOfYear()))
                 listDiaStr.add(cal);
-            }
-        }
+                
 
         ObservableList<Calendario> listDia = FXCollections.observableArrayList(listDiaStr);
         diaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -90,7 +96,9 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(((Calendario) item).toString2());
+
+                                text = new Text(((Calendario)item).toString2());
+
                                 text.setWrappingWidth(diaListView.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -104,6 +112,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         diaListView.setItems(listDia);
 
     }
+
     ScreensController myController;
 
     @Override
@@ -139,3 +148,4 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 }
+

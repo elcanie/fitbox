@@ -1,4 +1,3 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -84,8 +83,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+//        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+//        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
 
 
     }
@@ -115,7 +116,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirClasificacion(MouseEvent event) throws IOException {
-        // myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+//        myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
+//         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML

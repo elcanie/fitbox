@@ -8,9 +8,11 @@ import com.sai.javafx.calendar.FXCalendar;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Calendario;
 import fitbox.model.Usuario;
+
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -47,6 +49,7 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
+
 public class ConsultarVistaMensualController implements Initializable, ControlledScreen {
 
     @FXML
@@ -80,6 +83,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         lista.add(semana4);
         lista.add(semana5);
         DateTime dateTime = new DateTime();
+
         DateTime lastDate = dateTime.dayOfMonth().withMaximumValue();
         int diasMes = lastDate.dayOfMonth().withMaximumValue().getDayOfMonth();
         System.out.println(diasMes);
@@ -264,5 +268,6 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
+
     }
 }

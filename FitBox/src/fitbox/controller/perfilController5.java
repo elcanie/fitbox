@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import jfx.messagebox.MessageBox;
 
 /**
  *
@@ -57,9 +58,16 @@ public class perfilController5 implements Initializable, ControlledScreen {
         recurso.putObject("usuario", usuario);
 
         if (aceptar.isSelected() == true) {
-            System.out.println("OK");
-            //myController.loadScreen(??, recurso);
-            //myController.setScreen(??);
+            //GUARDAR EN LA BASE DE DATOS!!!!!
+            myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, null);
+            myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+        }else{
+            
+        int answer = MessageBox.show(ScreensFramework.stage,
+                    "Debe aceptar los términos del contrato para poder registrarse.",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+        
         }
     }
 
@@ -85,34 +93,43 @@ public class perfilController5 implements Initializable, ControlledScreen {
         usuario = new datosUsuario();
         recurso = (Recurso) rb;
         usuario = (datosUsuario) recurso.getObject("usuario");
-         try {
+        try {
             nombre.setSelected(usuario.isMostrarNombre());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             genero.setSelected(usuario.isMostrarGenero());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             apellidos.setSelected(usuario.isMostrarApellidos());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             peso.setSelected(usuario.isMostrarPeso());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             edad.setSelected(usuario.isMostrarEdad());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             actividad.setSelected(usuario.isMostrarActividad());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             fechaNac.setSelected(usuario.isMostrarFechaNac());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             logros.setSelected(usuario.isMostrarLogros());
-        } catch (Exception e) {}
-         try {
+        } catch (Exception e) {
+        }
+        try {
             aceptar.setSelected(usuario.isAceptar());
-        } catch (Exception e) {}
-         
+        } catch (Exception e) {
+        }
+
     }
 
     @Override

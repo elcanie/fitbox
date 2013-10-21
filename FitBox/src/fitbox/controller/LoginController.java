@@ -33,6 +33,7 @@ public class LoginController implements Initializable,ControlledScreen {
     @FXML private TextField fieldUser;
     @FXML private TextField fieldPassword;
     @FXML private Button buttonLogin;
+    @FXML private Button btnRegistro;
     private ScreensController myController;
     
     @Override
@@ -41,7 +42,11 @@ public class LoginController implements Initializable,ControlledScreen {
         ScreensFramework.stage.setWidth(543);
         ScreensFramework.stage.setHeight(438);
     }    
+    @FXML private void registrar(ActionEvent event){
+                myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, null);
+        myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
 
+    }
     @FXML private void iniciarSesion(ActionEvent event) {
         //Conexión SQL para comprobar los datos.
         

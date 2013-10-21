@@ -52,6 +52,7 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
+
 public class ConsultarVistaSemanalController implements Initializable, ControlledScreen {
 
     @FXML
@@ -60,9 +61,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
     @FXML
     HBox hPanel;
     static FXCalendar fxcalendar;
+
 LocalDate now;
     private Recurso recurso;
     private Usuario user;
+
     public ConsultarVistaSemanalController() {
     }
     
@@ -75,6 +78,7 @@ LocalDate now;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
                 this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
 ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
@@ -87,6 +91,7 @@ ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/ca
 
     public void updateVista(int _año, int _mes, int _dia,boolean fx) {
         System.out.println(_año+" "+_mes+" "+_dia);
+
         
         if(fx)
         now = new LocalDate(_año, _mes+1, _dia);
@@ -312,6 +317,7 @@ ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/ca
     @FXML
     public void siguienteSemana(ActionEvent e){
         System.out.println("Siguiente");
+
         now = now.plusWeeks(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(),false);
     }

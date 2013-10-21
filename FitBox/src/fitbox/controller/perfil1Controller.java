@@ -92,6 +92,14 @@ public class perfil1Controller implements Initializable, ControlledScreen {
     private Recurso recurso;
 
     @FXML
+    private void handleButtonAnterior(ActionEvent event) {
+
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+
+    }
+
+    @FXML
     private void handleButtonAction(ActionEvent event) {
 
         nombre = nombreText.getText();
@@ -224,13 +232,75 @@ public class perfil1Controller implements Initializable, ControlledScreen {
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
         }
 
-        
-        /*
+
+
         Calendar c = Calendar.getInstance();
-        int d = c.get(Calendar.DATE);
-        int m = c.get(Calendar.MONTH);
-        int a = c.get(Calendar.YEAR);
-        */
+        int diaActual = c.get(Calendar.DATE);
+        int mesActual = c.get(Calendar.MONTH+1);
+        int anyoActual = c.get(Calendar.YEAR);
+
+        int diaR = Integer.parseInt(dia);
+        int anyoR = Integer.parseInt(anyo);
+        int mesR = 0;
+        switch (mes) {
+            case "Enero":
+                mesR = 1;
+                break;
+            case "Febrero":
+                mesR = 2;
+                break;
+            case "Marzo":
+                mesR = 3;
+                break;
+            case "Abril":
+                mesR = 4;
+                break;
+            case "Mayo":
+                mesR = 5;
+                break;
+            case "Junio":
+                mesR = 6;
+                break;
+            case "Julio":
+                mesR = 7;
+                break;
+            case "Agosto":
+                mesR = 8;
+                break;
+            case "Septiembre":
+                mesR = 9;
+                break;
+            case "Octubre":
+                mesR = 10;
+                break;
+            case "Noviembre":
+                mesR = 11;
+                break;
+            case "Diciembre":
+                mesR = 12;
+                break;
+        }
+        boolean mostrarAvisoFecha = false;
+        if (anyoR > anyoActual) {
+            valido = false;
+            mostrarAvisoFecha = true;
+        } else if (anyoR == anyoActual && mesR > mesActual) {
+            valido = false;
+            mostrarAvisoFecha = true;
+        } else if (anyoR == anyoActual && mesR == mesActual && diaR > diaActual) {
+            valido = false;
+            mostrarAvisoFecha = true;
+        }
+        System.out.println("Fecha actual:"+diaActual+"/"+mesActual+"/"+anyoActual);
+        System.out.println("Fecha registro:"+diaR+"/"+mesR+"/"+anyoR);
+        if (mostrarAvisoFecha == true) {
+            int a = MessageBox.show(ScreensFramework.stage,
+                    "Fecha invalida.",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+
+        }
+
 
 
         if (valido) {

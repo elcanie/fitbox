@@ -7,6 +7,7 @@ package fitbox.controller.dao;
 
 import fitbox.model.Actividad;
 import fitbox.model.Calendario;
+import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Dal {
         daos.put("Usuario", new Dao<Usuario>(Usuario.class));
         daos.put("Actividad",new Dao<Actividad>(Actividad.class));
         daos.put("Calendario",new Dao<Calendario>(Calendario.class));
+        daos.put("Jugador", new Dao<Jugador>(Jugador.class));
     }
     
     public static Dal getDal(){
@@ -41,6 +43,9 @@ public class Dal {
        Dao dao = daos.get(objeto.getClass().getSimpleName());
        dao.insert(objeto); 
     }
-
+    public void update(Object objeto) {
+       Dao dao = daos.get(objeto.getClass().getSimpleName());
+       dao.update(objeto); 
+    }
 }
 
