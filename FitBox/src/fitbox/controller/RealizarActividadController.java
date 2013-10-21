@@ -50,7 +50,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     double puntos = 0;
     double puntosAct;
     private Recurso recurso;
-    private String URL = "UNvAy1N6jvU";
+    private String URL;// = "UNvAy1N6jvU";
     private Usuario usuario;
     private Actividad actividad;
     private Dal dal;
@@ -86,7 +86,6 @@ public class RealizarActividadController implements Initializable, ControlledScr
 		if (answer == MessageBox.OK) {
                     ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
-//			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         
         j.getPuntos();
@@ -126,10 +125,12 @@ public class RealizarActividadController implements Initializable, ControlledScr
     public void initialize(URL url, ResourceBundle rb) {
         dal = Dal.getDal();
         this.recurso=(Recurso)rb;
-        j = (Jugador)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
-        //j.setPuntos(123);
+        
         usuario=(Usuario) recurso.getObject("usuario");
-        //actividad=(Actividad) recurso.getObject("actividad");
+        j = (Jugador)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
+        actividad=(Actividad) recurso.getObject("actividad");
+        URL = actividad.getVideo();
+        
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         WebEngine webEngine= videoMuestra.getEngine();
@@ -157,7 +158,6 @@ public class RealizarActividadController implements Initializable, ControlledScr
 						MessageBox.ICON_INFORMATION| MessageBox.OK | MessageBox.CANCEL);
  
 		if (answer == MessageBox.OK) {
-//			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                     ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL); 

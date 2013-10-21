@@ -25,8 +25,10 @@ public class ConsultarClasificacionController implements Initializable, Controll
     }
 
         public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(380);
-        ScreensFramework.stage.setHeight(308);
+        ScreensFramework.stage.setWidth(386);
+        ScreensFramework.stage.setHeight(337);
+        
+        
         //Seleccionar tabla y realizar consulta.
         
 

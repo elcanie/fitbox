@@ -85,8 +85,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     public void abrirCalendario(MouseEvent event) throws IOException {
 //        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
 //        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
-        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+          myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+          myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+//          myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
+//          myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
 
 
     }
