@@ -97,4 +97,24 @@ public class Dao<T extends Object> {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void update(T t) {
+        try {
+            Statement s = conexion.createStatement();
+            Collection<T> datos = null;
+            Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
+            String consulta = null;
+            consulta = (String) claseT.getDeclaredField("UPDATE_" + claseT.getSimpleName().toUpperCase()).get(null);
+
+            for (int i = 1; i < valores.length; i++) {
+                consulta += "'" + valores[i] + "'";
+                consulta += i < valores.length - 1 ? "," : ")";
+            }
+                    //UPDATE jugador j SET puntos =5 WHERE j.id =10
+            Logger.getLogger("GenericDAO").info("Actualizar: " + consulta);
+            s.executeUpdate(consulta);
+
+        } catch (SQLException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

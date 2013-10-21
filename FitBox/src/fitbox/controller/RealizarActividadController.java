@@ -12,12 +12,14 @@ import fitbox.controller.ScreensController;
 import fitbox.controller.ScreensController;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
+import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +53,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private String URL = "UNvAy1N6jvU";
     private Usuario usuario;
     private Actividad actividad;
+    private Dal dal;
+    private Jugador j;
     
     
     private final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/"+URL+"\" frameborder=\"0\" allowfullscreen></iframe>";
@@ -85,7 +89,10 @@ public class RealizarActividadController implements Initializable, ControlledScr
 //			myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         
-        //CONSULTA PARA OBTENER PUNTOS ACTUALES Pun
+        j.getPuntos();
+        
+        
+//CONSULTA PARA OBTENER PUNTOS ACTUALES Pun
         
         //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
         
@@ -117,8 +124,10 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Dal dal = Dal.getDal();
+        dal = Dal.getDal();
         this.recurso=(Recurso)rb;
+        j = (Jugador)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
+        //j.setPuntos(123);
         usuario=(Usuario) recurso.getObject("usuario");
         //actividad=(Actividad) recurso.getObject("actividad");
         ScreensFramework.stage.setWidth(791);
