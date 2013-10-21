@@ -121,11 +121,7 @@ public class perfil2Controller implements Initializable, ControlledScreen {
                         MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } catch (Exception e) {
-            valido = false;
-            answer = MessageBox.show(ScreensFramework.stage,
-                    "Formado de días no válido. Introduzca valor numérico",
-                    "Information dialog",
-                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+         
 
         }
         if (valido) {

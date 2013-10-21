@@ -38,7 +38,7 @@
     </AnchorPane>
     <AnchorPane prefHeight="130.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="282.0">
       <children>
-        <Button fx:id="buttonLogin" minHeight="38.99998474121094" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="57.000016152858734" prefWidth="318.0001220703125" text="Iniciar sesión" AnchorPane.bottomAnchor="51.46" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="47.54">
+        <Button fx:id="buttonLogin" minHeight="38.99998474121094" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="56.99998474121094" prefWidth="216.5" text="Iniciar sesión" AnchorPane.bottomAnchor="49.5" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="311.5" AnchorPane.topAnchor="49.5">
           <stylesheets>
             <URL value="@Login.css" />
           </stylesheets>
@@ -48,6 +48,11 @@
             <Font size="12.0" />
           </font>
         </Label>
+        <Button id="buttonLogin" fx:id="btnRegistro" layoutX="285.0" layoutY="50.0" minHeight="38.99998474121094" mnemonicParsing="false" onAction="#registrar" prefHeight="56.99998474121094" prefWidth="216.5" text="Registrarse">
+          <stylesheets>
+            <URL value="@Login.css" />
+          </stylesheets>
+        </Button>
       </children>
       <stylesheets>
         <URL value="@Login.css" />

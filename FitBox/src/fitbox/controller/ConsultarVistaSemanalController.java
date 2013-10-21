@@ -9,6 +9,12 @@ import com.sai.javafx.calendar.FXCalendar;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Calendario;
 import fitbox.model.Usuario;
+<<<<<<< HEAD
+=======
+import fitbox.view.ControlledScreen;
+import fitbox.view.Recurso;
+import fitbox.view.ScreensFramework;
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -49,7 +55,11 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
+<<<<<<< HEAD
 public class ConsultarVistaSemanalController implements Initializable {
+=======
+public class ConsultarVistaSemanalController implements Initializable, ControlledScreen {
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
 
     @FXML
     ListView lunesList, martesList, miercolesList, juevesList, viernesList, sabadoList, domingoList;
@@ -57,7 +67,13 @@ public class ConsultarVistaSemanalController implements Initializable {
     @FXML
     HBox hPanel;
     static FXCalendar fxcalendar;
+<<<<<<< HEAD
 
+=======
+LocalDate now;
+    private Recurso recurso;
+    private Usuario user;
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
     public ConsultarVistaSemanalController() {
     }
     
@@ -70,6 +86,12 @@ public class ConsultarVistaSemanalController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+<<<<<<< HEAD
+=======
+                this.recurso = (Recurso) rb;
+        this.user = (Usuario) recurso.getObject("usuario");
+ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
         consultarVistaSemanal = this;
                 fxcalendar = new FXCalendar();
 		hPanel.getChildren().addAll(fxcalendar);
@@ -79,7 +101,11 @@ public class ConsultarVistaSemanalController implements Initializable {
 
     public void updateVista(int _año, int _mes, int _dia,boolean fx) {
         System.out.println(_año+" "+_mes+" "+_dia);
+<<<<<<< HEAD
         LocalDate now;
+=======
+        
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
         if(fx)
         now = new LocalDate(_año, _mes+1, _dia);
         else now = new LocalDate(_año, _mes, _dia);
@@ -304,11 +330,17 @@ public class ConsultarVistaSemanalController implements Initializable {
     @FXML
     public void siguienteSemana(ActionEvent e){
         System.out.println("Siguiente");
+<<<<<<< HEAD
+=======
+        now = now.plusWeeks(1);
+        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(),false);
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
     }
     
     @FXML
     public void anteriorSemana(ActionEvent e){
         System.out.println("Anterior");
+<<<<<<< HEAD
     }
     
     @FXML
@@ -319,5 +351,23 @@ public class ConsultarVistaSemanalController implements Initializable {
     @FXML
     public void cambioDia(ActionEvent e){
         System.out.println("otro dia");
+=======
+        now = now.minusWeeks(1);
+        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(),false);
+    }
+    
+    @FXML
+    public void vistaMensual(ActionEvent a) {
+        System.out.println("Mensual");
+        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+    }
+    
+    ScreensController myController;
+
+    @Override
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent; //To change body of generated methods, choose Tools | Templates.
+>>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
     }
 }
