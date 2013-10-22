@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
@@ -10,7 +11,7 @@
 
 <AnchorPane id="background" fx:id="anchorPane" minWidth="309.0" prefHeight="447.0" prefWidth="309.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaDiariaController">
   <children>
-    <ListView fx:id="diaListView" layoutX="41.0" layoutY="131.0" prefHeight="291.0" prefWidth="254.0" />
+    <ListView fx:id="diaListView" layoutX="41.0" layoutY="131.0" onMouseClicked="#mouselClicked" prefHeight="291.0" prefWidth="254.0" />
     <Label fx:id="diaLabel" layoutX="128.0" layoutY="95.0" prefHeight="18.0" prefWidth="80.0" text="Label" textFill="WHITE">
       <font>
         <Font name="Comic Sans MS" size="16.0" />

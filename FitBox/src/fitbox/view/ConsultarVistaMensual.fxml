@@ -8,6 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
+
 <AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="451.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensualController">
   <children>
     <ListView fx:id="semana1List" layoutX="29.0" layoutY="95.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
