@@ -22,21 +22,22 @@ public class Jugador {
     private double altura;
     private double peso;
     private String correo;
-    private int plan;
-    private int calendario;
+    private Integer plan;
+    private Integer calendario;
     private double puntos;
     public static final int NUMERO_ATRIBUTOS = 9;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
     
+    public static final String INSERT_JUGADOR = " INSERT INTO  `jugador` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
     public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
-    public static final String UPDATE_JUGADOR = "UPDATE `jugador` SET ";
+//    public static final String UPDATE_JUGADOR = "UPDATE `jugador` SET ";
 
     public Jugador(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (double) array.get(4),(String) array.get(5),(int) array.get(6),(int) array.get(7),(double) array.get(8));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3),(double) array.get(4), (String) array.get(5),(double) array.get(6),(Integer) array.get(7),(Integer) array.get(8));
     }
 
-    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, int plan, int calendario, double puntos) {
-        setValores(id, apellidos, genero, altura, peso, correo, plan, calendario, puntos);
+    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos,Integer plan, Integer calendario) {
+        setValores(id, apellidos, genero, altura, peso, correo,puntos, plan, calendario);
         setId(id);
         setApellidos(apellidos);
         setGenero(genero);
@@ -136,28 +137,28 @@ public class Jugador {
     /**
      * @return the plan
      */
-    public int getPlan() {
+    public Integer getPlan() {
         return plan;
     }
 
     /**
      * @param plan the plan to set
      */
-    public void setPlan(int plan) {
+    public void setPlan(Integer plan) {
         this.plan = plan;
     }
 
     /**
      * @return the calendario
      */
-    public int getCalendario() {
+    public Integer getCalendario() {
         return calendario;
     }
 
     /**
      * @param calendario the calendario to set
      */
-    public void setCalendario(int calendario) {
+    public void setCalendario(Integer calendario) {
         this.calendario = calendario;
     }
 
@@ -189,16 +190,17 @@ public class Jugador {
         this.valores = valores;
     }
 
-    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo, int plan, int calendario, double puntos) {
+    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo,double puntos, Integer plan, Integer calendario) {
         valores[0] = id;
         valores[1] = apellidos;
         valores[2] = genero;
         valores[3] = altura;
         valores[4] = peso;
         valores[5] = correo;
-        valores[6] = plan;
-        valores[7] = calendario;
-        valores[8] = puntos;
+        valores[6] = puntos;
+        valores[7] = plan;
+        valores[8] = calendario;
+        
     }
 
 }

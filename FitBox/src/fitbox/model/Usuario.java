@@ -19,7 +19,7 @@ public class Usuario {
     /*
      * Consultas
      */
-    public static final String INSERT_USUARIO = "INSERT INTO  `fitbox`.`usuario` (`id` ,`nombre` ,`password`) VALUES (NULL, ";
+    public static final String INSERT_USUARIO = "INSERT INTO  `usuario` (`id` ,`nombre` ,`password`) VALUES (NULL, ";
     public static final String TODOS_USUARIOS = "select * from usuario";
     public static final String USUARIOSBYID = "select * from usuario u WHERE u.id = ? and u.nombre = ?";
     public static final String USUARIOSBYNOMBREYPASS = "select * from usuario u WHERE u.nombre=? and u.password=?";

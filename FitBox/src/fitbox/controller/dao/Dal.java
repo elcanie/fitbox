@@ -43,6 +43,12 @@ public class Dal {
        Dao dao = daos.get(objeto.getClass().getSimpleName());
        dao.insert(objeto); 
     }
+    
+    public void insertConId(Object objeto) {
+       Dao dao = daos.get(objeto.getClass().getSimpleName());
+       dao.insertConId(objeto); 
+    }
+    
     public void update(Object objeto) {
        Dao dao = daos.get(objeto.getClass().getSimpleName());
        dao.update(objeto); 

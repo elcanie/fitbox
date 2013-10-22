@@ -21,7 +21,7 @@ public class Actividad {
      * Consultas
      */
 
-    public static final String INSERT_ACTIVIDAD = "INSERT INTO  `fitbox`.`usuario` (`idActividad` ,`nombre` ,`password`) VALUES (NULL, ";
+//    public static final String INSERT_ACTIVIDAD = "INSERT INTO  `fitbox`.`usuario` (`idActividad` ,`nombre` ,`password`) VALUES (NULL, ";
     public static final String TODOS_ACTIVIDADESbyCATEGORIA = "select * from `actividad` where `categoria`=?";
     public static final String ENCONTRAR_ACTIVIDADporNOMBRE = "select * from actividad where nombre='?'";
     public static final String ENCONTRAR_ACTIVIDADporID = "select * from actividad where id='?'";

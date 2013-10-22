@@ -96,6 +96,26 @@ public class Dao<T extends Object> {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void insertConId(T t) {
+        try {
+            Statement s = conexion.createStatement();
+            Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
+            String consulta = null;
+            consulta = (String) claseT.getDeclaredField("INSERT_" + claseT.getSimpleName().toUpperCase()).get(null);
+
+            for (int i = 0; i < valores.length; i++) {
+                consulta += "'" + valores[i] + "'";
+                consulta += i < valores.length - 1 ? "," : ")";
+            }
+
+            Logger.getLogger("GenericDAO").info("Insertar: " + consulta);
+            s.executeUpdate(consulta);
+
+        } catch (SQLException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void update(T t) {
 

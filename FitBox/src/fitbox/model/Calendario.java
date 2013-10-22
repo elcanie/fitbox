@@ -24,7 +24,7 @@ public class Calendario {
     /*
      * Consultas
      */
-    public static final String INSERT_CALENDARIO = "INSERT INTO  `fitbox`.`calendario` (`id` ,`fecha` ,`idActividad`,`estadoActividad`,`idJugador`) VALUES (NULL, ";
+    public static final String INSERT_CALENDARIO = "INSERT INTO  `calendario` (`id` ,`fecha` ,`idActividad`,`estadoActividad`,`idJugador`) VALUES (NULL, ";
     public static final String TODOS_CALENDARIOS = "select * from calendario";
     public static final String CALENDARIOBYJUGADORID = "select * from calendario c WHERE c.idJugador = ?";
     public static final String CALENDARIOSPORAÑODIAYJUGADOR = "SELECT * FROM calendario c WHERE c.fecha LIKE ? AND c.idJugador = ?";
