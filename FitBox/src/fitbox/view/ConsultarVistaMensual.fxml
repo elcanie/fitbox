@@ -8,20 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<<<<<<< HEAD
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="451.0" prefWidth="576.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensual">
-  <children>
-    <ListView fx:id="semana1List" layoutX="121.0" layoutY="84.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
-    <ListView fx:id="semana2List" layoutX="121.0" layoutY="157.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
-    <ListView fx:id="semana3List" layoutX="121.0" layoutY="230.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
-    <ListView fx:id="semana4List" layoutX="121.0" layoutY="303.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="73.0" prefWidth="434.0" />
-    <ListView fx:id="semana5List" layoutX="121.0" layoutY="376.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="48.0" prefWidth="434.0" />
-    <Button fx:id="mesAnteriorButton" layoutX="121.0" layoutY="35.0" mnemonicParsing="false" onAction="#anteriorMes" text="&lt;-Anterior" />
-    <Button fx:id="mesSiguiente" layoutX="472.0" layoutY="35.0" mnemonicParsing="false" onAction="#siguienteMes" text="Siguiente-&gt;" />
-    <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" text="Vista Semanal" />
-    <Label layoutX="310.0" layoutY="37.0" prefWidth="59.0" text="Label" />
-    <Button layoutX="14.0" layoutY="157.0" mnemonicParsing="false" text="Vista Mensual" />
-=======
+
 <AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="451.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensualController">
   <children>
     <ListView fx:id="semana1List" layoutX="29.0" layoutY="95.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
@@ -45,7 +32,6 @@
         <Font size="20.0" />
       </font>
     </Label>
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
   </children>
   <stylesheets>
     <URL value="@Calendario.css" />

@@ -28,7 +28,8 @@ public class Conexion {
             //Intentamos conectarnos a la base de Datos en este caso una base
             Logger.getLogger("Conexion").info("Conectando a la base...");
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/fitbox", "root", "");
+//                    "jdbc:mysql://localhost/fitbox", "root", "");
+                    "jdbc:mysql://sql4.freesqldatabase.com:3306/sql420852", "sql420852", "yA9*qJ9%");
             Logger.getLogger("Conexion").info("Conexion a BD establecida");
 
 

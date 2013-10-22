@@ -33,11 +33,11 @@ public class Dao<T extends Object> {
         conexion = Conexion.getConexion();
     }
 
-    public List<T> find(String consulta,Object[] parametros) {
+    public List<T> find(String consulta, Object[] parametros) {
 
-        PreparedStatement s = (PreparedStatement)conexion.createStatement(consulta);
-        int i=1;
-        for(Object o : parametros){
+        PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+        int i = 1;
+        for (Object o : parametros) {
             try {
                 s.setObject(i, o);
                 i++;
@@ -61,7 +61,7 @@ public class Dao<T extends Object> {
         List<T> datos = new LinkedList<>();
         try {
             Integer a = claseT.getDeclaredField("NUMERO_ATRIBUTOS").getInt(null);
-            while(_rs.next()){
+            while (_rs.next()) {
                 Integer i = 0;
                 LinkedList<Object> array = new LinkedList<Object>();
                 while (++i <= a) {
@@ -71,16 +71,15 @@ public class Dao<T extends Object> {
                 instanciaT = (T) claseT.getConstructor(LinkedList.class).newInstance(array);
                 datos.add(instanciaT);
             }
-        } catch (SecurityException | SQLException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException |  InvocationTargetException | NoSuchMethodException | InstantiationException ex) {
+        } catch (SecurityException | SQLException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return datos;
     }
 
     public void insert(T t) {
         try {
             Statement s = conexion.createStatement();
-            Collection<T> datos = null;
             Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
             String consulta = null;
             consulta = (String) claseT.getDeclaredField("INSERT_" + claseT.getSimpleName().toUpperCase()).get(null);
@@ -97,23 +96,45 @@ public class Dao<T extends Object> {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void update(T t) {
+
         try {
-            Statement s = conexion.createStatement();
-            Collection<T> datos = null;
             Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
             String consulta = null;
             consulta = (String) claseT.getDeclaredField("UPDATE_" + claseT.getSimpleName().toUpperCase()).get(null);
-
-            for (int i = 1; i < valores.length; i++) {
-                consulta += "'" + valores[i] + "'";
-                consulta += i < valores.length - 1 ? "," : ")";
+            PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+            int i = 1;
+            for (Object o : valores) {
+                try {
+                    System.out.println(i+" "+o.toString());
+                    s.setObject(i, o);
+                    i++;
+                } catch (SQLException ex) {
+                    Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-                    //UPDATE jugador j SET puntos =5 WHERE j.id =10
-            Logger.getLogger("GenericDAO").info("Actualizar: " + consulta);
-            s.executeUpdate(consulta);
+            
+            try {
+                s.setObject(i, valores[0]);
+                System.out.println(i+" "+valores[0]);
+                Logger.getLogger("GenericDAO").info("Update: " + consulta);
+                s.executeUpdate();
 
-        } catch (SQLException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException ex) {
+            } catch (SQLException ex) {
+                Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchFieldException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

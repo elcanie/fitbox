@@ -5,6 +5,7 @@
 package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 
 import fitbox.model.Usuario;
@@ -12,6 +13,7 @@ import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,23 +28,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import jfxtras.labs.dialogs.DialogFX;
 import org.joda.time.LocalDate;
 
 /**
  *
  * @author Elias
  */
-
 public class ConsultarVistaDiariaController implements Initializable, ControlledScreen {
 
     static Scene scene;
     private static ConsultarVistaDiariaController consultarVistaDiaria;
     private Recurso recurso;
     private Usuario user;
-
 
     public static void setScene(Scene _scene) {
         scene = _scene;
@@ -53,7 +55,6 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     private AnchorPane anchorPane;
     @FXML
     private Label diaLabel;
-
     LocalDate now;
 
     @Override
@@ -78,11 +79,13 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
         diaListView.setItems(null);
 
-        
-        for (Calendario cal : calendarios)
-            if (cal.getFecha().getDayOfMonth()==now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear()==now.getMonthOfYear()))
+
+        for (Calendario cal : calendarios) {
+            if (cal.getFecha().getDayOfMonth() == now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear())) {
                 listDiaStr.add(cal);
-                
+            }
+        }
+
 
         ObservableList<Calendario> listDia = FXCollections.observableArrayList(listDiaStr);
         diaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -97,7 +100,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
 
-                                text = new Text(((Calendario)item).toString2());
+                                text = new Text(((Calendario) item).toString2());
 
                                 text.setWrappingWidth(diaListView.getPrefWidth());
                                 setGraphic(text);
@@ -112,7 +115,6 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         diaListView.setItems(listDia);
 
     }
-
     ScreensController myController;
 
     @Override
@@ -147,5 +149,35 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         now = now.plusDays(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
-}
 
+    @FXML
+    public void mouselClicked(MouseEvent t) {
+
+        if (t.getClickCount() == 2) {
+            System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
+            Calendario cal = (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex());
+            List<Actividad> acts = Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{cal.getIdActividad()}, Actividad.class);
+            Actividad act = (acts.size() > 0) ? acts.get(0) : null;
+            Recurso resource = new Recurso();
+            resource.putObject("Actividad", act);
+            List<String> buttonLabels = new ArrayList<>(2);
+            buttonLabels.add("Editar Actividad");
+            buttonLabels.add("Realizar Actividad");
+
+            DialogFX dialog = new DialogFX(DialogFX.Type.QUESTION);
+            dialog.setTitleText("Elija una opcion");
+            //dialog.setMessage("This is an example of an QUESTION dialog box, created using DialogFX. This also demonstrates the automatic wrapping of text in DialogFX. Would you like to continue?");
+            dialog.addButtons(buttonLabels, 0, 1);
+            int answer = dialog.showDialog();
+
+            if (answer == 0) {
+                myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+            }
+            if (answer == 1) {
+                myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+            }
+        }
+    }
+}
