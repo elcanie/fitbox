@@ -88,10 +88,9 @@ public class RealizarActividadController implements Initializable, ControlledScr
         ScreensFramework.stage.setHeight(590);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         
-        j.getPuntos();
+        puntos = puntos + j.getPuntos();
         
         
-//CONSULTA PARA OBTENER PUNTOS ACTUALES Pun
         
         //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
         

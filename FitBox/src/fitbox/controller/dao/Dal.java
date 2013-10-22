@@ -21,7 +21,7 @@ public class Dal {
     private static Dal dal;
     private static Map<String,Dao> daos;
     
-    private Dal(){
+    public Dal(){
         daos =  new HashMap<String,Dao>();
         daos.put("Usuario", new Dao<Usuario>(Usuario.class));
         daos.put("Actividad",new Dao<Actividad>(Actividad.class));
