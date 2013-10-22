@@ -121,7 +121,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dal = Dal.getDal();
+       /* dal = Dal.getDal();
         this.recurso = (Recurso) rb;
 
         //usuario = (Usuario) recurso.getObject("usuario");
@@ -144,7 +144,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
 //        mediaControl.setMinSize(514, 455);
 //        mediaControl.setPrefSize(514, 455);
 //        mediaControl.setMaxSize(514, 455);
-//        zonavideo.getChildren().add(mediaControl);
+//        zonavideo.getChildren().add(mediaControl);*/
+        System.out.print("funciona");
     }
 
     @FXML

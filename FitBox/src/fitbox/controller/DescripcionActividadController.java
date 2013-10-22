@@ -5,6 +5,7 @@
 package fitbox.controller;
 
 import fitbox.model.Actividad;
+import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
@@ -22,7 +23,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author RUBEN
  */
-public class DescripcionActividadController implements Initializable {
+public class DescripcionActividadController implements Initializable,ControlledScreen {
 
     @FXML
     Button bGo;
@@ -53,9 +54,15 @@ public class DescripcionActividadController implements Initializable {
 
     @FXML
     public void irActividad(MouseEvent event) {
+        
         myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+        
 
+    }
 
+    @Override
+    public void setScreenParent(ScreensController screenParent) {
+       myController=screenParent; //To change body of generated methods, choose Tools | Templates.
     }
 }
