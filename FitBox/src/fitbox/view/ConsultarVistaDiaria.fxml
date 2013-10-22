@@ -6,21 +6,6 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<<<<<<< HEAD
-
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="401.0000999999975" prefWidth="418.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaDiariaController">
-  <children>
-    <ListView fx:id="diaListView" layoutX="133.0" layoutY="77.0" prefHeight="291.0" prefWidth="254.0" />
-    <Label fx:id="diaLabel" layoutX="26.0" layoutY="19.0" prefHeight="18.0" prefWidth="80.0" text="Label" />
-    <Button layoutX="133.0" layoutY="23.0" mnemonicParsing="false" text="Anterior" />
-    <Button layoutX="331.0" layoutY="24.0" mnemonicParsing="false" text="Siguiente" />
-    <Button layoutX="14.0" layoutY="145.0" mnemonicParsing="false" text="Vista Semanal" />
-    <Button layoutX="14.0" layoutY="191.0" mnemonicParsing="false" text="Vista Mensual" />
-    <HBox fx:id="hPanel" layoutX="216.0" layoutY="19.0" prefHeight="36.0" prefWidth="107.0" />
-  </children>
-  <stylesheets>
-    <URL value="@calendar_styles.css" />
-=======
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="background" fx:id="anchorPane" minWidth="309.0" prefHeight="447.0" prefWidth="309.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaDiariaController">
@@ -43,6 +28,5 @@
   </children>
   <stylesheets>
     <URL value="@Calendario.css" />
->>>>>>> f0b6a2eee4573c5c993a72cce2ede4f4b7af7f8c
   </stylesheets>
 </AnchorPane>
