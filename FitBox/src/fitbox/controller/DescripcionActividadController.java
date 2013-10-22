@@ -41,7 +41,7 @@ public class DescripcionActividadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         recurso = (Recurso) rb;
-        Actividad actividad = (Actividad) recurso.getObject("Actividad");
+        Actividad actividad = (Actividad) recurso.getObject("actividad");
         nombreActividad.setText(actividad.getNombre().toUpperCase());
         tDescripcion.setText(actividad.getDescripcion());
         factor.setText(actividad.getFactor() + "");
