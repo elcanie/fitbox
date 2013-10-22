@@ -7,6 +7,7 @@ package fitbox.controller;
 import com.sai.javafx.calendar.DatePicker;
 import com.sai.javafx.calendar.FXCalendar;
 import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
@@ -110,13 +111,13 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
         Dal dal = Dal.getDal();
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{10}, Calendario.class);
         System.out.println("Actividades: " + calendarios.size());
-        List<String> listLunesStr = new LinkedList<>();
-        List<String> listMartesStr = new LinkedList<>();
-        List<String> listMiercolesStr = new LinkedList<>();
-        List<String> listJuevesStr = new LinkedList<>();
-        List<String> listViernesStr = new LinkedList<>();
-        List<String> listSabadoStr = new LinkedList<>();
-        List<String> listDomingoStr = new LinkedList<>();
+        List<Calendario> listLunesStr = new LinkedList<>();
+        List<Calendario> listMartesStr = new LinkedList<>();
+        List<Calendario> listMiercolesStr = new LinkedList<>();
+        List<Calendario> listJuevesStr = new LinkedList<>();
+        List<Calendario> listViernesStr = new LinkedList<>();
+        List<Calendario> listSabadoStr = new LinkedList<>();
+        List<Calendario> listDomingoStr = new LinkedList<>();
         martesList.setItems(null);
         lunesList.setItems(null);
         miercolesList.setItems(null);
@@ -131,23 +132,23 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
         for (Calendario cal : calendarios) {
             if (cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear() || cal.getFecha().getMonthOfYear() == mes2)) {
                 if (cal.getFecha().getDayOfMonth() == lunes) {
-                    listLunesStr.add(cal.getIdActividad() + "");
+                    listLunesStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == martes) {
-                    listMartesStr.add(cal.getId() + "");
+                    listMartesStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == miercoles) {
-                    listMiercolesStr.add(cal.getId() + "");
+                    listMiercolesStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == jueves) {
-                    listJuevesStr.add(cal.getId() + "");
+                    listJuevesStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == viernes) {
-                    listViernesStr.add(cal.getId() + "");
+                    listViernesStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == sabado) {
-                    listSabadoStr.add(cal.getId() + "");
+                    listSabadoStr.add(cal );
                 } else if (cal.getFecha().getDayOfMonth() == domingo) {
-                    listDomingoStr.add(cal.getId() + "");
+                    listDomingoStr.add(cal );
                 }
             }
         }
-        ObservableList<String> listLunes = FXCollections.observableArrayList(listLunesStr);
+        ObservableList<Calendario> listLunes = FXCollections.observableArrayList(listLunesStr);
         lunesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -159,7 +160,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(lunesList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -171,7 +176,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         lunesList.setItems(listLunes);
-        ObservableList<String> listDomingo = FXCollections.observableArrayList(listDomingoStr);
+        ObservableList<Calendario> listDomingo = FXCollections.observableArrayList(listDomingoStr);
         domingoList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -183,7 +188,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                 Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(domingoList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -195,7 +204,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         domingoList.setItems(listDomingo);
-        ObservableList<String> listSabado = FXCollections.observableArrayList(listSabadoStr);
+        ObservableList<Calendario> listSabado = FXCollections.observableArrayList(listSabadoStr);
         sabadoList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -207,7 +216,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(sabadoList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -219,7 +232,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         sabadoList.setItems(listSabado);
-        ObservableList<String> listViernes = FXCollections.observableArrayList(listViernesStr);
+        ObservableList<Calendario> listViernes = FXCollections.observableArrayList(listViernesStr);
         viernesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -231,7 +244,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(viernesList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -243,7 +260,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         viernesList.setItems(listViernes);
-        ObservableList<String> listJueves = FXCollections.observableArrayList(listJuevesStr);
+        ObservableList<Calendario> listJueves = FXCollections.observableArrayList(listJuevesStr);
         juevesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -255,7 +272,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(juevesList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -267,7 +288,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         juevesList.setItems(listJueves);
-        ObservableList<String> listMiercoles = FXCollections.observableArrayList(listMiercolesStr);
+        ObservableList<Calendario> listMiercoles = FXCollections.observableArrayList(listMiercolesStr);
         miercolesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -279,7 +300,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(miercolesList.getPrefWidth());
                                 setGraphic(text);
                             }
@@ -291,7 +316,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             }
         });
         miercolesList.setItems(listMiercoles);
-        ObservableList<String> listMartes = FXCollections.observableArrayList(listMartesStr);
+        ObservableList<Calendario> listMartes = FXCollections.observableArrayList(listMartesStr);
         martesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -303,7 +328,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-                                text = new Text(item.toString());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario)item).getIdActividad()}, Actividad.class).get(0);
+                                if(ac!=null)
+                                text = new Text(ac.getNombre());
+                                else
+                                text = new Text("");
                                 text.setWrappingWidth(martesList.getPrefWidth());
                                 setGraphic(text);
                             }

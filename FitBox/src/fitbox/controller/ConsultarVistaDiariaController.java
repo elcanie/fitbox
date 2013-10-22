@@ -100,7 +100,12 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
 
-                                text = new Text(((Calendario) item).toString2());
+                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario) item).getIdActividad()}, Actividad.class).get(0);
+                                if (ac != null) {
+                                    text = new Text(ac.getNombre());
+                                } else {
+                                    text = new Text("");
+                                }
 
                                 text.setWrappingWidth(diaListView.getPrefWidth());
                                 setGraphic(text);

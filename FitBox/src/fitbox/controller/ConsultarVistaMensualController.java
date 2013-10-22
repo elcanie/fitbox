@@ -263,6 +263,13 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         myController.loadScreen(ScreensFramework.PANTALLA_VISTASEMANAL, ScreensFramework.PANTALLA_VISTASEMANAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
     }
+    
+    @FXML
+    public void menuPrincipal(ActionEvent a) {
+        System.out.println("Principal");
+        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+    }
     ScreensController myController;
 
     @Override
