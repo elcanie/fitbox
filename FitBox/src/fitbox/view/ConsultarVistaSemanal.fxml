@@ -1,57 +1,4 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane id="background" fx:id="anchorPane" prefHeight="426.999977929685" prefWidth="810.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaSemanalController">
-  <children>
-    <ListView fx:id="lunesList" layoutX="73.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label layoutX="102.0" layoutY="76.0" text="Lunes">
-      <font>
-        <Font name="Comic Sans MS" size="16.0" fx:id="x1" />
-      </font>
-      <textFill>
-        <Color blue="0.750" green="0.750" red="0.750" fx:id="x2" />
-      </textFill>
-    </Label>
-    <ListView fx:id="martesList" layoutX="174.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="198.0" layoutY="76.0" text="Martes" textFill="$x2" />
-    <ListView fx:id="miercolesList" layoutX="278.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="296.0" layoutY="76.0" text="Miercoles" textFill="$x2" />
-    <ListView fx:id="juevesList" layoutX="383.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="401.0" layoutY="76.0" text="Jueves" textFill="$x2" />
-    <ListView fx:id="viernesList" layoutX="488.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0">
-      <stylesheets>
-        <URL value="@Calendario.css" />
-      </stylesheets>
-    </ListView>
-    <Label font="$x1" layoutX="506.0" layoutY="76.0" text="Viernes" textFill="$x2" />
-    <ListView fx:id="sabadoList" layoutX="593.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="611.0" layoutY="76.0" text="Sabado" textFill="$x2" />
-    <ListView fx:id="domingoList" layoutX="698.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="716.0" layoutY="76.0" text="Domingo" textFill="$x2" />
-    <Label layoutX="235.0" layoutY="40.0" text="Vista Semanal" textFill="WHITE" />
-    <Button layoutX="73.0" layoutY="48.0" mnemonicParsing="false" onAction="#anteriorSemana" text="&lt;- Anterior" />
-    <Button layoutX="697.0" layoutY="48.0" mnemonicParsing="false" onAction="#siguienteSemana" text="Siguiente -&gt;" />
-    <HBox fx:id="hPanel" layoutX="363.0" layoutY="27.0" prefHeight="31.0" prefWidth="201.0" />
-    <Label alignment="CENTER" depthTest="DISABLE" layoutX="55.0" layoutY="10.0" minHeight="24.0" prefHeight="34.0" prefWidth="122.0" text="FitBox" textFill="#dfdfdf">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </Label>
-  </children>
-  <stylesheets>
-    <URL value="@Calendario.css" />
-  </stylesheets>
-</AnchorPane>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
@@ -105,4 +52,4 @@
     <URL value="@Calendario.css" />
   </stylesheets>
 </AnchorPane>
->>>>>>> de8e0ef9fadecb807c86efded4ada3743c27e308
+

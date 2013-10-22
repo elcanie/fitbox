@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
@@ -38,44 +38,4 @@
     <URL value="@Calendario.css" />
   </stylesheets>
 </AnchorPane>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-
-
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="451.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensualController">
-  <children>
-    <ListView fx:id="semana1List" layoutX="29.0" layoutY="95.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <ListView fx:id="semana2List" layoutX="29.0" layoutY="159.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <ListView fx:id="semana3List" layoutX="29.0" layoutY="223.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <ListView fx:id="semana4List" layoutX="29.0" layoutY="287.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <ListView fx:id="semana5List" layoutX="29.0" layoutY="351.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <Button fx:id="mesAnteriorButton" layoutX="29.0" layoutY="46.0" mnemonicParsing="false" onAction="#anteriorMes" text="&lt;-Anterior" />
-    <Button fx:id="mesSiguiente" layoutX="380.0" layoutY="46.0" mnemonicParsing="false" onAction="#siguienteMes" text="Siguiente-&gt;" />
-    <Button layoutX="375.0" layoutY="12.0" mnemonicParsing="false" onAction="#vistaSemanal" text="Vista Semanal" />
-    <Label layoutX="205.0" layoutY="43.0" prefWidth="51.0" text="Label" textFill="WHITE">
-      <font>
-        <Font size="18.0" />
-      </font>
-      <stylesheets>
-        <URL value="@Calendario.css" />
-      </stylesheets>
-    </Label>
-    <Label alignment="CENTER" depthTest="DISABLE" layoutX="-10.0" layoutY="1.0" minHeight="24.0" prefHeight="34.0" prefWidth="155.0" text="FitBox" textFill="#dfdfdf">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </Label>
-  </children>
-  <stylesheets>
-    <URL value="@Calendario.css" />
-  </stylesheets>
-</AnchorPane>
->>>>>>> de8e0ef9fadecb807c86efded4ada3743c27e308
