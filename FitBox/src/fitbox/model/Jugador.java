@@ -28,7 +28,7 @@ public class Jugador {
     public static final int NUMERO_ATRIBUTOS = 9;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
     
-    public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
+    public static final String JUGADORBYUSUARIO = "select * from `jugador` j WHERE j.id =?";
     public static final String UPDATE_JUGADOR = "UPDATE `jugador` SET ";
 
     public Jugador(LinkedList array) {

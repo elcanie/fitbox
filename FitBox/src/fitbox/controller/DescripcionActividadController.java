@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -43,6 +44,7 @@ public class DescripcionActividadController implements Initializable,ControlledS
     public void initialize(URL url, ResourceBundle rb) {
         recurso = (Recurso) rb;
         Actividad actividad = (Actividad) recurso.getObject("actividad");
+        setScreenParent((ScreensController)rb.getObject("controller"));
         nombreActividad.setText(actividad.getNombre().toUpperCase());
         tDescripcion.setText(actividad.getDescripcion());
         factor.setText(actividad.getFactor() + "");
@@ -54,8 +56,10 @@ public class DescripcionActividadController implements Initializable,ControlledS
 
     @FXML
     public void irActividad(MouseEvent event) {
+        Stage ventana=(Stage)bGo.getScene().getWindow();
+        ventana.close();
         
-        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML,recurso );
         myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
         
 

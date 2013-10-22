@@ -6,10 +6,6 @@
 package fitbox.controller;
 
 import fitbox.Cronometro;
-import fitbox.view.MediaControl;
-import fitbox.controller.ScreensController;
-import fitbox.controller.ScreensController;
-import fitbox.controller.ScreensController;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Jugador;
@@ -19,18 +15,13 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.Collection;
-import java.util.List;
+import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jfx.messagebox.MessageBox;
@@ -56,7 +47,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Dal dal;
     private Jugador j;
 
-    private final String MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/" + URL + "\" frameborder=\"0\" allowfullscreen></iframe>";
+    private String MEDIA_URL; 
 
     @FXML
     public void grabar() {
@@ -121,16 +112,20 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       /* dal = Dal.getDal();
+        dal = Dal.getDal();
         this.recurso = (Recurso) rb;
 
-        //usuario = (Usuario) recurso.getObject("usuario");
-        //j = (Jugador) dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
-        //actividad = (Actividad) recurso.getObject("actividad");
-        //URL = actividad.getVideo();
+        usuario = (Usuario) recurso.getObject("usuario");
+        System.out.println(usuario.getId());
+        Collection<Jugador> jugadores=dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class);
+        Iterator<Jugador> it=jugadores.iterator();
+        if(it.hasNext()) j=it.next();
+        actividad = (Actividad) recurso.getObject("actividad");
+        URL = actividad.getVideo();
 
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
+        MEDIA_URL= "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/" +URL+ "\" frameborder=\"0\" allowfullscreen></iframe>";
         WebEngine webEngine = videoMuestra.getEngine();
         webEngine.loadContent(MEDIA_URL);
         videoMuestra.setLayoutX(-5);
@@ -144,8 +139,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
 //        mediaControl.setMinSize(514, 455);
 //        mediaControl.setPrefSize(514, 455);
 //        mediaControl.setMaxSize(514, 455);
-//        zonavideo.getChildren().add(mediaControl);*/
-        System.out.print("funciona");
+//        zonavideo.getChildren().add(mediaControl);
+     
     }
 
     @FXML

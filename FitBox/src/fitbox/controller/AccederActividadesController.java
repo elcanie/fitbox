@@ -131,6 +131,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
                         Recurso resource = new Recurso();
                         resource.putObject("actividad", actividad);
                         resource.putObject("usuario", usuario);
+                        resource.putObject("controller",myController);
                         root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), resource);
                     } catch (IOException ex) {
                         Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
