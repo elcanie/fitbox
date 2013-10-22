@@ -28,6 +28,7 @@ public class Calendario {
     public static final String TODOS_CALENDARIOS = "select * from calendario";
     public static final String CALENDARIOBYJUGADORID = "select * from calendario c WHERE c.idJugador = ?";
     public static final String CALENDARIOSPORAÑODIAYJUGADOR = "SELECT * FROM calendario c WHERE c.fecha LIKE ? AND c.idJugador = ?";
+    public static final String UPDATE_CALENDARIO = "UPDATE calendario c SET c.id = ? , c.fecha = ?, c.idActividad = ? , c.estadoActividad = ? , idJugador = ? WHERE c.id = ? ";
     /*
      * Atributos
      */

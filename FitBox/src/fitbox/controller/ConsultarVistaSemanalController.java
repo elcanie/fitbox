@@ -14,6 +14,7 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -45,6 +46,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import jfxtras.labs.dialogs.DialogFX;
+import jfxtras.labs.dialogs.DialogFX.Type;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
@@ -52,50 +56,49 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
-
 public class ConsultarVistaSemanalController implements Initializable, ControlledScreen {
 
     @FXML
     ListView lunesList, martesList, miercolesList, juevesList, viernesList, sabadoList, domingoList;
-    
     @FXML
     HBox hPanel;
     static FXCalendar fxcalendar;
-
-LocalDate now;
+    LocalDate now;
     private Recurso recurso;
     private Usuario user;
 
     public ConsultarVistaSemanalController() {
     }
-    
     private static ConsultarVistaSemanalController consultarVistaSemanal;
-    
-    public static void cambiarFecha(){
-        if(consultarVistaSemanal!=null)
-       consultarVistaSemanal.updateVista(fxcalendar.getSelectedYear(), fxcalendar.getSelectedMonth(), fxcalendar.getSelectedDate(),true);
+
+    public static void cambiarFecha() {
+        if (consultarVistaSemanal != null) {
+            consultarVistaSemanal.updateVista(fxcalendar.getSelectedYear(), fxcalendar.getSelectedMonth(), fxcalendar.getSelectedDate(), true);
+        }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-                this.recurso = (Recurso) rb;
+        this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
-ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         consultarVistaSemanal = this;
-                fxcalendar = new FXCalendar();
-		hPanel.getChildren().addAll(fxcalendar);
+        fxcalendar = new FXCalendar();
+        hPanel.getChildren().addAll(fxcalendar);
         LocalDate hoy = new LocalDate();
-        updateVista(hoy.getYear(),hoy.getMonthOfYear(),hoy.getDayOfMonth(),false);
+        updateVista(hoy.getYear(), hoy.getMonthOfYear(), hoy.getDayOfMonth(), false);
     }
 
-    public void updateVista(int _año, int _mes, int _dia,boolean fx) {
-        System.out.println(_año+" "+_mes+" "+_dia);
+    public void updateVista(int _año, int _mes, int _dia, boolean fx) {
+        System.out.println(_año + " " + _mes + " " + _dia);
 
-        
-        if(fx)
-        now = new LocalDate(_año, _mes+1, _dia);
-        else now = new LocalDate(_año, _mes, _dia);
+
+        if (fx) {
+            now = new LocalDate(_año, _mes + 1, _dia);
+        } else {
+            now = new LocalDate(_año, _mes, _dia);
+        }
         int lunes = now.withDayOfWeek(DateTimeConstants.MONDAY).getDayOfMonth();
         int martes = now.withDayOfWeek(DateTimeConstants.TUESDAY).getDayOfMonth();
         int miercoles = now.withDayOfWeek(DateTimeConstants.WEDNESDAY).getDayOfMonth();
@@ -103,7 +106,7 @@ ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/ca
         int viernes = now.withDayOfWeek(DateTimeConstants.FRIDAY).getDayOfMonth();
         int sabado = now.withDayOfWeek(DateTimeConstants.SATURDAY).getDayOfMonth();
         int domingo = now.withDayOfWeek(DateTimeConstants.SUNDAY).getDayOfMonth();
-        System.out.println("Lunes: "+lunes+"  "+"Domingo: "+domingo);
+        System.out.println("Lunes: " + lunes + "  " + "Domingo: " + domingo);
         Dal dal = Dal.getDal();
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{10}, Calendario.class);
         System.out.println("Actividades: " + calendarios.size());
@@ -118,15 +121,15 @@ ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/ca
         lunesList.setItems(null);
         miercolesList.setItems(null);
         int mes2;
-        if(lunes>domingo){ 
-        mes2 = now.plusMonths(1).getMonthOfYear();
-        }else{
-        mes2 = now.getMonthOfYear();
+        if (lunes > domingo) {
+            mes2 = now.plusMonths(1).getMonthOfYear();
+        } else {
+            mes2 = now.getMonthOfYear();
         }
 
-        
+
         for (Calendario cal : calendarios) {
-            if (cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear()==now.getMonthOfYear() || cal.getFecha().getMonthOfYear()==mes2)) {
+            if (cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear() || cal.getFecha().getMonthOfYear() == mes2)) {
                 if (cal.getFecha().getDayOfMonth() == lunes) {
                     listLunesStr.add(cal.getIdActividad() + "");
                 } else if (cal.getFecha().getDayOfMonth() == martes) {
@@ -313,29 +316,55 @@ ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/ca
         });
         martesList.setItems(listMartes);
     }
-    
+
     @FXML
-    public void siguienteSemana(ActionEvent e){
+    public void siguienteSemana(ActionEvent e) {
         System.out.println("Siguiente");
 
         now = now.plusWeeks(1);
-        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(),false);
+        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), false);
     }
-    
+
     @FXML
-    public void anteriorSemana(ActionEvent e){
+    public void anteriorSemana(ActionEvent e) {
         System.out.println("Anterior");
         now = now.minusWeeks(1);
-        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(),false);
+        updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), false);
     }
-    
+
+    @FXML
+    public void mouselClicked(MouseEvent t) {
+
+        if (t.getClickCount() == 2) {
+            System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
+
+            List<String> buttonLabels = new ArrayList<>(2);
+            buttonLabels.add("Editar Actividad");
+            buttonLabels.add("Realizar Actividad");
+
+            DialogFX dialog = new DialogFX(Type.QUESTION);
+            dialog.setTitleText("Elija una opcion");
+            //dialog.setMessage("This is an example of an QUESTION dialog box, created using DialogFX. This also demonstrates the automatic wrapping of text in DialogFX. Would you like to continue?");
+            dialog.addButtons(buttonLabels, 0, 1);
+            int answer = dialog.showDialog();
+
+            if (answer == 0) {
+                myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+            }
+            if (answer == 1) {
+                myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+            }
+        }
+    }
+
     @FXML
     public void vistaMensual(ActionEvent a) {
         System.out.println("Mensual");
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
     }
-    
     ScreensController myController;
 
     @Override

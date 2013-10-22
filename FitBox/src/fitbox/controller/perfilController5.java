@@ -4,6 +4,8 @@
  */
 package fitbox.controller;
 
+import fitbox.model.Jugador;
+import fitbox.model.Usuario;
 import fitbox.model.datosUsuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -59,6 +61,10 @@ public class perfilController5 implements Initializable, ControlledScreen {
 
         if (aceptar.isSelected() == true) {
             //GUARDAR EN LA BASE DE DATOS!!!!!
+            
+//            Usuario u = new Usuario(0, usuario.getNombre(), usuario.getPass());
+//            Jugador j =  new Jugador(null, , null, altura, peso, null, plan, calendario, puntos)
+            
             myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, null);
             myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
         }else{
