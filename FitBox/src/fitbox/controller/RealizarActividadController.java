@@ -77,6 +77,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 ScreensFramework.stage.setWidth(921);
                 ScreensFramework.stage.setHeight(590);
                 puntos = puntos + j.getPuntos();
+                
+                
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                 myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
