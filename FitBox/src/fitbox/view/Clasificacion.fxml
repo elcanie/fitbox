@@ -16,10 +16,10 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="229.0">
               <children>
-                <TableView layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="229.0">
+                <TableView fx:id="tabla" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="229.0">
                   <columns>
-                    <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Usuario" />
-                    <TableColumn editable="false" prefWidth="75.0" text="Puntuación" />
+                    <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Usuario" fx:id="columnaUsuario" />
+                    <TableColumn editable="false" prefWidth="75.0" text="Puntuación" fx:id="columnaPuntos" />
                   </columns>
                 </TableView>
               </children>
@@ -28,7 +28,7 @@
         </ScrollPane>
         <Button layoutX="300.0" layoutY="75.0" mnemonicParsing="false" text="General" />
         <Button layoutX="300.0" layoutY="110.0" mnemonicParsing="false" text="Amigos" />
-        <Button layoutX="300.0" layoutY="255.0" mnemonicParsing="false" prefWidth="61.0" text="Cerrar" />
+        <Button fx:id="cerrar" layoutX="300.0" layoutY="255.0" mnemonicParsing="false" onAction="#cerrar" prefWidth="61.0" text="Cerrar" />
         <Label layoutX="32.0" layoutY="26.0" text="Clasificación" textFill="WHITE">
           <font>
             <Font size="18.0" />

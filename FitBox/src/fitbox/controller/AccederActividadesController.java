@@ -52,6 +52,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     private ScreensController myController;
     @FXML
     ListView listaCategorias;
+    private Usuario usuario;
     @FXML
     AnchorPane panelActividades;
     private Hashtable<String, Actividad> botonActividad = new Hashtable<String, Actividad>();
@@ -63,6 +64,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         this.recurso=(Recurso)rb;
+        usuario=(Usuario)recurso.getObject("usuario");
         cargarCategorias();
         ScreensFramework.stage.setResizable(true);
         ScreensFramework.stage.setWidth(916);
@@ -127,8 +129,9 @@ public class AccederActividadesController implements Initializable, ControlledSc
                     Parent root = null;
                     try {
                         Recurso resource = new Recurso();
-                        resource.putObject("Actividad", actividad);
-                        
+                        resource.putObject("actividad", actividad);
+                        resource.putObject("usuario", usuario);
+                        resource.putObject("controller",myController);
                         root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), resource);
                     } catch (IOException ex) {
                         Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);

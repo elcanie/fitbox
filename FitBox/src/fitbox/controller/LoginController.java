@@ -64,7 +64,10 @@ public class LoginController implements Initializable,ControlledScreen {
           //      Collection<Usuario> datos=dal.find(Usuario.TODOS_USUARIOS, null, Usuario.class);
 
         Iterator<Usuario> it=datos.iterator();
-        Usuario user=it.next();
+        Usuario user=null;
+        if(it.hasNext())
+            user=it.next();
+        
         if(user!=null){
             Recurso recurso=new Recurso();
             recurso.putObject("usuario", user);

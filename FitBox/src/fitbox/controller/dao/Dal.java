@@ -9,6 +9,7 @@ import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
+import fitbox.model.Video;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +22,13 @@ public class Dal {
     private static Dal dal;
     private static Map<String,Dao> daos;
     
-    private Dal(){
+    public Dal(){
         daos =  new HashMap<String,Dao>();
         daos.put("Usuario", new Dao<Usuario>(Usuario.class));
         daos.put("Actividad",new Dao<Actividad>(Actividad.class));
         daos.put("Calendario",new Dao<Calendario>(Calendario.class));
         daos.put("Jugador", new Dao<Jugador>(Jugador.class));
+       // daos.put("video", new Dao<Video>(video.class));
     }
     
     public static Dal getDal(){
