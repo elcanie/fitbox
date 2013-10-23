@@ -28,7 +28,7 @@ public class Dal {
         daos.put("Actividad",new Dao<Actividad>(Actividad.class));
         daos.put("Calendario",new Dao<Calendario>(Calendario.class));
         daos.put("Jugador", new Dao<Jugador>(Jugador.class));
-       // daos.put("video", new Dao<Video>(video.class));
+       daos.put("Video", new Dao<Video>(Video.class));
     }
     
     public static Dal getDal(){

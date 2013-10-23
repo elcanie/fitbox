@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="ventana" prefHeight="453.000022070315" prefWidth="284.00007792968245" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarFechaActividadController">
+<AnchorPane fx:id="ventana" prefHeight="479.000022070315" prefWidth="317.00007792968245" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarFechaActividadController">
   <children>
     <Label fx:id="nombreActividad" layoutX="37.0" layoutY="23.0" prefWidth="159.0" text="Nombre actividad" textFill="WHITE">
       <font>
@@ -31,7 +31,7 @@
         </TextArea>
       </children>
     </AnchorPane>
-    <HBox layoutX="37.0" layoutY="309.0" prefHeight="20.0" prefWidth="200.0" />
+    <HBox fx:id="hPanel" layoutX="37.0" layoutY="309.0" prefHeight="19.0" prefWidth="106.0" />
     <Label font="$x1" layoutX="40.0" layoutY="282.0" text="Fecha" textFill="WHITE" />
     <Label font="$x1" layoutX="40.0" layoutY="345.0" text="Hora" textFill="WHITE" />
     <TextField id="minutos" fx:id="hora" layoutX="104.0" layoutY="345.0" prefWidth="33.0" />

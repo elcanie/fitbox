@@ -14,13 +14,13 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Marcos
  */
-public class Video {
-    public static final String VIDEObyUSUARIO = "select * from `video` where idJugador=?";
+public class Video2 {
+    public static final String VIDEObyUSUARIO = "select * from `video` where idUsuario=?";
 
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 3;
+    public static final int NUMERO_ATRIBUTOS = 7;
     private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre = new SimpleStringProperty("");
     private final SimpleStringProperty URL = new SimpleStringProperty("");
@@ -28,16 +28,16 @@ public class Video {
    
     private String valores[] = new String[NUMERO_ATRIBUTOS];
 
-    public Video() {
+    public Video2() {
         this(new Integer(0), "", "");
 
     }
 
-    public Video(LinkedList array) {
+    public Video2(LinkedList array) {
         this((int) array.get(0), (String) array.get(1), (String) array.get(2));
     }
 
-    public Video(int id, String nombre, String URL){
+    public Video2(int id, String nombre, String URL){
         setValores(id, nombre, URL);
         setId(id);
         setNombre(nombre);

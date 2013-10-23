@@ -14,7 +14,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane id="AnchorPane" fx:id="realizarActividad" focusTraversable="false" prefHeight="548.9999000000025" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.RealizarActividadController">
+<AnchorPane id="AnchorPane" fx:id="realizarActividad" focusTraversable="false" prefHeight="548.9999000000025" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.RealizarActividadController">
   <children>
     <AnchorPane fx:id="zonavideo" layoutX="0.0" layoutY="0.0" prefHeight="428.0" prefWidth="514.0">
       <children>

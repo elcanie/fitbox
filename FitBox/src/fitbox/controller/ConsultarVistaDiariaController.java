@@ -56,13 +56,21 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     @FXML
     private Label diaLabel;
     LocalDate now;
+    private Calendario calendario;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+          ScreensFramework.stage.setWidth(309);
+        ScreensFramework.stage.setHeight(447);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
+        this.calendario = (Calendario) recurso.getObject("calendario");
+        if(calendario!=null)
+        updateVista(calendario.getFecha().getYear(), calendario.getFecha().getMonthOfYear(), calendario.getFecha().getDayOfMonth());
+        else{
         LocalDate hoy = new LocalDate();
-        updateVista(hoy.getYear(), hoy.getMonthOfYear(), 16);
+                updateVista(hoy.getYear(), hoy.getMonthOfYear(), hoy.getDayOfMonth());
+        }
     }
 
     public void updateVista(int _año, int _mes, int _dia) {
@@ -77,7 +85,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         List<Calendario> listDiaStr = new LinkedList<>();
 
 
-        diaListView.setItems(null);
+        diaListView.setItems(FXCollections.observableArrayList(listDiaStr));
 
 
         for (Calendario cal : calendarios) {
@@ -102,7 +110,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
                                 Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario) item).getIdActividad()}, Actividad.class).get(0);
                                 if (ac != null) {
-                                    text = new Text(ac.getNombre());
+                                    text = new Text(calendario.getFecha().getHourOfDay()+" "+ac.getNombre());
                                 } else {
                                     text = new Text("");
                                 }
@@ -163,8 +171,8 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
             Calendario cal = (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex());
             List<Actividad> acts = Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{cal.getIdActividad()}, Actividad.class);
             Actividad act = (acts.size() > 0) ? acts.get(0) : null;
-            Recurso resource = new Recurso();
-            resource.putObject("Actividad", act);
+
+            recurso.putObject("actividad", act);
             List<String> buttonLabels = new ArrayList<>(2);
             buttonLabels.add("Editar Actividad");
             buttonLabels.add("Realizar Actividad");
@@ -176,8 +184,8 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
             int answer = dialog.showDialog();
 
             if (answer == 0) {
-                myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+                myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
             }
             if (answer == 1) {
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);

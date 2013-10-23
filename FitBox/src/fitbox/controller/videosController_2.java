@@ -31,7 +31,7 @@ import javafx.scene.web.WebView;
  *
  * @author Marcos
  */
-public class videosController implements Initializable, ControlledScreen {
+public class videosController_2 implements Initializable, ControlledScreen {
     //por hacer: que se note al apretar el boton home
     //           ajustar la ventana, scrolls mas grandes
     //           
@@ -53,14 +53,9 @@ public class videosController implements Initializable, ControlledScreen {
         this.recurso=(Recurso)rb;
         usuario=(Usuario) recurso.getObject("usuario");
         insertarvideosV();
-        insertarvideosS();
+   //     insertarvideosS();
 
-        ScreensFramework.stage.setWidth(1450);
-        ScreensFramework.stage.setHeight(710);
-        
-        
         ScreensFramework.stage.setResizable(true);
-        
 //        
     }  
     
@@ -183,7 +178,6 @@ public class videosController implements Initializable, ControlledScreen {
     private void home(){
     myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-     
     
     }
 

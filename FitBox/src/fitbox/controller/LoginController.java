@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import jfx.messagebox.MessageBox;
 
@@ -31,7 +32,7 @@ import jfx.messagebox.MessageBox;
 public class LoginController implements Initializable,ControlledScreen {
     
     @FXML private TextField fieldUser;
-    @FXML private TextField fieldPassword;
+    @FXML private PasswordField fieldPassword;
     @FXML private Button buttonLogin;
     @FXML private Button btnRegistro;
     private ScreensController myController;

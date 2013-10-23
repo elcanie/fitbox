@@ -80,7 +80,8 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+  ScreensFramework.stage.setWidth(810);
+        ScreensFramework.stage.setHeight(426);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
@@ -378,8 +379,8 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
             int answer = dialog.showDialog();
 
             if (answer == 0) {
-                myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+         myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
             }
             if (answer == 1) {
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);

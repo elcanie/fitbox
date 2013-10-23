@@ -39,7 +39,7 @@ public class FXCalendar extends HBox {
 	private SimpleObjectProperty<Date> value = new SimpleObjectProperty<Date>();
 	private boolean showWeekNumber;
 	private FXCalendarUtility fxCalendarUtility;
-	private DateTextField dateTxtField;
+	public static DateTextField dateTxtField;
 	private ChangeListener<Boolean> focusOutListener;
 	private Popup popup;
 	private DatePicker datePicker;

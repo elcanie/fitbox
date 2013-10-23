@@ -6,6 +6,7 @@ package fitbox.controller;
 
 import com.sai.javafx.calendar.FXCalendar;
 import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Usuario;
 
@@ -49,7 +50,6 @@ import org.joda.time.LocalDate;
  *
  * @author Elias
  */
-
 public class ConsultarVistaMensualController implements Initializable, ControlledScreen {
 
     @FXML
@@ -60,6 +60,8 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ScreensFramework.stage.setWidth(492);
+        ScreensFramework.stage.setHeight(451);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
         LocalDate hoy = new LocalDate();
@@ -238,6 +240,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
         if (t.getClickCount() == 2) {
             System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
+            recurso.putObject("calendario", (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             myController.loadScreen(ScreensFramework.PANTALLA_VISTADIARIA, ScreensFramework.PANTALLA_VISTADIARIA_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_VISTADIARIA);
         }
@@ -263,7 +266,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         myController.loadScreen(ScreensFramework.PANTALLA_VISTASEMANAL, ScreensFramework.PANTALLA_VISTASEMANAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
     }
-    
+
     @FXML
     public void menuPrincipal(ActionEvent a) {
         System.out.println("Principal");
