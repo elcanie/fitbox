@@ -13,13 +13,17 @@ import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -34,10 +38,6 @@ public class ConsultarClasificacionController implements Initializable, Controll
     private Dal dal;
     @FXML
     private TableView tabla;
-    @FXML
-    TableColumn columnaNombre;
-    @FXML
-    TableColumn columnaPuntos;
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
@@ -48,12 +48,30 @@ public class ConsultarClasificacionController implements Initializable, Controll
         ScreensFramework.stage.setWidth(386);
         ScreensFramework.stage.setHeight(337);
         this.recurso = (Recurso) rb;
-        Ranking ranking = (Ranking) recurso.getObject("ranking");
+        dal = Dal.getDal();
+        List<Usuario> usuarios = dal.find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);
+        List<Ranking> rankingList = new LinkedList<>();
+        for (Usuario u : usuarios) {
+            Jugador _jugador = (Jugador) dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{u.getId()}, Jugador.class).get(0);
+            rankingList.add(new Ranking(u.getNombre(), _jugador.getPuntos()));
+        }
+
+        TableColumn nombreColumn = new TableColumn("Nombre");
+        TableColumn puntosColumn = new TableColumn("Puntos");
+        nombreColumn.setCellValueFactory(
+                new PropertyValueFactory<Ranking, String>("nombre"));
+        puntosColumn.setCellValueFactory(
+                new PropertyValueFactory<Ranking, Double>("puntos"));
         
-        List<Ranking> lista;
-        
-        dal = new Dal();
-        
+        nombreColumn.setMinWidth(150);
+        puntosColumn.setMinWidth(50);
+        tabla.getColumns().addAll(nombreColumn,puntosColumn);
+          
+         
+         ObservableList<Ranking> datosRanking = FXCollections.observableArrayList(rankingList);
+         tabla.setItems(datosRanking);
+
+
         //usuarios = (List<Usuario>) recurso.getObject("usuario");
         //j = (List<Jugador>)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{"*"}, Jugador.class).get(0);
         //Seleccionar tabla y realizar consulta.

@@ -17,7 +17,7 @@ public class Ranking {
     private final SimpleStringProperty nombre;
     private final SimpleDoubleProperty puntos;
  
-    private Ranking(String nombre, double puntos) {
+    public Ranking(String nombre, double puntos) {
         this.nombre = new SimpleStringProperty(nombre);
         this.puntos = new SimpleDoubleProperty(puntos);
     }
@@ -26,7 +26,7 @@ public class Ranking {
         return nombre.get();
     }
 
-    public double getLastName() {
+    public double getPuntos() {
         return puntos.get();
     }   
         

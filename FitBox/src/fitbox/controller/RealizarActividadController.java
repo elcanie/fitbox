@@ -16,6 +16,7 @@ import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -77,8 +78,9 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 ScreensFramework.stage.setWidth(921);
                 ScreensFramework.stage.setHeight(590);
                 puntos = puntos + j.getPuntos();
-                
-                
+                j.getValores()[6]=puntos;
+                dal.update(j);
+              
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                 myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
@@ -119,9 +121,11 @@ public class RealizarActividadController implements Initializable, ControlledScr
 
         usuario = (Usuario) recurso.getObject("usuario");
         System.out.println(usuario.getId());
-        Collection<Jugador> jugadores=dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class);
-        Iterator<Jugador> it=jugadores.iterator();
-        if(it.hasNext()) j=it.next();
+        List<Jugador> jugadores=dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class);
+        j=jugadores.get(0);
+        System.out.println(jugadores.get(0).getApellidos());
+//        Iterator<Jugador> it=jugadores.iterator();
+//        if(it.hasNext()) j=it.next();
         actividad = (Actividad) recurso.getObject("actividad");
         URL = actividad.getVideo();
 
