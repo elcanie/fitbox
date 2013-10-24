@@ -27,7 +27,7 @@ public class Jugador {
     private double puntos;
     public static final int NUMERO_ATRIBUTOS = 9;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
-    public static final String INSERT_JUGADOR = " INSERT INTO  `nada` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
+    public static final String INSERT_JUGADOR = " INSERT INTO  `jugador` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
     public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
     public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
 
