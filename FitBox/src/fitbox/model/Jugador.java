@@ -27,17 +27,16 @@ public class Jugador {
     private double puntos;
     public static final int NUMERO_ATRIBUTOS = 9;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
-    
     public static final String INSERT_JUGADOR = " INSERT INTO  `nada` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
     public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
-public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
+    public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
 
     public Jugador(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3),(double) array.get(4), (String) array.get(5),(double) array.get(6),(Integer) array.get(7),(Integer) array.get(8));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (double) array.get(4), (String) array.get(5), (double) array.get(6), (Integer) array.get(7), (Integer) array.get(8));
     }
 
-    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos,Integer plan, Integer calendario) {
-        setValores(id, apellidos, genero, altura, peso, correo,puntos, plan, calendario);
+    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario) {
+        setValores(id, apellidos, genero, altura, peso, correo, puntos, plan, calendario);
         setId(id);
         setApellidos(apellidos);
         setGenero(genero);
@@ -190,7 +189,7 @@ public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apel
         this.valores = valores;
     }
 
-    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo,double puntos, Integer plan, Integer calendario) {
+    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario) {
         valores[0] = id;
         valores[1] = apellidos;
         valores[2] = genero;
@@ -200,7 +199,6 @@ public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apel
         valores[6] = puntos;
         valores[7] = plan;
         valores[8] = calendario;
-        
-    }
 
+    }
 }
