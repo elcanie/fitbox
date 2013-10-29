@@ -70,8 +70,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
-        //  myController.setScreen(ScreensFramework.PANTALLA_PERFIL);
-        // ResourceBundle d=new ResourceBundle();
+        myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
     }
 
     @FXML

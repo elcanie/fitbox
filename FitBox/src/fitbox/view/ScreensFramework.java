@@ -28,8 +28,10 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_VISTADIARIA_FXML = "/fitbox/view/ConsultarVistaDiaria.fxml";
     public static final String PANTALLA_VISTASEMANAL = "VistaSemanal";
     public static final String PANTALLA_VISTASEMANAL_FXML = "/fitbox/view/ConsultarVistaSemanal.fxml";
-       public static final String PANTALLA_EDITARFECHAACTIVIDAD = "EditarFechaActividad";
+    public static final String PANTALLA_EDITARFECHAACTIVIDAD = "EditarFechaActividad";
     public static final String PANTALLA_EDITARFECHAACTIVIDAD_FXML = "/fitbox/view/EditarFechaActividad.fxml";
+    public static final String PANTALLA_EDITARPERFIL = "EditarPerfil";
+    public static final String PANTALLA_EDITARPERFIL_FXML = "/fitbox/view/EditarPerfil.fxml";
     public static Stage stage;
     public static final String PANTALLA_ACTIVIDADES = "AccederActividades";
     public static final String PANTALLA_ACTIVIDADES_FXML = "/fitbox/view/AccederActividades.fxml";
@@ -94,7 +96,7 @@ public class ScreensFramework extends Application {
     public Stage getStage() {
         return stage;
     }
-    
+
     public static Stage getStage2() {
         return stage;
     }
