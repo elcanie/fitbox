@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="background" fx:id="anchorPane" minWidth="309.0" prefHeight="447.0" prefWidth="309.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaDiariaController">
+  <children>
+    <ListView fx:id="diaListView" layoutX="41.0" layoutY="131.0" onMouseClicked="#mouselClicked" prefHeight="291.0" prefWidth="254.0" />
+    <Label fx:id="diaLabel" layoutX="128.0" layoutY="95.0" prefHeight="18.0" prefWidth="80.0" text="Label" textFill="WHITE">
+      <font>
+        <Font name="Comic Sans MS" size="16.0" />
+      </font>
+    </Label>
+    <Button layoutX="41.0" layoutY="93.0" mnemonicParsing="false" onAction="#anteriorDia" text="Anterior" />
+    <Button layoutX="225.0" layoutY="93.0" mnemonicParsing="false" onAction="#siguienteDia" text="Siguiente" />
+    <Button layoutX="201.0" layoutY="54.0" mnemonicParsing="false" onAction="#vistaSemanal" text="Vista Semanal" />
+    <Button layoutX="201.0" layoutY="25.0" mnemonicParsing="false" onAction="#vistaMensual" text="Vista Mensual" />
+    <Label alignment="CENTER" depthTest="DISABLE" layoutX="23.0" layoutY="19.0" minHeight="24.0" prefHeight="34.0" prefWidth="117.0" text="FitBox" textFill="#dfdfdf">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Label>
+  </children>
+  <stylesheets>
+    <URL value="@Calendario.css" />
+  </stylesheets>
+</AnchorPane>
+

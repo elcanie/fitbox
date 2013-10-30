@@ -1,0 +1,58 @@
+#panellateral{
+	-fx-background-image: url("CoarseGrid.png");
+    -fx-background-repeat: repeat;
+    -fx-border-width:1;
+	-fx-border-color: #000000;
+	-fx-background-color:
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-font-size:16px;
+	-fx-font-color: #FFFFFF;
+	-fx-font-style: normal;
+
+}
+#panelinferior{
+	-fx-border-width:1;
+	-fx-border-color: #000000;
+	-fx-background-image: url("CoarseGrid.png");
+    	-fx-background-repeat: repeat;
+	-fx-background-color:
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+.button{
+	-fx-background-color: #3399AA;
+	-fx-border-width: 1;
+	-fx-border-color: black;
+	-fx-border-style: solid line-join miter 45;
+}
+.button:hover{
+	-fx-background-color: #336688;
+	-fx-border-width:3;
+}
+.pane{
+	-fx-background-image: url("CoarseGrid.png");
+    -fx-background-repeat: repeat;
+    -fx-border-width:1;
+	-fx-border-color: #000000;
+	-fx-background-color:
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-font-size:16px;
+	-fx-font-color: #FFFFFF;
+	-fx-font-style: normal;
+
+}
+#videoCaptura{
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+}
+#videoMuestra{
+    -fx-background-color:#000000;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    
+}
