@@ -7,6 +7,7 @@ package fitbox.controller.dao;
 
 import fitbox.model.Actividad;
 import fitbox.model.Calendario;
+import fitbox.model.Evento;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.model.Video;
@@ -29,6 +30,7 @@ public class Dal {
         daos.put("Calendario",new Dao<Calendario>(Calendario.class));
         daos.put("Jugador", new Dao<Jugador>(Jugador.class));
        daos.put("Video", new Dao<Video>(Video.class));
+       daos.put("Evento", new Dao<Evento>(Evento.class));
     }
     
     public static Dal getDal(){

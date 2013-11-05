@@ -4,6 +4,10 @@
  */
 package fitbox.controller;
 
+import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
+import fitbox.model.Calendario;
+import fitbox.model.Evento;
 import fitbox.model.Usuario;
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
@@ -11,6 +15,10 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
@@ -19,6 +27,8 @@ import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransition;
 import javafx.animation.SequentialTransitionBuilder;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,6 +44,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * FXML Controller class
@@ -140,6 +152,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         inicioReloj();
         inicioGaleria();
         cargarEventos();
+        cargarResumen();
+        cargarTablaActividades();
 
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
@@ -151,17 +165,49 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void cargarEventos() {
-        /*
+        
          Dal dal = Dal.getDal();
-         Collection<Evento> datos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,Evento.class);
-         ObservableList<String> eventos=FXCollections.observableArrayList(datos);
+         Collection<Evento> datos = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
+            //Iterator<Evento> it = datos.iterator();
+
+         ObservableList<Evento> eventos =FXCollections.observableArrayList(datos);
          listaEventos.setItems(eventos);
        
-         */
+         
     }
 
     public void cargarResumen() {
         //Hoy tienes X actividades para realizar y has realizado Y.
+        LocalDate f = new LocalDate();
+        DateTime d = new DateTime(f.getYear(),f.getMonthOfYear(),f.getDayOfMonth(),0,0,0);
+        Dal dal = Dal.getDal();
+        //List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
+        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORDIAYJUGADOR, new Object[]{d,user.getId()}, Calendario.class);
+        Iterator<Calendario> it = calendarios.iterator();
+        Calendario cal = null;
+        System.out.println("talla: "+calendarios.size());
+        
+        int ActPorHacer = 0;
+        int ActHechas = 0;
+        while(it.hasNext()){
+        cal=it.next();
+        cal.getFecha();
+        if(cal.getEstadoActividad()==0) ActPorHacer++;
+        else ActHechas++;
+        
+        }
+        String texto;
+        if(calendarios.isEmpty()){
+            texto= "No tienes actividades programadas para hoy.";
+        }
+        else{
+         texto = "Hoy tienes "+calendarios.size()+" actividades para realizar y has realizado "+ActHechas+".";
+         if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
+         else texto = texto+"\nHas realizado todas las actividades de hoy!";
+        }
+        
+                textoResumen.setText(texto);
+        
     }
 
     public void cargarTablaActividades() {
