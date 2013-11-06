@@ -52,8 +52,7 @@ public class Evento {
         setFecha(fecha);
 
     }
-
-
+//prueba
  
     /**
      *
