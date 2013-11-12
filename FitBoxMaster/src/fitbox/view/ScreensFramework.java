@@ -53,6 +53,8 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_PERFIL5 = "Perfil5";
     public static final String PANTALLA_CLASIFICACION = "Clasificacion";
     public static final String PANTALLA_CLASIFICACION_FXML = "/fitbox/view/Clasificacion.fxml";
+    public static final String PANTALLA_DESAFIO = "Desafio";
+    public static final String PANTALLA_DESAFIO_FXML = "/fitbox/view/CrearYApuntarDesafio.fxml";
 
     @Override
     public void start(Stage primeraPantalla) throws Exception {

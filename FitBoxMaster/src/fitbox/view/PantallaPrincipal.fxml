@@ -153,7 +153,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="ventanaEventos" minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="300.0">
                                       <children>
-                                        <ScrollPane id="ScrollPane" prefHeight="91.0" prefViewportHeight="72.0" prefViewportWidth="301.0" prefWidth="276.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="34.0">
+                                        <ScrollPane id="ScrollPane" hbarPolicy="NEVER" prefHeight="91.0" prefViewportHeight="72.0" prefViewportWidth="301.0" prefWidth="276.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="34.0">
                                           <content>
                                             <ListView fx:id="listaEventos" prefHeight="120.0" prefWidth="308.0" />
                                           </content>
@@ -192,7 +192,7 @@
                         <AnchorPane fx:id="ventanaNews" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                           <children>
                             <Text fill="WHITE" layoutX="31.0" layoutY="19.0" scaleX="2.5297412976655935" scaleY="1.315712187958884" strokeType="OUTSIDE" strokeWidth="0.0" text="NEWS" />
-                            <ScrollPane id="ScrollPane" layoutX="0.0" layoutY="27.0" prefHeight="71.0" prefViewportHeight="72.0" prefViewportWidth="301.0" prefWidth="354.0">
+                            <ScrollPane id="ScrollPane" hbarPolicy="NEVER" layoutX="0.0" layoutY="27.0" prefHeight="71.0" prefViewportHeight="72.0" prefViewportWidth="301.0" prefWidth="354.0" vbarPolicy="NEVER">
                               <content>
                                 <ListView fx:id="listaNews" prefHeight="72.0" prefWidth="339.0" />
                               </content>

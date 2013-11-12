@@ -4,6 +4,11 @@
  */
 package fitbox.controller;
 
+import fitbox.controller.dao.Dal;
+import fitbox.model.Actividad;
+import fitbox.model.Calendario;
+import fitbox.model.Evento;
+import fitbox.model.Noticia;
 import fitbox.model.Usuario;
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
@@ -11,6 +16,12 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.AbstractCollection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
@@ -19,6 +30,8 @@ import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransition;
 import javafx.animation.SequentialTransitionBuilder;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +40,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +48,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * FXML Controller class
@@ -110,8 +126,9 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     @FXML
-    public void abrirEventos(MouseEvent event) throws IOException {
-        //  myController.setScreen(ScreensFramework.PANTALLA_EVENTOS);
+    public void abrirDesafios(MouseEvent event) throws IOException {
+         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
+         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
     }
 
     @FXML
@@ -139,7 +156,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
         inicioReloj();
         inicioGaleria();
+        cargarNoticias();
         cargarEventos();
+        cargarResumen();
+        cargarTablaActividades();
 
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
@@ -151,25 +171,84 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void cargarEventos() {
-        /*
+             
+
          Dal dal = Dal.getDal();
-         Collection<Evento> datos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,Evento.class);
-         ObservableList<String> eventos=FXCollections.observableArrayList(datos);
+         
+         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
+         Iterator<Evento> itdatosE = datosE.iterator();
+         Collection<String> eventosString = new ArrayList();
+         Evento e;
+       
+         while(itdatosE.hasNext()){
+             e=itdatosE.next();
+            eventosString.add(e.toString());
+         }
+            
+         ObservableList<String> eventos =FXCollections.observableArrayList(eventosString);
          listaEventos.setItems(eventos);
        
-         */
+         
+    }
+    
+    private void cargarNoticias() {
+        
+         Dal dal = Dal.getDal();
+         Collection<Noticia> datos = dal.find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
+         Iterator<Noticia> itdatos = datos.iterator();
+         Collection<String> noticiasString = new ArrayList();
+         while(itdatos.hasNext()){
+         noticiasString.add(itdatos.next().toString());
+         }
+    
+         ObservableList<String> noticias =FXCollections.observableArrayList(noticiasString);
+         listaNews.setItems(noticias);
+        
     }
 
     public void cargarResumen() {
         //Hoy tienes X actividades para realizar y has realizado Y.
+        LocalDate f = new LocalDate();
+        DateTime d = new DateTime(f.getYear(),f.getMonthOfYear(),f.getDayOfMonth(),0,0,0);
+        Dal dal = Dal.getDal();
+        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
+        //List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORDIAYJUGADOR, new Object[]{d,user.getId()}, Calendario.class);
+        Iterator<Calendario> it = calendarios.iterator();
+        Calendario cal = null;
+        System.out.println("talla: "+calendarios.size());
+        
+        int ActPorHacer = 0;
+        int ActHechas = 0;
+        while(it.hasNext()){
+        cal=it.next();
+        cal.getFecha();
+        if(cal.getEstadoActividad()==0) ActPorHacer++;
+        else ActHechas++;
+        
+        }
+        String texto;
+        if(calendarios.isEmpty()){
+            texto= "No tienes actividades programadas para hoy.";
+        }
+        else{
+         texto = "Hoy tienes "+calendarios.size()+" actividades para realizar y has realizado "+ActHechas+".";
+         if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
+         else texto = texto+"\nHas realizado todas las actividades de hoy!";
+        }
+        
+                textoResumen.setText(texto);
+        
     }
 
     public void cargarTablaActividades() {
-        /*   ObservableList<Actividad> datos=FXCollections.observableArrayList();
+          Dal dal = Dal.getDal();
+          List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
+       
+         ObservableList<Calendario> datos=FXCollections.observableArrayList(calendarios);
          columnaHora.setCellValueFactory(new PropertyValueFactory("hora"));
          columnaActividad.setCellFactory(new PropertyValueFactory("nombre"));
          tablaActividad.setItems(datos);
-         */
+         
     }
 
     public void inicioReloj() {
@@ -247,4 +326,6 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }
