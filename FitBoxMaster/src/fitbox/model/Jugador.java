@@ -29,7 +29,7 @@ public class Jugador {
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
     public static final String INSERT_JUGADOR = " INSERT INTO  `jugador` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
     public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
-    public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
+    public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`=?, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
 
     public Jugador(LinkedList array) {
         this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (double) array.get(4), (String) array.get(5), (double) array.get(6), (Integer) array.get(7), (Integer) array.get(8));
@@ -61,6 +61,7 @@ public class Jugador {
      */
     public void setId(int id) {
         this.id = id;
+         valores[0] = id;
     }
 
     /**
@@ -75,6 +76,7 @@ public class Jugador {
      */
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+        valores[1] = apellidos;
     }
 
     /**
@@ -89,6 +91,7 @@ public class Jugador {
      */
     public void setGenero(String genero) {
         this.genero = genero;
+        valores[2] = genero;
     }
 
     /**
@@ -103,6 +106,7 @@ public class Jugador {
      */
     public void setAltura(double altura) {
         this.altura = altura;
+        valores[3] = altura;
     }
 
     /**
@@ -117,6 +121,7 @@ public class Jugador {
      */
     public void setPeso(double peso) {
         this.peso = peso;
+        valores[4] = peso;
     }
 
     /**
@@ -131,6 +136,7 @@ public class Jugador {
      */
     public void setCorreo(String correo) {
         this.correo = correo;
+        valores[5] = correo;
     }
 
     /**
@@ -145,6 +151,7 @@ public class Jugador {
      */
     public void setPlan(Integer plan) {
         this.plan = plan;
+        valores[7] = plan;
     }
 
     /**

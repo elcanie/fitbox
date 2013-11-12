@@ -23,6 +23,7 @@ public class Usuario {
     public static final String TODOS_USUARIOS = "select * from usuario";
     public static final String USUARIOSBYID = "select * from usuario u WHERE u.id = ? and u.nombre = ?";
     public static final String USUARIOSBYNOMBREYPASS = "select * from usuario u WHERE u.nombre=? and u.password=?";
+    public static final String UPDATE_USUARIO = "UPDATE usuario u SET `id`= ? ,`nombre`= ? ,`password`= ? WHERE id = ? ";
 
     /*
      * Atributos
@@ -66,6 +67,7 @@ public class Usuario {
 
     public void setNombre(String fName) {
         nombre.set(fName);
+        valores[1] = fName + "";
     }
 
     public String getPassword() {
@@ -74,6 +76,7 @@ public class Usuario {
 
     public void setFactor(String fName) {
         password.set(fName);
+        valores[2] = fName + "";
     }
 
     @Override

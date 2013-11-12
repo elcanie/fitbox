@@ -39,7 +39,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     @FXML
     private Label crono2;
     private Cronometro crono;
-    double puntos = 0;
+    double puntos = 10;
     double puntosAct;
     private Recurso recurso;
     private String URL;// = "UNvAy1N6jvU";
@@ -68,7 +68,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
 
         if (answer == MessageBox.OK) {
-            puntos = crono.getPuntos();
+           // puntos = crono.getPuntos();
             answer = MessageBox.show(ScreensFramework.stage,
                     "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
                     "Information dialog",

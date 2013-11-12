@@ -127,6 +127,7 @@ public class Dao<T extends Object> {
             int i = 1;
             for (Object o : valores) {
                 try {
+                    if(o != null)
                     System.out.println(i+" "+o.toString());
                     s.setObject(i, o);
                     i++;

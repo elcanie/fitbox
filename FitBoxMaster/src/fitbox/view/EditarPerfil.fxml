@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="ventana" prefHeight="513.0" prefWidth="428.00007792968245" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarPerfil">
+<AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarPerfil">
   <children>
-    <Label fx:id="nombreActividad" layoutX="37.0" layoutY="23.0" prefWidth="159.0" text="Editar Perfil" textFill="WHITE">
+    <Label fx:id="nombreActividad" layoutX="247.0" layoutY="73.0" prefWidth="127.0" text="Editar Perfil" textFill="WHITE">
       <effect>
         <Bloom />
       </effect>
@@ -20,8 +20,8 @@
         <Font name="System Bold Italic" size="15.0" />
       </font>
     </Label>
-    <HBox fx:id="hPanel" layoutX="134.0" layoutY="119.0" prefHeight="19.0" prefWidth="106.0" />
-    <Button id="botonCalendario" cancelButton="false" graphicTextGap="4.0" layoutX="305.0" layoutY="454.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="106.0" text="Cancelar">
+    <HBox fx:id="hPanel" layoutX="344.0" layoutY="164.0" prefHeight="19.0" prefWidth="106.0" />
+    <Button id="botonCalendario" cancelButton="false" graphicTextGap="4.0" layoutX="515.0" layoutY="499.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="106.0" text="Cancelar">
       <effect>
         <DropShadow />
       </effect>
@@ -36,7 +36,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" layoutX="195.0" layoutY="454.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="95.0" text="Editar">
+    <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" layoutX="405.0" layoutY="499.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="95.0" text="Editar">
       <effect>
         <DropShadow />
       </effect>
@@ -48,7 +48,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Label layoutX="37.0" layoutY="69.0" text="Nombre" textFill="WHITE">
+    <Label layoutX="247.0" layoutY="114.0" text="Nombre" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -60,8 +60,8 @@
         <Font name="System Bold" size="14.0" fx:id="x1" />
       </font>
     </Label>
-    <TextField id="" fx:id="nombreText" layoutX="101.0" layoutY="69.0" prefWidth="95.0" />
-    <Label font="$x1" layoutX="226.0" layoutY="69.0" text="Apellidos" textFill="WHITE">
+    <TextField id="" fx:id="nombreText" layoutX="311.0" layoutY="114.0" prefWidth="95.0" />
+    <Label font="$x1" layoutX="436.0" layoutY="114.0" text="Apellidos" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.1249999999999996">
           <input>
@@ -70,8 +70,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="apellidosText" layoutX="300.0" layoutY="69.0" prefWidth="106.0" />
-    <Label font="$x1" layoutX="37.0" layoutY="119.0" text="Nacimiento" textFill="WHITE">
+    <TextField id="minutos" fx:id="apellidosText" layoutX="510.0" layoutY="114.0" prefWidth="106.0" />
+    <Label font="$x1" layoutX="247.0" layoutY="164.0" text="Nacimiento" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -80,7 +80,7 @@
         </MotionBlur>
       </effect>
     </Label>
-    <RadioButton id="hombreRadioBt" fx:id="hombreRadio" font="$x1" layoutX="126.0" layoutY="167.0" mnemonicParsing="false" text="Hombre" textFill="WHITE" wrapText="false">
+    <RadioButton id="hombreRadioBt" fx:id="hombreRadio" font="$x1" layoutX="336.0" layoutY="212.0" mnemonicParsing="false" onAction="#invertirGeneroM" text="Hombre" textFill="WHITE" wrapText="false">
       <effect>
         <Reflection />
       </effect>
@@ -88,7 +88,7 @@
         <ToggleGroup fx:id="x3" />
       </toggleGroup>
     </RadioButton>
-    <Label font="$x1" layoutX="37.0" layoutY="167.0" text="Genero" textFill="WHITE">
+    <Label font="$x1" layoutX="247.0" layoutY="212.0" text="Genero" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -97,7 +97,7 @@
         </MotionBlur>
       </effect>
     </Label>
-    <RadioButton id="hombreRadioBt" fx:id="mujerRadio" font="$x1" layoutX="243.0" layoutY="167.0" mnemonicParsing="false" text="Mujer" textFill="WHITE" wrapText="false">
+    <RadioButton id="hombreRadioBt" fx:id="mujerRadio" font="$x1" layoutX="453.0" layoutY="212.0" mnemonicParsing="false" onAction="#invertirGeneroH" text="Mujer" textFill="WHITE" wrapText="false">
       <effect>
         <Reflection />
       </effect>
@@ -105,7 +105,7 @@
         <ToggleGroup />
       </toggleGroup>
     </RadioButton>
-    <Label font="$x1" layoutX="37.0" layoutY="214.0" text="Altura (cm)" textFill="WHITE">
+    <Label font="$x1" layoutX="247.0" layoutY="259.0" text="Altura (cm)" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -114,8 +114,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="alturaText" layoutX="133.0" layoutY="214.0" prefWidth="62.0" />
-    <Label font="$x1" layoutX="228.0" layoutY="214.0" text="Peso (Kg)" textFill="WHITE">
+    <TextField id="minutos" fx:id="alturaText" layoutX="343.0" layoutY="259.0" prefWidth="62.0" />
+    <Label font="$x1" layoutX="438.0" layoutY="259.0" text="Peso (Kg)" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.1249999999999996">
           <input>
@@ -124,8 +124,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="pesoText" layoutX="313.0" layoutY="214.0" prefWidth="62.0" />
-    <Label font="$x1" layoutX="34.0" layoutY="256.0" text="Correo Electronico" textFill="WHITE">
+    <TextField id="minutos" fx:id="pesoText" layoutX="523.0" layoutY="259.0" prefWidth="62.0" />
+    <Label font="$x1" layoutX="244.0" layoutY="301.0" text="Correo Electronico" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -134,8 +134,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="correoText" layoutX="160.0" layoutY="257.0" prefWidth="149.0" />
-    <Label font="$x1" layoutX="34.0" layoutY="304.0" text="Repite Correo" textFill="WHITE">
+    <TextField id="minutos" fx:id="correoText" layoutX="370.0" layoutY="302.0" prefWidth="149.0" />
+    <Label font="$x1" layoutX="244.0" layoutY="349.0" text="Repite Correo" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.1249999999999996">
           <input>
@@ -144,8 +144,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="correo2Text" layoutX="160.0" layoutY="303.0" prefWidth="149.0" />
-    <Label font="$x1" layoutX="37.0" layoutY="351.0" text="Contraseña" textFill="WHITE">
+    <TextField id="minutos" fx:id="correo2Text" layoutX="370.0" layoutY="348.0" prefWidth="149.0" />
+    <Label font="$x1" layoutX="247.0" layoutY="396.0" text="Contraseña" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.125">
           <input>
@@ -154,8 +154,8 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="contraseñaText" layoutX="163.0" layoutY="352.0" prefWidth="149.0" />
-    <Label font="$x1" layoutX="37.0" layoutY="399.0" text="Repite Contraseña" textFill="WHITE">
+    <TextField id="minutos" fx:id="contraseñaText" layoutX="373.0" layoutY="397.0" prefWidth="149.0" />
+    <Label font="$x1" layoutX="247.0" layoutY="444.0" text="Repite Contraseña" textFill="WHITE">
       <effect>
         <MotionBlur radius="2.1249999999999996">
           <input>
@@ -164,7 +164,90 @@
         </MotionBlur>
       </effect>
     </Label>
-    <TextField id="minutos" fx:id="contraseña2Text" layoutX="163.0" layoutY="398.0" prefWidth="149.0" />
+    <TextField id="minutos" fx:id="contraseña2Text" layoutX="373.0" layoutY="443.0" prefWidth="149.0" />
+    <ToolBar id="toolBar" layoutX="0.0" layoutY="0.0" prefHeight="56.0" prefWidth="920.0">
+      <items>
+        <Button id="botonPerfil" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="45.5" prefWidth="155.0" text="ESTADÍSTICAS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="44.500099999997474" fitWidth="44.500099999997474" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/chart-search-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
+    <Label fx:id="errorGenero" layoutX="526.0" layoutY="215.0" text="" />
   </children>
   <stylesheets>
     <URL value="@Styledescripcionactividad.css" />

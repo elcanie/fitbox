@@ -19,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import jfx.messagebox.MessageBox;
 
         
@@ -47,6 +49,9 @@ public class LoginController implements Initializable,ControlledScreen {
                 myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, null);
         myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
 
+    }
+    @FXML private void leerEnter(KeyEvent k){
+    if(KeyCode.ENTER==k.getCode()) iniciarSesion(null);
     }
     @FXML private void iniciarSesion(ActionEvent event) {
         //Conexión SQL para comprobar los datos.

@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -38,12 +39,17 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     TextField nombreText, apellidosText, alturaText, pesoText,
             correoText, correo2Text, contraseñaText, contraseña2Text;
     @FXML
+    RadioButton hombreRadio, mujerRadio;
+    @FXML
+    Label errorGenero;
+    @FXML
     HBox hPanel;
     static FXCalendar fxcalendar;
     private Recurso recurso;
     private ScreensController myController;
     private Usuario usuario;
     private Jugador jugador;
+    private String genero;
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
@@ -55,8 +61,9 @@ public class EditarPerfil implements Initializable, ControlledScreen {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(428);
-        ScreensFramework.stage.setHeight(513);
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
+        System.out.println("ok");
         recurso = (Recurso) rb;
         usuario = (Usuario) recurso.getObject("usuario");
         jugador = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
@@ -64,16 +71,52 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         hPanel.getChildren().addAll(fxcalendar);
 //        FXCalendar.dateTxtField.setText(jugador.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
+
+        nombreText.setText(usuario.getNombre());
+        apellidosText.setText(jugador.getApellidos());
+        alturaText.setText("" + jugador.getAltura());
+        fxcalendar.getTextField().setText("19/19/2013");
+        pesoText.setText(jugador.getPeso() + "");
+        correoText.setText(jugador.getCorreo());
+        correo2Text.setText(jugador.getCorreo());
+        if (jugador.getGenero().trim().equalsIgnoreCase("mujer")) {
+            mujerRadio.setSelected(true);
+        }
+        if (jugador.getGenero().trim().equalsIgnoreCase("hombre")) {
+            hombreRadio.setSelected(true);
+        }
     }
 
     @FXML
     public void editar(ActionEvent event) {
         if (comprobarCampos()) {
-            Dal.getDal().insert(usuario);
-            Dal.getDal().insertConId(jugador);
+            usuario.setNombre(nombreText.getText());
+            if (!contraseñaText.getText().trim().equals("")) {
+                usuario.setFactor(contraseñaText.getText());
+            }
+            jugador.setAltura(Double.parseDouble(alturaText.getText()));
+            jugador.setPeso(Double.parseDouble(pesoText.getText()));
+            jugador.setGenero(genero);
+            jugador.setCorreo(correoText.getText());
+            Dal.getDal().update(usuario);
+            Dal.getDal().update(jugador);
+            System.out.println("pantalla");
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         }
+    }
+
+    @FXML
+    public void invertirGeneroM(ActionEvent event) {
+        mujerRadio.setSelected(false);
+        hombreRadio.setSelected(true);
+
+    }
+
+    @FXML
+    public void invertirGeneroH(ActionEvent event) {
+        mujerRadio.setSelected(true);
+        hombreRadio.setSelected(false);
     }
 
     @FXML
@@ -83,12 +126,92 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     }
 
     private boolean comprobarCampos() {
-        if(nombreText.getText().trim().equals("")){
+        boolean response = true;
+        if (nombreText.getText().trim().equals("") ){
+            
             nombreText.setStyle("-fx-background-color: red");
-            return false;
-        }else{
-        
+            response = false;
+        } else {
+            String nombre_regex = "[a-zA-Z_áéíóú]+";
+            if(!nombreText.getText().matches(nombre_regex)){
+                nombreText.setStyle("-fx-background-color: red");
+            response=false;
+            }else
+            nombreText.setStyle("-fx-background-color: grey");
         }
-        return true;
+        if (apellidosText.getText().trim().equals("")) {
+            apellidosText.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+             String apellidos_regex = "[a-zA-Z_áéíóú ]+";
+            if(!apellidosText.getText().matches(apellidos_regex)){
+                apellidosText.setStyle("-fx-background-color: red");
+            response=false;
+            }else
+            apellidosText.setStyle("-fx-background-color: grey");
+        }
+        if (alturaText.getText().trim().equals("")) {
+            alturaText.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+            try {
+                Double.parseDouble(alturaText.getText());
+                alturaText.setStyle("-fx-background-color: grey");
+            } catch (java.lang.NumberFormatException e) {
+                alturaText.setStyle("-fx-background-color: red");
+                response = false;
+            }
+
+        }
+        if (pesoText.getText().trim().equals("")) {
+            pesoText.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+            try {
+                Double.parseDouble(pesoText.getText());
+                pesoText.setStyle("-fx-background-color: grey");
+            } catch (java.lang.NumberFormatException e) {
+                pesoText.setStyle("-fx-background-color: red");
+                response = false;
+            }
+        }
+
+        if (correoText.getText().trim().equals("")) {
+            correoText.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+            String email_regex = "[a-zA-Z_]+@[a-zA-Z]+.[a-zA-Z.]+";
+            if(!correoText.getText().matches(email_regex)){
+                correoText.setStyle("-fx-background-color: red");
+            response = false;
+            }
+            else
+            correoText.setStyle("-fx-background-color: grey");
+        }
+        if (correo2Text.getText().trim().equals("")
+                || !correoText.getText().equals(correo2Text.getText())) {
+            correo2Text.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+            correo2Text.setStyle("-fx-background-color: grey");
+        }
+        if (!contraseñaText.getText().equals(contraseña2Text.getText())) {
+            contraseña2Text.setStyle("-fx-background-color: red");
+            contraseñaText.setStyle("-fx-background-color: red");
+            response = false;
+        } else {
+            contraseña2Text.setStyle("-fx-background-color: grey");
+            contraseñaText.setStyle("-fx-background-color: grey");
+        }
+        if (!hombreRadio.isSelected() && !mujerRadio.isSelected()) {
+            errorGenero.setText("Elija su genero");
+            response = false;
+        }else{
+       if(hombreRadio.isSelected())
+        genero = "hombre";
+       if(mujerRadio.isSelected())
+           genero = "mujer";
+        }
+        return response;
     }
 }
