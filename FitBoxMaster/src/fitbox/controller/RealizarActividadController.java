@@ -25,6 +25,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jfx.messagebox.MessageBox;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.xuggle.mediatool.IMediaWriter;
+import com.xuggle.mediatool.ToolFactory;
+import com.xuggle.xuggler.ICodec;
+import com.xuggle.xuggler.IPixelFormat;
+import com.xuggle.xuggler.IVideoPicture;
+import com.xuggle.xuggler.video.ConverterFactory;
+import com.xuggle.xuggler.video.IConverter;
+import fitbox.controller.RealizarActividadController;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
 
@@ -57,9 +74,14 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
             if (answer == MessageBox.OK) {
-                webcam = new ObjetoWebCam();
+                String nombre = JOptionPane.showInputDialog(
+                        null,
+                        "¿Qué nombre quiere para el archivo de video?",
+                        JOptionPane.QUESTION_MESSAGE);
+                webcam = new ObjetoWebCam(nombre);
                 Thread t1 = new Thread(webcam);
                 t1.start();
+
             }
 
             crono = new Cronometro(this);
