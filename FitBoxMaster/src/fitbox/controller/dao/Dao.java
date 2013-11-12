@@ -6,6 +6,7 @@ package fitbox.controller.dao;
 
 import com.mysql.jdbc.PreparedStatement;
 import fitbox.model.Usuario;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -66,9 +67,12 @@ public class Dao<T extends Object> {
                 LinkedList<Object> array = new LinkedList<Object>();
                 while (++i <= a) {
                     array.add(_rs.getObject(i));
+                    System.out.print(_rs.getObject(i) + "||");
                 }
+                System.out.println("");
                 T instanciaT = null;
-                instanciaT = (T) claseT.getConstructor(LinkedList.class).newInstance(array);
+                Constructor con = claseT.getConstructor(LinkedList.class);
+                instanciaT = (T) con.newInstance(array);
                 datos.add(instanciaT);
             }
         } catch (SecurityException | SQLException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException ex) {
@@ -96,7 +100,7 @@ public class Dao<T extends Object> {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void insertConId(T t) {
         try {
             Statement s = conexion.createStatement();
@@ -127,18 +131,19 @@ public class Dao<T extends Object> {
             int i = 1;
             for (Object o : valores) {
                 try {
-                    if(o != null)
-                    System.out.println(i+" "+o.toString());
+                    if (o != null) {
+                        System.out.println(i + " " + o.toString());
+                    }
                     s.setObject(i, o);
                     i++;
                 } catch (SQLException ex) {
                     Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
             try {
                 s.setObject(i, valores[0]);
-                System.out.println(i+" "+valores[0]);
+                System.out.println(i + " " + valores[0]);
                 Logger.getLogger("GenericDAO").info("Update: " + consulta);
                 s.executeUpdate();
 

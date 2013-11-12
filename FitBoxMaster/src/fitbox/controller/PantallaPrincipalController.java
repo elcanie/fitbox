@@ -211,6 +211,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         LocalDate f = new LocalDate();
         DateTime d = new DateTime(f.getYear(),f.getMonthOfYear(),f.getDayOfMonth(),0,0,0);
         Dal dal = Dal.getDal();
+        System.out.println(user.getId());
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
         //List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORDIAYJUGADOR, new Object[]{d,user.getId()}, Calendario.class);
         Iterator<Calendario> it = calendarios.iterator();
@@ -222,7 +223,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         while(it.hasNext()){
         cal=it.next();
         cal.getFecha();
-        if(cal.getEstadoActividad()==0) ActPorHacer++;
+        if(cal.getEstadoActividad()!= null && cal.getEstadoActividad().intValue()==0) ActPorHacer++;
         else ActHechas++;
         
         }
@@ -245,8 +246,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
           List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
        
          ObservableList<Calendario> datos=FXCollections.observableArrayList(calendarios);
-         columnaHora.setCellValueFactory(new PropertyValueFactory("hora"));
-         columnaActividad.setCellFactory(new PropertyValueFactory("nombre"));
+                columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("id"));
+                columnaActividad.setCellValueFactory(new PropertyValueFactory<Calendario,String>("idActividad"));
          tablaActividad.setItems(datos);
          
     }

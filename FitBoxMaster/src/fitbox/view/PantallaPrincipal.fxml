@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="ventana" prefHeight="560.000022070315" prefWidth="919.999977929685" style="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="ventana" prefHeight="560.000022070315" prefWidth="919.999977929685" style="" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.PantallaPrincipalController">
   <children>
     <VBox id="VBox" alignment="CENTER" prefHeight="560.000022070315" prefWidth="919.999977929685" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -205,7 +205,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="ventanaBotones" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="280.0">
                           <children>
-                            <Button fx:id="botonEvento" defaultButton="false" layoutX="4.0" layoutY="7.0" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+                            <Button fx:id="botonEvento" defaultButton="false" layoutX="4.0" layoutY="7.0" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
                               <effect>
                                 <DropShadow />
                               </effect>
