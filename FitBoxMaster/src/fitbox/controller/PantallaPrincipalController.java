@@ -8,6 +8,7 @@ import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
+import fitbox.model.Jugador;
 import fitbox.model.Noticia;
 import fitbox.model.Usuario;
 import fitbox.view.Clock;
@@ -153,7 +154,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         // stage.setResizable(false);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
-
+        
         inicioReloj();
         inicioGaleria();
         cargarNoticias();
@@ -174,8 +175,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
              
 
          Dal dal = Dal.getDal();
-         
-         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
+         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{},Evento.class);
+         //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
          Iterator<Evento> itdatosE = datosE.iterator();
          Collection<String> eventosString = new ArrayList();
          Evento e;
@@ -192,7 +193,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
     
     private void cargarNoticias() {
-        
+         
          Dal dal = Dal.getDal();
          Collection<Noticia> datos = dal.find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
          Iterator<Noticia> itdatos = datos.iterator();
@@ -207,10 +208,16 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void cargarResumen() {
+        Dal dal = Dal.getDal();
+        List<Jugador> listjugador = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{user.getId()}, Jugador.class);
+        Iterator<Jugador> itjugador = listjugador.iterator();
+        Jugador jugador = null;
+        if(itjugador.hasNext()) jugador = itjugador.next();
+                
         //Hoy tienes X actividades para realizar y has realizado Y.
         LocalDate f = new LocalDate();
         DateTime d = new DateTime(f.getYear(),f.getMonthOfYear(),f.getDayOfMonth(),0,0,0);
-        Dal dal = Dal.getDal();
+        
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
         //List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORDIAYJUGADOR, new Object[]{d,user.getId()}, Calendario.class);
         Iterator<Calendario> it = calendarios.iterator();
@@ -235,6 +242,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
          if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
          else texto = texto+"\nHas realizado todas las actividades de hoy!";
         }
+
+        texto = texto+"\nTienes "+jugador.getPuntos()+" puntos de jugador.";
         
                 textoResumen.setText(texto);
         
@@ -321,11 +330,18 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private void goToMain(ActionEvent event) {
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
+    @FXML
+    private void actualizar(){
+        cargarNoticias();
+        cargarEventos();
+        cargarResumen();
+        cargarTablaActividades();
+    }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     
 }
