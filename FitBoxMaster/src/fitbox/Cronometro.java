@@ -28,6 +28,7 @@ public class Cronometro implements Runnable {
     
     public void run() {
         try {
+            Thread.sleep(5500);
             for (;;) {
                 if(!finalizado){
                     if (centesimas == 99){
