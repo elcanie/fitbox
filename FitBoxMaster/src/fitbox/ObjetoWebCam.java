@@ -25,12 +25,16 @@ import javax.swing.JFrame;
  *
  * @author Lluis
  */
-
 public class ObjetoWebCam implements Runnable{
     
     private boolean finalizado = false;
     private String nombreVideo = "";
     JFrame window;
+    private String ruta=""; 
+
+    public String getRuta() {
+        return ruta;
+    }
     
     public ObjetoWebCam(String nombre){
         this.nombreVideo = nombre;
@@ -41,7 +45,6 @@ public class ObjetoWebCam implements Runnable{
                 window.setUndecorated(true);
                 Webcam webcam = Webcam.getDefault();
                 WebcamPanel panel = new WebcamPanel(webcam);
-
                 
                 window.add(panel);   
                 window.setLocation(800,475);
@@ -50,19 +53,16 @@ public class ObjetoWebCam implements Runnable{
                 
                 // Grabar en video
                 
-
                 File archivo = new File(nombreVideo+".wmv");
-
+                ruta = archivo.getAbsolutePath();
                 IMediaWriter writer = ToolFactory.makeWriter(archivo.getName());
                 Dimension size = webcam.getViewSize();
                 
                 writer.addVideoStream(0, 0,ICodec.ID.CODEC_ID_WMV2,size.width, size.height);
                 long start = System.currentTimeMillis();
-
                 
                 
                 for(int i =0; finalizado == false ;i++) {
-
                         System.out.println("Capture frame " + i);
 
                         BufferedImage image = ConverterFactory.convertToType(webcam.getImage(), BufferedImage.TYPE_3BYTE_BGR);
@@ -82,7 +82,6 @@ public class ObjetoWebCam implements Runnable{
                 }
 
                 writer.close();
-
 }
     @Override
     public void finalize(){
@@ -92,5 +91,4 @@ public class ObjetoWebCam implements Runnable{
         }
     }
 }
-
 

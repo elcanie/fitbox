@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,6 +5,18 @@
  */
 package fitbox.controller;
 
+/*import com.google.gdata.client.*;
+import com.google.gdata.client.youtube.*;
+import com.google.gdata.data.*;
+import com.google.gdata.data.geo.impl.*;
+import com.google.gdata.data.media.*;
+import com.google.gdata.data.media.mediarss.*;
+import com.google.gdata.data.youtube.*;
+import com.google.gdata.data.extensions.*;
+import com.google.gdata.util.*;
+import java.io.IOException;
+import java.io.File;
+import java.net.URL;*/
 import fitbox.Cronometro;
 import fitbox.ObjetoWebCam;
 import fitbox.controller.dao.Dal;
@@ -18,6 +29,8 @@ import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,22 +39,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jfx.messagebox.MessageBox;
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.xuggle.mediatool.IMediaWriter;
-import com.xuggle.mediatool.ToolFactory;
-import com.xuggle.xuggler.ICodec;
-import com.xuggle.xuggler.IPixelFormat;
-import com.xuggle.xuggler.IVideoPicture;
-import com.xuggle.xuggler.video.ConverterFactory;
-import com.xuggle.xuggler.video.IConverter;
-import fitbox.controller.RealizarActividadController;
-import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
@@ -66,6 +63,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Jugador j;
     private ObjetoWebCam webcam;
     private String MEDIA_URL;
+    String nombreVideo;
 
     @FXML
     public void grabar() {
@@ -75,11 +73,11 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
             if (answer == MessageBox.OK) {
-                String nombre = JOptionPane.showInputDialog(
+                nombreVideo = JOptionPane.showInputDialog(
                         null,
                         "¿Qué nombre quiere para el archivo de video?",
                         JOptionPane.QUESTION_MESSAGE);
-                webcam = new ObjetoWebCam(nombre);
+                webcam = new ObjetoWebCam(nombreVideo);
                 Thread t1 = new Thread(webcam);
                 t1.start();
 
@@ -101,29 +99,54 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
 
         if (answer == MessageBox.OK) {
+            webcam.finalize();
+            puntos = crono.getPuntos();
+            
+            // Subida de video
+            /*YouTubeService service = new YouTubeService("xze.411@gmail.com", "AI39si73OlWoHwDEA5CmVkNeqLGsw5sQawk6T_Odf32LWSwXuIItZC2AV5XGCNeLFFpDmRbBQv-pDbz1TF1j--R_YegUbq2gWQ");
+            VideoEntry newEntry = new VideoEntry();
+            newEntry.setLocation("Valencia, SPA");
+
+            YouTubeMediaGroup mg = newEntry.getOrCreateMediaGroup();
+
+            mg.addCategory(new MediaCategory(YouTubeNamespace.CATEGORY_SCHEME, "Sport"));
+            mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME, j.getId()+""));
+            mg.setPrivate(true);
+            mg.setTitle(new MediaTitle());
+            mg.getTitle().setPlainTextContent(nombreVideo);
+            mg.setKeywords(new MediaKeywords());
+            mg.getKeywords().addKeyword("fitbox");
+            mg.setDescription(new MediaDescription());
+            //mg.getDescription().setPlainTextContent("");
+            MediaFileSource ms = new MediaFileSource(new File(webcam.getRuta()), "video/quicktime");
+            newEntry.setMediaSource(ms);
+
+            String uploadUrl = "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
             try {
-                webcam.finalize();
-                puntos = crono.getPuntos();
-                answer = MessageBox.show(ScreensFramework.stage,
-                        "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
-                        "Information dialog",
-                        MessageBox.ICON_INFORMATION | MessageBox.OK);
-
-                if (answer == MessageBox.OK) {
-                    ScreensFramework.stage.setWidth(921);
-                    ScreensFramework.stage.setHeight(590);
-                    puntos = puntos + j.getPuntos();
-                    j.getValores()[6] = puntos;
-                    dal.update(j);
-
-                    myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-                    myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-
-                    //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
-                } else if (answer == MessageBox.CANCEL) {
-                }
-            } catch (Throwable ex) {
+                VideoEntry createdEntry = service.insert(new URL(uploadUrl), newEntry);
+            } catch (IOException ex) {
                 Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ServiceException ex) {
+                Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            
+            answer = MessageBox.show(ScreensFramework.stage,
+                    "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+
+            if (answer == MessageBox.OK) {
+                ScreensFramework.stage.setWidth(921);
+                ScreensFramework.stage.setHeight(590);
+                puntos = puntos + j.getPuntos();
+                j.getValores()[6] = puntos;
+                dal.update(j);
+
+                myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+
+                //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
+            } else if (answer == MessageBox.CANCEL) {
             }
 
         } else if (answer == MessageBox.CANCEL) {
