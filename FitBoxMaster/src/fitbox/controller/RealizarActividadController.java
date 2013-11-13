@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,6 +26,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jfx.messagebox.MessageBox;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.xuggle.mediatool.IMediaWriter;
+import com.xuggle.mediatool.ToolFactory;
+import com.xuggle.xuggler.ICodec;
+import com.xuggle.xuggler.IPixelFormat;
+import com.xuggle.xuggler.IVideoPicture;
+import com.xuggle.xuggler.video.ConverterFactory;
+import com.xuggle.xuggler.video.IConverter;
+import fitbox.controller.RealizarActividadController;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
 
@@ -57,9 +75,14 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
             if (answer == MessageBox.OK) {
-                webcam = new ObjetoWebCam();
+                String nombre = JOptionPane.showInputDialog(
+                        null,
+                        "¿Qué nombre quiere para el archivo de video?",
+                        JOptionPane.QUESTION_MESSAGE);
+                webcam = new ObjetoWebCam(nombre);
                 Thread t1 = new Thread(webcam);
                 t1.start();
+
             }
 
             crono = new Cronometro(this);
@@ -78,25 +101,29 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
 
         if (answer == MessageBox.OK) {
-            webcam.finalize();
-            puntos = crono.getPuntos();
-            answer = MessageBox.show(ScreensFramework.stage,
-                    "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
-                    "Information dialog",
-                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+            try {
+                webcam.finalize();
+                puntos = crono.getPuntos();
+                answer = MessageBox.show(ScreensFramework.stage,
+                        "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
+                        "Information dialog",
+                        MessageBox.ICON_INFORMATION | MessageBox.OK);
 
-            if (answer == MessageBox.OK) {
-                ScreensFramework.stage.setWidth(921);
-                ScreensFramework.stage.setHeight(590);
-                puntos = puntos + j.getPuntos();
-                j.getValores()[6] = puntos;
-                dal.update(j);
+                if (answer == MessageBox.OK) {
+                    ScreensFramework.stage.setWidth(921);
+                    ScreensFramework.stage.setHeight(590);
+                    puntos = puntos + j.getPuntos();
+                    j.getValores()[6] = puntos;
+                    dal.update(j);
 
-                myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+                    myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+                    myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
-                //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
-            } else if (answer == MessageBox.CANCEL) {
+                    //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
+                } else if (answer == MessageBox.CANCEL) {
+                }
+            } catch (Throwable ex) {
+                Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else if (answer == MessageBox.CANCEL) {

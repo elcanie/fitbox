@@ -72,7 +72,7 @@
                 </ImageView>
               </graphic>
             </Button>
-            <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+            <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#actualizar" onMouseClicked="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
               <effect>
                 <DropShadow />
               </effect>
@@ -205,7 +205,9 @@
                         </AnchorPane>
                         <AnchorPane fx:id="ventanaBotones" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="280.0">
                           <children>
+
                             <Button fx:id="botonEvento" defaultButton="false" layoutX="4.0" layoutY="7.0" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+
                               <effect>
                                 <DropShadow />
                               </effect>

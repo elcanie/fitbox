@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -5,8 +6,6 @@
 package fitbox.model;
 
 import java.lang.reflect.Method;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,35 +35,36 @@ public class Calendario {
      * Atributos
      */
     public static final int NUMERO_ATRIBUTOS = 6;
-    private Integer id;
+    private int id;
     private DateTime fecha;
     private Integer idActividad;
-    private Integer idEvento;
     private Integer estadoActividad;
+    private Integer evento;
     private Integer idJugador;
+    private String hora;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
 
     
-    public Calendario(LinkedList<Object> array) {
-        this((Integer) array.get(0), (String) array.get(1), (Integer) array.get(2), (Integer) array.get(3), (Integer) array.get(4), (Integer) array.get(5));
+    public Calendario(LinkedList array) {
+        this((int) array.get(0), (String) array.get(1), (Integer) array.get(2), (Integer) array.get(3),(Integer) array.get(4), (Integer) array.get(5));
     }
 
-    public Calendario(Integer id, String fechaStr, Integer idActividad,Integer idEvento, Integer estadoActividad, Integer idJugador) {
-        setValores(id,fechaStr,idActividad,idEvento,estadoActividad,idJugador);
+    public Calendario(int id, String fechaStr, Integer idActividad,Integer evento, Integer estadoActividad, Integer idJugador) {
+        setValores(id,fechaStr,idActividad,estadoActividad,idJugador);
         setId(id);
         setIdActividad(idActividad);
-        setIdEvento(idEvento);
+        setEvento(evento);
         setEstadoActividad(estadoActividad);
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm:ss");
 fecha = formatter.parseDateTime(fechaStr);
     }
 
 
-    private void setValores(Integer id, String fecha, Integer idActividad,Integer idEvento, Integer estadoActividad, Integer idJugador) {
+    private void setValores(int id, String fecha, Integer idActividad, Integer estadoActividad, Integer idJugador) {
         valores[0] = id ;
         valores[1] = fecha;
         valores[2] = idActividad;
-        valores[3] = idEvento;
+        valores[3] = evento;
         valores[4] = estadoActividad;
         valores[5] = idJugador;
     }
@@ -76,16 +76,15 @@ fecha = formatter.parseDateTime(fechaStr);
     /**
      * @return the id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
-           valores[0] = id ;
     }
 
     /**
@@ -100,14 +99,12 @@ fecha = formatter.parseDateTime(fechaStr);
      */
     public void setFecha(DateTime fecha) {
         this.fecha = fecha;
-        DateFormat df = new SimpleDateFormat("yyyyMMdd  HH:mm");
-        valores[1] = df.format(fecha);
     }
 
     /**
      * @return the idActividad
      */
-    public Integer getIdActividad() {
+    public int getIdActividad() {
         return idActividad;
     }
 
@@ -116,7 +113,6 @@ fecha = formatter.parseDateTime(fechaStr);
      */
     public void setIdActividad(Integer idActividad) {
         this.idActividad = idActividad;
-        valores[2] = idActividad;
     }
 
     /**
@@ -131,7 +127,6 @@ fecha = formatter.parseDateTime(fechaStr);
      */
     public void setEstadoActividad(Integer estadoActividad) {
         this.estadoActividad = estadoActividad;
-        valores[4] = estadoActividad;
     }
 
     /**
@@ -146,7 +141,6 @@ fecha = formatter.parseDateTime(fechaStr);
      */
     public void setIdJugador(Integer idJugador) {
         this.idJugador = idJugador;
-        valores[5] = idJugador;
     }
 
     /**
@@ -167,17 +161,30 @@ fecha = formatter.parseDateTime(fechaStr);
     }
 
     /**
-     * @return the idEvento
+     * @return the evento
      */
-    public Integer getIdEvento() {
-        return idEvento;
+    public Integer getEvento() {
+        return evento;
     }
 
     /**
-     * @param idEvento the idEvento to set
+     * @param evento the evento to set
      */
-    public void setIdEvento(Integer idEvento) {
-        this.idEvento = idEvento;
-        valores[3] = idEvento;
+    public void setEvento(Integer evento) {
+        this.evento = evento;
+    }
+
+    /**
+     * @return the hora
+     */
+    public String getHora() {
+        return fecha.getHourOfDay()+":"+fecha.getMinuteOfHour();
+    }
+
+    /**
+     * @param hora the hora to set
+     */
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 }
