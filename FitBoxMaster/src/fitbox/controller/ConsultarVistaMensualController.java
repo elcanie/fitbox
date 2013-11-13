@@ -103,7 +103,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         }
                     }
                     if (flag) {
-                        lista.get(i).add(new Calendario(0, "2013/10/" + (i * 7 + y) + " 00:00:00", 99999,null, 0, 10));
+                        lista.get(i).add(new Calendario(0, "2013/10/" + (i * 7 + y) + " 00:00:00", 99999,null,0,  10));
                     }
                 }
             }
