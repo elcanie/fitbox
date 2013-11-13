@@ -35,7 +35,7 @@ public class FXCalendar extends HBox {
 	private SimpleIntegerProperty selectedYear = new SimpleIntegerProperty();
 	private SimpleBooleanProperty triggered = new SimpleBooleanProperty();
 	private final SimpleObjectProperty<Color> baseColor = new SimpleObjectProperty<Color>();
-	private SimpleDoubleProperty dateTextWidth = new SimpleDoubleProperty(74);
+	private SimpleDoubleProperty dateTextWidth = new SimpleDoubleProperty(100);
 	private SimpleObjectProperty<Date> value = new SimpleObjectProperty<Date>();
 	private boolean showWeekNumber;
 	private FXCalendarUtility fxCalendarUtility;
@@ -441,6 +441,7 @@ public class FXCalendar extends HBox {
 		public DateTextField() {
 			setEditable(true);
 			setPrefHeight(22);
+                        setPrefWidth(100);
 			setPromptText("Selecccione fecha");
 		}
 

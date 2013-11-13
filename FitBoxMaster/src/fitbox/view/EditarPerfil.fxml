@@ -20,7 +20,7 @@
         <Font name="System Bold Italic" size="15.0" />
       </font>
     </Label>
-    <HBox fx:id="hPanel" layoutX="344.0" layoutY="164.0" prefHeight="19.0" prefWidth="106.0" />
+    <HBox fx:id="hPanel" layoutX="344.0" layoutY="164.0" prefHeight="29.0" prefWidth="149.0" />
     <Button id="botonCalendario" cancelButton="false" graphicTextGap="4.0" layoutX="515.0" layoutY="499.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="106.0" text="Cancelar">
       <effect>
         <DropShadow />

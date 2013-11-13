@@ -159,8 +159,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         inicioGaleria();
         cargarNoticias();
         cargarEventos();
-        cargarResumen();
-        cargarTablaActividades();
+//        cargarResumen();
+//        cargarTablaActividades();
 
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);

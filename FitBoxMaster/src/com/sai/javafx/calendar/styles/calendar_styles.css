@@ -164,6 +164,7 @@
 .fx-calendar-datetext{
 	-fx-fill : black;
 	-fx-cursor:hand;
+        width: 100px;
 }
 
 .fx-calendar-datetext:disabled{

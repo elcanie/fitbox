@@ -79,6 +79,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         pesoText.setText(jugador.getPeso() + "");
         correoText.setText(jugador.getCorreo());
         correo2Text.setText(jugador.getCorreo());
+        fxcalendar.getTextField().setText(jugador.getNacimiento());
         if (jugador.getGenero().trim().equalsIgnoreCase("mujer")) {
             mujerRadio.setSelected(true);
         }
@@ -98,9 +99,11 @@ public class EditarPerfil implements Initializable, ControlledScreen {
             jugador.setPeso(Double.parseDouble(pesoText.getText()));
             jugador.setGenero(genero);
             jugador.setCorreo(correoText.getText());
+            jugador.setNacimiento(fxcalendar.getTextField().getText());
+            
             Dal.getDal().update(usuario);
             Dal.getDal().update(jugador);
-            System.out.println("pantalla");
+            System.out.println(fxcalendar.getTextField().getText()+"pantalla");
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         }

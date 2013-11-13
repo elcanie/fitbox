@@ -25,18 +25,19 @@ public class Jugador {
     private Integer plan;
     private Integer calendario;
     private double puntos;
-    public static final int NUMERO_ATRIBUTOS = 9;
+    private String nacimiento;
+    public static final int NUMERO_ATRIBUTOS = 10;
     private Object valores[] = new Object[NUMERO_ATRIBUTOS];
-    public static final String INSERT_JUGADOR = " INSERT INTO  `jugador` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`) VALUES ( ";
+    public static final String INSERT_JUGADOR = " INSERT INTO  `jugador` (`id` ,`apellidos` ,`genero` ,`altura` ,`peso` ,`correo`, `puntos` ,`plan` ,`calendario`,`nacimiento`) VALUES ( ";
     public static final String JUGADORBYUSUARIO = "select * from jugador j WHERE j.id = ?";
-    public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`=?, `puntos`= ? ,`plan`= ? ,`calendario`=? WHERE c.id = ? ";
+    public static final String UPDATE_JUGADOR = "UPDATE jugador c SET `id`= ? ,`apellidos`= ? ,`genero`= ? ,`altura`= ? ,`peso`= ? ,`correo`=?, `puntos`= ? ,`plan`= ? ,`calendario`=? , `nacimiento`=? WHERE c.id = ? ";
 
     public Jugador(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (double) array.get(4), (String) array.get(5), (double) array.get(6), (Integer) array.get(7), (Integer) array.get(8));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (double) array.get(3), (double) array.get(4), (String) array.get(5), (double) array.get(6), (Integer) array.get(7), (Integer) array.get(8), (String)array.get(9));
     }
 
-    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario) {
-        setValores(id, apellidos, genero, altura, peso, correo, puntos, plan, calendario);
+    public Jugador(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario,String nacimiento) {
+        setValores(id, apellidos, genero, altura, peso, correo, puntos, plan, calendario,nacimiento);
         setId(id);
         setApellidos(apellidos);
         setGenero(genero);
@@ -46,7 +47,7 @@ public class Jugador {
         setPlan(plan);
         setCalendario(calendario);
         setPuntos(puntos);
-
+setNacimiento(nacimiento);
     }
 
     /**
@@ -196,7 +197,7 @@ public class Jugador {
         this.valores = valores;
     }
 
-    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario) {
+    private void setValores(int id, String apellidos, String genero, double altura, double peso, String correo, double puntos, Integer plan, Integer calendario,String nacimiento) {
         valores[0] = id;
         valores[1] = apellidos;
         valores[2] = genero;
@@ -206,6 +207,22 @@ public class Jugador {
         valores[6] = puntos;
         valores[7] = plan;
         valores[8] = calendario;
+        valores[9] = nacimiento;
 
+    }
+
+    /**
+     * @return the nacimiento
+     */
+    public String getNacimiento() {
+        return nacimiento;
+    }
+
+    /**
+     * @param nacimiento the nacimiento to set
+     */
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
+        valores[9]=nacimiento;
     }
 }

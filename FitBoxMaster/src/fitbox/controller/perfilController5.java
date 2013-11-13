@@ -66,7 +66,10 @@ public class perfilController5 implements Initializable, ControlledScreen {
             Usuario u = new Usuario(0, usuario.getNombre(), usuario.getPass());
             Dal.getDal().insert(u);
             int id = ((Usuario)Dal.getDal().find(Usuario.USUARIOSBYNOMBREYPASS, new Object[]{u.getNombre(),u.getPassword()}, Usuario.class).get(0)).getId();
-            Jugador j =  new Jugador(id, usuario.getApellidos() , usuario.getSexo(), Double.parseDouble(usuario.getAltura()), Double.parseDouble(usuario.getPeso()), usuario.getCorreo(), 0, 1, 1);
+            Jugador j =  new Jugador(id, usuario.getApellidos() , usuario.getSexo(), 
+                    Double.parseDouble(usuario.getAltura()), Double.parseDouble(usuario.getPeso()), 
+                    usuario.getCorreo(), 0, 1, 1,
+                    usuario.getAnyo()+"/"+usuario.getMes()+"/"+usuario.getDia());
             Dal.getDal().insertConId(j);
             
             myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, null);

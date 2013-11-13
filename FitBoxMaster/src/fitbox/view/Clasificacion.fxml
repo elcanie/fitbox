@@ -5,35 +5,132 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="308.0000999999975" prefWidth="379.9998779296875" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarClasificacionController">
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="919.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarClasificacionController">
   <children>
-    <Pane id="PanePrincipal" fx:id="principal" layoutX="0.0" layoutY="-1.0" prefHeight="309.0001220703125" prefWidth="379.9998779296875">
-      <children>
-        <ScrollPane layoutX="31.0" layoutY="75.0" prefHeight="201.0" prefWidth="200.0">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-              <children>
-                <TableView fx:id="tabla" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </children>
-            </AnchorPane>
-          </content>
-        </ScrollPane>
-        <Button layoutX="300.0" layoutY="75.0" mnemonicParsing="false" text="General" />
-        <Button layoutX="300.0" layoutY="110.0" mnemonicParsing="false" text="Amigos" />
-        <Button fx:id="cerrar" layoutX="300.0" layoutY="255.0" mnemonicParsing="false" onAction="#cerrar" prefWidth="61.0" text="Cerrar" />
-        <Label layoutX="32.0" layoutY="26.0" text="Clasificación" textFill="WHITE">
+    <TableView fx:id="tabla" layoutX="239.0" layoutY="171.0" prefHeight="273.0" prefWidth="384.0" />
+    <ToolBar id="toolBar" layoutX="0.0" layoutY="1.0" minHeight="56.0" prefHeight="56.0" prefWidth="920.0">
+      <items>
+        <Button id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
           <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="10.0" fx:id="x1" />
           </font>
-        </Label>
-      </children>
-    </Pane>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="45.5" prefWidth="155.0" text="ESTADÍSTICAS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="44.500099999997474" fitWidth="44.500099999997474" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/chart-search-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false"  prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
+    <Button id="botonPerfil" cancelButton="false" disable="true" font="$x1" graphicTextGap="4.0" layoutX="14.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="General">
+      <effect>
+        <DropShadow />
+      </effect>
+      <graphic>
+        <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+          <effect>
+            <DropShadow />
+          </effect>
+          <image>
+            <Image url="@../../imagenes/Profile-icon32px.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button id="botonPerfil" cancelButton="false" font="$x1" graphicTextGap="4.0" layoutX="181.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="Amigos">
+      <effect>
+        <DropShadow />
+      </effect>
+      <graphic>
+        <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+          <effect>
+            <DropShadow />
+          </effect>
+          <image>
+            <Image url="@../../imagenes/Profile-icon32px.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
   </children>
   <stylesheets>
-    <URL value="@StyleClasificacion.css" />
+    <URL value="@StyleDialog.css" />
     <URL value="@Calendario.css" />
   </stylesheets>
 </AnchorPane>

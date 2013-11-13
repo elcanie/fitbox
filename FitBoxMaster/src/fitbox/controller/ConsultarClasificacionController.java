@@ -63,8 +63,8 @@ public class ConsultarClasificacionController implements Initializable, Controll
         puntosColumn.setCellValueFactory(
                 new PropertyValueFactory<Ranking, Double>("puntos"));
         
-        nombreColumn.setMinWidth(150);
-        puntosColumn.setMinWidth(50);
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         tabla.getColumns().addAll(nombreColumn,puntosColumn);
           
          
