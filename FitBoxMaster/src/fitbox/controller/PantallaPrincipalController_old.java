@@ -4,15 +4,12 @@
  */
 package fitbox.controller;
 
-import fitbox.controller.dao.Conexion;
 import fitbox.controller.dao.Dal;
-import fitbox.controller.dao.Dao;
 import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
 import fitbox.model.Noticia;
-import fitbox.model.TablaActividad;
 import fitbox.model.Usuario;
 import fitbox.view.Clock;
 import fitbox.view.ControlledScreen;
@@ -21,18 +18,12 @@ import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
 import javafx.animation.PauseTransition;
@@ -66,7 +57,7 @@ import org.joda.time.LocalDate;
  *
  * @author RUBEN
  */
-public class PantallaPrincipalController implements Initializable, ControlledScreen {
+public class PantallaPrincipalController_old implements Initializable, ControlledScreen {
 
     /**
      * Initializes the controller class.
@@ -118,7 +109,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     @FXML
-    public void abrirVideos(MouseEvent event) throws IOException {
+    public void abrirEstadisticas(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
 
@@ -126,9 +117,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     @FXML
-    public void Actualizar(MouseEvent event) throws IOException, SQLException {
-          myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-        actualizar();
+    public void actualizar(MouseEvent event) throws IOException {
+        //  myController.setScreen(ScreensFramework.PANTALLA_ACTUALIZAR);
     }
 
     @FXML
@@ -169,12 +159,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         inicioGaleria();
         cargarNoticias();
         cargarEventos();
-        cargarResumen();
-        try {
-            cargarTablaActividades();
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        cargarResumen();
+//        cargarTablaActividades();
 
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
@@ -189,12 +175,12 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
              
 
          Dal dal = Dal.getDal();
-         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{user.getId()},Evento.class);
+         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{10},Evento.class);
          //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
          Iterator<Evento> itdatosE = datosE.iterator();
          Collection<String> eventosString = new ArrayList();
          Evento e;
-         System.out.println("tallaEventos: "+datosE.size());
+       
          while(itdatosE.hasNext()){
              e=itdatosE.next();
             eventosString.add(e.toString());
@@ -230,8 +216,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
                 
         //Hoy tienes X actividades para realizar y has realizado Y.
         LocalDate f = new LocalDate();
-        String a = f.getYear()+"/"+f.getMonthOfYear()+"/"+f.getDayOfMonth()+"%";
-        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{a,user.getId()}, Calendario.class);
+        DateTime d = new DateTime(f.getYear(),f.getMonthOfYear(),f.getDayOfMonth(),0,0,0);
+        
+        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
+        //List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORDIAYJUGADOR, new Object[]{d,user.getId()}, Calendario.class);
         Iterator<Calendario> it = calendarios.iterator();
         Calendario cal = null;
         System.out.println("talla: "+calendarios.size());
@@ -254,22 +242,21 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
          if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
          else texto = texto+"\nHas realizado todas las actividades de hoy!";
         }
+
+        texto = texto+"\nTienes "+jugador.getPuntos()+" puntos de jugador.";
         
-        DecimalFormat df = new DecimalFormat("#.##");
-        texto = texto+"\nTienes "+df.format(jugador.getPuntos())+" puntos de jugador.";
-        
-        textoResumen.setText(texto);
+                textoResumen.setText(texto);
         
     }
 
-    public void cargarTablaActividades() throws SQLException {
-        Dal dal = Dal.getDal(); 
-        
-        List<TablaActividad> actividades = dal.find(TablaActividad.Actividades_Usuario, new Object[]{user.getId()}, TablaActividad.class);
+    public void cargarTablaActividades() {
+          Dal dal = Dal.getDal();
+          List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
        
-         ObservableList<TablaActividad> datos=FXCollections.observableArrayList(actividades);
-         columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("fecha"));         
-         columnaActividad.setCellValueFactory(new PropertyValueFactory<ResultSet,String>("nombre"));
+         ObservableList<Calendario> datos=FXCollections.observableArrayList(calendarios);
+         columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("hora"));
+         
+        columnaActividad.setCellValueFactory(new PropertyValueFactory<Calendario,String>("idActividad"));
          tablaActividad.setItems(datos);
          
     }
@@ -345,13 +332,11 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
     @FXML
-    private void actualizar() throws SQLException{
-        System.out.println("Actualizando ventana principal");
+    private void actualizar(){
         cargarNoticias();
         cargarEventos();
         cargarResumen();
         cargarTablaActividades();
-        System.out.println("Ventana principal Actualizada");
     }
 
     @Override

@@ -19,10 +19,7 @@ public class Evento {
      * Consultas
      */
 
-    public static final String TODOS_EVENTOS_USUARIOINICIADO = "SELECT eventos.* FROM eventos,`calendario` WHERE `eventos`.`id` = `calendario`.`idEvento` and `calendario`.`idJugador` = ?";
-//    SELECT `eventos`.* 
-//FROM eventos, calendario
-//WHERE ((`eventos`.`id`=`calendario`.`idEvento`) AND (`calendario`.`idJugador`=10))
+    public static final String TODOS_EVENTOS_USUARIOINICIADO = "SELECT e.* FROM eventos e, calendario c WHERE e.id = c.idEvento AND c.idJugador = ?";
     public static final String TODOS_EVENTOS = "select * from `eventos`";
 
     /*

@@ -5,15 +5,16 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane id="background" fx:id="anchorPane" prefHeight="426.999977929685" prefWidth="810.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaSemanalController">
+<AnchorPane id="background" fx:id="anchorPane" prefHeight="560.0" prefWidth="920.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaSemanalController">
   <children>
-    <ListView fx:id="lunesList" layoutX="73.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label layoutX="102.0" layoutY="76.0" text="Lunes">
+    <ListView fx:id="lunesList" layoutX="142.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label layoutX="171.0" layoutY="195.0" text="Lunes">
       <font>
         <Font name="Comic Sans MS" size="16.0" fx:id="x1" />
       </font>
@@ -21,34 +22,152 @@
         <Color blue="0.750" green="0.750" red="0.750" fx:id="x2" />
       </textFill>
     </Label>
-    <ListView fx:id="martesList" layoutX="174.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="198.0" layoutY="76.0" text="Martes" textFill="$x2" />
-    <ListView fx:id="miercolesList" layoutX="278.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="296.0" layoutY="76.0" text="Miercoles" textFill="$x2" />
-    <ListView fx:id="juevesList" layoutX="383.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="401.0" layoutY="76.0" text="Jueves" textFill="$x2" />
-    <ListView fx:id="viernesList" layoutX="488.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0">
+    <ListView fx:id="martesList" layoutX="243.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label font="$x1" layoutX="267.0" layoutY="195.0" text="Martes" textFill="$x2" />
+    <ListView fx:id="miercolesList" layoutX="347.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label font="$x1" layoutX="365.0" layoutY="195.0" text="Miercoles" textFill="$x2" />
+    <ListView fx:id="juevesList" layoutX="452.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label font="$x1" layoutX="470.0" layoutY="195.0" text="Jueves" textFill="$x2" />
+    <ListView fx:id="viernesList" layoutX="557.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0">
       <stylesheets>
         <URL value="@Calendario.css" />
       </stylesheets>
     </ListView>
-    <Label font="$x1" layoutX="506.0" layoutY="76.0" text="Viernes" textFill="$x2" />
-    <ListView fx:id="sabadoList" layoutX="593.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="611.0" layoutY="76.0" text="Sabado" textFill="$x2" />
-    <ListView fx:id="domingoList" layoutX="698.0" layoutY="109.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
-    <Label font="$x1" layoutX="716.0" layoutY="76.0" text="Domingo" textFill="$x2" />
-    <Label layoutX="235.0" layoutY="40.0" text="Vista Semanal" textFill="WHITE" />
-    <Button layoutX="73.0" layoutY="48.0" mnemonicParsing="false" onAction="#anteriorSemana" text="&lt;- Anterior" />
-    <Button layoutX="697.0" layoutY="48.0" mnemonicParsing="false" onAction="#siguienteSemana" text="Siguiente -&gt;" />
-    <HBox fx:id="hPanel" layoutX="363.0" layoutY="27.0" prefHeight="31.0" prefWidth="201.0" />
-    <Label alignment="CENTER" depthTest="DISABLE" layoutX="55.0" layoutY="10.0" minHeight="24.0" prefHeight="34.0" prefWidth="122.0" text="FitBox" textFill="#dfdfdf">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </Label>
+    <Label font="$x1" layoutX="575.0" layoutY="195.0" text="Viernes" textFill="$x2" />
+    <ListView fx:id="sabadoList" layoutX="662.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label font="$x1" layoutX="680.0" layoutY="195.0" text="Sabado" textFill="$x2" />
+    <ListView fx:id="domingoList" layoutX="767.0" layoutY="228.0" orientation="VERTICAL" prefHeight="281.0000999999975" prefWidth="85.0" />
+    <Label font="$x1" layoutX="785.0" layoutY="195.0" text="Domingo" textFill="$x2" />
+    <HBox fx:id="hPanel" layoutX="410.0" layoutY="146.0" prefHeight="31.0" prefWidth="201.0" />
+    <ToolBar id="toolBar" layoutX="0.0" layoutY="0.0" prefHeight="56.0" prefWidth="920.0">
+      <items>
+        <Button id="botonActividades" cancelButton="false" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="82.0" text="">
+          <effect>
+            <DropShadow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="10.0" fx:id="x3" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Action-button-home-icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEstadisticas" prefHeight="45.5" prefWidth="155.0" text="ESTADÍSTICAS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="44.500099999997474" fitWidth="44.500099999997474" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/chart-search-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" disable="true" font="$x3" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
+    <Button id="botonPerfil" cancelButton="false" font="$x3" graphicTextGap="4.0" layoutX="133.0" layoutY="156.0" minHeight="34.0" minWidth="-1.0" mnemonicParsing="false" onAction="#anteriorSemana" prefHeight="34.0" prefWidth="117.0" text="Anterior">
+      <effect>
+        <DropShadow />
+      </effect>
+      <graphic>
+        <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+          <effect>
+            <DropShadow />
+          </effect>
+          <image>
+            <Image url="@../../imagenes/Profile-icon32px.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button id="botonPerfil" cancelButton="false" font="$x3" graphicTextGap="4.0" layoutX="735.0" layoutY="153.0" minHeight="34.0" minWidth="-1.0" mnemonicParsing="false" onAction="#siguienteSemana" prefHeight="34.0" prefWidth="117.0" text="Siguiente">
+      <effect>
+        <DropShadow />
+      </effect>
+      <graphic>
+        <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+          <effect>
+            <DropShadow />
+          </effect>
+          <image>
+            <Image url="@../../imagenes/Profile-icon32px.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Button id="botonPerfil" cancelButton="false" font="$x3" graphicTextGap="4.0" layoutX="38.0" layoutY="79.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onAction="#vistaMensual" prefHeight="46.0" prefWidth="135.9998779296875" text="Vista Mensual">
+      <effect>
+        <DropShadow />
+      </effect>
+      <graphic>
+        <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+          <effect>
+            <DropShadow />
+          </effect>
+          <image>
+            <Image url="@../../imagenes/Profile-icon32px.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
   </children>
   <stylesheets>
     <URL value="@Calendario.css" />
   </stylesheets>
 </AnchorPane>
-
