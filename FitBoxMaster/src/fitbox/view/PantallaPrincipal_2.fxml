@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="ventana" prefHeight="560.000022070315" prefWidth="919.999977929685" style="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="ventana" prefHeight="560.000022070315" prefWidth="919.999977929685" style="" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.PantallaPrincipalController">
   <children>
     <VBox id="VBox" alignment="CENTER" prefHeight="560.000022070315" prefWidth="919.999977929685" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -48,14 +48,14 @@
                 </ImageView>
               </graphic>
             </Button>
-            <Button fx:id="botonEstadisticas" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
+            <Button fx:id="botonEstadisticas" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="45.5" prefWidth="155.0" text="ESTADÍSTICAS">
               <effect>
                 <DropShadow />
               </effect>
               <graphic>
-                <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="44.500099999997474" fitWidth="44.500099999997474" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../imagenes/Play-icon.png" />
+                    <Image url="@../../imagenes/chart-search-icon32px.png" />
                   </image>
                 </ImageView>
               </graphic>
@@ -72,7 +72,7 @@
                 </ImageView>
               </graphic>
             </Button>
-            <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+            <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#actualizar" onMouseClicked="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
               <effect>
                 <DropShadow />
               </effect>
@@ -124,12 +124,12 @@
                                     <Color blue="1.000" green="0.928" red="0.400" fx:id="x2" />
                                   </stroke>
                                 </Line>
-                                <ScrollPane id="ScrollPane" hbarPolicy="NEVER" layoutX="6.0" layoutY="32.0" prefViewportHeight="92.0" prefViewportWidth="280.0" prefWidth="302.0" vbarPolicy="NEVER">
+                                <ScrollPane id="ScrollPane" layoutX="6.0" layoutY="32.0" prefViewportHeight="92.0" prefViewportWidth="280.0" prefWidth="302.0">
                                   <content>
                                     <TableView fx:id="tablaActividad" prefHeight="92.0" prefWidth="301.0">
                                       <columns>
-                                        <TableColumn editable="true" maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" resizable="true" text="Fecha" fx:id="columnaHora" />
-                                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Actividad" fx:id="columnaActividad" />
+                                        <TableColumn prefWidth="75.0" text="Hora" fx:id="columnaHora" />
+                                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="192.0" text="Actividad" fx:id="columnaActividad" />
                                       </columns>
                                     </TableView>
                                   </content>
@@ -144,7 +144,7 @@
                                       <children>
                                         <Text fill="WHITE" layoutX="81.0" layoutY="21.0" scaleX="2.3756200049430576" scaleY="1.3552727963707778" strokeType="OUTSIDE" strokeWidth="0.0" text="RESUMEN SEMANAL" />
                                         <Line endX="130.0" endY="2.0" layoutX="138.0" layoutY="26.0" startX="-130.0" startY="0.0" stroke="$x2" />
-                                        <ScrollPane id="ScrollPane" hbarPolicy="NEVER" layoutX="8.0" layoutY="33.0" prefHeight="71.0" prefViewportHeight="69.0" prefViewportWidth="266.0" prefWidth="298.0">
+                                        <ScrollPane id="ScrollPane" layoutX="8.0" layoutY="33.0" prefHeight="71.0" prefViewportHeight="69.0" prefViewportWidth="266.0" prefWidth="298.0">
                                           <content>
                                             <TextArea fx:id="textoResumen" prefHeight="69.0" prefWidth="297.0" wrapText="true" />
                                           </content>

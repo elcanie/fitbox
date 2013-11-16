@@ -34,6 +34,7 @@ public class Dao<T extends Object> {
         conexion = Conexion.getConexion();
     }
 
+    
     public List<T> find(String consulta, Object[] parametros) {
 
         PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);

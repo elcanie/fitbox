@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarPerfil">
+<AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.EditarPerfil">
   <children>
     <Label fx:id="nombreActividad" layoutX="247.0" layoutY="73.0" prefWidth="127.0" text="Editar Perfil" textFill="WHITE">
       <effect>
@@ -165,9 +165,22 @@
       </effect>
     </Label>
     <TextField id="minutos" fx:id="contraseña2Text" layoutX="373.0" layoutY="443.0" prefWidth="149.0" />
-    <ToolBar id="toolBar" layoutX="0.0" layoutY="0.0" prefHeight="56.0" prefWidth="920.0">
+    <Label fx:id="errorGenero" layoutX="526.0" layoutY="215.0" text="" />
+    <ToolBar id="toolBar" prefHeight="56.0" prefWidth="916.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <Button id="botonPerfil" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#home" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0" onMouseClicked="#home">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonPerfil" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" opacity="0.8" prefHeight="46.0" prefWidth="135.9998779296875" styleClass="fondo" text="PERFIL">
           <effect>
             <DropShadow />
           </effect>
@@ -181,8 +194,11 @@
               </image>
             </ImageView>
           </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
         </Button>
-        <Button id="botonActividades" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+        <Button id="botonActividades" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
           <effect>
             <DropShadow />
           </effect>
@@ -194,19 +210,19 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonEstadisticas" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="45.5" prefWidth="155.0" text="ESTADÍSTICAS">
+        <Button id="botonEstadisticas" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
           <effect>
             <DropShadow />
           </effect>
           <graphic>
-            <ImageView fitHeight="44.500099999997474" fitWidth="44.500099999997474" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../imagenes/chart-search-icon32px.png" />
+                <Image url="@../../imagenes/Play-icon.png" />
               </image>
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+        <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
           <effect>
             <DropShadow />
           </effect>
@@ -218,7 +234,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
           <effect>
             <DropShadow />
           </effect>
@@ -230,7 +246,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" prefWidth="136.0" text="AJUSTES">
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
           <effect>
             <DropShadow />
           </effect>
@@ -247,7 +263,6 @@
         <URL value="@StyleDialog.css" />
       </stylesheets>
     </ToolBar>
-    <Label fx:id="errorGenero" layoutX="526.0" layoutY="215.0" text="" />
   </children>
   <stylesheets>
     <URL value="@Styledescripcionactividad.css" />

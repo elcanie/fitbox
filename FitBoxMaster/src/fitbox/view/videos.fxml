@@ -5,6 +5,7 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
@@ -12,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1365.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.videosController">
   <children>
-    <TabPane prefHeight="409.0" prefWidth="526.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <TabPane prefHeight="680.0" prefWidth="526.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
       <tabs>
         <Tab text="Vídeos">
           <content>
@@ -34,18 +35,6 @@
                     <URL value="@../estilo/style.css" />
                   </stylesheets>
                 </ScrollPane>
-                <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="62.0" style="" styleClass="fondo" text="" underline="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <graphic>
-                    <ImageView id="Home-icon.png" fitHeight="57.0" fitWidth="55.0">
-                      <image>
-                        <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                  <stylesheets>
-                    <URL value="@style.css" />
-                  </stylesheets>
-                </Button>
               </children>
               <stylesheets>
                 <URL value="@style.css" />
@@ -71,18 +60,6 @@
                     <Font size="15.0" />
                   </font>
                 </Label>
-                <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#home" prefHeight="60.0" prefWidth="62.0" style="" styleClass="fondo" text="" underline="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <graphic>
-                    <ImageView id="Home-icon.png" fitHeight="57.0" fitWidth="55.0">
-                      <image>
-                        <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                  <stylesheets>
-                    <URL value="@style.css" />
-                  </stylesheets>
-                </Button>
               </children>
               <stylesheets>
                 <URL value="@style.css" />
@@ -92,5 +69,105 @@
         </Tab>
       </tabs>
     </TabPane>
+    <ToolBar id="toolBar" prefHeight="56.0" prefWidth="920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#home" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="10.0" fx:id="x3" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" disable="true" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" opacity="0.8" prefHeight="45.5" prefWidth="155.0" styleClass="fondo" text="VIDEOS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Play-icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x3" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
   </children>
 </AnchorPane>

@@ -12,24 +12,12 @@
 
 <AnchorPane fx:id="ventana" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="916.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.AccederActividadesController">
   <children>
-    <VBox id="VBox" alignment="CENTER" prefHeight="520.0" prefWidth="916.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <VBox id="VBox" alignment="CENTER" prefHeight="520.0" prefWidth="916.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
       <children>
         <AnchorPane id="AnchorPane" prefHeight="58.0" prefWidth="916.0">
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="53.0" prefWidth="916.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Button fx:id="botonHome" cancelButton="false" defaultButton="false" minHeight="72.0" minWidth="93.0" mnemonicParsing="false" onMouseClicked="#goToHome" prefHeight="72.0" prefWidth="93.0" text="">
-                  <effect>
-                    <DropShadow color="#33ffb6" />
-                  </effect>
-                  <graphic>
-                    <ImageView fitHeight="70.25" fitWidth="70.25" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="">
-                      <image>
-                        <Image url="@../../imagenes/Action-button-home-icon.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Button>
                 <Separator prefWidth="200.0" visible="false" />
                 <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="26.0" prefWidth="313.0" text="ACTIVIDADES" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" wrapText="false">
                   <effect>
@@ -76,6 +64,106 @@
         </AnchorPane>
       </children>
     </VBox>
+    <ToolBar id="toolBar" prefHeight="56.0" prefWidth="1365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0" onMouseClicked="#goToHome">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="10.0" fx:id="x1" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" disable="true" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" opacity="0.8" prefHeight="46.0" prefWidth="154.00009999999747" styleClass="fondo" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Play-icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
   </children>
   <stylesheets>
     <URL value="@StyleAccederActividades.css" />
