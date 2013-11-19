@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="fondo" prefHeight="399.9998779296875" prefWidth="622.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.view.RealizarEventoController">
+  <children>
+    <TableView layoutX="32.0" layoutY="62.0" prefHeight="240.0" prefWidth="346.0">
+      <columns>
+        <TableColumn prefWidth="75.0" text="Nombre" />
+        <TableColumn prefWidth="75.0" text="Descripción" />
+        <TableColumn prefWidth="75.0" text="Puntuación" />
+        <TableColumn prefWidth="75.0" text="Estado" />
+      </columns>
+    </TableView>
+    <Button layoutX="139.0" layoutY="312.0" minHeight="73.999755859375" minWidth="88.0" mnemonicParsing="false" prefHeight="73.999755859375" prefWidth="116.0" text="Go!">
+      <font>
+        <Font name="System Bold" size="12.0" />
+      </font>
+      <graphic>
+        <ImageView fitHeight="64.0" fitWidth="64.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../imagenes/Button-Next-icon.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+    <Label layoutX="60.0" layoutY="26.0" prefHeight="22.0" prefWidth="137.0" text="Mis eventos" textFill="WHITE" underline="false" wrapText="false">
+      <font>
+        <Font name="System Bold" size="20.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="464.0" layoutY="26.0" text="Resultados" textFill="WHITE" />
+    <ScrollPane id="ScrollPane" layoutX="408.0" layoutY="62.0" prefViewportHeight="240.0" prefViewportWidth="202.0">
+      <content>
+        <ListView prefHeight="240.0" prefWidth="202.0" />
+      </content>
+    </ScrollPane>
+  </children>
+  <stylesheets>
+    <URL value="@realizarevento.css" />
+  </stylesheets>
+</AnchorPane>
