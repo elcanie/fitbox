@@ -89,10 +89,10 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
                 dal.updateRuben(desafio);
                 cargarListaDesafios();
                 MessageBox.show(ScreensFramework.stage,
-                    " ¡Ha aceptado el desafio !",
-                    "Information dialog",
-                    MessageBox.ICON_INFORMATION | MessageBox.OK);
-                
+                        " ¡Ha aceptado el desafio !",
+                        "Information dialog",
+                        MessageBox.ICON_INFORMATION | MessageBox.OK);
+
             }
         } else {
             MessageBox.show(ScreensFramework.stage,
@@ -110,11 +110,11 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
         Dal dal = Dal.getDal();
         String nombreEvento = textNombre.getText();
         int indice = comboActividad.getSelectionModel().getSelectedIndex();
-        String actividadNombre = (String) comboActividad.getItems().get(indice);
-        List<Actividad> lista = dal.find(Actividad.ENCONTRAR_ACTIVIDADporNOMBRE, new Object[]{actividadNombre}, Actividad.class);
-        Actividad actividad = lista.get(0);
         int indice2 = listaRival.getSelectionModel().getSelectedIndex();
         if (indice2 != -1 && !(nombreEvento.equals("")) && indice != -1) {
+            String actividadNombre = (String) comboActividad.getItems().get(indice);
+            List<Actividad> lista = dal.find(Actividad.ENCONTRAR_ACTIVIDADporNOMBRE, new Object[]{actividadNombre}, Actividad.class);
+            Actividad actividad = lista.get(0);
             String rival = (String) listaRival.getItems().get(indice2);
             int idRival = Integer.parseInt(rival.split("-")[0].trim());
             List<Jugador> listaJugador = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idRival}, Jugador.class);
@@ -144,7 +144,9 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
                         "Information dialog",
                         MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
             } else {
-                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, (Jugador) recurso.getObject("usuario"), jugador, actividad);
+                Jugador j = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{((Usuario)recurso.getObject("usuario")).getId()},Jugador.class).get(0);
+                System.out.println(j.getId()+"---"+jugador.getId());
+                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, j , jugador, actividad);
                 dal.insert(d);
             }
         } else {
@@ -160,8 +162,8 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ScreensFramework.stage.setWidth(600);
-        ScreensFramework.stage.setHeight(420);
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         fecha = new LocalDate();
         fxcalendar2 = new FXCalendar();
@@ -216,7 +218,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     }
 
     private void cargarListaDesafios() {
-        dataDesafios=null;
+        dataDesafios = null;
         dataDesafios = FXCollections.observableArrayList();
         Dal dal = Dal.getDal();
         Usuario usuario = (Usuario) recurso.getObject("usuario");
@@ -252,8 +254,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     //To change body of generated methods, choose Tools | Templates.
 
     //Metodos barra de botones
-    
-      @FXML
+    @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
@@ -283,8 +284,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     }
 
     @FXML
-    public void Actualizar(MouseEvent event) throws IOException{
-        
+    public void Actualizar(MouseEvent event) throws IOException {
     }
 
     @FXML
@@ -294,25 +294,24 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
 
     @FXML
     public void abrirDesafios(MouseEvent event) throws IOException {
-         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
+        myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
     }
 
     @FXML
     public void abrirClasificacion(ActionEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+        myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML
     public void abrirAjustes(MouseEvent event) throws IOException {
         //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
     }
-   
-    @FXML
-    private void home(){
-        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);    
-    }
 
+    @FXML
+    private void home() {
+        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+    }
 }

@@ -80,8 +80,8 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  ScreensFramework.stage.setWidth(810);
-        ScreensFramework.stage.setHeight(426);
+  ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
@@ -110,7 +110,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
         int domingo = now.withDayOfWeek(DateTimeConstants.SUNDAY).getDayOfMonth();
         System.out.println("Lunes: " + lunes + "  " + "Domingo: " + domingo);
         Dal dal = Dal.getDal();
-        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{10}, Calendario.class);
+        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
         System.out.println("Actividades: " + calendarios.size());
         List<Calendario> listLunesStr = new LinkedList<>();
         List<Calendario> listMartesStr = new LinkedList<>();

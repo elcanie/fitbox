@@ -56,7 +56,12 @@ public class Calendario {
         setEvento(evento);
         setEstadoActividad(estadoActividad);
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm:ss");
-fecha = formatter.parseDateTime(fechaStr);
+        try{
+        fecha = formatter.parseDateTime(fechaStr);
+       }catch(java.lang.IllegalArgumentException e){
+       formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+       fecha = formatter.parseDateTime(fechaStr);
+       }
     }
 
 

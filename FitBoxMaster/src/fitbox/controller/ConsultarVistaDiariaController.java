@@ -61,8 +61,8 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          ScreensFramework.stage.setWidth(309);
-        ScreensFramework.stage.setHeight(447);
+         ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
         this.calendario = (Calendario) recurso.getObject("calendario");

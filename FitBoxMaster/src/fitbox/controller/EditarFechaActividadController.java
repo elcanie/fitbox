@@ -63,7 +63,7 @@ public class EditarFechaActividadController implements Initializable, Controlled
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         hPanel.getChildren().addAll(fxcalendar);
         Calendario cal = ((Calendario) recurso.getObject("calendario"));
-        FXCalendar.dateTxtField.setText(cal.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
+        FXCalendar.dateTxtField.setText(cal.getFecha().getYear() + "-" + cal.getFecha().getMonthOfYear() + "-" + cal.getFecha().getDayOfMonth());
         hora.setText(cal.getFecha().getHourOfDay() + "");
         minutos.setText(cal.getFecha().getMinuteOfHour() + "");
         nombreActividad.setText(actividad.getNombre().toUpperCase());

@@ -48,8 +48,8 @@ public class ConsultarClasificacionController implements Initializable, Controll
     }
 
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(386);
-        ScreensFramework.stage.setHeight(337);
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         dal = Dal.getDal();
         List<Usuario> usuarios = dal.find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);

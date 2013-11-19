@@ -60,8 +60,8 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(492);
-        ScreensFramework.stage.setHeight(451);
+        ScreensFramework.stage.setWidth(921);
+        ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
         LocalDate hoy = new LocalDate();
@@ -70,8 +70,8 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
     public void updateVista(int _año, int _mes, int _dia) {
         now = new LocalDate(_año, _mes, _dia);
-        List<Calendario> calendarios = Dal.getDal().find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{now.getYear() + "/" + now.getMonthOfYear() + "/%", user.getId()}, Calendario.class);
-        System.out.println(calendarios.size());
+        System.out.println("Hoy es:"+_año+"-"+_mes+"-"+_dia);
+        List<Calendario> calendarios = Dal.getDal().find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{now.getYear() + "-" + now.getMonthOfYear() + "-%", user.getId()}, Calendario.class);
         LinkedList<Calendario> semana1 = new LinkedList<Calendario>();
         LinkedList<Calendario> semana2 = new LinkedList<Calendario>();
         LinkedList<Calendario> semana3 = new LinkedList<Calendario>();
@@ -88,7 +88,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
         DateTime lastDate = dateTime.dayOfMonth().withMaximumValue();
         int diasMes = lastDate.dayOfMonth().withMaximumValue().getDayOfMonth();
-        System.out.println(diasMes);
+
         for (int i = 0; i < lista.size(); i++) {
             for (int y = 1; y <= 7; y++) {
                 boolean flag = true;
@@ -96,14 +96,14 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                     for (Calendario cal : calendarios) {
 
                         if (flag && cal.getFecha().getDayOfMonth() == ((i * 7) + y)) {
-                            System.out.println(cal.getFecha().getDayOfMonth() + "==" + (i * 7 + y));
+                            
                             lista.get(i).add(cal);
                             flag = false;
                             break;
                         }
                     }
                     if (flag) {
-                        lista.get(i).add(new Calendario(0, "2013/10/" + (i * 7 + y) + " 00:00:00", 99999,null,0,  10));
+                        lista.get(i).add(new Calendario(0, "2013/"+dateTime.getMonthOfYear()+"/" + (i * 7 + y) + " 00:00:00", 99999,null,0,  user.getId()));
                     }
                 }
             }
@@ -239,7 +239,6 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
     public void mouselClicked(MouseEvent t) {
 
         if (t.getClickCount() == 2) {
-            System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             recurso.putObject("calendario", (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             myController.loadScreen(ScreensFramework.PANTALLA_VISTADIARIA, ScreensFramework.PANTALLA_VISTADIARIA_FXML, recurso);
             myController.setScreen(ScreensFramework.PANTALLA_VISTADIARIA);
@@ -248,28 +247,24 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
     @FXML
     public void anteriorMes(ActionEvent a) {
-        System.out.println("Anterior");
         now = now.minusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 
     @FXML
     public void siguienteMes(ActionEvent a) {
-        System.out.println("Siguiente");
         now = now.plusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 
     @FXML
     public void vistaSemanal(ActionEvent a) {
-        System.out.println("Semanal");
         myController.loadScreen(ScreensFramework.PANTALLA_VISTASEMANAL, ScreensFramework.PANTALLA_VISTASEMANAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
     }
 
     @FXML
     public void menuPrincipal(ActionEvent a) {
-        System.out.println("Principal");
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }

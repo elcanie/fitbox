@@ -70,7 +70,7 @@ public class Desafio {
 
     }
         public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, Jugador jugador, Jugador rival, Actividad actividad) {
-            
+            System.out.println(jugador.getId());
         setValores(id, nombre, fechaInicio, fechaFin, estado,jugador, rival, actividad);
         setId(id);
         setNombre(nombre);
