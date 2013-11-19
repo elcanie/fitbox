@@ -4,6 +4,7 @@
 <?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -11,44 +12,76 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="fondo" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
+<AnchorPane id="fondo" prefHeight="560.0" prefWidth="920.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
   <children>
-    <TabPane prefHeight="344.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <TabPane prefHeight="485.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
       <tabs>
         <Tab text="Crear desafio">
           <content>
             <AnchorPane id="contentCrear" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button fx:id="btnDesafiar" layoutX="264.0" layoutY="262.0" mnemonicParsing="false" onAction="#crearDesafio" prefHeight="27.0" prefWidth="92.0" text="Desafiar" textFill="BLACK">
-                  <effect>
-                    <DropShadow color="#001200" height="1.0" radius="0.0" width="1.0" />
-                  </effect>
-                  <font>
-                    <Font name="Broadway" size="12.0" fx:id="x1" />
-                  </font>
-                </Button>
-                <TextField fx:id="textNombre" layoutX="110.0" layoutY="38.0" prefWidth="200.0" />
-                <ComboBox id="comboCategoria" fx:id="comboActividad" layoutX="110.0" layoutY="82.0" prefHeight="21.0" prefWidth="200.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ScrollPane id="ScrollPane" layoutX="369.0" layoutY="38.0" prefViewportHeight="200.0" prefViewportWidth="200.0">
-                  <content>
-                    <ListView fx:id="listaRival" prefHeight="200.0" prefWidth="200.0" />
-                  </content>
-                </ScrollPane>
-                <Label font="$x1" layoutX="369.0" layoutY="14.0" minHeight="10.0" prefHeight="21.0" prefWidth="164.0" text="Selecciona el rival" textFill="WHITE" wrapText="false" />
-                <Label font="$x1" layoutX="26.0" layoutY="44.0" prefWidth="84.0" text="Nombre" textFill="WHITE" wrapText="false" />
-                <Label font="$x1" layoutX="26.0" layoutY="92.0" minHeight="13.0" prefHeight="16.0" prefWidth="72.0" text="Actividad" textFill="WHITE" wrapText="false" />
-                <Label font="$x1" layoutX="26.0" layoutY="134.0" text="Fecha inicio" textFill="WHITE" wrapText="false" />
-                <Label font="$x1" layoutX="26.0" layoutY="172.0" prefWidth="61.0" text="Fecha fin" textFill="WHITE" wrapText="false" />
-                <HBox fx:id="hBoxFin" layoutX="110.0" layoutY="172.0" prefHeight="22.0" prefWidth="219.0" />
-                <TextField fx:id="fechaIni" editable="false" layoutX="110.0" layoutY="130.0" prefWidth="200.0" />
+                <VBox id="VBox" alignment="CENTER" prefHeight="502.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <HBox id="HBox" alignment="CENTER" prefHeight="350.0" prefWidth="889.0" spacing="100.0">
+                      <children>
+                        <VBox id="VBox" alignment="CENTER" prefHeight="230.0" spacing="40.0">
+                          <children>
+                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                              <children>
+                                <Label prefWidth="84.0" text="Nombre" textFill="WHITE" wrapText="false">
+                                  <font>
+                                    <Font name="Broadway" size="12.0" fx:id="x1" />
+                                  </font>
+                                </Label>
+                                <TextField fx:id="textNombre" prefWidth="200.0" />
+                              </children>
+                            </HBox>
+                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                              <children>
+                                <Label font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="13.0" prefHeight="16.0" prefWidth="72.0" text="Actividad" textFill="WHITE" wrapText="false" />
+                                <ComboBox id="comboCategoria" fx:id="comboActividad" prefHeight="21.0" prefWidth="200.0">
+                                  <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                      <String fx:value="Item 1" />
+                                      <String fx:value="Item 2" />
+                                      <String fx:value="Item 3" />
+                                    </FXCollections>
+                                  </items>
+                                </ComboBox>
+                              </children>
+                            </HBox>
+                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                              <children>
+                                <Label font="$x1" text="Fecha inicio" textFill="WHITE" wrapText="false" />
+                                <TextField fx:id="fechaIni" editable="false" prefWidth="200.0" />
+                              </children>
+                            </HBox>
+                            <HBox fx:id="hBoxFin" prefHeight="22.0" prefWidth="219.0" spacing="60.0">
+                              <children>
+                                <Label font="$x1" prefWidth="61.0" text="Fecha fin" textFill="WHITE" wrapText="false" />
+                              </children>
+                            </HBox>
+                          </children>
+                        </VBox>
+                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                          <children>
+                            <Label font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" prefHeight="21.0" prefWidth="164.0" text="Selecciona el rival" textFill="WHITE" wrapText="false">
+                              <VBox.margin>
+                                <Insets />
+                              </VBox.margin>
+                            </Label>
+                            <ListView fx:id="listaRival" prefHeight="215.0" prefWidth="289.0" />
+                          </children>
+                        </VBox>
+                      </children>
+                    </HBox>
+                    <Button fx:id="btnDesafiar" font="$x1" mnemonicParsing="false" onAction="#crearDesafio" prefHeight="27.0" prefWidth="92.0" text="Desafiar" textFill="BLACK">
+                      <effect>
+                        <DropShadow color="#001200" height="1.0" radius="0.0" width="1.0" />
+                      </effect>
+                    </Button>
+                  </children>
+                </VBox>
               </children>
             </AnchorPane>
           </content>
@@ -57,32 +90,119 @@
           <content>
             <AnchorPane id="contentAceptar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Label font="$x1" layoutX="36.0" layoutY="8.0" prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE" />
-                <AnchorPane layoutX="0.0" layoutY="26.0" prefHeight="204.0" prefWidth="600.0">
+                <VBox id="VBox" alignment="CENTER" prefHeight="510.0" prefWidth="889.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
-                    <ScrollPane id="ScrollPane" prefHeight="197.0" prefViewportHeight="268.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                      <content>
-                        <ListView fx:id="listaDesafios" prefHeight="268.0" prefWidth="600.0" />
-                      </content>
-                    </ScrollPane>
+                    <Label prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE">
+                      <font>
+                        <Font name="Broadway" size="22.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <ListView fx:id="listaDesafios" prefHeight="560.0" prefWidth="920.0">
+                      <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </ListView>
+                    <Button fx:id="btnAceptar" mnemonicParsing="false" onMouseClicked="#aceptarDesafio" text="Aceptar desafio">
+                      <VBox.margin>
+                        <Insets bottom="10.0" />
+                      </VBox.margin>
+                    </Button>
                   </children>
-                </AnchorPane>
-                <Button fx:id="btnAceptar" layoutX="249.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#aceptarDesafio" text="Aceptar desafio" />
+                </VBox>
               </children>
             </AnchorPane>
           </content>
         </Tab>
       </tabs>
     </TabPane>
-    <Button fx:id="btnAtras" layoutX="7.0" layoutY="337.0" minHeight="54.0" mnemonicParsing="false" onAction="#atras" prefHeight="54.0" prefWidth="105.0" text="">
-      <graphic>
-        <ImageView fitHeight="63.0" fitWidth="84.00000451316296" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../imagenes/Action-button-home-icon.png" />
-          </image>
-        </ImageView>
-      </graphic>
-    </Button>
+    <ToolBar id="toolBar" prefHeight="56.0" prefWidth="916.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#home" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="10.0" fx:id="x2" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Play-icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
   </children>
   <stylesheets>
     <URL value="@crearyapuntardesafio.css" />
