@@ -97,7 +97,7 @@ public class AgregarAmigoController implements Initializable, ControlledScreen {
         Dal dal = Dal.getDal();
         dataJugadores=null;
         dataJugadores = FXCollections.observableArrayList();
-        List<Jugador> jugadores = dal.find(Jugador.TODOS_JUGADAROES, new Object[]{}, Jugador.class);
+        List<Jugador> jugadores = dal.find(Jugador.TODOS_JUGADOES, new Object[]{}, Jugador.class);
         List<Amigo> amigos = dal.find(Amigo.JugadorID, new Object[]{(jugador.getId())}, Amigo.class);
         boolean existe = false;
         for (Jugador j : jugadores) {

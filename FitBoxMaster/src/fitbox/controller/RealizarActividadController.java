@@ -6,17 +6,17 @@
 package fitbox.controller;
 
 /*import com.google.gdata.client.*;
-import com.google.gdata.client.youtube.*;
-import com.google.gdata.data.*;
-import com.google.gdata.data.geo.impl.*;
-import com.google.gdata.data.media.*;
-import com.google.gdata.data.media.mediarss.*;
-import com.google.gdata.data.youtube.*;
-import com.google.gdata.data.extensions.*;
-import com.google.gdata.util.*;
-import java.io.IOException;
-import java.io.File;
-import java.net.URL;*/
+ import com.google.gdata.client.youtube.*;
+ import com.google.gdata.data.*;
+ import com.google.gdata.data.geo.impl.*;
+ import com.google.gdata.data.media.*;
+ import com.google.gdata.data.media.mediarss.*;
+ import com.google.gdata.data.youtube.*;
+ import com.google.gdata.data.extensions.*;
+ import com.google.gdata.util.*;
+ import java.io.IOException;
+ import java.io.File;
+ import java.net.URL;*/
 import fitbox.Cronometro;
 import fitbox.ObjetoWebCam;
 import fitbox.controller.dao.Dal;
@@ -77,16 +77,29 @@ public class RealizarActividadController implements Initializable, ControlledScr
                         null,
                         "¿Qué nombre quiere para el archivo de video?",
                         JOptionPane.QUESTION_MESSAGE);
-                webcam = new ObjetoWebCam(nombreVideo);
-                Thread t1 = new Thread(webcam);
-                t1.start();
+                try {
+                    webcam = new ObjetoWebCam(nombreVideo);
+                    if (webcam == null) {
+                        nombreVideo = JOptionPane.showInputDialog(
+                                null,
+                                "No se ha encontrado ningún dispositivo. Por favor instale o conecte la webcam.",
+                                JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Thread t1 = new Thread(webcam);
+                        t1.start();
+                    }
+                } catch (Exception e) {
+                    nombreVideo = JOptionPane.showInputDialog(
+                            null,
+                            "Error inesperado",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+                crono = new Cronometro(this);
+                Thread t = new Thread(crono);
+                t.start();
 
             }
-
-            crono = new Cronometro(this);
-            Thread t = new Thread(crono);
-            t.start();
-
         }
     }
 
@@ -97,39 +110,43 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 "¿Desea finalizar el ejercicio?",
                 "Information dialog",
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
-
+        int answer2 = MessageBox.show(ScreensFramework.stage,
+                "¿Desea subir el ejercicio a Youtube?",
+                "Information dialog",
+                MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
         if (answer == MessageBox.OK) {
             webcam.finalize();
             puntos = crono.getPuntos();
-            
+
             // Subida de video
+            //if(answer2 == MessageBox.OK){}
             /*YouTubeService service = new YouTubeService("xze.411@gmail.com", "AI39si73OlWoHwDEA5CmVkNeqLGsw5sQawk6T_Odf32LWSwXuIItZC2AV5XGCNeLFFpDmRbBQv-pDbz1TF1j--R_YegUbq2gWQ");
-            VideoEntry newEntry = new VideoEntry();
-            newEntry.setLocation("Valencia, SPA");
+             VideoEntry newEntry = new VideoEntry();
+             newEntry.setLocation("Valencia, SPA");
 
-            YouTubeMediaGroup mg = newEntry.getOrCreateMediaGroup();
+             YouTubeMediaGroup mg = newEntry.getOrCreateMediaGroup();
 
-            mg.addCategory(new MediaCategory(YouTubeNamespace.CATEGORY_SCHEME, "Sport"));
-            mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME, j.getId()+""));
-            mg.setPrivate(true);
-            mg.setTitle(new MediaTitle());
-            mg.getTitle().setPlainTextContent(nombreVideo);
-            mg.setKeywords(new MediaKeywords());
-            mg.getKeywords().addKeyword("fitbox");
-            mg.setDescription(new MediaDescription());
-            //mg.getDescription().setPlainTextContent("");
-            MediaFileSource ms = new MediaFileSource(new File(webcam.getRuta()), "video/quicktime");
-            newEntry.setMediaSource(ms);
+             mg.addCategory(new MediaCategory(YouTubeNamespace.CATEGORY_SCHEME, "Sport"));
+             mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME, j.getId()+""));
+             mg.setPrivate(true);
+             mg.setTitle(new MediaTitle());
+             mg.getTitle().setPlainTextContent(nombreVideo);
+             mg.setKeywords(new MediaKeywords());
+             mg.getKeywords().addKeyword("fitbox");
+             mg.setDescription(new MediaDescription());
+             //mg.getDescription().setPlainTextContent("");
+             MediaFileSource ms = new MediaFileSource(new File(webcam.getRuta()), "video/quicktime");
+             newEntry.setMediaSource(ms);
 
-            String uploadUrl = "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
-            try {
-                VideoEntry createdEntry = service.insert(new URL(uploadUrl), newEntry);
-            } catch (IOException ex) {
-                Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ServiceException ex) {
-                Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            
+             String uploadUrl = "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
+             try {
+             VideoEntry createdEntry = service.insert(new URL(uploadUrl), newEntry);
+             } catch (IOException ex) {
+             Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (ServiceException ex) {
+             Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
+             }*/
+
             answer = MessageBox.show(ScreensFramework.stage,
                     "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
                     "Information dialog",

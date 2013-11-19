@@ -6,7 +6,9 @@
 package fitbox.controller.dao;
 
 import fitbox.model.Actividad;
+import fitbox.model.Amigo;
 import fitbox.model.Calendario;
+import fitbox.model.Desafio;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
 import fitbox.model.Noticia;
@@ -35,6 +37,8 @@ public class Dal {
        daos.put("Evento", new Dao<Evento>(Evento.class));
        daos.put("Noticia", new Dao<Noticia>(Noticia.class));
        daos.put("TablaActividad", new Dao<TablaActividad>(TablaActividad.class));
+       daos.put("Desafio", new Dao<Desafio>(Desafio.class));
+       daos.put("Amigo", new Dao<Amigo>(Amigo.class));
     }
     
     public static Dal getDal(){
