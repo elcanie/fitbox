@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -98,6 +99,47 @@ public class Dao<T extends Object> {
             s.executeUpdate(consulta);
 
         } catch (SQLException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+         public void updateRuben(T t) {
+
+        try {
+            Object valores[] = (Object[]) (claseT.getMethod("getValores", null)).invoke(t, null);
+            String consulta = null;
+            consulta = (String) claseT.getDeclaredField("UPDATE_" + claseT.getSimpleName().toUpperCase()).get(null);
+            PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+            int i = 1;
+            for (Object o : valores) {
+                try {
+                    System.out.println(i+" "+o.toString());
+                    s.setObject(i, o);
+                    i++;
+                } catch (SQLException ex) {
+                    Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            try {
+              //  s.setObject(i, valores[0]);
+               // System.out.println(i+" "+valores[0]);
+                Logger.getLogger("GenericDAO").info("Update: " + consulta);
+                s.executeUpdate();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchFieldException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

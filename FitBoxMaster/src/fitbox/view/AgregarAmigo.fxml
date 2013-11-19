@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="fondo" prefHeight="418.0" prefWidth="613.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.AgregarAmigoController">
+  <children>
+    <AnchorPane layoutX="37.0" layoutY="50.0" prefHeight="337.0" prefWidth="222.0">
+      <children>
+        <ScrollPane id="ScrollPane" prefHeight="337.0" prefViewportHeight="337.0" prefViewportWidth="222.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <content>
+            <ListView id="listaAmigos" fx:id="listaJugadores" prefHeight="337.0" prefWidth="221.0" />
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+    <Button fx:id="btnAgregar" layoutX="269.0" layoutY="160.0" mnemonicParsing="false" onAction="#agregar" prefHeight="40.0" prefWidth="85.0" text="AGREGAR">
+      <effect>
+        <DropShadow />
+      </effect>
+    </Button>
+    <AnchorPane layoutX="362.0" layoutY="51.0" prefHeight="337.0" prefWidth="222.0">
+      <children>
+        <ScrollPane id="ScrollPane" prefHeight="337.0" prefViewportHeight="337.0" prefViewportWidth="222.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <content>
+            <ListView fx:id="listaAmigos" prefHeight="337.0" prefWidth="221.0" />
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+    <Label layoutX="46.0" layoutY="11.0" prefHeight="30.0" prefWidth="206.0" text="Jugadores fitbox" textFill="WHITE" />
+    <Label layoutX="362.0" layoutY="11.0" prefHeight="30.0" prefWidth="206.0" text="Mis amigos" textFill="WHITE" />
+  </children>
+  <stylesheets>
+    <URL value="@agregaramigo.css" />
+  </stylesheets>
+</AnchorPane>

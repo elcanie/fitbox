@@ -1,13 +1,11 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package fitbox.controller;
 
-import fitbox.controller.dao.Conexion;
 import fitbox.controller.dao.Dal;
-import fitbox.controller.dao.Dao;
-import fitbox.model.Actividad;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
@@ -20,12 +18,9 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -44,8 +39,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,8 +54,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -133,7 +130,19 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirEquipo(MouseEvent event) throws IOException {
-        // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
+                    Stage s = new Stage();
+                    Parent root = null;
+                    try {
+                        recurso.putObject("controller", myController);
+                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/AgregarAmigo.fxml"), recurso);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    Scene scene = new Scene(root);
+                    s.setScene(scene);
+                    s.show();
+                    ScreensFramework.stage.toBack();
     }
 
     @FXML

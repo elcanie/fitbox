@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="fondo" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
+  <children>
+    <TabPane prefHeight="344.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <tabs>
+        <Tab text="Crear desafio">
+          <content>
+            <AnchorPane id="contentCrear" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Button fx:id="btnDesafiar" layoutX="264.0" layoutY="262.0" mnemonicParsing="false" onAction="#crearDesafio" prefHeight="27.0" prefWidth="92.0" text="Desafiar" textFill="BLACK">
+                  <effect>
+                    <DropShadow color="#001200" height="1.0" radius="0.0" width="1.0" />
+                  </effect>
+                  <font>
+                    <Font name="Broadway" size="12.0" fx:id="x1" />
+                  </font>
+                </Button>
+                <TextField fx:id="textNombre" layoutX="110.0" layoutY="38.0" prefWidth="200.0" />
+                <ComboBox id="comboCategoria" fx:id="comboActividad" layoutX="110.0" layoutY="82.0" prefHeight="21.0" prefWidth="200.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <ScrollPane id="ScrollPane" layoutX="369.0" layoutY="38.0" prefViewportHeight="200.0" prefViewportWidth="200.0">
+                  <content>
+                    <ListView fx:id="listaRival" prefHeight="200.0" prefWidth="200.0" />
+                  </content>
+                </ScrollPane>
+                <Label font="$x1" layoutX="369.0" layoutY="14.0" minHeight="10.0" prefHeight="21.0" prefWidth="164.0" text="Selecciona el rival" textFill="WHITE" wrapText="false" />
+                <Label font="$x1" layoutX="26.0" layoutY="44.0" prefWidth="84.0" text="Nombre" textFill="WHITE" wrapText="false" />
+                <Label font="$x1" layoutX="26.0" layoutY="92.0" minHeight="13.0" prefHeight="16.0" prefWidth="72.0" text="Actividad" textFill="WHITE" wrapText="false" />
+                <Label font="$x1" layoutX="26.0" layoutY="134.0" text="Fecha inicio" textFill="WHITE" wrapText="false" />
+                <Label font="$x1" layoutX="26.0" layoutY="172.0" prefWidth="61.0" text="Fecha fin" textFill="WHITE" wrapText="false" />
+                <HBox fx:id="hBoxFin" layoutX="110.0" layoutY="172.0" prefHeight="22.0" prefWidth="219.0" />
+                <TextField fx:id="fechaIni" editable="false" layoutX="110.0" layoutY="130.0" prefWidth="200.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab id="" text="Aceptar desafio">
+          <content>
+            <AnchorPane id="contentAceptar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label font="$x1" layoutX="36.0" layoutY="8.0" prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE" />
+                <AnchorPane layoutX="0.0" layoutY="26.0" prefHeight="204.0" prefWidth="600.0">
+                  <children>
+                    <ScrollPane id="ScrollPane" prefHeight="197.0" prefViewportHeight="268.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <content>
+                        <ListView fx:id="listaDesafios" prefHeight="268.0" prefWidth="600.0" />
+                      </content>
+                    </ScrollPane>
+                  </children>
+                </AnchorPane>
+                <Button fx:id="btnAceptar" layoutX="249.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#aceptarDesafio" text="Aceptar desafio" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <Button fx:id="btnAtras" layoutX="7.0" layoutY="337.0" minHeight="54.0" mnemonicParsing="false" onAction="#atras" prefHeight="54.0" prefWidth="105.0" text="">
+      <graphic>
+        <ImageView fitHeight="63.0" fitWidth="84.00000451316296" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../imagenes/Action-button-home-icon.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </Button>
+  </children>
+  <stylesheets>
+    <URL value="@crearyapuntardesafio.css" />
+  </stylesheets>
+</AnchorPane>

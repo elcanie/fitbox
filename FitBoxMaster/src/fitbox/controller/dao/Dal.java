@@ -61,5 +61,9 @@ public class Dal {
        Dao dao = daos.get(objeto.getClass().getSimpleName());
        dao.update(objeto); 
     }
+      public void updateRuben(Object objeto) {
+       Dao dao = daos.get(objeto.getClass().getSimpleName());
+       dao.updateRuben(objeto); 
+    }
 }
 

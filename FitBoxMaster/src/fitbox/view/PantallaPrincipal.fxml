@@ -205,7 +205,9 @@
                         </AnchorPane>
                         <AnchorPane fx:id="ventanaBotones" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="280.0">
                           <children>
-                            <Button fx:id="botonEvento" defaultButton="false" layoutX="4.0" layoutY="7.0" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+
+                            <Button fx:id="botonEvento" defaultButton="false" layoutX="4.0" layoutY="7.0" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#abrirDesafios" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+
                               <effect>
                                 <DropShadow />
                               </effect>
