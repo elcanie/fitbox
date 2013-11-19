@@ -20,75 +20,80 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lluis
  */
-public class ObjetoWebCam implements Runnable{
-    
+public class ObjetoWebCam implements Runnable {
+
     private boolean finalizado = false;
     private String nombreVideo = "";
     JFrame window;
-    private String ruta=""; 
+    private String ruta = "";
 
     public String getRuta() {
         return ruta;
     }
-    
-    public ObjetoWebCam(String nombre){
+
+    public ObjetoWebCam(String nombre) {
         this.nombreVideo = nombre;
     }
-    
-    public void run(){
-    window = new JFrame("Test Webcam Panel");
-                window.setUndecorated(true);
-                Webcam webcam = Webcam.getDefault();
-                WebcamPanel panel = new WebcamPanel(webcam);
-                
-                window.add(panel);   
-                window.setLocation(800,475);
-                window.pack();
-                window.setVisible(true); 
-                
-                // Grabar en video
-                
-                File archivo = new File(nombreVideo+".wmv");
-                ruta = archivo.getAbsolutePath();
-                IMediaWriter writer = ToolFactory.makeWriter(archivo.getName());
-                Dimension size = webcam.getViewSize();
-                
-                writer.addVideoStream(0, 0,ICodec.ID.CODEC_ID_WMV2,size.width, size.height);
-                long start = System.currentTimeMillis();
-                
-                
-                for(int i =0; finalizado == false ;i++) {
-                        System.out.println("Capture frame " + i);
 
-                        BufferedImage image = ConverterFactory.convertToType(webcam.getImage(), BufferedImage.TYPE_3BYTE_BGR);
-                        IConverter converter = ConverterFactory.createConverter(image, IPixelFormat.Type.YUV420P);
+    public void run() {
+        window = new JFrame("Test Webcam Panel");
+        window.setUndecorated(true);
+        Webcam webcam = Webcam.getDefault();
+        if (webcam == null) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado ningún dispositivo webcam.");
+        } else {
+            WebcamPanel panel = new WebcamPanel(webcam);
 
-                        IVideoPicture frame = converter.toPicture(image, (System.currentTimeMillis() - start) * 1000);
-                        frame.setKeyFrame(i == 0);
-                        frame.setQuality(0);
+            window.add(panel);
+            window.setLocation(800, 475);
+            window.pack();
+            window.setVisible(true);
 
-                        writer.encodeVideo(0, frame);
-                    try {
-                        // 20 FPS
-                        Thread.sleep(50);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            // Grabar en video
+
+            File archivo = new File(nombreVideo + ".wmv");
+            ruta = archivo.getAbsolutePath();
+            IMediaWriter writer = ToolFactory.makeWriter(archivo.getName());
+            Dimension size = webcam.getViewSize();
+
+            writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_WMV2, size.width, size.height);
+            long start = System.currentTimeMillis();
+
+
+            for (int i = 0; finalizado == false; i++) {
+                System.out.println("Capture frame " + i);
+
+                BufferedImage image = ConverterFactory.convertToType(webcam.getImage(), BufferedImage.TYPE_3BYTE_BGR);
+                IConverter converter = ConverterFactory.createConverter(image, IPixelFormat.Type.YUV420P);
+
+                IVideoPicture frame = converter.toPicture(image, (System.currentTimeMillis() - start) * 1000);
+                frame.setKeyFrame(i == 0);
+                frame.setQuality(0);
+
+                writer.encodeVideo(0, frame);
+                try {
+                    // 20 FPS
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
 
-                writer.close();
-}
+            writer.close();
+        }
+    }
+
     @Override
-    public void finalize(){
-       if(!finalizado){
-            this.finalizado=true;
+    public void finalize() {
+        if (!finalizado) {
+            this.finalizado = true;
             this.window.dispose();
         }
     }
 }
-

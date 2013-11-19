@@ -63,7 +63,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Jugador j;
     private ObjetoWebCam webcam;
     private String MEDIA_URL;
-    String nombreVideo;
+    private String nombreVideo;
 
     @FXML
     public void grabar() {
@@ -79,15 +79,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
                         JOptionPane.QUESTION_MESSAGE);
                 try {
                     webcam = new ObjetoWebCam(nombreVideo);
-                    if (webcam == null) {
-                        nombreVideo = JOptionPane.showInputDialog(
-                                null,
-                                "No se ha encontrado ningún dispositivo. Por favor instale o conecte la webcam.",
-                                JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        Thread t1 = new Thread(webcam);
-                        t1.start();
-                    }
+                    Thread t1 = new Thread(webcam);
+                    t1.start();
                 } catch (Exception e) {
                     nombreVideo = JOptionPane.showInputDialog(
                             null,
@@ -110,10 +103,12 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 "¿Desea finalizar el ejercicio?",
                 "Information dialog",
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
-        int answer2 = MessageBox.show(ScreensFramework.stage,
-                "¿Desea subir el ejercicio a Youtube?",
-                "Information dialog",
-                MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
+        /*if (webcam != null) {
+            int answer2 = MessageBox.show(ScreensFramework.stage,
+                    "¿Desea subir el ejercicio a Youtube?",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
+        }*/
         if (answer == MessageBox.OK) {
             webcam.finalize();
             puntos = crono.getPuntos();
