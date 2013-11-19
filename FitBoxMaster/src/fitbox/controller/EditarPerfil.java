@@ -101,7 +101,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
             jugador.setGenero(genero);
             jugador.setCorreo(correoText.getText());
             jugador.setNacimiento(fxcalendar.getTextField().getText());
-            
+            jugador.setApellidos(apellidosText.getText());
             Dal.getDal().update(usuario);
             Dal.getDal().update(jugador);
             System.out.println(fxcalendar.getTextField().getText()+"pantalla");

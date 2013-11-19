@@ -5,6 +5,7 @@
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
@@ -12,8 +13,13 @@
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.99998474121094" prefWidth="542.0001220703125" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.LoginController">
   <children>
-    <AnchorPane prefHeight="281.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="108.46" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="8.54">
+    <AnchorPane prefHeight="281.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="109.96" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="7.04">
       <children>
+        <ImageView id="portada2.png" fitHeight="101.99999237060547" fitWidth="279.0" layoutX="2.0" layoutY="4.0">
+          <image>
+            <Image url="file:/C:/wamp/www/fitbox/imagenes/portada2.png" preserveRatio="true" smooth="true" />
+          </image>
+        </ImageView>
         <Label id="labelNombreUsuario" layoutX="59.0" layoutY="106.0" prefHeight="22.0" prefWidth="168.0" text="Nombre de usuario" textFill="WHITE">
           <font>
             <Font size="18.0" fx:id="x1" />
@@ -22,18 +28,12 @@
         <TextField fx:id="fieldUser" layoutX="58.0" layoutY="148.0" prefHeight="22.0" prefWidth="427.0" />
         <PasswordField fx:id="fieldPassword" layoutX="58.0" layoutY="225.0" onKeyPressed="#leerEnter" prefWidth="427.0" />
         <Label id="labelContraseña" font="$x1" layoutX="58.0" layoutY="192.0" prefHeight="22.0" prefWidth="103.0" text="Contraseña" textFill="WHITE" />
-        <Label alignment="CENTER" depthTest="DISABLE" layoutX="135.0" layoutY="31.0" prefHeight="57.0" prefWidth="287.0" text="FitBox" textFill="#dfdfdf">
-          <font>
-            <Font size="35.0" />
-          </font>
-        </Label>
-        <Line endX="313.0" endY="-2.0" layoutX="165.0" layoutY="217.0" startX="-105.0" startY="0.0">
+        <Line endX="-1.5" endY="-0.0399932861328125" layoutX="165.0" layoutY="217.0" startX="-105.0" startY="0.0">
           <stroke>
             <Color blue="1.000" green="0.953" red="0.600" fx:id="x2" />
           </stroke>
         </Line>
-        <Line endX="318.5" endY="-4.5399932861328125" layoutX="159.0" layoutY="134.0" startX="-100.0" stroke="$x2" />
-        <Line endX="37.0" endY="-1.0" layoutX="305.0" layoutY="79.0" startX="-88.0" startY="-1.0" stroke="#99f3ff" />
+        <Line endX="58.5" endY="-1.0399932861328125" layoutX="159.0" layoutY="134.0" startX="-100.0" stroke="$x2" />
       </children>
     </AnchorPane>
     <AnchorPane prefHeight="130.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="282.0">
