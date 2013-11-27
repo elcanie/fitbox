@@ -11,7 +11,9 @@ article, footer, header, nav, section
 {
     display: block
 }
-
+span {
+    font-size: 18px;
+}
 body 
 { 
     font:13px/1.231 sans-serif; *font-size:small
@@ -66,8 +68,9 @@ h1, h2, h3, h4, h5, h6
     font-family:Rockwell, 'GeoSlb712MdBTMedium',"Courier Bold", Courier, Georgia, Times, "Times New Roman", serif
 }
 h1{
-    font-size: 38px;
-    color: #963;
+    font-size: 32px !important;
+    color: #007;
+    font-style: normal !important;
 }
 
 a, a:active, a:visited 
@@ -82,20 +85,242 @@ a:hover
     text-decoration:underline
 }
 
+/* RUBEN */
+#feedback { font-size: 1.4em; float: left;}
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; float: right; }
+#selectable li { margin: 3px; padding: 0.4em; font-size: 1em;}
+#rival { float: left;}
+#seleccionarRival {
+    width: 300px;
+}
+#selRival{
+    float: right;
+    visibility: hidden !important;
+    height: 1px !important;
+}
+#selUsuario{
+    visibility: hidden;
+    height: 1px !important;
+    float: right;
+}
+
+#fechaDesafio{
+    float: left;
+}
+
+
+#textoPr{
+    height: 500px;
+    width: 100%;
+}
+#form1{
+    height: 350px;
+    width: 700px;
+    margin-left: 100px;
+    float: left;
+    margin-top: 60px;
+    display: block;
+}
+#comboCategoria{
+    width: 150px;
+
+}
+#selRival{
+    width: 150px;
+    margin-left: 21px;
+
+}
+#feedback{
+    margin-top: 50px;
+    margin-bottom:40px;
+}
+#bCrear{
+    width: 100px;
+    margin-left: 25px;
+}
+input[type=text]{
+    margin-right: 5px;
+    border-radius: 4px;
+}
+#nombreEvento{
+    width: 150px;
+    margin-left: 20px;
+}
+#fechaInicio{
+
+    margin-left: 15px;
+    margin-right: 5px;
+}
+#fechaFin{
+    margin-left: 15px;
+}
+input[type=password]{
+
+    margin-top: 5px;
+}
+label[for=name]{
+    margin-left: 5px;
+}
+label[for=password]{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+select{
+    border-radius:4px;
+    margin-left: 5px;
+    border-style: inset;
+    border-width: 2px;
+
+}
+#comboCategoria{
+    margin-left: 63px;
+}
+input[type=date]{
+    border-radius: 4px;
+}
+input[id=fechaFin]{
+    margin-left: 5px;
+    margin-right:5px;
+}
+input[id=fechaInicio]{
+    margin-left: 5px;
+    margin-right:5px;
+}
+
+/** ::: ALEX   ::: */
+#botones{
+
+    margin-left: 250px;
+}
+#textodialogo{
+    margin-top: 8px;
+    margin-left: 20px;
+}
+.eventos{
+    height: 400px;
+    width: 100%;
+    float: left;
+    margin-top: 50px;
+    margin-left: 100px;
+    max-width: 800px;
+    max-height: 390px;
+}
+th{
+    padding-right: 50px;
+    height: 20px;
+    text-align: left;
+    min-width: 140px;
+}
+#eventos{
+    margin-bottom: 30px;
+    border: thin solid #000;
+    background-color: #EEEEFF;
+}
+thead{
+    border-bottom: thin solid #000;
+    background-color: #111144;
+    color: #EEE;
+
+}
+
+#izqEvento{
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+    width: 100px;}
+#derEvento{
+    float: right;
+    width: 300px
+}
+label[for=fechaE]{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+label[for=nameE]{
+    margin-left: 5px;
+}
+label[for=descripcionE]{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+input[id=descripcionE]{
+    margin-right: 5px;
+    border-radius: 4px;
+    width: 270px;
+    margin-top: 5px;
+}
+input[id=nombreE]{
+    margin-right: 5px;
+    border-radius: 4px;
+    width: 270px;
+}
+input[id=fechaE]{
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 270px;
+    text-align: right;
+}
+
+.ui-selecting { background: #2296c6;}
+.ui-selected {background: #1185B5; color: #00273D;}
+
+#contrata{
+    float: right;
+    margin-right: 15px;
+}
+
+/* ::: CAROUSEL :::*/
+
+#carousel{
+    width: 500px;
+    float: right;
+    margin-top: 42px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
 /* ::: HEADER :::  */
+.container{
+    width:996px;
+    display: block;
+    border-color: #933;
+    border-right: double 4px;
+    border-left: double 4px;
+    padding: 0 0 0 0; !important
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 962px !important;
+    max-width: 962px !important;
+}
+
+/* :::: LOGIN   :::::*/
+#dialoglogin{
+    visibility: none;
+}
+
+#izq{
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+    width: 170px;}
+#der{
+    float: right;
+    width: 200px
+
+}
+
+
 .portada{
     background:url(../imagenes/tramado.gif) repeat;
     width:100%; 
     height:200px;
-    border:thin solid #962; 
-    border-width:0 0 1px;
     margin:0;
     padding:0; 
     z-index:200;
 }
 .titulo{
-    margin-left: 200px;
-    width: 800px;
+    margin-left:30px;
+    width: 500px;
     height: 200px;
     float: left;
 }
@@ -103,32 +328,35 @@ a:hover
     width: 300px;
     height: 200px;
     float: right;
+    z-index: -10;
 }
 a.logo_principal
 {
     width: 250px;
     height: 200px;
-    background:transparent url(../imagenes/fito2.png) no-repeat 0 0;
+    background:transparent url(../imagenes/fito3.png) no-repeat 0 0;
     text-indent: -9999px;
-    padding-right: 200px;
     float: right;
 }
 
 header.principal 
 {
-    border:thin solid #962; 
+    border:thin solid #000; 
     border-width:0 0 1px;
     
 }
+
 .navegacion{
 
-    background: transparent url(../imagenes/triangulos.png) no-repeat 0 0;
+    background: transparent url(../imagenes/triangulos2.png) no-repeat 0 0;
     height: 42px;
     width: 100%;
+    border:thin solid #000; 
+    border-width:1px 0 0;
+    min-width: 954px;
 }
 nav.navegacion_principal 
 {
-    height:42px;
     float:left;
     font-family:Rockwell, 'GeoSlb712MdBTMedium',"Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
     font-size:20px;
@@ -138,14 +366,14 @@ nav.navegacion_principal
     font-weight:400; 
     border:thin solid #e9e9e9;
     border-width:0 0 0 0; /* de momento */ 
-    margin-left: 150px;
+    margin-left: 30px;
 }
 
 nav.right 
 {
     float:right; 
     border:none;
-    margin-right: 220px;
+    margin-right: 80px;
 }
 
 
@@ -171,7 +399,7 @@ nav.navegacion_principal ul li a
 
 nav.navegacion_principal ul li a:hover 
 {
-    color:#953;
+    color:#06A;
     text-decoration:none
 }
 
@@ -179,28 +407,34 @@ nav.navegacion_principal ul li a:hover
 
 .cuerpo 
 {
-    background-color: #CB8;
+    background-color: #E6E8FF;
     display:block;
     margin:0 auto; 
     clear:both; 
-    padding-top: 50px;
+    padding-top: 0px;
     height: 500px;
 }
 .titulocuerpo{
-    margin-left: 100px;
+    margin-left: 60px;
     height:60px;
-    width: 500px;
+    width: 300px;
     float: left;
+    padding-top:25px;
 }
 .tituloright{
+    padding-top:30px;
+    padding-right: 60px;
     height: 60px;
     float:right;
     width: 500px;
+    text-align: right;
 }
 .texto{
-    margin-left: 100px;
-    width: 400px;
+    margin-left: 35px;
+    padding-top:70px;
+    width: 350px;
     float: left;
+    text-align: justify;
 }
 .contenido{
     height:100%;
@@ -208,7 +442,9 @@ nav.navegacion_principal ul li a:hover
 }
 .adjunto{
     float: right;
-    margin-right: 100px;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left:10px;
 }
 .right 
 {
@@ -255,38 +491,63 @@ body
 /* ::: Footer ::: */
 footer
 {
-    background:#742;
+    background:#00273D;
     width:100%;
     height: 150px;
     clear:both;
     display:block;
-    text-shadow:none;
     color:#bcbcbc;
     margin:0 auto;
     padding:0;
 }
-
+.footer{
+    height:100%;
+    width:100%;
+}
+.redes{
+    height: 100%;
+    width: 400px;
+    float: left;
+}
+.enlaces{
+    width: 100%;
+    height: 50px;
+}
 .contacto_inferior{
-    width:300px;
+    width:250px;
     height:120px;
     float:right; 
-    background:transparent url(../imagenes/logo_contacto2.png) no-repeat 0 0; 
     cursor:pointer;
     border:none;
     line-height:0;
     font-size:0;
     text-decoration:none;
-    margin-top: 30px; !important
-    margin-right: 200px; !important
+    margin-top: 30px !important;
 }
 h3{
-    font-style:italic;
-    color: #FF8C00;
-    font-size: 20px;
+    font-style:normal;
+    color: #007;
+    font-size: 80px;
     line-height:30px;
 }
 h4{
     font-style: normal;
-    color: #244;
-    font-size: 22px;
+    color: #247;
+    font-size: 32px;
+}
+h5{
+    font-style: normal;
+    color: #09A;
+    }
+#ev{
+visibility:hidden;
+}
+#de{
+visibility:hidden;
+}
+#fo{
+visibility:hidden;
+}
+#re{
+visibility:hidden;
 }
