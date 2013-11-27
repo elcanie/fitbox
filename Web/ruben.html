@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset='utf-8'>
+		<link rel="stylesheet" type="text/css" href=".\bootstrap\css\bootstrap.css"/>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+			<script src=".\bootstrap\js\jquery.js"></script>
+			<script src=".\bootstrap\js\bootstrap.min.js"></script>
+			<script src=".\bootstrap\js\jquery-ui-1.10.3.custom.min.js"></script>
+		 <style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  </style>
+  <script>
+	var fechaActual=new Date();
+  	
+						
+								
+  </script>
+	</head>
+	<body>
+		<div id='contenido' class="container">
+			<header>
+				<hgroup>
+					<h1> Mi página web </h1>
+				
+				</hgroup>
+			
+			
+			
+				<nav>
+					<ul>
+						<li><button id='btnMiPerfil' >Mi Perfil</button> </li>
+						<li id='actividad' href='actividad.html'> Actividades </li>
+						<li> Estadísticas </li>
+					</ul>
+			
+				</nav>
+		
+			</header>
+			<!--<section>-->
+				<div id='textoPr'>
+					<!--<article>-->
+						<hgroup>
+							<h1> Crear evento</h1>
+						</hgroup>
+							<form id="form1" name="form1" method="POST" action="procesarDesafio.php">
+							Nombre evento: <input type="text" name="nombreEvento" id="nombreEvento" required/>
+							Actividad:<SELECT NAME="selCombo" SIZE=1 id="comboCategoria" required> 
+										<script>
+										var data2;
+										$(function(){
+								var d;
+								$.ajax({
+									type: "POST",
+									url: "other.php",
+									data: {consulta:"SELECT * from actividad "},
+									success:function(data){
+									d = JSON.parse(data);
+									for(var i=0;i<d.length;i++)
+									 $("#comboCategoria").append('<OPTION VALUE="'+d[i].id+'">'+ d[i].nombre +'</OPTION>');
+									}
+								});
+								
+								
+								
+								data2=function data2(valor){
+									$.ajax({
+									type: "POST",
+									url: "other.php",
+									data: {consulta:"SELECT * from usuario j WHERE j.id ="+valor},
+									success:function(data){
+									var d2 = JSON.parse(data);
+									$("#selectable").append("<li class='ui-widget-content' id='lista'> ID-"+ d2[0].id+"   "+d2[0].nombre+ '</li>');
+									
+									
+									}
+								});}
+								
+								});
+								
+								
+								
+								</script>
+										
+									</SELECT>
+							Selecciona rival:<input name="rival" style="visibility:hidden" id="selRival" value=""/> 
+
+							<p id="feedback">
+							<span>Has seleccionado: </span> <span id="select-result">ninguno</span>.
+							</p>
+							<ol id="selectable">
+								<script>
+								$(function(){
+								var d;
+								$.ajax({
+									type: "POST",
+									url: "other.php",
+									data: {consulta:"SELECT * from amigo j WHERE j.idJugador = 3"},
+									success:function(data){
+									d = JSON.parse(data);
+									for(var i=0;i<d.length;i++){
+										data2(d[i].idAmigo);
+										//console.log('aaa'+d2);
+										//
+									 }
+									}
+								});
+								$('#fechaInicio').val(fechaActual.getDate()+"/"+ (fechaActual.getMonth() +1)+"/"+ fechaActual.getFullYear());
+								});
+								
+							
+								
+								
+								</script>
+
+															 
+							</ol>
+							
+							Inicio:<input type="text" name="fecha_inicio" id="fechaInicio"  required/>
+							Fin:<input type="date" name="fecha_fin" id="fechaFin" required/>
+							<input type="submit" name="crear" id="bCrear" value="Crear">
+							</form>
+							
+							
+							
+					<!--</article>-->
+				</div>
+			<!--</section>-->
+		</div>
+		
+			<script>
+			  $(function() {
+				$( "#selectable" ).selectable({
+				  stop: function() {
+					var result = $( "#select-result" ).empty();
+					$( ".ui-selected", this ).each(function() {
+					  var index = $( "#selectable li" ).index( this );
+					  console.log($('#selectable option:selected').html());
+					  $('#selRival').attr("value",$('.ui-selected').html().substr(4,5).trim());
+					  result.append( $('.ui-selected').html().substr(5));
+					});
+				  }
+				});
+			  });
+  </script>
+
+	
+	</body>
+
+
+</html>

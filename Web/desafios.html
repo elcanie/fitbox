@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Desafíos - FitBox</title> 
+
+  <link rel="stylesheet" href="estilo/jquery-ui.css"/>
+  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="jqueryCookie/jquery.cookie.js"></script>
+ 
+
+ <script>
+ /*
+    //Ahora todas las ventanas tienen acceso a la cookie
+    //¿Como leerla?
+          var leerString = $.cookie("logueado");
+          var logueado = JSON.parse(leerString);
+          */
+ var logueado;
+  $(function() {
+  var leerString = $.cookie("logueado");
+  if(leerString!=null)
+       logueado = JSON.parse(leerString);
+if(logueado==null){
+$(location).attr('href','index.html');
+}
+  if(logueado!=null){
+$('#ev').css("visibility","visible");
+$('#de').css("visibility","visible");
+$('#re').css("visibility","visible");
+$('#login').css("visibility","hidden");
+$('#re').click(function(){
+$.removeCookie("logueado");
+$('#ev').css("visibility","hidden");
+$('#de').css("visibility","hidden");
+$('#re').css("visibility","hidden");
+$('#login').css("visibility","visible");
+$(location).attr('href','index.html');
+});
+}
+  /*update();*/
+    $( "#dialoglogin" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 450,
+      modal: true,
+      buttons: {
+"Loguear":function(){
+  if(logueado==null){
+    $.ajax({
+      type: "POST",
+      url: "other.php",
+      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
+      success:function(data){
+    console.log('Consulta OK');
+        d=JSON.parse(data);
+        f=d[0].password;
+        if(f==$("#password").val()){
+    //Si se loguea con exito
+    //Guardo la cookie
+          $.cookie("logueado",JSON.stringify(d[0]));
+
+          logueado = d[0];
+        }
+      }
+
+    });
+
+  }
+  
+  $( this ).dialog( "close" );
+}
+      }
+    });
+
+    $("#login").click(function() {
+      $( "#dialoglogin" ).dialog("open");
+      });
+    });
+
+$( "#mensaje-inscribirse" ).dialog({
+      modal: true,
+    autoOpen:false,
+    width:400,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+
+  </script>
+  <script>
+  var fechaActual=new Date();
+  </script>
+
+  <script>
+  var array=[];
+        $(function() {
+        $( "#selectable" ).selectable({
+          stop: function() {
+          var result = $( "#select-result" ).empty();
+          $( ".ui-selected", this ).each(function() {
+            var index = $( "#selectable li" ).index( this );
+            console.log($('#selectable option:selected').html());
+
+            result.append( $('.ui-selected').html());
+            console.log(index);
+            console.log(array);
+            console.log(array[index]);
+            $('#selRival').attr("value",array[index]);
+            
+            /*
+            result.append( $('.ui-selected').html());
+            $('#selRival').attr("value",$('.ui-selected').html().trim());
+*/
+          });
+          }
+        });
+        });
+  </script>
+    
+	  <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
+    <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
+</head>
+
+<body>
+
+  <div class="container">
+  <header class="principal">
+  <div class="portada">
+      <div class="titulo">
+          <img src="./imagenes/portada2.png">
+      </div>
+      <div class="logofito">
+        <a href="#" class="logo_principal">FitBox</a>
+      </div>
+  </div> 
+     <div class="navegacion"> 
+       <nav class="navegacion_principal" >
+          <ul>
+               <li><a href="index.html">Home</a></li>
+               <li id="ev"><a href="eventos.html">Eventos</a></li>
+               <li id="de"><b>Desafíos</b></li>
+               <li id="fo"><a href="#">Foro</a></li>
+          </ul>
+      </nav>
+      <nav class="navegacion_principal right">
+          <ul>
+              <li ><a id="login" href="#">Login</a></li>
+              <li>&bull;</li>
+              <li id="re"><a href="#">Logout</a></li>
+          </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="cuerpo">
+    <div class="titulocuerpo">
+      <h1>Crear Desafío</h1>
+    </div>
+
+      <div id="textoPr">
+          <article>
+              <form id="form1" name="form1" method="POST" action="procesarDesafio.php">
+              Nombre evento: <input type="text" name="nombreEvento" id="nombreEvento" required/><br></br>
+              Actividad:<SELECT NAME="selCombo" SIZE=1 id="comboCategoria" required>
+                <script>
+                    var data2;
+                    $(function(){
+                var d;
+                $.ajax({
+                  type: "POST",
+                  url: "other.php",
+                  data: {consulta:"SELECT * from actividad "},
+                  success:function(data){
+                  d = JSON.parse(data);
+                  for(var i=0;i<d.length;i++)
+                   $("#comboCategoria").append('<OPTION VALUE="'+d[i].id+'">'+ d[i].nombre +'</OPTION>');
+                  }
+                });
+                
+                
+                
+                data2=function data2(valor){
+                  $.ajax({
+                  type: "POST",
+                  url: "other.php",
+                  data: {consulta:"SELECT * from usuario j WHERE j.id ="+valor},
+                  success:function(data){
+                  var d2 = JSON.parse(data);
+                  $("#selectable").append("<li class='ui-widget-content' id='lista'>"+ d2[0].nombre+ '</li>');
+                  
+                  
+                  }
+                });}
+                
+                });
+                </script>
+                <script>
+                $('#bCrear').click(function(){
+                  $("#mensaje-inscribirse").dialog("open");
+                });
+                </script>
+                    
+                  </SELECT><br></br>
+              <div id="seleccionarRival">    
+              <p id="rival">Selecciona rival:</p>
+              <input type="text" name="rival" id="selRival" required/><input type="text" name="usuario" id="selUsuario"/>
+              <ol id="selectable">
+              </div>
+                <script>
+                $(function(){
+
+                $.ajax({
+                  type: "POST",
+                  url: "other.php",
+
+                  //data: {consulta:"SELECT * from amigo j WHERE j.idJugador = 3"},
+                  data: {consulta:"SELECT * from amigo j WHERE j.idJugador = "+logueado.id},
+                  success:function(data){
+                  d = JSON.parse(data);
+                  for(var i=0;i<d.length;i++){
+                    data2(d[i].idAmigo);
+                    //console.log('aaa'+d2);
+                    //
+                    array[i]=d[i].idAmigo;
+                    console.log(logueado.id);
+                    $('#selUsuario').attr("value",logueado.id);
+
+                   }
+                  }
+                });
+                $('#fechaInicio').val(fechaActual.getDate()+"/"+ (fechaActual.getMonth() +1)+"/"+ fechaActual.getFullYear());
+
+                });
+                
+              
+                
+                
+                </script>
+
+
+                               
+              </ol>
+
+              <p id="feedback">
+              <span>Has seleccionado: </span> <span id="select-result">ninguno</span>.
+              </p>
+              <div id="fechaDesafio">
+              Inicio:<input type="text" name="fecha_inicio" id="fechaInicio"  required/>
+              Fin:<input type="date" name="fecha_fin" id="fechaFin" required/>
+              <input type="submit" name="crear" id="bCrear" value="Crear"  class="btn btn-primary">
+            </div>
+              </form>              
+              
+          </article>
+        </div>
+  </section>
+
+  
+<footer>
+  <div class="footer">
+    <div class="redes">
+    </div>
+    <div class="contacto_inferior">
+      <img src="./imagenes/logo_contacto.png">
+      <h5>FitBox S.A. blablabla</h5>
+      <p/>
+      <h5>981291320</h4>
+    </div>
+    <div class="enlaces">
+    </div>
+  </div>
+
+</footer>
+</div>
+<div id="dialoglogin" title="Login">
+  <form>
+    <p id="textodialogo"> Introduce nombre de usuario y password para indentificarte </p>
+  <fieldset>
+    <div id="izq">
+      <label for="name">Nombre de Usuario</label>
+      <label for="password">Password</label>
+    </div>
+    <div id="der">
+      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+    
+      <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+    </div>
+    <div id="botlogin">
+
+    </div>
+    <div id="mensaje-desafio-correcto" title="Inscripción">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+    Ha creado el desafío correctamente.
+  </p>
+  
+</div>
+  </fieldset>
+  </form>
+
+</div>
+</body>
+
+</html>

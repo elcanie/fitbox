@@ -146,8 +146,12 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
             } else {
                 Jugador j = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{((Usuario)recurso.getObject("usuario")).getId()},Jugador.class).get(0);
                 System.out.println(j.getId()+"---"+jugador.getId());
-                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, j , jugador, actividad);
+                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, ((Usuario)recurso.getObject("usuario")).getId() , jugador.getId(), actividad.getId());
                 dal.insert(d);
+                MessageBox.show(ScreensFramework.stage,
+                    "Ha insertado un nuevo desafío",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } else {
             MessageBox.show(ScreensFramework.stage,

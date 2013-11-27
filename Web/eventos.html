@@ -1,0 +1,372 @@
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Eventos - FitBox</title> 
+
+  <link rel="stylesheet" href="estilo/jquery-ui.css"/>
+  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
+  <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="jquery-ui-1.10.3/themes/base/jquery.ui.all.css" />
+  <script src="jquery-ui-1.10.3/jquery.min.js"></script>
+  <script src="jquery-ui-1.10.3/jquery-ui.min.js"></script>
+  <script src="jqueryCookie/jquery.cookie.js"></script>
+  
+
+  <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
+
+  <script>
+    
+  </script>
+ 
+ <script>
+ /*
+    //Ahora todas las ventanas tienen acceso a la cookie
+    //¿Como leerla?
+          var leerString = $.cookie("logueado");
+          var logueado = JSON.parse(leerString);
+          */
+ var logueado;
+  $(function() {
+  var leerString = $.cookie("logueado");
+  if(leerString!=null)
+       logueado = JSON.parse(leerString);
+if(logueado==null){
+$(location).attr('href','index.html');
+}
+  if(logueado!=null){
+$('#ev').css("visibility","visible");
+$('#de').css("visibility","visible");
+$('#re').css("visibility","visible");
+$('#login').css("visibility","hidden");
+$('#re').click(function(){
+$.removeCookie("logueado");
+$('#ev').css("visibility","hidden");
+$('#de').css("visibility","hidden");
+$('#re').css("visibility","hidden");
+$('#login').css("visibility","visible");
+$(location).attr('href','index.html');
+});
+}
+  update();
+    $( "#dialoglogin" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 450,
+      modal: true,
+      buttons: {
+"Loguear":function(){
+  if(logueado==null){
+    $.ajax({
+      type: "POST",
+      url: "other.php",
+      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
+      success:function(data){
+    console.log('Consulta OK');
+        d=JSON.parse(data);
+        f=d[0].password;
+        if(f==$("#password").val()){
+    //Si se loguea con exito
+    //Guardo la cookie
+          $.cookie("logueado",JSON.stringify(d[0]));
+
+          logueado = d[0];   
+        }
+      }
+
+    });
+
+  }
+  
+  $( this ).dialog( "close" );
+}
+      }
+    });
+
+    $("#login").click(function() {
+      $( "#dialoglogin" ).dialog("open");
+      });
+    });
+
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+  <header class="principal">
+  <div class="portada">
+      <div class="titulo">
+          <img src="./imagenes/portada2.png">
+      </div>
+      <div class="logofito">
+        <a href="#" class="logo_principal">FitBox</a>
+      </div>
+  </div> 
+     <div class="navegacion"> 
+       <nav class="navegacion_principal" >
+          <ul>
+               <li><a href="index.html">Home</a></li>
+               <li id="ev"><b>Eventos</b></li>
+               <li id="de"><a href="desafios.html">Desafíos</a></li>
+               <li id="fo"><a href="#">Foro</a></li>
+          </ul>
+      </nav>
+      <nav class="navegacion_principal right">
+          <ul>
+              <li ><a id="login" href="#">Login</a></li>
+              <li>&bull;</li>
+              <li id="re"><a href="#">Logout</a></li>
+          </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="cuerpo">
+    <div class="titulocuerpo">
+      <h1>Eventos</h1>
+    </div>
+    <div class="eventos">
+
+      <table id="eventos">
+
+<thead><tr><th>Nombre</th><th>Descripción</th><th>Fecha</th></tr></thead> 
+<tbody id="tt">
+</tbody>
+</table>
+
+<div id="botones">
+<table id="botonesT" border="0">
+<tr>
+<td>
+<form action="" >
+<input id="inscribirseB" type="button" value="Inscribirse" class="btn btn-primary">
+</form>
+</td>
+<td>
+<form action="">
+<input id="crearB" type="button" value="Crear evento" class="btn btn-primary">
+</form>
+</td>
+</tr>
+</table>
+</div>
+
+<div id="dialogcrearevento" title="Crear evento">
+  <p id="textodialogo"> Introduce los datos a continuación:</p>
+  <form>
+  <fieldset>
+
+    <div id="izqEvento">
+    <label for="nameE">Nombre:</label>
+    <label for="descripcionE">Descripcion:</label>
+    <label for="fechaE">Fecha:</label>
+    </div>
+    <div id="derEvento">
+    <input type="text" name="nombre" id="nombreE" value="" required/>
+    <input type="text" name="descripcion" id="descripcionE" value="" required/>
+    <input type="date" name="fecha" id="fechaE" value="" required/>
+    </div>
+  </fieldset>
+  </form>
+</div>
+
+<div id="mensaje-crear" title="Creación de evento">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+    Ha creado un evento con éxito.
+  </p>
+<div id="mensaje-crear-fallido" title="Creación de evento">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+    No se ha podido crear el evento, rellene todos los campos.
+  </p>
+</div>
+
+<div id="mensaje-inscribirse" title="Inscripción">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+    Ha inscrito a un evento con éxito.
+  </p>
+  
+</div>
+
+
+ <script>
+ //INSCRIBIRSE EVENTO
+  var f;
+ $(function() {
+
+ 
+   $( "#mensaje-inscribirse" ).dialog({
+      modal: true,
+    autoOpen:false,
+    width:400,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  
+  var ide;
+   $('#eventos').selectable({
+  filter:'tbody tr',
+  stop: function(event, ui){
+     ide =  $( this ).find( ".ui-selected" ).map(function() {
+      return this.id;
+    }).get().join(", ");
+  }
+});
+  $("#inscribirseB").click(function(){
+  if(ide!=null){
+    $.ajax({
+    type: "POST",
+    url: "other.php",
+    data: {consulta:"SELECT * FROM eventos where id="+ide+";"},
+    success:function(data){
+  d = JSON.parse(data);
+  f=d[0].fecha;
+  console.log(f);
+    $.ajax({
+    type: "POST",
+    url: "other.php",
+  //JUGADOR 
+    //data: {consulta:"INSERT INTO calendario (fecha, idEvento, idJugador) VALUES ('"+f+"','"+ide+"','"+logueado.id"');"}
+    //data: {consulta:"INSERT INTO calendario (fecha, idEvento, idJugador) VALUES ('"+f+"',"+ide+",10);"},
+    success:function(data){
+  $("#mensaje-inscribirse").dialog("open");
+  ide='';
+   console.log("inscrito "+logueado+" en "+ide);
+  }
+    });
+  } 
+    });}
+
+  });
+  
+  });
+  </script>
+
+<script>
+//CARGAR EVENTOS EN LISTA
+var d;
+var update=  function(){
+$.ajax({
+    type: "POST",
+    url: "other.php",
+    data: {consulta:"SELECT * FROM eventos"},
+    success:function(data){
+  d = JSON.parse(data);
+  for(var i=0;i<d.length;i++)
+   $("#tt").append('<tr id='+d[i].id+'><td>'+d[i].nombre+'</td> <td>'+d[i].descripcion+'</td> <td>'+d[i].fecha+'</td></tr>')    
+  }
+});
+}
+
+</script>
+
+ <script>
+ //CREAR EVENTO
+  $(function() {
+ 
+    $( "#mensaje-crear" ).dialog({
+      modal: true,
+    autoOpen:false,
+    width:400,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  
+  $( "#mensaje-crear-fallido" ).dialog({
+      modal: true,
+    autoOpen:false,
+    width:400,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  
+    $("#dialogcrearevento").dialog({autoOpen:false,width:500,modal:true, 
+    buttons: {
+        "Aceptar": function() {
+    if($("#nombreE").val()!='' && $("#descripcionE").val()!='' && $("#fechaE").val()!='' ){
+$.ajax({
+    type: "POST",
+    url: "other.php",
+    data: {consulta:"INSERT INTO eventos(nombre, descripcion, fecha) VALUES ('"+$("#nombreE").val()+"','"+$("#descripcionE").val()+"','"+$("#fechaE").val()+"');"},
+    success:function(data){
+  //selectable
+  $("#tt").html('');
+  update();
+  $("#mensaje-crear").dialog("open");
+    }
+  
+});
+} else{ $("#mensaje-crear-fallido").dialog("open");}  
+      $( this ).dialog("close");
+        },
+        "Cancelar": function() {
+          $( this ).dialog( "close" );
+        }
+      }}
+  );
+   $('#crearB').click(function(){$("#dialogcrearevento").dialog("open")});
+  });
+  </script>
+      </div>
+
+  </section>
+
+  
+<footer>
+  <div class="footer">
+    <div class="redes">
+    </div>
+    <div class="contacto_inferior">
+      <img src="./imagenes/logo_contacto.png">
+      <h5>FitBox S.A. blablabla</h5>
+      <p/>
+      <h5>981291320</h4>
+    </div>
+    <div class="enlaces">
+    </div>
+  </div>
+
+</footer>
+</div>
+
+<div id="dialoglogin" title="Login">
+  <p id="textodialogo"> Introduce nombre de usuario y password para indentificarte </p>
+  <form>
+  <fieldset>
+    <div id="izq">
+      <label for="name">Nombre de Usuario</label>
+      <label for="password">Password</label>
+    </div>
+    <div id="der">
+      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+    
+      <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+    </div>
+    <div id="botlogin">
+
+    </div>
+  </fieldset>
+  </form>
+
+</div>
+</body>
+
+</html>
