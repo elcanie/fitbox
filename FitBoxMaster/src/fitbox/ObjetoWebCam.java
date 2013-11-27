@@ -36,6 +36,10 @@ public class ObjetoWebCam implements Runnable {
     public String getRuta() {
         return ruta;
     }
+    
+    public String getNombreVideo(){
+        return nombreVideo;
+    }
 
     public ObjetoWebCam(String nombre) {
         this.nombreVideo = nombre;
@@ -57,12 +61,12 @@ public class ObjetoWebCam implements Runnable {
 
             // Grabar en video
 
-            File archivo = new File(nombreVideo + ".wmv");
-            ruta = archivo.getAbsolutePath();
+            File archivo = new File(nombreVideo + ".mp4");
+            ruta = archivo.getAbsolutePath();               
             IMediaWriter writer = ToolFactory.makeWriter(archivo.getName());
             Dimension size = webcam.getViewSize();
 
-            writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_WMV2, size.width, size.height);
+            writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_MPEG4, size.width, size.height);
             long start = System.currentTimeMillis();
 
 
