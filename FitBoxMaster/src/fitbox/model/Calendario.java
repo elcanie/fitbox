@@ -35,7 +35,7 @@ public class Calendario {
      * Atributos
      */
     public static final int NUMERO_ATRIBUTOS = 6;
-    private int id;
+    private Integer id;
     private DateTime fecha;
     private Integer idActividad;
     private Integer estadoActividad;
@@ -46,10 +46,10 @@ public class Calendario {
 
     
     public Calendario(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (Integer) array.get(2), (Integer) array.get(3),(Integer) array.get(4), (Integer) array.get(5));
+        this((Integer) array.get(0), (String) array.get(1), (Integer) array.get(2), (Integer) array.get(3),(Integer) array.get(4), (Integer) array.get(5));
     }
 
-    public Calendario(int id, String fechaStr, Integer idActividad,Integer evento, Integer estadoActividad, Integer idJugador) {
+    public Calendario(Integer id, String fechaStr, Integer idActividad,Integer evento, Integer estadoActividad, Integer idJugador) {
         setValores(id,fechaStr,idActividad,estadoActividad,idJugador);
         setId(id);
         setIdActividad(idActividad);
@@ -65,7 +65,7 @@ public class Calendario {
     }
 
 
-    private void setValores(int id, String fecha, Integer idActividad, Integer estadoActividad, Integer idJugador) {
+    private void setValores(Integer id, String fecha, Integer idActividad, Integer estadoActividad, Integer idJugador) {
         valores[0] = id ;
         valores[1] = fecha;
         valores[2] = idActividad;
@@ -81,14 +81,14 @@ public class Calendario {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -109,7 +109,7 @@ public class Calendario {
     /**
      * @return the idActividad
      */
-    public int getIdActividad() {
+    public Integer getIdActividad() {
         return idActividad;
     }
 
@@ -157,12 +157,13 @@ public class Calendario {
     
     @Override
     public String toString(){
-        if(getIdActividad()<9999) return "Actividades";
+        if(getIdActividad()!= null && getIdActividad()<9999) return "Actividades";
+        if(getEvento()!=null) return "Evento";
     return getFecha().getDayOfMonth()+"\n Nada";
     }
     
     public String toString2(){
-       return (getFecha().getHourOfDay()+" "+getIdActividad());
+       return "ok";//(getFecha().getHourOfDay()+" "+getIdActividad());
     }
 
     /**

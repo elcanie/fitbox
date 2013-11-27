@@ -70,8 +70,10 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
     public void updateVista(int _año, int _mes, int _dia) {
         now = new LocalDate(_año, _mes, _dia);
-        System.out.println("Hoy es:"+_año+"-"+_mes+"-"+_dia);
+        //System.out.println("Hoy es:"+_año+"-"+_mes+"-"+_dia);
         List<Calendario> calendarios = Dal.getDal().find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{now.getYear() + "-" + now.getMonthOfYear() + "-%", user.getId()}, Calendario.class);
+        List<Calendario> calendarios2 = Dal.getDal().find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{now.getYear() + "/" + now.getMonthOfYear() + "/%", user.getId()}, Calendario.class);
+        calendarios.addAll(calendarios2);
         LinkedList<Calendario> semana1 = new LinkedList<Calendario>();
         LinkedList<Calendario> semana2 = new LinkedList<Calendario>();
         LinkedList<Calendario> semana3 = new LinkedList<Calendario>();
@@ -96,7 +98,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                     for (Calendario cal : calendarios) {
 
                         if (flag && cal.getFecha().getDayOfMonth() == ((i * 7) + y)) {
-                            
+                           // System.out.println(cal.getEvento()+"Evento");
                             lista.get(i).add(cal);
                             flag = false;
                             break;
@@ -120,9 +122,11 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(((Calendario) item).toString());
-                            if (((Calendario) item).getIdActividad() >= 99999) {
-                                this.setStyle("-fx-background-color: yellow");
-                            }
+                            if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
+                                //if (((Calendario) item).getIdActividad()!=null) {
+                                    this.setStyle("-fx-background-color: yellow");
+                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
+                                else this.setStyle("-fx-background-color: grey");
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
@@ -145,9 +149,11 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
-                            if (((Calendario) item).getIdActividad() >= 99999) {
-                                this.setStyle("-fx-background-color: yellow");
-                            }
+if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
+                                //if (((Calendario) item).getIdActividad()!=null) {
+                                    this.setStyle("-fx-background-color: yellow");
+                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
+                                else this.setStyle("-fx-background-color: grey");
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
@@ -170,9 +176,11 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
-                            if (((Calendario) item).getIdActividad() >= 99999) {
-                                this.setStyle("-fx-background-color: yellow");
-                            }
+                            if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
+                                //if (((Calendario) item).getIdActividad()!=null) {
+                                    this.setStyle("-fx-background-color: yellow");
+                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
+                                else this.setStyle("-fx-background-color: grey");
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
@@ -195,9 +203,13 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
-                            if (((Calendario) item).getIdActividad() >= 99999) {
-                                this.setStyle("-fx-background-color: yellow");
-                            }
+                             if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
+                                //if (((Calendario) item).getIdActividad()!=null) {
+                                if(!this.getStyle().contains("green") || !this.getStyle().contains("blue"))
+                                    this.setStyle("-fx-background-color: yellow");
+                                else   this.setStyle("-fx-background-color: blue");
+                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
+                                else this.setStyle("-fx-background-color: grey");
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
@@ -219,10 +231,16 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                     public void updateItem(Object item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
+                            
                             text = new Text(item.toString());
-                            if (((Calendario) item).getIdActividad() >= 99999) {
-                                this.setStyle("-fx-background-color: yellow");
-                            }
+                            System.out.println("Estilo->"+this.getStyle());
+                            if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
+                                //if (((Calendario) item).getIdActividad()!=null) {
+                                if(!this.getStyle().contains("green") || !this.getStyle().contains("blue"))
+                                    this.setStyle("-fx-background-color: yellow");
+                                else   this.setStyle("-fx-background-color: blue");
+                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
+                                else this.setStyle("-fx-background-color: grey");
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
