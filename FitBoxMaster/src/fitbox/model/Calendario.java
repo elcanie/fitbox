@@ -157,8 +157,8 @@ public class Calendario {
     
     @Override
     public String toString(){
-        if(getIdActividad()!= null && getIdActividad()<9999) return "Actividades";
-        if(getEvento()!=null) return "Evento";
+        if(getIdActividad()!= null && getIdActividad()==99999) return "Trabajo";
+        if(getIdActividad()!= null && getIdActividad()==99990) return "Nada";
     return getFecha().getDayOfMonth()+"\n Nada";
     }
     

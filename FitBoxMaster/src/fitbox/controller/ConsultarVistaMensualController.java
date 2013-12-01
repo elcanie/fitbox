@@ -99,13 +99,12 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
 
                         if (flag && cal.getFecha().getDayOfMonth() == ((i * 7) + y)) {
                            // System.out.println(cal.getEvento()+"Evento");
-                            lista.get(i).add(cal);
+                            lista.get(i).add(new Calendario(0, "2013/"+dateTime.getMonthOfYear()+"/" + (i * 7 + y) + " 00:00:00", 99999,null,0,  user.getId()));
                             flag = false;
-                            break;
                         }
                     }
                     if (flag) {
-                        lista.get(i).add(new Calendario(0, "2013/"+dateTime.getMonthOfYear()+"/" + (i * 7 + y) + " 00:00:00", 99999,null,0,  user.getId()));
+                        lista.get(i).add(new Calendario(0, "2013/"+dateTime.getMonthOfYear()+"/" + (i * 7 + y) + " 00:00:00", 99990,null,0,  user.getId()));
                     }
                 }
             }
@@ -123,10 +122,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         if (!isEmpty()) {
                             text = new Text(((Calendario) item).toString());
                             if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
-                                //if (((Calendario) item).getIdActividad()!=null) {
-                                    this.setStyle("-fx-background-color: yellow");
-                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
-                                else this.setStyle("-fx-background-color: grey");
+                                }
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
@@ -149,11 +145,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
-if(((Calendario) item).getIdActividad()!=null && ((Calendario) item).getIdActividad()<= 9999){
-                                //if (((Calendario) item).getIdActividad()!=null) {
-                                    this.setStyle("-fx-background-color: yellow");
-                                }else if(((Calendario) item).getEvento()!=null) this.setStyle("-fx-background-color: green");
-                                else this.setStyle("-fx-background-color: grey");
+
                             text.setWrappingWidth(semana1List.getPrefWidth() / 7 - 8);
                             setGraphic(text);
                         }
