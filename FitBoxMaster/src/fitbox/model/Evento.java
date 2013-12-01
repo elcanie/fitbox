@@ -21,7 +21,7 @@ public class Evento {
 
     public static final String TODOS_EVENTOS_USUARIOINICIADO = "SELECT e.* FROM eventos e, calendario c WHERE e.id = c.idEvento AND c.idJugador = ?";
     public static final String TODOS_EVENTOS = "select * from `eventos`";
-
+    public static final String ENCONTRAR_EVENTOporID = "select * from eventos where id = ? ";
     /*
      * Atributos
      */

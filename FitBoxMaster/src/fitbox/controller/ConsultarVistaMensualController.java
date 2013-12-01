@@ -67,7 +67,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         LocalDate hoy = new LocalDate();
         updateVista(hoy.getYear(), hoy.getMonthOfYear(), hoy.getDayOfMonth());
     }
-
+DateTime dateTime = new DateTime();
     public void updateVista(int _año, int _mes, int _dia) {
         now = new LocalDate(_año, _mes, _dia);
         //System.out.println("Hoy es:"+_año+"-"+_mes+"-"+_dia);
@@ -86,7 +86,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         lista.add(semana3);
         lista.add(semana4);
         lista.add(semana5);
-        DateTime dateTime = new DateTime();
+        
 
         DateTime lastDate = dateTime.dayOfMonth().withMaximumValue();
         int diasMes = lastDate.dayOfMonth().withMaximumValue().getDayOfMonth();
@@ -258,12 +258,14 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
     @FXML
     public void anteriorMes(ActionEvent a) {
         now = now.minusMonths(1);
+        dateTime = dateTime.minusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 
     @FXML
     public void siguienteMes(ActionEvent a) {
         now = now.plusMonths(1);
+        dateTime = dateTime.plusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
     }
 
