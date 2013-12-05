@@ -23,9 +23,11 @@ import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
+import fitbox.model.Video;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -125,8 +127,8 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     YouTubeMediaGroup mg = newEntry.getOrCreateMediaGroup();
 
                     mg.addCategory(new MediaCategory(YouTubeNamespace.CATEGORY_SCHEME, "Sports"));
-                    mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME, j.getId()+""));
-                    mg.setPrivate(true);
+                    mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME,j.getId()+""));
+                    mg.setPrivate(false);
                     mg.setTitle(new MediaTitle());
                     mg.getTitle().setPlainTextContent(webcam.getNombreVideo());
                     mg.setKeywords(new MediaKeywords());
@@ -139,6 +141,13 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     String uploadUrl = "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
                     try {
                         VideoEntry createdEntry = service.insert(new URL(uploadUrl), newEntry);
+                        YouTubeMediaGroup mediaGroup2 = createdEntry.getMediaGroup();
+                        String url = mediaGroup2.getVideoId();
+                     
+                        dal = Dal.getDal();
+                        Video videoSubido = new Video(0, nombreVideo, url, j.getId());
+                        dal.insert(videoSubido);
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ServiceException ex) {

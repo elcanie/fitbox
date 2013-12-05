@@ -16,35 +16,44 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Video {
     public static final String VIDEObyUSUARIO = "select * from `video` where idJugador=?";
+    public static final String INSERT_VIDEO = " INSERT INTO  `video` (`nombre`,`url`,`idJugador`) VALUES ( ";
 
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 3;
+    public static final int NUMERO_ATRIBUTOS = 4;
     private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre = new SimpleStringProperty("");
     private final SimpleStringProperty URL = new SimpleStringProperty("");
-   
+    private final SimpleIntegerProperty idJugador = new SimpleIntegerProperty(0);
    
     private String valores[] = new String[NUMERO_ATRIBUTOS];
 
+    public Video(int id, String nombre, String url, int idJugador){
+        setValores(id, nombre,url,idJugador);
+        setId(id);
+        setNombre(nombre);
+        setURL(url);
+        setIdJugador(idJugador);
+    }
+        
     public Video() {
-        this(new Integer(0), "", "");
+        this(new Integer(0), "", "",new Integer(0));
 
     }
 
     public Video(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2),(int)array.get(3));
     }
 
-    public Video(int id, String nombre, String URL){
+   /* public Video(int id, String nombre, String URL){
         setValores(id, nombre, URL);
         setId(id);
         setNombre(nombre);
         setURL(URL);
         
     }
-
+*/
     public String getURL() {
         return URL.get();
     }
@@ -69,25 +78,32 @@ public class Video {
         nombre.set(fName);
     }
 
-
     public void setURL(String fName) {
         URL.set(fName);
     }
-   
-
-   
-
+    public void setIdJugador(int id){
+        idJugador.set(id);
+    }
+    public int IdJugador(int id){
+        return idJugador.get();
+    }
+    
     @Override
     public String toString() {
         return nombre.get();
     }
 
-    private void setValores(int id, String nombre, String URL) {
+    /*private void setValores(int id, String nombre, String URL) {
         valores[0] = id + "";
         valores[1] = nombre + "";
         valores[2] = URL + "";
-        
-
+        valores[3] = "";
+    }*/
+    private void setValores(int id, String nombre, String URL, int idJugador) {
+        valores[0] = id + "";
+        valores[1] = nombre + "";
+        valores[2] = URL + "";
+        valores[3] = idJugador+"";
     }
 
     public String[] getValores() {
