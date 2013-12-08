@@ -94,20 +94,20 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
+        //myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
+        //myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+       // myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
 //        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
 //        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
 
@@ -117,14 +117,14 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
+        //myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
 
 
     }
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException, SQLException {
-          myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+         //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         actualizar();
     }
 
@@ -148,17 +148,27 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     @FXML
     public void abrirDesafios(MouseEvent event) throws IOException {
          myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
+         //myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
     }
 
     @FXML
     public void abrirClasificacion(ActionEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+         //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML
     public void abrirAjustes(MouseEvent event) throws IOException {
+
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
+   //     myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+        //        Parent root = FXMLLoader.load(getClass().getResource("PantallaPrincipal_2.fxml"));
+//        
+//        Scene scene = new Scene(root);
+//        
+//        Stage stage = new Stage();
+//                stage.setScene(scene);
+//        stage.show();
         //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
     }
 
@@ -175,6 +185,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         this.user = (Usuario) recurso.getObject("usuario");
         
         inicioReloj();
+       
         inicioGaleria();
         cargarNoticias();
         cargarEventos();
@@ -185,11 +196,11 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
             Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        ScreensFramework.stage.setWidth(921);
-        ScreensFramework.stage.setHeight(590);
-        ScreensFramework.stage.setResizable(false);
+        ScreensFramework.stage.setWidth(933);
+        ScreensFramework.stage.setHeight(579);
+        ScreensFramework.stage.setResizable(true);
         ScreensFramework.stage.centerOnScreen();
-
+        ScreensFramework.stage.setTitle("Pantalla Principal - ("+user.getNombre()+")");
 
 
     }
@@ -313,9 +324,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         image1.setFitWidth(586);
         image2.setFitHeight(500);
         image2.setFitWidth(586);
+        
 
         panelGaleria.getChildren().addAll(image, image1, image2);
-
+        panelGaleria.toBack();
         fadeTransition = FadeTransitionBuilder.create()
                 .duration(Duration.seconds(5))
                 .node(image2)
@@ -347,11 +359,11 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
                 .autoReverse(true)
                 .build();
         sequentialTransition.play();
-    }
+        }
 
     @FXML
     private void goToMain(ActionEvent event) {
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
     @FXML
     private void actualizar() throws SQLException{
@@ -368,6 +380,12 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+     @FXML
+     private void redimensionar(){
+         System.out.println("VENTANA REDIMENSIONADA!!");
+         
+     }
     
 }
 

@@ -9,18 +9,25 @@ import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import jfx.messagebox.MessageBox;
 
         
@@ -44,6 +51,7 @@ public class LoginController implements Initializable,ControlledScreen {
        //TODO
         ScreensFramework.stage.setWidth(543);
         ScreensFramework.stage.setHeight(438);
+        ScreensFramework.stage.setResizable(false);
     }    
     @FXML private void registrar(ActionEvent event){
                 myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, null);
@@ -77,8 +85,24 @@ public class LoginController implements Initializable,ControlledScreen {
         if(user!=null){
             Recurso recurso=new Recurso();
             recurso.putObject("usuario", user);
-            myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,ScreensFramework.PANTALLA_PRINCIPAL_FXML,recurso );
-                myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+           
+           
+//                    Parent root = null;
+//                    try {
+//                        recurso.putObject("controller", myController);
+//                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/PantallaPrincipal_2.fxml"), recurso);
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    
+//                    Scene scene = new Scene(root);
+//                    ScreensFramework.stage.setScene(scene);
+                    
+                    //s.show();
+            
+            
+                myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,ScreensFramework.PANTALLA_PRINCIPAL_FXML,recurso );
+               // myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
             
             }
         else{

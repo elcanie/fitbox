@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 public class ScreensFramework extends Application {
 
     public static final String PANTALLA_PRINCIPAL = "PantallaPrincipal";
-    public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml";
+    //public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml";
+    public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal_2.fxml";
     public static final String PANTALLA_VISTAMENSUAL = "VistaMensual";
     public static final String PANTALLA_VISTAMENSUAL_FXML = "/fitbox/view/ConsultarVistaMensual.fxml";
     public static final String PANTALLA_VISTADIARIA = "VistaDiaria";

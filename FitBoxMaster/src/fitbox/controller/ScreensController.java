@@ -6,6 +6,7 @@ package fitbox.controller;
 
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
+import fitbox.view.ScreensFramework;
 import java.util.HashMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -16,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,7 +30,8 @@ public class ScreensController extends StackPane {
 
     private HashMap<String, Node> screens = new HashMap<>();
     private Stage stage;
-
+   
+    
     public ScreensController(Stage stage) {
         this.stage = stage;
     }
@@ -44,6 +47,8 @@ public class ScreensController extends StackPane {
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             myScreenControler.setScreenParent(this);
             addScreen(name, loadScreen);
+            Scene escene = new Scene(loadScreen);
+            ScreensFramework.stage.setScene(escene);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -70,6 +75,7 @@ public class ScreensController extends StackPane {
                         getChildren().remove(0);
                         //add new screen 
                         getChildren().add(0, screens.get(name));
+                       
                         Timeline fadeIn = new Timeline(
                                 new KeyFrame(Duration.ZERO,
                                 new KeyValue(opacity, 0.0)),
@@ -90,12 +96,15 @@ public class ScreensController extends StackPane {
                         new KeyValue(opacity, 1.0)));
                 fadeIn.play();
             }
+          
             return true;
         } else {
             System.out.println("screen hasn't been loaded!\n");
             return false;
         }
-    }
+        
+        
+      }
 
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
