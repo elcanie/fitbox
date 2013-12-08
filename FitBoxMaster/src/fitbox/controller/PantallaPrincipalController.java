@@ -6,6 +6,7 @@
 package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
@@ -197,8 +198,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     public void cargarEventos() {
              
 
-         Dal dal = Dal.getDal();
-         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{user.getId()},Evento.class);
+         
+         Collection<Evento> datosE = BaseDeDatos.getBD().getEventosUsuarioIniciado(user);
          //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
          Iterator<Evento> itdatosE = datosE.iterator();
          Collection<String> eventosString = new ArrayList();
@@ -216,9 +217,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
     
     private void cargarNoticias() {
-         
-         Dal dal = Dal.getDal();
-         Collection<Noticia> datos = dal.find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
+
+         Collection<Noticia> datos = BaseDeDatos.getBD().getNoticias();
          Iterator<Noticia> itdatos = datos.iterator();
          Collection<String> noticiasString = new ArrayList();
          while(itdatos.hasNext()){
@@ -231,16 +231,16 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void cargarResumen() {
-        Dal dal = Dal.getDal();
-        List<Jugador> listjugador = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{user.getId()}, Jugador.class);
-        Iterator<Jugador> itjugador = listjugador.iterator();
-        Jugador jugador = null;
-        if(itjugador.hasNext()) jugador = itjugador.next();
+
+        Jugador jugador = BaseDeDatos.getBD().getJugador(user.getId());
+//        Iterator<Jugador> itjugador = listjugador.iterator();
+//        Jugador jugador = null;
+//        if(itjugador.hasNext()) jugador = itjugador.next();
                 
         //Hoy tienes X actividades para realizar y has realizado Y.
         LocalDate f = new LocalDate();
         String a = f.getYear()+"/"+f.getMonthOfYear()+"/"+f.getDayOfMonth()+"%";
-        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{a,user.getId()}, Calendario.class);
+        List<Calendario> calendarios = BaseDeDatos.getBD().getCALENDARIOSPORAÑODIAYJUGADOR(a, user.getId());
         Iterator<Calendario> it = calendarios.iterator();
         Calendario cal = null;
         System.out.println("talla: "+calendarios.size());
@@ -272,9 +272,9 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void cargarTablaActividades() throws SQLException {
-        Dal dal = Dal.getDal(); 
+//        Dal dal = Dal.getDal(); 
         
-        List<TablaActividad> actividades = dal.find(TablaActividad.Actividades_Usuario, new Object[]{user.getId()}, TablaActividad.class);
+        List<TablaActividad> actividades = BaseDeDatos.getBD().getTablaActividadesUsuario(user.getId());
        
          ObservableList<TablaActividad> datos=FXCollections.observableArrayList(actividades);
          columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("fecha"));         

@@ -179,11 +179,12 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
     public void mouselClicked(MouseEvent t) {
 
         if (t.getClickCount() == 2) {
+            int answer =1;
             System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             Calendario cal = (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex());
             List<Actividad> acts = Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{cal.getIdActividad()}, Actividad.class);
             Actividad act = (acts.size() > 0) ? acts.get(0) : null;
-
+            if(act!=null){
             recurso.putObject("actividad", act);
             List<String> buttonLabels = new ArrayList<>(2);
             buttonLabels.add("Editar Actividad");
@@ -193,8 +194,10 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
             dialog.setTitleText("Elija una opcion");
             //dialog.setMessage("This is an example of an QUESTION dialog box, created using DialogFX. This also demonstrates the automatic wrapping of text in DialogFX. Would you like to continue?");
             dialog.addButtons(buttonLabels, 0, 1);
-            int answer = dialog.showDialog();
-
+            answer = dialog.showDialog();
+            }else{
+            
+            }
             if (answer == 0) {
                 myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
                 myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);

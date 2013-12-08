@@ -12,10 +12,59 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="fondo" prefHeight="560.0" prefWidth="920.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
+<AnchorPane id="fondo" prefHeight="560.0" prefWidth="920.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
   <children>
     <TabPane prefHeight="485.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
       <tabs>
+        <Tab onSelectionChanged="#tabCambia" text="Detalles desafio">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="tabla" layoutX="97.0" layoutY="51.0" prefHeight="304.0" prefWidth="559.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Nombre Desafio" fx:id="nombreColumn" />
+                    <TableColumn prefWidth="75.0" text="Actividad" fx:id="actividadColumn" />
+                    <TableColumn prefWidth="75.0" text="Fecha Limite" fx:id="fechaLimiteColumn" />
+                    <TableColumn prefWidth="75.0" text="Rival" fx:id="rivalColumn" />
+                    <TableColumn prefWidth="75.0" text="Tus puntos" fx:id="tusPuntosColumn" />
+                    <TableColumn prefWidth="75.0" text="Puntos Rival" fx:id="puntosRivalColumn" />
+                    <TableColumn prefWidth="75.0" text="Estado" fx:id="estadoColumn" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab id="" text="Aceptar desafio">
+          <content>
+            <AnchorPane id="contentAceptar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <VBox id="VBox" alignment="CENTER" prefHeight="510.0" prefWidth="889.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Label prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE">
+                      <font>
+                        <Font name="Broadway" size="22.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <ListView fx:id="listaDesafios" prefHeight="560.0" prefWidth="920.0">
+                      <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </ListView>
+                    <Button fx:id="btnAceptar" mnemonicParsing="false" onMouseClicked="#aceptarDesafio" text="Aceptar desafio">
+                      <VBox.margin>
+                        <Insets bottom="10.0" />
+                      </VBox.margin>
+                    </Button>
+                  </children>
+                </VBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
         <Tab text="Crear desafio">
           <content>
             <AnchorPane id="contentCrear" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -79,36 +128,6 @@
                       <effect>
                         <DropShadow color="#001200" height="1.0" radius="0.0" width="1.0" />
                       </effect>
-                    </Button>
-                  </children>
-                </VBox>
-              </children>
-            </AnchorPane>
-          </content>
-        </Tab>
-        <Tab id="" text="Aceptar desafio">
-          <content>
-            <AnchorPane id="contentAceptar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <VBox id="VBox" alignment="CENTER" prefHeight="510.0" prefWidth="889.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <children>
-                    <Label prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE">
-                      <font>
-                        <Font name="Broadway" size="22.0" />
-                      </font>
-                      <VBox.margin>
-                        <Insets top="10.0" />
-                      </VBox.margin>
-                    </Label>
-                    <ListView fx:id="listaDesafios" prefHeight="560.0" prefWidth="920.0">
-                      <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                      </VBox.margin>
-                    </ListView>
-                    <Button fx:id="btnAceptar" mnemonicParsing="false" onMouseClicked="#aceptarDesafio" text="Aceptar desafio">
-                      <VBox.margin>
-                        <Insets bottom="10.0" />
-                      </VBox.margin>
                     </Button>
                   </children>
                 </VBox>

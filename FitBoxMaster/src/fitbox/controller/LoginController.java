@@ -5,6 +5,7 @@
 package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -56,7 +57,7 @@ public class LoginController implements Initializable,ControlledScreen {
     @FXML private void iniciarSesion(ActionEvent event) {
         //Conexión SQL para comprobar los datos.
         
-        Dal dal=Dal.getDal();
+        //Dal dal=Dal.getDal();
         String nombreUser=fieldUser.getText();
         String pass=fieldPassword.getText();
         if(nombreUser.equals("") || pass.equals("")){
@@ -66,13 +67,14 @@ public class LoginController implements Initializable,ControlledScreen {
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
                  return;
         }
-        Collection<Usuario> datos=dal.find(Usuario.USUARIOSBYNOMBREYPASS, new Object[]{nombreUser,pass}, Usuario.class);
+        //Collection<Usuario> datos=dal.find(Usuario.USUARIOSBYNOMBREYPASS, new Object[]{nombreUser,pass}, Usuario.class);
           //      Collection<Usuario> datos=dal.find(Usuario.TODOS_USUARIOS, null, Usuario.class);
-
-        Iterator<Usuario> it=datos.iterator();
-        Usuario user=null;
-        if(it.hasNext())
-            user=it.next();
+        
+//        Iterator<Usuario> it=
+                
+        Usuario user=BaseDeDatos.getBD().getUsuarioByPassANDName(nombreUser, pass);
+//        if(it.hasNext())
+//            user=it.next();
         
         if(user!=null){
             Recurso recurso=new Recurso();

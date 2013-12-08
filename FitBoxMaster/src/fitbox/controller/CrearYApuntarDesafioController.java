@@ -9,8 +9,10 @@ import static fitbox.controller.ConsultarVistaSemanalController.fxcalendar;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Amigo;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Desafio;
 import fitbox.model.Jugador;
+import fitbox.model.Ranking;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -24,12 +26,17 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import jfx.messagebox.MessageBox;
@@ -57,7 +64,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     private FXCalendar fxcalendar2;
     ObservableList<String> dataDesafios;
     LocalDate fecha;
-
+boolean segundaVez=false;
     /**
      * Initializes the controller class.
      */
@@ -82,11 +89,11 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
                     MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
             if (answer == MessageBox.OK) {
                 String arrayItem[] = item.split("-");
-                Dal dal = Dal.getDal();
-                List<Desafio> lista = dal.find(Desafio.desafioPorIdDesafio, new Object[]{arrayItem[0]}, Desafio.class);
+               
+                List<Desafio> lista = Dal.getDal().find(Desafio.desafioPorIdDesafio, new Object[]{arrayItem[0]}, Desafio.class);
                 Desafio desafio = lista.get(0);
                 desafio.setEstado(1);
-                dal.updateRuben(desafio);
+               Dal.getDal().updateRuben(desafio);
                 cargarListaDesafios();
                 MessageBox.show(ScreensFramework.stage,
                         " ¡Ha aceptado el desafio !",
@@ -162,7 +169,8 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
 
 
     }
-
+List<Desafio> desafios;
+Usuario usuario;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -175,11 +183,14 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
         hBoxFin.getChildren().addAll(fxcalendar2);
         recurso = (Recurso) rb;
         dataDesafios = FXCollections.observableArrayList();
+        usuario = (Usuario) recurso.getObject("usuario");
+                desafios = BaseDeDatos.getBD().getDesafios(usuario.getId());
+
         inicializarActividades();
         cargarAmigos();
         cargarListaDesafios();
-
-
+        cargarTabDetalles();
+        segundaVez = true;
 
 
     }
@@ -224,14 +235,13 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     private void cargarListaDesafios() {
         dataDesafios = null;
         dataDesafios = FXCollections.observableArrayList();
-        Dal dal = Dal.getDal();
-        Usuario usuario = (Usuario) recurso.getObject("usuario");
+        //Dal dal = Dal.getDal();
+        
         int mesActual = fecha.getMonthOfYear();
         int diaActual = fecha.getDayOfMonth();
         int añoActual = fecha.getYear();
         boolean error = false;
         //To change body of generated methods, choose Tools | Templates.
-        List<Desafio> desafios = dal.find(Desafio.desafioPorId, new Object[]{usuario.getId()}, Desafio.class);
         for (Desafio desafio : desafios) {
             if (desafio.getEstado() == 0) {
                 String fechaDesafio[] = desafio.getFechaFin().split("/");
@@ -317,5 +327,62 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     private void home() {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+    }
+    
+    
+    @FXML
+    TableView tabla;
+    @FXML
+    TableColumn nombreColumn,actividadColumn,fechaLimiteColumn,
+            rivalColumn,tusPuntosColumn,estadoColumn,puntosRivalColumn;
+    
+    @FXML    
+    public void tabCambia(Event event){
+        if(segundaVez){cargarTabDetalles();}
+    }
+
+    private void cargarTabDetalles() {
+        tusPuntosColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("misPuntos"));
+        actividadColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("actividad"));
+        fechaLimiteColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("fechaFin"));
+        rivalColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("nombreRival"));
+        estadoColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("estado"));
+        puntosRivalColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("misPuntos"));
+        nombreColumn.setCellValueFactory(
+                new PropertyValueFactory<Desafio, String>("nombre"));
+        
+        ObservableList listDetalles = FXCollections.observableArrayList();
+       // Dal dal = Dal.getDal();
+        Usuario usuario = (Usuario) recurso.getObject("usuario");
+        int mesActual = fecha.getMonthOfYear();
+        int diaActual = fecha.getDayOfMonth();
+        int añoActual = fecha.getYear();
+        boolean error = false;
+        //To change body of generated methods, choose Tools | Templates.
+        for (Desafio desafio : desafios) {
+            if (desafio.getEstado() == 0) {
+                String fechaDesafio[] = desafio.getFechaFin().split("/");
+                int año = Integer.parseInt(fechaDesafio[2]);
+                int mes = Integer.parseInt(fechaDesafio[1]);
+                int dia = Integer.parseInt(fechaDesafio[0]);
+
+                if (añoActual > año) {
+                    error = true;
+                } else if (añoActual <= año && mesActual > mes) {
+                    error = true;
+                } else if (añoActual <= año & mesActual <= mes && diaActual > dia) {
+                    error = true;
+                }
+                if (!error) {
+                    listDetalles.add(desafio);
+                }
+            }}    
+    tabla.setItems(listDetalles);
     }
 }

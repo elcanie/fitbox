@@ -1,0 +1,83 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package fitbox.model;
+
+import fitbox.controller.dao.Dal;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ *
+ * @author Elias
+ */
+public class BaseDeDatos {
+    List<Usuario> usuariosBD;
+    List<Desafio> desafiosBD;
+    List<Jugador> jugadoresBD;
+    List<Evento> eventosUsuarioIniciadoBD;
+    List<Calendario> CALENDARIOSPORAÑODIAYJUGADOR;
+    private static BaseDeDatos bD;
+    private Collection<Noticia> misNoticias;
+    
+    public static BaseDeDatos getBD(){
+    if(bD==null) bD = new BaseDeDatos();
+    return bD;
+    }
+    private List<TablaActividad> tablaActividad;
+    
+    
+    private BaseDeDatos(){
+    }
+    
+    public List<Usuario> getUsuarios(){
+    if(usuariosBD==null)usuariosBD = Dal.getDal().find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);
+    return usuariosBD;
+    }
+    
+    public List<Jugador> getJugadores(){
+    if(jugadoresBD==null)jugadoresBD = Dal.getDal().find(Jugador.TODOS_JUGADOES, new Object[]{}, Jugador.class);
+    return jugadoresBD;
+    }
+    
+    public List<Evento> getEventosUsuarioIniciado(Usuario user){
+        if(eventosUsuarioIniciadoBD==null)eventosUsuarioIniciadoBD = Dal.getDal().find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{user.getId()},Evento.class);
+        return eventosUsuarioIniciadoBD;
+    }
+    
+    public Usuario getUsuarioByPassANDName(String name,String pass){
+    for(Usuario usuario : getUsuarios())
+        if(usuario.getPassword().equals(pass) && usuario.getNombre().equalsIgnoreCase(name))
+            return usuario;
+    return null;
+    }
+
+    public Collection<Noticia> getNoticias() {
+        if(misNoticias==null) misNoticias = Dal.getDal().find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
+    return misNoticias;
+    }
+
+    public Jugador getJugador(int id) {
+for(Jugador jugador : getJugadores())
+        if(jugador.getId()==id)
+            return jugador;
+    return null;    }
+    
+    public List<Calendario> getCALENDARIOSPORAÑODIAYJUGADOR(String anyo,int id){
+    if(CALENDARIOSPORAÑODIAYJUGADOR==null) CALENDARIOSPORAÑODIAYJUGADOR = Dal.getDal().find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{anyo,id}, Calendario.class);
+    return CALENDARIOSPORAÑODIAYJUGADOR;
+    }
+    
+   
+    
+    public List<TablaActividad> getTablaActividadesUsuario(int id){
+    if(tablaActividad==null)tablaActividad = Dal.getDal().find(TablaActividad.Actividades_Usuario, new Object[]{id}, TablaActividad.class);
+   return tablaActividad;
+    }
+
+    public List<Desafio> getDesafios(int id) {
+        if(desafiosBD==null)desafiosBD = Dal.getDal().find(Desafio.desafioPorId, new Object[]{id}, Desafio.class);
+    return desafiosBD;
+    }
+}

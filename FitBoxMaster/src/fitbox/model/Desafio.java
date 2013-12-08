@@ -49,13 +49,13 @@ public class Desafio {
     public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, int idJugador, int idRival, int idActividad) {
         if (idJugador != -1 && idRival != -1 && idActividad != -1) {
             Dal dal = Dal.getDal();
-            List<Jugador> usuarios = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idJugador}, Jugador.class);
+            Jugador j1 = BaseDeDatos.getBD().getJugador(idJugador);
 
-            List<Jugador> usuarios2 = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idRival}, Jugador.class);
+            Jugador j2 = BaseDeDatos.getBD().getJugador(idRival);
 
             List<Actividad> actividades = dal.find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{idActividad}, Actividad.class);
-            setJugador(usuarios.get(0));
-            setRival(usuarios2.get(0));
+            setJugador(j1);
+            setRival(j2);
             setActividad(actividades.get(0));
         }
         setValores(id, nombre, fechaInicio, fechaFin, estado, getJugador(), getRival(), getActividad());
@@ -175,5 +175,13 @@ public class Desafio {
 
     public String[] getValores() {
         return valores;
+    }
+    
+    public String getMisPuntos(){
+    return valores[4];
+    }
+    
+    public String getNombreRival(){
+    return rival.getApellidos();
     }
 }
