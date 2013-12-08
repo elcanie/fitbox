@@ -24,7 +24,6 @@ if(logueado!=null){
 $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
-$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
 
 $('#re').click(function(){
@@ -32,7 +31,6 @@ $.removeCookie("logueado");
 $('#ev').css("visibility","hidden");
 $('#de').css("visibility","hidden");
 $('#re').css("visibility","hidden");
-$('#fo').css("visibility","hidden");
 $('#login').css("visibility","visible");
 $(location).attr('href','index.html');
 });
@@ -87,7 +85,6 @@ $( "#mensaje-error-login" ).dialog({
       $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
-$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
         }
       }
@@ -107,6 +104,77 @@ $('#login').css("visibility","hidden");
     });
 
   </script>
+  	<script>
+			 
+				
+				
+</script>
+  <script>
+					var arraySubForos=[];
+					var numSubForos=0;
+					 $(function(){
+						
+						var d;
+						$.ajax({
+						  type: "POST",
+						  url: "other.php",
+						  data: {consulta:"SELECT * from subforo "},
+						  success:function(data){
+						  d = JSON.parse(data);
+						  for(var i=0;i<d.length;i++){
+							console.log(d[i]);
+							arraySubForos[i]=d[i];
+							$('#foro').append('<div id="subforo'+numSubForos+'"></div>');
+							$("#subforo"+numSubForos).append('<table class="table table-hover" id="tabla'+numSubForos+'"></table>');
+							$("#tabla"+numSubForos).append('<thead> </thead>');
+							$('#tabla'+numSubForos+' thead').append('<tr> </tr>');
+							$('#tabla'+numSubForos+' thead tr').append('<th> Nombre </th><th> Visitas </th>');
+							$("#tabla"+numSubForos).append('<tbody </tbody>');
+							$('#tabla'+numSubForos+' tbody').append('<tr> </tr>');
+							//$('#tabla'+numSubForos+' tbody tr').append('<td><a href="subforo.html">'+d[i].nombre+'</a> </td><td>'+ d[i].visitas+' </td>');
+							$('#tabla'+numSubForos+' tbody tr').append('<td><a href="subForo.html">'+d[i].nombre+'</a> </td><td>'+ d[i].visitas+' </td>');
+							$('#tabla'+numSubForos+' tbody tr td a').click(function (){
+											function encontrarSubForo(nombre){
+												for(var i=0;i<arraySubForos.length;i++){
+													if(arraySubForos[i].nombre==nombre.trim()) return i;
+												}
+												return -1;
+					
+											}
+												var leerString = $.cookie("subForo");
+												if(leerString==null){
+													$.removeCookie("subForo");
+												}
+												
+												$.cookie("subForo",this.text);
+												var posicion=encontrarSubForo(this.text);
+												console.log(posicion);
+												var subForo=arraySubForos[posicion];
+												console.log(subForo);
+												var visitas=parseInt(subForo.visitas);
+												visitas+=1;
+												console.log(visitas);
+												$.ajax({
+												  type: "POST",
+												  url: "other.php",
+												  data: {consulta:"update `subforo` SET `visitas`="+(visitas)+" where `nombre`='"+this.text+"';"},
+												  success:function(data){
+													}
+												});
+			
+						});	
+							$("#subforo"+numSubForos).append('<p>'+d[i].descripcion+'</p>');
+							numSubForos++;
+						   }
+						  }
+						});
+				});
+			
+			
+			</script>
+		
+
+			
 
     
     <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
@@ -147,44 +215,22 @@ $('#login').css("visibility","hidden");
 
   <section class="cuerpo">
     <div class="titulocuerpo">
-      <h1>Home</h1>
+      <h1>Foro</h1>
     </div>
     <div class="tituloright"> 
       <h4> Tu entrenador personal en línea</h4>
     </div>
-    <div class="contenido">
-      <div class="texto">
-        <p> FitBox es una aplicación de escritorio con la cual podremos realizar ejercicio de forma interactiva y disfrutar del deporte en casa.</p>
-        <p> Los usuarios podrán, si lo desean, consultar nuestro portal web para obtener ayuda sobre ejercicios u otras actividades a través de los foros que se encuentran disponibles, además de crear e inscribirse a eventos y conseguir desafíos.</p>
-        <p> Ya no tienes excusa para no estar en forma! Notarás cambios desde el primer día!</p><h5 id="contrata">Contrata FitBox!</h5>
-      </div>
-      <div class="row" id="carousel">
-    <div class="span6 offset3" id="carouselint">
-  
-<div id="carousel_fade" class="carousel slide carousel-fade">
-  <div class="carousel-inner">
-        
-    <div class="item active">
-      <img src="imagenes/3.jpg">
-    </div>
-          
-    <div class="item ">
-      <img src="imagenes/2.jpg">
-    </div>
-    <div class="item ">
-      <img src="imagenes/3.jpg">
-    </div>
-
-          
-  </div>
-  <a class="carousel-control left btn-control " href="#carousel_fade" data-slide="prev">‹</a>
-  <a class="carousel-control right btn-control" href="#carousel_fade" data-slide="next">›</a>
-  </div>
-    </div>
-  </div>
+   
+	<div class="contenido">
+		<div id="foro">
+			
+			<h3> Subforos </h3>
+			
+			
+		</div>
+	</div>
 
 
-</div>
 
   </section>
   

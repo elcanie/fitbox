@@ -186,6 +186,31 @@ input[id=fechaInicio]{
     margin-left: 5px;
     margin-right:5px;
 }
+#foro div{
+width: 100%;
+float: left;
+margin-left: 50px;
+margin-top: 10px;
+border-radius: 5px;
+border:solid;
+}
+h3{
+	position:relative;
+	left:55px;
+
+}
+#foro,#subForo{
+	width: 80%;
+	float: left;
+	margin-left: 50px;
+	margin-top: 50px;
+	
+}
+/*Ruben dialogo abrir tema*/
+#dialogAbrirTema{
+	visibility:none;
+
+}
 
 /** ::: ALEX   ::: */
 #botones{
