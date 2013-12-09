@@ -42,6 +42,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
+import jfx.messagebox.MessageBox;
 
 /**
  *
@@ -62,17 +63,18 @@ public class RealizarEventosController implements Initializable, ControlledScree
 
     private Usuario user;
     private Recurso recurso;
+    private Conexion conexion;
+    private Connection conectar;
+    int idEventoSeleccionado;
 
     public void mostrarPuntuaciones(int id) {
         String consulta1 = "select * from puntuacion_evento where idEvento=" + id + ";";
         int idJug;
 
         try {
-            Conexion conexion = new Conexion();
-            Connection conectar = conexion.conectar1();
+
             Statement s = conectar.createStatement();
-            Connection conectar2 = conexion.conectar1();
-            Statement s1 = conectar2.createStatement();
+            Statement s1 = conectar.createStatement();
 
             ResultSet rs = s.executeQuery(consulta1);
             Collection<String> puntuaciones = new ArrayList();
@@ -108,12 +110,11 @@ public class RealizarEventosController implements Initializable, ControlledScree
         ObservableList<Evento> datos = FXCollections.observableArrayList(eventos);
 
         for (int i = 0; i < datos.size(); i++) {
-            String n = datos.get(i).getNombre();
+            int n = datos.get(i).getId();
             for (int j = 0; j < datos.size(); j++) {
-                if (datos.get(j).getNombre().equals(n) && i != j) {
+                if (datos.get(j).getId() == n && i != j) {
                     datos.remove(j);
                 }
-
             }
         }
 
@@ -122,19 +123,36 @@ public class RealizarEventosController implements Initializable, ControlledScree
 
     @FXML
     private void handleButtonGO(ActionEvent event) {
-
+        try {
+            String consulta3 = "select * from puntuacion_evento where idEvento=" + idEventoSeleccionado + " and idJugador=" + user.getId() + ";";
+            Statement s = conectar.createStatement();
+            ResultSet rs = s.executeQuery(consulta3);
+            if (!rs.next()) {
+                System.out.println("Puedes participar");
+            } else {
+                MessageBox.show(ScreensFramework.stage,
+                    "Ya has participado en este evento.",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RealizarEventosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     public void mouseClicked(MouseEvent t) {
-        int id = ((Evento) ((TableView) t.getSource()).getItems().get(((TableView) t.getSource()).getSelectionModel().getSelectedIndex())).getId();
-        mostrarPuntuaciones(id);
+        idEventoSeleccionado = ((Evento) ((TableView) t.getSource()).getItems().get(((TableView) t.getSource()).getSelectionModel().getSelectedIndex())).getId();
+        mostrarPuntuaciones(idEventoSeleccionado);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
+
+        conexion = new Conexion();
+        conectar = conexion.conectar1();
 
         nombreT.setCellValueFactory(new PropertyValueFactory<Evento, String>("nombre"));
         descripcionT.setCellValueFactory(new PropertyValueFactory<Evento, String>("descripcion"));
@@ -143,7 +161,6 @@ public class RealizarEventosController implements Initializable, ControlledScree
         ScreensFramework.stage.setHeight(425);
 
         mostrarEventos();
-
     }
 
     @Override
