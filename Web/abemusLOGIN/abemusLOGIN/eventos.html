@@ -12,13 +12,44 @@
   <link rel="stylesheet" href="jquery-ui-1.10.3/themes/base/jquery.ui.all.css" />
   <script src="jquery-ui-1.10.3/jquery.min.js"></script>
   <script src="jquery-ui-1.10.3/jquery-ui.min.js"></script>
-<script src="jqueryCookie/jquery.cookie.js"></script>
+  <script src="jqueryCookie/jquery.cookie.js"></script>
+
   <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
+
+  <script>
+    
+  </script>
  
  <script>
+ /*
+    //Ahora todas las ventanas tienen acceso a la cookie
+    //¿Como leerla?
+          var leerString = $.cookie("logueado");
+          var logueado = JSON.parse(leerString);
+          */
  var logueado;
   $(function() {
-
+  var leerString = $.cookie("logueado");
+  if(leerString!=null)
+       logueado = JSON.parse(leerString);
+if(logueado==null){
+$(location).attr('href','index.html');
+}
+  if(logueado!=null){
+$('#ev').css("visibility","visible");
+$('#de').css("visibility","visible");
+$('#re').css("visibility","visible");
+$('#login').css("visibility","hidden");
+$('#re').click(function(){
+$.removeCookie("logueado");
+$('#ev').css("visibility","hidden");
+$('#de').css("visibility","hidden");
+$('#re').css("visibility","hidden");
+$('#login').css("visibility","visible");
+$(location).attr('href','index.html');
+});
+}
+  update();
     $( "#dialoglogin" ).dialog({
       autoOpen: false,
       height: 300,
@@ -30,22 +61,19 @@
     $.ajax({
       type: "POST",
       url: "other.php",
-
-      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},
+      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
       success:function(data){
-	  console.log('Consulta OK');
+    console.log('Consulta OK');
         d=JSON.parse(data);
         f=d[0].password;
         if(f==$("#password").val()){
-		//Si se loguea con exito
-		//Guardo la cookie
-		$.cookie("logueado",JSON.stringify(d[0]));
-		//Ahora todas las ventanas tienen acceso a la cookie
-		//¿Como leerla?
-		var leerString = $.cookie("logueado");
-		var logueado = JSON.parse(leerString);
-		console.log(logueado);
+    //Si se loguea con exito
+    //Guardo la cookie
+          $.cookie("logueado",JSON.stringify(d[0]));
+
           logueado = d[0];
+          hayLogueado();
+		  
         }
       }
 
@@ -62,6 +90,10 @@
       $( "#dialoglogin" ).dialog("open");
       });
     });
+
+
+
+
 
   </script>
 </head>
@@ -89,9 +121,9 @@
       </nav>
       <nav class="navegacion_principal right">
           <ul>
-              <li><a id="login" href="#">Login</a></li>
+                 <li ><a id="login" href="#">Login</a></li>
               <li>&bull;</li>
-              <li><a href="#">Registro</a></li>
+              <li id="re"><a href="#">Logout</a></li>
           </ul>
       </nav>
     </div>
@@ -146,15 +178,19 @@
   </form>
 </div>
 
-<div id="mensaje-crear" title="Download complete">
+<div id="mensaje-crear" title="Creación de evento">
   <p>
     <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
     Ha creado un evento con éxito.
   </p>
-  
+<div id="mensaje-crear-fallido" title="Creación de evento">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+    No se ha podido crear el evento, rellene todos los campos.
+  </p>
 </div>
 
-<div id="mensaje-inscribirse" title="Download complete">
+<div id="mensaje-inscribirse" title="Inscripción">
   <p>
     <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
     Ha inscrito a un evento con éxito.
@@ -167,8 +203,8 @@
  //INSCRIBIRSE EVENTO
   var f;
  $(function() {
+
  
-  update();
    $( "#mensaje-inscribirse" ).dialog({
       modal: true,
     autoOpen:false,
@@ -190,7 +226,6 @@
   }
 });
   $("#inscribirseB").click(function(){
-  
   if(ide!=null){
     $.ajax({
     type: "POST",
@@ -212,10 +247,11 @@
    console.log("inscrito "+logueado+" en "+ide);
   }
     });
-  }
+  } 
     });}
 
   });
+  
   });
   </script>
 
@@ -251,20 +287,35 @@ $.ajax({
         }
       }
     });
+	
+	$( "#mensaje-crear-fallido" ).dialog({
+      modal: true,
+    autoOpen:false,
+    width:400,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
   
     $("#dialogcrearevento").dialog({autoOpen:false,width:500,modal:true, 
     buttons: {
-        "Aceptar": function() { 
+        "Aceptar": function() {
+		if($("#nombreE").val()!='' && $("#descripcionE").val()!='' && $("#fechaE").val()!='' ){
 $.ajax({
     type: "POST",
     url: "other.php",
-    data: {consulta:"INSERT INTO eventos(nombre, descripcion, fecha) VALUES ('"+$("#nombre").val()+"','"+$("#descripcion").val()+"','"+$("#fecha").val()+"');"},
+    data: {consulta:"INSERT INTO eventos(nombre, descripcion, fecha) VALUES ('"+$("#nombreE").val()+"','"+$("#descripcionE").val()+"','"+$("#fechaE").val()+"');"},
     success:function(data){
-  $("#selectable").html('');
+	//selectable
+  $("#tt").html('');
   update();
   $("#mensaje-crear").dialog("open");
     }
+	
 });
+} else{ $("#mensaje-crear-fallido").dialog("open");}  
       $( this ).dialog("close");
         },
         "Cancelar": function() {
