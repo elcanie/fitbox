@@ -8,39 +8,11 @@
   <link rel="stylesheet" href="estilo/jquery-ui.css"/>
   <script src="js/jquery-1.9.1.js"></script>
   <script src="js/jquery-ui.js"></script>
-  <script src="jqueryCookie/jquery.cookie.js"></script>
  
 
- <script>
- /*
-    //Ahora todas las ventanas tienen acceso a la cookie
-    //¿Como leerla?
-          var leerString = $.cookie("logueado");
-          var logueado = JSON.parse(leerString);
-          */
- var logueado;
+  <script>
   $(function() {
-  var leerString = $.cookie("logueado");
-  if(leerString!=null)
-       logueado = JSON.parse(leerString);
-if(logueado==null){
-$(location).attr('href','index.html');
-}
-  if(logueado!=null){
-$('#ev').css("visibility","visible");
-$('#de').css("visibility","visible");
-$('#re').css("visibility","visible");
-$('#login').css("visibility","hidden");
-$('#re').click(function(){
-$.removeCookie("logueado");
-$('#ev').css("visibility","hidden");
-$('#de').css("visibility","hidden");
-$('#re').css("visibility","hidden");
-$('#login').css("visibility","visible");
-$(location).attr('href','index.html');
-});
-}
-  /*update();*/
+
     $( "#dialoglogin" ).dialog({
       autoOpen: false,
       height: 300,
@@ -48,27 +20,7 @@ $(location).attr('href','index.html');
       modal: true,
       buttons: {
 "Loguear":function(){
-  if(logueado==null){
-    $.ajax({
-      type: "POST",
-      url: "other.php",
-      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
-      success:function(data){
-    console.log('Consulta OK');
-        d=JSON.parse(data);
-        f=d[0].password;
-        if(f==$("#password").val()){
-    //Si se loguea con exito
-    //Guardo la cookie
-          $.cookie("logueado",JSON.stringify(d[0]));
-
-          logueado = d[0];
-        }
-      }
-
-    });
-
-  }
+  console.log("ok");
   
   $( this ).dialog( "close" );
 }
@@ -80,24 +32,14 @@ $(location).attr('href','index.html');
       });
     });
 
-$( "#mensaje-inscribirse" ).dialog({
-      modal: true,
-    autoOpen:false,
-    width:400,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-
   </script>
+
+
   <script>
   var fechaActual=new Date();
   </script>
 
   <script>
-  var array=[];
         $(function() {
         $( "#selectable" ).selectable({
           stop: function() {
@@ -105,17 +47,8 @@ $( "#mensaje-inscribirse" ).dialog({
           $( ".ui-selected", this ).each(function() {
             var index = $( "#selectable li" ).index( this );
             console.log($('#selectable option:selected').html());
-
-            result.append( $('.ui-selected').html());
-            console.log(index);
-            console.log(array);
-            console.log(array[index]);
-            $('#selRival').attr("value",array[index]);
-            
-            /*
-            result.append( $('.ui-selected').html());
-            $('#selRival').attr("value",$('.ui-selected').html().trim());
-*/
+            $('#selRival').attr("value",$('.ui-selected').html().substr(4,5).trim());
+            result.append( $('.ui-selected').html().substr(5));
           });
           }
         });
@@ -143,16 +76,16 @@ $( "#mensaje-inscribirse" ).dialog({
        <nav class="navegacion_principal" >
           <ul>
                <li><a href="index.html">Home</a></li>
-               <li id="ev"><a href="eventos.html">Eventos</a></li>
-               <li id="de"><b>Desafíos</b></li>
-               <li id="fo"><a href="#">Foro</a></li>
+               <li><a href="eventos.html">Eventos</a></li>
+               <li><b>Desafíos</b></li>
+               <li><a href="#">Foro</a></li>
           </ul>
       </nav>
       <nav class="navegacion_principal right">
           <ul>
-              <li ><a id="login" href="#">Login</a></li>
+              <li><a id="login" href="#">Login</a></li>
               <li>&bull;</li>
-              <li id="re"><a href="#">Logout</a></li>
+              <li><a href="#">Registro</a></li>
           </ul>
       </nav>
     </div>
@@ -192,50 +125,43 @@ $( "#mensaje-inscribirse" ).dialog({
                   data: {consulta:"SELECT * from usuario j WHERE j.id ="+valor},
                   success:function(data){
                   var d2 = JSON.parse(data);
-                  $("#selectable").append("<li class='ui-widget-content' id='lista'>"+ d2[0].nombre+ '</li>');
+                  $("#selectable").append("<li class='ui-widget-content' id='lista'> ID-"+ d2[0].id+"   "+d2[0].nombre+ '</li>');
                   
                   
                   }
                 });}
                 
                 });
-                </script>
-                <script>
-                $('#bCrear').click(function(){
-                  $("#mensaje-inscribirse").dialog("open");
-                });
+                
+                
+                
                 </script>
                     
                   </SELECT><br></br>
-              <div id="seleccionarRival">    
-              <p id="rival">Selecciona rival:</p>
-              <input type="text" name="rival" id="selRival" required/><input type="text" name="usuario" id="selUsuario"/>
+
+              Selecciona rival:<input type="text" name="rival" id="selRival" value=""/> 
+
+              <p id="feedback">
+              <span>Has seleccionado: </span> <span id="select-result">ninguno</span>.
+              </p>
               <ol id="selectable">
-              </div>
                 <script>
                 $(function(){
-
+                var d;
                 $.ajax({
                   type: "POST",
                   url: "other.php",
-
-                  //data: {consulta:"SELECT * from amigo j WHERE j.idJugador = 3"},
-                  data: {consulta:"SELECT * from amigo j WHERE j.idJugador = "+logueado.id},
+                  data: {consulta:"SELECT * from amigo j WHERE j.idJugador = 3"},
                   success:function(data){
                   d = JSON.parse(data);
                   for(var i=0;i<d.length;i++){
                     data2(d[i].idAmigo);
                     //console.log('aaa'+d2);
                     //
-                    array[i]=d[i].idAmigo;
-                    console.log(logueado.id);
-                    $('#selUsuario').attr("value",logueado.id);
-
                    }
                   }
                 });
                 $('#fechaInicio').val(fechaActual.getDate()+"/"+ (fechaActual.getMonth() +1)+"/"+ fechaActual.getFullYear());
-
                 });
                 
               
@@ -246,15 +172,9 @@ $( "#mensaje-inscribirse" ).dialog({
 
                                
               </ol>
-
-              <p id="feedback">
-              <span>Has seleccionado: </span> <span id="select-result">ninguno</span>.
-              </p>
-              <div id="fechaDesafio">
               Inicio:<input type="text" name="fecha_inicio" id="fechaInicio"  required/>
               Fin:<input type="date" name="fecha_fin" id="fechaFin" required/>
               <input type="submit" name="crear" id="bCrear" value="Crear"  class="btn btn-primary">
-            </div>
               </form>              
               
           </article>
@@ -294,13 +214,6 @@ $( "#mensaje-inscribirse" ).dialog({
     <div id="botlogin">
 
     </div>
-    <div id="mensaje-desafio-correcto" title="Inscripción">
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-    Ha creado el desafío correctamente.
-  </p>
-  
-</div>
   </fieldset>
   </form>
 

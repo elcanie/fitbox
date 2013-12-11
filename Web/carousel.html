@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="estilo/jquery-ui.css"/>
   <script src="js/jquery-1.9.1.js"></script>
   <script src="js/jquery-ui.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="bootstrap-3.0.0/dist/js/boostrap.min.js"></script>
  
 
   <script>
@@ -38,6 +40,11 @@
 
   </script>
 
+<script type="text/javascript">
+        $(document).ready(funtion(){
+          $('#myCarousel').carousel();
+        }
+    </script>
     
 	  <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
     <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
@@ -90,18 +97,23 @@
 	<div class="carousel-inner">
 				
 		<div class="item active">
-			<img src="http://placehold.it/600x400&amp;text=Fade+effect">
+			<img src="imagenescarousel/1.jpg">
 		</div>
 					
 		<div class="item ">
-			<img src="http://placehold.it/600x400&amp;text=Fade+effect">
+			<img src="imagenescarousel/2.jpg">
 		</div>
+    <div class="item ">
+      <img src="imagenescarousel/3.jpg">
+    </div>
+
 					
 	</div>
 	<a class="carousel-control left btn-control " href="#carousel_fade" data-slide="prev">‹</a>
 	<a class="carousel-control right btn-control" href="#carousel_fade" data-slide="next">›</a>
 	</div>
     </div>
+
 </div>
 
   </section>

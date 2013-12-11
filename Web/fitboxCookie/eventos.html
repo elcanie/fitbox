@@ -12,10 +12,11 @@
   <link rel="stylesheet" href="jquery-ui-1.10.3/themes/base/jquery.ui.all.css" />
   <script src="jquery-ui-1.10.3/jquery.min.js"></script>
   <script src="jquery-ui-1.10.3/jquery-ui.min.js"></script>
-
+<script src="jqueryCookie/jquery.cookie.js"></script>
   <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
  
-  <script>
+ <script>
+ var logueado;
   $(function() {
 
     $( "#dialoglogin" ).dialog({
@@ -25,7 +26,32 @@
       modal: true,
       buttons: {
 "Loguear":function(){
-  console.log("ok");
+  if(logueado==null){
+    $.ajax({
+      type: "POST",
+      url: "other.php",
+
+      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},
+      success:function(data){
+	  console.log('Consulta OK');
+        d=JSON.parse(data);
+        f=d[0].password;
+        if(f==$("#password").val()){
+		//Si se loguea con exito
+		//Guardo la cookie
+		$.cookie("logueado",JSON.stringify(d[0]));
+		//Ahora todas las ventanas tienen acceso a la cookie
+		//¿Como leerla?
+		var leerString = $.cookie("logueado");
+		var logueado = JSON.parse(leerString);
+		console.log(logueado);
+          logueado = d[0];
+        }
+      }
+
+    });
+
+  }
   
   $( this ).dialog( "close" );
 }
@@ -178,11 +204,12 @@
     type: "POST",
     url: "other.php",
   //JUGADOR 
-    data: {consulta:"INSERT INTO calendario (fecha, idEvento, idJugador) VALUES ('"+f+"',"+ide+",10);"},
+    //data: {consulta:"INSERT INTO calendario (fecha, idEvento, idJugador) VALUES ('"+f+"','"+ide+"','"+logueado.id"');"}
+    //data: {consulta:"INSERT INTO calendario (fecha, idEvento, idJugador) VALUES ('"+f+"',"+ide+",10);"},
     success:function(data){
   $("#mensaje-inscribirse").dialog("open");
   ide='';
-  
+   console.log("inscrito "+logueado+" en "+ide);
   }
     });
   }
