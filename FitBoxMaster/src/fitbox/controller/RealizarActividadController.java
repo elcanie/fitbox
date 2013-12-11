@@ -245,10 +245,11 @@ public class RealizarActividadController implements Initializable, ControlledScr
             evento = true;
         } catch (Exception e) {
             System.out.println("Error recurso ,realizar eventos");
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
-        myController.ponerLimitesMinimosCero();
+       ScreensFramework.stage.setMinWidth(0);
+        ScreensFramework.stage.setMinHeight(0);
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/" + URL + "\" frameborder=\"0\" allowfullscreen></iframe>";
