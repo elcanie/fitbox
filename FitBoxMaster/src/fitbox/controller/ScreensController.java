@@ -49,6 +49,7 @@ public class ScreensController extends StackPane {
             addScreen(name, loadScreen);
             Scene escene = new Scene(loadScreen);
             ScreensFramework.stage.setScene(escene);
+            
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -56,7 +57,7 @@ public class ScreensController extends StackPane {
         }
     }
 
-    public boolean setScreen(final String name) {
+      public boolean setScreen(final String name) {
 
         if (screens.get(name) != null) { //screen loaded 
             final DoubleProperty opacity = opacityProperty();
@@ -96,14 +97,13 @@ public class ScreensController extends StackPane {
                         new KeyValue(opacity, 1.0)));
                 fadeIn.play();
             }
-          
+                      
             return true;
         } else {
             System.out.println("screen hasn't been loaded!\n");
             return false;
         }
-        
-        
+
       }
 
     public boolean unloadScreen(String name) {

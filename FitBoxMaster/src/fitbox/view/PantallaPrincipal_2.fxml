@@ -13,9 +13,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" onTouchMoved="#redimensionar" prefHeight="579.000022070315" prefWidth="932.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.000022070315" prefWidth="932.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
   <children>
-    <VBox id="VBox" fx:id="VBOXhorario" alignment="CENTER" prefWidth="329.7929068969752" spacing="5.0" style="#-fx-background-color: yellow" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+    <VBox id="VBox" fx:id="VBOXhorario" alignment="CENTER" prefWidth="329.7929068969752" spacing="5.0" style="#-fx-background-color: yellow" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="64.0">
       <children>
         <Text fill="WHITE" scaleX="2.5297412976655935" scaleY="1.315712187958884" strokeType="OUTSIDE" strokeWidth="0.0" text="HORARIO" />
         <Line endX="100.0" startX="-100.0">
@@ -33,33 +33,36 @@
       <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x3" />
       </padding>
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
     </VBox>
-    <HBox id="HBox" alignment="CENTER" padding="$x3" prefHeight="104.99999986419425" prefWidth="331.0" spacing="5.0" style="#-fx-background-color: violet" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <HBox id="HBox" alignment="CENTER" padding="$x3" prefHeight="104.99999986419425" prefWidth="331.0" spacing="5.0" style="#-fx-background-color: violet" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
       <children>
-        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
           <effect>
             <DropShadow />
           </effect>
           <graphic>
-            <ImageView disable="false" fitHeight="104.0" fitWidth="104.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+            <ImageView id="desafios" fx:id="Imagendesafios" disable="false" fitHeight="104.0" fitWidth="104.0" mouseTransparent="true" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" onMouseMoved="#girarImagenDesafiosOn" pickOnBounds="true" preserveRatio="true" rotate="0.0" smooth="true">
               <image>
                 <Image url="@../../imagenes/Swords-icon.png" />
               </image>
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="botonClasificacion" defaultButton="false" mnemonicParsing="false" onAction="#abrirClasificacion" prefHeight="86.0" prefWidth="105.0" text="">
+        <Button fx:id="botonClasificacion" defaultButton="false" mnemonicParsing="false" onAction="#abrirClasificacion" onMouseEntered="#girarImagenClasifOn" onMouseExited="#girarImagenClasifOf" prefHeight="86.0" prefWidth="105.0" text="">
           <graphic>
-            <ImageView fitHeight="80.49996948242188" fitWidth="80.49996948242188" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImagenClasif" fitHeight="80.49996948242188" fitWidth="80.49996948242188" mouseTransparent="true" onMouseEntered="#girarImagenClasifOn" onMouseExited="#girarImagenClasifOf" pickOnBounds="true" preserveRatio="true" rotate="0.0">
               <image>
                 <Image url="@../../imagenes/Podium-icon.png" />
               </image>
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="botonEquipo" defaultButton="false" mnemonicParsing="false" onMouseClicked="#abrirEquipo" prefHeight="86.0" prefWidth="98.0" text="">
+        <Button fx:id="botonEquipo" defaultButton="false" mnemonicParsing="false" onMouseClicked="#abrirEquipo" onMouseEntered="#girarImagenAmigosOn" onMouseExited="#girarImagenAmigosOf" prefHeight="86.0" prefWidth="98.0" rotate="0.0" text="">
           <graphic>
-            <ImageView fitHeight="75.75" fitWidth="101.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImagenAmigos" fitHeight="75.75" fitWidth="101.0" mouseTransparent="true" onMouseEntered="#girarImagenAmigosOn" onMouseExited="#girarImagenAmigosOf" pickOnBounds="true" preserveRatio="true" rotate="0.0">
               <image>
                 <Image url="@../../imagenes/Groups-Meeting-Dark-icon.png" />
               </image>
@@ -67,6 +70,9 @@
           </graphic>
         </Button>
       </children>
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
     </HBox>
     <ToolBar fx:id="toolBar" prefHeight="65.0" prefWidth="834.0000999999975" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
@@ -124,7 +130,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#actualizar" onMouseClicked="#actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+        <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
           <effect>
             <DropShadow />
           </effect>
@@ -153,7 +159,7 @@
         <URL value="@StyleDialog.css" />
       </stylesheets>
     </ToolBar>
-    <VBox id="VBox" alignment="TOP_CENTER" padding="$x3" prefHeight="151.0" prefWidth="330.0" spacing="5.0" style="#-fx-background-color: orange" AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="323.0">
+    <VBox id="VBox" alignment="TOP_CENTER" padding="$x3" prefHeight="151.0" prefWidth="330.0" spacing="5.0" style="#-fx-background-color: orange" AnchorPane.bottomAnchor="106.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="322.0">
       <children>
         <Text fill="WHITE" scaleX="2.3756200049430576" scaleY="1.3552727963707778" strokeType="OUTSIDE" strokeWidth="0.0" text="RESUMEN SEMANAL" />
         <Line endX="130.0" endY="2.0" startX="-130.0" startY="0.0" stroke="$x2" />
@@ -163,6 +169,9 @@
           </VBox.margin>
         </TextArea>
       </children>
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
     </VBox>
     <VBox id="VBox" alignment="CENTER" padding="$x3" prefHeight="105.0" prefWidth="390.0" spacing="5.0" style="#-fx-background-color: blue" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="330.0">
       <children>
@@ -170,20 +179,35 @@
         <Line endX="205.0" endY="-1.0" startX="-100.0" stroke="#99f3ff" />
         <ListView fx:id="listaNews" prefHeight="72.0" prefWidth="339.0" />
       </children>
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
     </VBox>
-    <VBox id="VBox" alignment="CENTER" layoutY="194.0" padding="$x3" prefHeight="129.0" prefWidth="330.0" spacing="5.0" style="#-fx-background-color: pink" AnchorPane.rightAnchor="0.0">
+    <VBox id="VBox" alignment="CENTER" layoutY="193.0" padding="$x3" prefHeight="129.0" prefWidth="330.0" spacing="5.0" style="#-fx-background-color: pink" AnchorPane.rightAnchor="1.0">
       <children>
         <Text fill="WHITE" scaleX="2.5297412976655935" scaleY="1.315712187958884" strokeType="OUTSIDE" strokeWidth="0.0" text="TUS EVENTOS" />
         <Line endX="130.0" endY="2.0" startX="-130.0" startY="0.0" stroke="#66edff" />
         <ListView fx:id="listaEventos" orientation="VERTICAL" prefHeight="120.0" prefWidth="308.0" />
       </children>
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
     </VBox>
-    <AnchorPane fx:id="panelGaleria" prefHeight="412.000022070315" prefWidth="599.999977929685" style="#-fx-background-color: green" styleClass="backgroundImagen" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="65.0">
+    <AnchorPane fx:id="panelGaleria" opacity="1.0" prefHeight="412.0" prefWidth="600.0" style="#-fx-background-color: green" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="65.0">
       <stylesheets>
         <URL value="@style.css" />
       </stylesheets>
     </AnchorPane>
-    <AnchorPane fx:id="zonaReloj" minHeight="0.0" minWidth="-Infinity" prefHeight="91.99999986419425" prefWidth="213.0" rotate="0.0" style="#-fx-background-color : red" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+    <AnchorPane fx:id="zonaReloj" focusTraversable="false" minHeight="0.0" minWidth="-Infinity" opacity="0.56" prefHeight="104.99999988079071" prefWidth="213.0" rotate="0.0" style="#-fx-background-color : red" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
+    </AnchorPane>
+    <Label fx:id="labelActualizada" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" opacity="1.0" prefHeight="579.000022070315" prefWidth="932.999977929685" text="Ventana actualizada." textAlignment="CENTER" textFill="#fff500" textOverrun="CLIP" visible="false" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="22.0" />
+      </font>
+    </Label>
   </children>
   <stylesheets>
     <URL value="@StyleDialog.css" />

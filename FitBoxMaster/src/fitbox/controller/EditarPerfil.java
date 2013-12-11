@@ -27,6 +27,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import org.joda.time.DateTime;
 
 /**
@@ -71,8 +72,8 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         fxcalendar = new FXCalendar();
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         hPanel.getChildren().addAll(fxcalendar);
+        hPanel.setSpacing(15);
 //        FXCalendar.dateTxtField.setText(jugador.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
-
         nombreText.setText(usuario.getNombre());
         apellidosText.setText(jugador.getApellidos());
         alturaText.setText("" + jugador.getAltura());

@@ -58,11 +58,12 @@ public class videosController implements Initializable, ControlledScreen {
         insertarvideosV();
         insertarvideosS();
 
+        ScreensFramework.stage.setResizable(true);
         ScreensFramework.stage.setWidth(1450);
         ScreensFramework.stage.setHeight(710);
         
         
-        ScreensFramework.stage.setResizable(true);
+        
         
 //        
     }  

@@ -170,7 +170,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 dal.update(j);
 
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+                //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
                 //UPDATE PARA ACTUALIZAR LOS PUNTOS DEL USUARIO (PUNTOS ACT+PUNTOS)
             } else if (answer == MessageBox.CANCEL) {
@@ -228,9 +228,10 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 MessageBox.ICON_INFORMATION | MessageBox.OK | MessageBox.CANCEL);
 
         if (answer == MessageBox.OK) {
-            ScreensFramework.stage.setWidth(921);
-            ScreensFramework.stage.setHeight(590);
-            myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+//            ScreensFramework.stage.setWidth(921);
+//            ScreensFramework.stage.setHeight(590);
+            myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+            //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         } else if (answer == MessageBox.CANCEL) {
         }
     }

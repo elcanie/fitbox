@@ -60,7 +60,7 @@ public class DescripcionActividadController implements Initializable,ControlledS
         ventana.close();
         
         myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML,recurso );
-        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+        //myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
         
 
     }

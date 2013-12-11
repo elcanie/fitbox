@@ -27,6 +27,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,8 +37,11 @@ import javafx.scene.effect.Effect;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -55,41 +60,44 @@ public class AccederActividadesController implements Initializable, ControlledSc
     ListView listaCategorias;
     private Usuario usuario;
     @FXML
-    AnchorPane panelActividades;
+    VBox panelActividades;
+    //@FXML  AnchorPane panelActividades;
     private Hashtable<String, Actividad> botonActividad = new Hashtable<String, Actividad>();
     @FXML
     Button botonHome;
     private Recurso recurso;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        this.recurso=(Recurso)rb;
-        usuario=(Usuario)recurso.getObject("usuario");
+        this.recurso = (Recurso) rb;
+        usuario = (Usuario) recurso.getObject("usuario");
         cargarCategorias();
         ScreensFramework.stage.setResizable(true);
         ScreensFramework.stage.setWidth(916);
         ScreensFramework.stage.setHeight(522);
         ScreensFramework.stage.centerOnScreen();
+        listaCategorias.getSelectionModel().selectFirst();
+        cargarActividades(null);
 
         //myController.setSize(600, 400);
     }
-    
+
     public void cargarCategorias() {
         ObservableList<String> data = FXCollections.observableArrayList();
         data.addAll("Torso", "Cardio", "Pierna", "Abdominales", "Hit", "Estiramientos");
         listaCategorias.setItems(data);
-        
-        
+
+
     }
-    
+
     @FXML
     public void goToHome(MouseEvent event) {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-        
+
     }
-    
+
     @FXML
     public void cargarActividades(MouseEvent event) {
         panelActividades.getChildren().clear();
@@ -101,69 +109,80 @@ public class AccederActividadesController implements Initializable, ControlledSc
         Collection<Actividad> datos = dal.find(Actividad.TODOS_ACTIVIDADESbyCATEGORIA, new Object[]{elemento}, Actividad.class);
         Iterator<Actividad> it = datos.iterator();
         Actividad actividad = null;
-        int i = 0, j = 0, contador = 1;
-        int contadorImagen = 0;
+
+        ArrayList<HBox> listHB = new ArrayList<>();
+        HBox nuevaHBox = new HBox();
+        nuevaHBox.setAlignment(Pos.CENTER_LEFT);
+        nuevaHBox.setSpacing(20);
+        panelActividades.getChildren().setAll(nuevaHBox);
+        listHB.add(nuevaHBox);
         while (it.hasNext()) {
-            if (i % 3 == 0 && i != 0) {
-                j++;
-                contador++;
-                i = 0;
+
+            if (listHB.get(listHB.size() - 1).getChildren().size() > 8) {
+                nuevaHBox = new HBox();
+                nuevaHBox.setAlignment(Pos.CENTER_LEFT);
+                nuevaHBox.setSpacing(20);
+                panelActividades.getChildren().add(nuevaHBox);
+                listHB.add(nuevaHBox);
             }
+
             actividad = it.next();
             Image im = new Image(getClass().getResource("/imagenes/" + actividad.getNombreImagen() + ".jpg").toExternalForm());
             ImageView imageView = new ImageView(im);
             imageView.setFitWidth(150);
             imageView.setFitHeight(150);
             Button boton = new Button(actividad.getNombre());
-            boton.setStyle("    -fx-background-radius: 10; \n" +
-"\n" +
-"    -fx-background-insets: 0,1,2; \n" +
-"\n" +
-"        -fx-background-color:#0099FF;");
+            boton.setStyle("    -fx-background-radius: 10; \n"
+                    + "\n"
+                    + "    -fx-background-insets: 0,1,2; \n"
+                    + "\n"
+                    + "        -fx-background-color:#0099FF;");
             boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-                    Button botonPulsado = (Button) t.getSource();
-                    
-                    Actividad actividad = botonActividad.get(botonPulsado.getText());
-                    Stage s = new Stage();
-                    Parent root = null;
-                    try {
-                        Recurso resource = new Recurso();
-                        resource.putObject("actividad", actividad);
-                        resource.putObject("usuario", usuario);
-                        resource.putObject("controller",myController);
-                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), resource);
-                    } catch (IOException ex) {
-                        Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    Scene scene = new Scene(root);
-                    s.setScene(scene);
-                    s.show();
-                    ScreensFramework.stage.toBack();
+                    if (t.getButton().equals(MouseButton.PRIMARY)) {
+                        if (t.getClickCount() == 2) {
+                            Button botonPulsado = (Button) t.getSource();
+                            Actividad actividad = botonActividad.get(botonPulsado.getText());
+                            System.out.println("botonPulsado.getText():--> " + botonPulsado.getText());
+                            Stage s = new Stage();
+                            s.setTitle("Realizar "+botonPulsado.getText());
+                            s.getIcons().add(new Image("/imagenes/fito5.png"));
+                            s.setResizable(false);
+                            Parent root = null;
+                            try {
+                                Recurso resource = new Recurso();
+                                resource.putObject("actividad", actividad);
+                                resource.putObject("usuario", usuario);
+                                resource.putObject("controller", myController);
+                                root = FXMLLoader.load(getClass().getResource("/fitbox/view/DescripcionActividad.fxml"), resource);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AccederActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
 
-                    //To change body of generated methods, choose Tools | Templates.
+                            Scene scene = new Scene(root);
+                            s.setScene(scene);
+                            s.show();
+                            ScreensFramework.stage.toBack();
+
+                        }
+                    }  //To change body of generated methods, choose Tools | Templates.
                 }
             });
-            panelActividades.getChildren().add(boton);
-            boton.setLayoutX(26 + ((i * imageView.getFitWidth()) + (50 * i)));
-            boton.setLayoutY(25 + ((contador * imageView.getFitHeight()) + (j * boton.getHeight()) + (30 * j)));
+
+            VBox vb = new VBox();
+            vb.getChildren().add(imageView);
+            vb.getChildren().add(boton);
+            vb.setAlignment(Pos.CENTER);
+            vb.setSpacing(5);
+            listHB.get(listHB.size() - 1).getChildren().add(vb);
             botonActividad.put(actividad.getNombre(), actividad);
-            
-            panelActividades.getChildren().add(imageView);
-            imageView.setLayoutX(20 + ((i * imageView.getFitWidth()) + (50 * i)));
-            imageView.setLayoutY(20 + ((j * imageView.getFitHeight()) + (30 * j) + (boton.getHeight() * j)));
-            i++;
-            contadorImagen++;
-            
+
         }
     }
-    
-    
+
     //Metodos barra de botones
-    
-      @FXML
+    @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
         myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
@@ -193,8 +212,7 @@ public class AccederActividadesController implements Initializable, ControlledSc
     }
 
     @FXML
-    public void Actualizar(MouseEvent event) throws IOException{
-        
+    public void Actualizar(MouseEvent event) throws IOException {
     }
 
     @FXML
@@ -204,26 +222,27 @@ public class AccederActividadesController implements Initializable, ControlledSc
 
     @FXML
     public void abrirDesafios(MouseEvent event) throws IOException {
-         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
+        myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
+        myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
     }
 
     @FXML
     public void abrirClasificacion(ActionEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+        myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML
     public void abrirAjustes(MouseEvent event) throws IOException {
         //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
     }
+
     @FXML
-    private void home(){
+    private void home() {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);    
+        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
-    
+
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.

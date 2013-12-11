@@ -9,6 +9,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -66,7 +67,9 @@ public class ScreensFramework extends Application {
         /**
          *
          */
+        
         this.stage = primeraPantalla;
+        
         /*
          ScreensController mainContainer = new ScreensController(stage);
          mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
@@ -90,6 +93,7 @@ public class ScreensFramework extends Application {
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/imagenes/fito5.png")); 
         stage.show();
 
     }

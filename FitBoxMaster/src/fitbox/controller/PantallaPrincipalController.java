@@ -1,5 +1,4 @@
 
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -27,8 +26,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
 import javafx.animation.PauseTransition;
@@ -36,6 +38,8 @@ import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransition;
 import javafx.animation.SequentialTransitionBuilder;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,7 +48,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -55,6 +61,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.joda.time.LocalDate;
@@ -79,6 +86,19 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private Recurso recurso;
     private Usuario user;
     private Clock clock;
+    private ImageView image;
+    private ImageView image1;
+    private ImageView image2;
+    @FXML
+    ProgressIndicator barraCargando;
+    @FXML
+    private ImageView Imagendesafios;
+    @FXML
+    private ImageView ImagenClasif;
+    @FXML
+    private ImageView ImagenAmigos;
+    @FXML
+    private Label labelActualizada;
     @FXML
     Parent root;
     @FXML
@@ -108,7 +128,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-       // myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+        // myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
 //        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
 //        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
 
@@ -125,44 +145,44 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException, SQLException {
-         //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         actualizar();
     }
 
     @FXML
     public void abrirEquipo(MouseEvent event) throws IOException {
-                    Stage s = new Stage();
-                    Parent root = null;
-                    try {
-                        recurso.putObject("controller", myController);
-                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/AgregarAmigo.fxml"), recurso);
-                    } catch (IOException ex) {
-                        Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    Scene scene = new Scene(root);
-                    s.setScene(scene);
-                    s.show();
-                    ScreensFramework.stage.toBack();
+        Stage s = new Stage();
+        Parent root = null;
+        try {
+            recurso.putObject("controller", myController);
+            root = FXMLLoader.load(getClass().getResource("/fitbox/view/AgregarAmigo.fxml"), recurso);
+        } catch (IOException ex) {
+            Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Scene scene = new Scene(root);
+        s.setScene(scene);
+        s.show();
+        ScreensFramework.stage.toBack();
     }
 
     @FXML
     public void abrirDesafios(MouseEvent event) throws IOException {
-         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         //myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
+        myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
+        //myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
     }
 
     @FXML
     public void abrirClasificacion(ActionEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+        //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
     }
 
     @FXML
     public void abrirAjustes(MouseEvent event) throws IOException {
 
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
-   //     myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+        //     myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
         //        Parent root = FXMLLoader.load(getClass().getResource("PantallaPrincipal_2.fxml"));
 //        
 //        Scene scene = new Scene(root);
@@ -178,68 +198,73 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
-        //  Stage stage=(Stage)lo.getScene().getWindow();
-        // stage.setResizable(false);
+
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
-        
-        inicioReloj();
-       
+
+
+         inicioReloj();
         inicioGaleria();
         cargarNoticias();
         cargarEventos();
         cargarResumen();
-        try {
-            cargarTablaActividades();
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cargarTablaActividades();
 
-        ScreensFramework.stage.setWidth(933);
-        ScreensFramework.stage.setHeight(579);
+        ScreensFramework.stage.setTitle("Pantalla Principal - (" + user.getNombre() + ")");
         ScreensFramework.stage.setResizable(true);
+        ScreensFramework.stage.sizeToScene();
         ScreensFramework.stage.centerOnScreen();
-        ScreensFramework.stage.setTitle("Pantalla Principal - ("+user.getNombre()+")");
+        
+        ScreensFramework.stage.setMinWidth(950);
+        ScreensFramework.stage.setMinHeight(580);
+
+
+       
+
+        
+        
+
+
+
 
 
     }
 
     public void cargarEventos() {
-             
 
-         Dal dal = Dal.getDal();
-         Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{user.getId()},Evento.class);
-         //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
-         Iterator<Evento> itdatosE = datosE.iterator();
-         Collection<String> eventosString = new ArrayList();
-         Evento e;
-         System.out.println("tallaEventos: "+datosE.size());
-         while(itdatosE.hasNext()){
-             e=itdatosE.next();
+
+        Dal dal = Dal.getDal();
+        Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO, new Object[]{user.getId()}, Evento.class);
+        //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
+        Iterator<Evento> itdatosE = datosE.iterator();
+        Collection<String> eventosString = new ArrayList();
+        Evento e;
+        System.out.println("tallaEventos: " + datosE.size());
+        while (itdatosE.hasNext()) {
+            e = itdatosE.next();
             eventosString.add(e.toString());
-         }
-            
-         ObservableList<String> eventos =FXCollections.observableArrayList(eventosString);
-         listaEventos.setItems(eventos);
-       
-         
+        }
+
+        ObservableList<String> eventos = FXCollections.observableArrayList(eventosString);
+        listaEventos.setItems(eventos);
+
+
     }
-    
+
     private void cargarNoticias() {
-         
-         Dal dal = Dal.getDal();
-         Collection<Noticia> datos = dal.find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
-         Iterator<Noticia> itdatos = datos.iterator();
-         Collection<String> noticiasString = new ArrayList();
-         while(itdatos.hasNext()){
-         noticiasString.add(itdatos.next().toString());
-         }
-    
-         ObservableList<String> noticias =FXCollections.observableArrayList(noticiasString);
-         listaNews.setItems(noticias);
-        
+
+        Dal dal = Dal.getDal();
+        Collection<Noticia> datos = dal.find(Noticia.TODAS_NOTICIAS, new Object[]{}, Noticia.class);
+        Iterator<Noticia> itdatos = datos.iterator();
+        Collection<String> noticiasString = new ArrayList();
+        while (itdatos.hasNext()) {
+            noticiasString.add(itdatos.next().toString());
+        }
+
+        ObservableList<String> noticias = FXCollections.observableArrayList(noticiasString);
+        listaNews.setItems(noticias);
+
     }
 
     public void cargarResumen() {
@@ -247,52 +272,59 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         List<Jugador> listjugador = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{user.getId()}, Jugador.class);
         Iterator<Jugador> itjugador = listjugador.iterator();
         Jugador jugador = null;
-        if(itjugador.hasNext()) jugador = itjugador.next();
-                
+        if (itjugador.hasNext()) {
+            jugador = itjugador.next();
+        }
+
         //Hoy tienes X actividades para realizar y has realizado Y.
         LocalDate f = new LocalDate();
-        String a = f.getYear()+"/"+f.getMonthOfYear()+"/"+f.getDayOfMonth()+"%";
-        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{a,user.getId()}, Calendario.class);
+        String a = f.getYear() + "/" + f.getMonthOfYear() + "/" + f.getDayOfMonth() + "%";
+        List<Calendario> calendarios = dal.find(Calendario.CALENDARIOSPORAÑODIAYJUGADOR, new Object[]{a, user.getId()}, Calendario.class);
         Iterator<Calendario> it = calendarios.iterator();
         Calendario cal = null;
-        System.out.println("talla: "+calendarios.size());
-        
+        System.out.println("talla: " + calendarios.size());
+
         int ActPorHacer = 0;
         int ActHechas = 0;
-        while(it.hasNext()){
-        cal=it.next();
-        cal.getFecha();
-        if(cal.getEstadoActividad()==0) ActPorHacer++;
-        else ActHechas++;
-        
+        while (it.hasNext()) {
+            cal = it.next();
+            cal.getFecha();
+            if (cal.getEstadoActividad() == 0) {
+                ActPorHacer++;
+            } else {
+                ActHechas++;
+            }
+
         }
         String texto;
-        if(calendarios.isEmpty()){
-            texto= "No tienes actividades programadas para hoy.";
+        if (calendarios.isEmpty()) {
+            texto = "No tienes actividades programadas para hoy.";
+        } else {
+            texto = "Hoy tienes " + calendarios.size() + " actividades para realizar y has realizado " + ActHechas + ".";
+            if (ActPorHacer != 0) {
+                texto = texto + "\nRealiza las " + ActPorHacer + " actividades restantes!";
+            } else {
+                texto = texto + "\nHas realizado todas las actividades de hoy!";
+            }
         }
-        else{
-         texto = "Hoy tienes "+calendarios.size()+" actividades para realizar y has realizado "+ActHechas+".";
-         if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
-         else texto = texto+"\nHas realizado todas las actividades de hoy!";
-        }
-        
+
         DecimalFormat df = new DecimalFormat("#.##");
-        texto = texto+"\nTienes "+df.format(jugador.getPuntos())+" puntos de jugador.";
-        
+        texto = texto + "\nTienes " + df.format(jugador.getPuntos()) + " puntos de jugador.";
+
         textoResumen.setText(texto);
-        
+
     }
 
-    public void cargarTablaActividades() throws SQLException {
-        Dal dal = Dal.getDal(); 
-        
+    public void cargarTablaActividades() {
+        Dal dal = Dal.getDal();
+
         List<TablaActividad> actividades = dal.find(TablaActividad.Actividades_Usuario, new Object[]{user.getId()}, TablaActividad.class);
-       
-         ObservableList<TablaActividad> datos=FXCollections.observableArrayList(actividades);
-         columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("fecha"));         
-         columnaActividad.setCellValueFactory(new PropertyValueFactory<ResultSet,String>("nombre"));
-         tablaActividad.setItems(datos);
-         
+
+        ObservableList<TablaActividad> datos = FXCollections.observableArrayList(actividades);
+        columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario, String>("fecha"));
+        columnaActividad.setCellValueFactory(new PropertyValueFactory<ResultSet, String>("nombre"));
+        tablaActividad.setItems(datos);
+
     }
 
     public void inicioReloj() {
@@ -315,20 +347,29 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         images[2] = new Image("http://3.bp.blogspot.com/-dLwJkzM8iZU/UTywrD6b5CI/AAAAAAAABF8/T0BtZKjnbIY/s1600/imagen-con-frase-motivadora-para-corredores5050.jpg", false);
 
 
-        ImageView image = new ImageView(images[0]);
-        ImageView image1 = new ImageView(images[1]);
-        ImageView image2 = new ImageView(images[2]);
+        image = new ImageView(images[0]);
+        image1 = new ImageView(images[1]);
+        image2 = new ImageView(images[2]);
 
-        image.setFitHeight(500);
-        image.setFitWidth(586);
-        image1.setFitHeight(500);
-        image1.setFitWidth(586);
-        image2.setFitHeight(500);
-        image2.setFitWidth(586);
-        
+        image.autosize();
+        image1.autosize();
+        image2.autosize();
+        image.setFitHeight(412);
+        image.setFitWidth(600);
+        image1.setFitHeight(412);
+        image1.setFitWidth(600);
+        image2.setFitHeight(412);
+        image2.setFitWidth(600);
+
+
+        //redimensionar la imagen principal
+        redimensionarImagenes();
+
+
+
 
         panelGaleria.getChildren().addAll(image, image1, image2);
-        panelGaleria.toBack();
+        panelGaleria.toFront();
         fadeTransition = FadeTransitionBuilder.create()
                 .duration(Duration.seconds(5))
                 .node(image2)
@@ -360,32 +401,100 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
                 .autoReverse(true)
                 .build();
         sequentialTransition.play();
-        }
+    }
 
     @FXML
     private void goToMain(ActionEvent event) {
         //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
-    @FXML
-    private void actualizar() throws SQLException{
+
+    
+    private void actualizar() throws SQLException {
+        
         System.out.println("Actualizando ventana principal");
         cargarNoticias();
         cargarEventos();
         cargarResumen();
         cargarTablaActividades();
         System.out.println("Ventana principal Actualizada");
+        labelActualizada.toFront();
+        labelActualizada.setVisible(true);
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                System.out.println("timer..." + labelActualizada.getOpacity());
+
+                if (labelActualizada.getOpacity() <= 0) {
+                    labelActualizada.setVisible(false);
+                    labelActualizada.setOpacity(1);
+                    this.stop();
+                } else {
+                    labelActualizada.setOpacity(labelActualizada.getOpacity() - 0.05);
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }.start();
+
     }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-     @FXML
-     private void redimensionar(){
-         System.out.println("VENTANA REDIMENSIONADA!!");
-         
-     }
-    
+
+    @FXML
+    private void redimensionarImagenes() {
+        panelGaleria.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
+                image.setFitWidth(panelGaleria.getWidth());
+                image1.setFitWidth(panelGaleria.getWidth());
+                image2.setFitWidth(panelGaleria.getWidth());
+            }
+        });
+
+        panelGaleria.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
+                image.setFitHeight(panelGaleria.getHeight());
+                image1.setFitHeight(panelGaleria.getHeight());
+                image2.setFitHeight(panelGaleria.getHeight());
+            }
+        });
+
+    }
+
+    @FXML
+    private void girarImagenDesafiosOn() {
+        Imagendesafios.setRotate(20);
+    }
+
+    @FXML
+    private void girarImagenDesafioOf() {
+        Imagendesafios.setRotate(0);
+    }
+
+    @FXML
+    private void girarImagenAmigosOn() {
+        ImagenAmigos.setRotate(20);
+    }
+
+    @FXML
+    private void girarImagenAmigosOf() {
+        ImagenAmigos.setRotate(0);
+    }
+
+    @FXML
+    private void girarImagenClasifOn() {
+        ImagenClasif.setRotate(20);
+    }
+
+    @FXML
+    private void girarImagenClasifOf() {
+        ImagenClasif.setRotate(0);
+    }
 }
