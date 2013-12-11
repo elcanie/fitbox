@@ -217,4 +217,9 @@ public class Desafio {
     return "Null";
     
     }
+
+    public void setPuntosRR(double puntos) {
+        if(alReves) valores[8]=puntos+"";
+        else valores[9]=puntos+"";
+    }
 }
