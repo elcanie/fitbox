@@ -162,7 +162,7 @@ $('#login').css("visibility","hidden");
                                                       for(var i=0;i<d.length;i++){
                                                         console.log(d[i]); 
                                                         $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
-                                                        $('#filaTema'+numTemas).append('<td><a href="#">'+d[i].nombre+'</a> </td><td id="visitas">'+ d[i].visitas+' </td>');
+                                                        $('#filaTema'+numTemas).append('<td><a href="tema.html">'+d[i].nombre+'</a> </td><td id="visitas">'+ d[i].visitas+' </td>');
                                                         arrayTemas[numTemas]=d[i].nombre;
                                                         arrayTemasVisitas[numTemas]=d[i].visitas;
                                                         numTemas++;
@@ -227,7 +227,7 @@ $('#login').css("visibility","hidden");
                                                                 success:function(data){
                                                                                 console.log('Consulta OK');
                                                                                 $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
-                                                                                $('#filaTema'+numTemas).append('<td><a href="#">'+$('#nameTema').val()+'</a> </td><td id="visitas">0</td>');
+                                                                                $('#filaTema'+numTemas).append('<td><a href="tema.html">'+$('#nameTema').val()+'</a> </td><td id="visitas">0</td>');
                                                                                 arrayTemas[numTemas]=$('#nameTema').val();
                                                                                 arrayTemasVisitas[numTemas]=0;
                                                                                 numTemas++;
