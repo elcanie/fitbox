@@ -211,7 +211,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     }
      @FXML
-    public void abrirEventos(ActionEvent event) throws IOException {
+    public void abrirEventos(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
 
         //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);

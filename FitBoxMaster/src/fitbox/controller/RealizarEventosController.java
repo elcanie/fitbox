@@ -138,7 +138,7 @@ public class RealizarEventosController implements Initializable, ControlledScree
                 recurso.putObject("conexionn", conexion);
                 recurso.putObject("connectionn", conectar);
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
             } else {
                 MessageBox.show(ScreensFramework.stage,
                         "Ya has participado en este evento.",
