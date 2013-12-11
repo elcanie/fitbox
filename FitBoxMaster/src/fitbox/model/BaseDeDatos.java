@@ -14,12 +14,13 @@ import java.util.List;
  */
 public class BaseDeDatos {
     List<Usuario> usuariosBD;
-    List<Desafio> desafiosBD;
+    List<Desafio> desafiosCreadosPorMiBD,desafiosDondeSoyRivalBD;
     List<Jugador> jugadoresBD;
+    List<Actividad> actividadesBD;
     List<Evento> eventosUsuarioIniciadoBD;
     List<Calendario> CALENDARIOSPORAÑODIAYJUGADOR;
     private static BaseDeDatos bD;
-    private Collection<Noticia> misNoticias;
+    private List<Noticia> misNoticias;
     
     public static BaseDeDatos getBD(){
     if(bD==null) bD = new BaseDeDatos();
@@ -46,6 +47,11 @@ public class BaseDeDatos {
         return eventosUsuarioIniciadoBD;
     }
     
+    public List<Actividad> getActividades(){
+    if(actividadesBD==null) actividadesBD = Dal.getDal().find(Actividad.TODOS_ACTIVIDADES, new Object[]{}, Actividad.class);
+    return actividadesBD;
+    }
+    
     public Usuario getUsuarioByPassANDName(String name,String pass){
     for(Usuario usuario : getUsuarios())
         if(usuario.getPassword().equals(pass) && usuario.getNombre().equalsIgnoreCase(name))
@@ -53,7 +59,7 @@ public class BaseDeDatos {
     return null;
     }
 
-    public Collection<Noticia> getNoticias() {
+    public List<Noticia> getNoticias() {
         if(misNoticias==null) misNoticias = Dal.getDal().find(Noticia.TODAS_NOTICIAS,new Object[]{},Noticia.class);
     return misNoticias;
     }
@@ -76,8 +82,14 @@ for(Jugador jugador : getJugadores())
    return tablaActividad;
     }
 
-    public List<Desafio> getDesafios(int id) {
-        if(desafiosBD==null)desafiosBD = Dal.getDal().find(Desafio.desafioPorId, new Object[]{id}, Desafio.class);
-    return desafiosBD;
+    public List<Desafio> getDesafiosCreadosPorMi(int id) {
+        if(desafiosCreadosPorMiBD==null)desafiosCreadosPorMiBD = Dal.getDal().find(Desafio.desafioPorIdCreadosPorMi, new Object[]{id}, Desafio.class);
+    return desafiosCreadosPorMiBD;
+    }
+    public List<Desafio> getdesafiosDondeSoyRivalBD(int id) {
+        if(desafiosDondeSoyRivalBD==null){desafiosDondeSoyRivalBD = Dal.getDal().find(Desafio.desafioPorIdDondeSoyRival, new Object[]{id}, Desafio.class);
+        for(Desafio d : desafiosDondeSoyRivalBD)d.alReves = true;
+        
+        }return desafiosDondeSoyRivalBD;
     }
 }

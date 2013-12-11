@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -94,7 +95,7 @@ boolean segundaVez=false;
                 Desafio desafio = lista.get(0);
                 desafio.setEstado(1);
                Dal.getDal().updateRuben(desafio);
-                cargarListaDesafios();
+                //cargarListaDesafios();
                 MessageBox.show(ScreensFramework.stage,
                         " ¡Ha aceptado el desafio !",
                         "Information dialog",
@@ -153,7 +154,7 @@ boolean segundaVez=false;
             } else {
                 Jugador j = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{((Usuario)recurso.getObject("usuario")).getId()},Jugador.class).get(0);
                 System.out.println(j.getId()+"---"+jugador.getId());
-                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, ((Usuario)recurso.getObject("usuario")).getId() , jugador.getId(), actividad.getId());
+                Desafio d = new Desafio(3, nombreEvento, fechaInicio, fechaFin, 0, ((Usuario)recurso.getObject("usuario")).getId() , jugador.getId(), actividad.getId(),0,0);
                 dal.insert(d);
                 MessageBox.show(ScreensFramework.stage,
                     "Ha insertado un nuevo desafío",
@@ -169,7 +170,7 @@ boolean segundaVez=false;
 
 
     }
-List<Desafio> desafios;
+List<Desafio> desafiosMios,desafiosDondeEstoy,desafios;
 Usuario usuario;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -184,11 +185,19 @@ Usuario usuario;
         recurso = (Recurso) rb;
         dataDesafios = FXCollections.observableArrayList();
         usuario = (Usuario) recurso.getObject("usuario");
-                desafios = BaseDeDatos.getBD().getDesafios(usuario.getId());
-
-        inicializarActividades();
-        cargarAmigos();
-        cargarListaDesafios();
+        desafiosMios = BaseDeDatos.getBD().getDesafiosCreadosPorMi(usuario.getId());
+        System.out.println("--->"+desafiosMios.size());
+        desafiosDondeEstoy = BaseDeDatos.getBD().getdesafiosDondeSoyRivalBD(usuario.getId());
+        System.out.println("--->"+desafiosDondeEstoy.size());
+        desafios = new LinkedList<>();
+        desafios.addAll(desafiosMios);
+        desafios.addAll(desafiosDondeEstoy);
+        System.out.println("D-->"+desafios.size());
+        for(Desafio desafio : desafios)
+            System.out.println("->"+desafio.getFechaInicio()+"vs"+desafio.getFechaFin());
+        //inicializarActividades();
+        //cargarAmigos();
+       // cargarListaDesafios();
         cargarTabDetalles();
         segundaVez = true;
 
@@ -203,7 +212,7 @@ Usuario usuario;
     private void inicializarActividades() {
         ObservableList<String> data = FXCollections.observableArrayList();
         Dal dal = Dal.getDal();
-        Collection<Actividad> actividades = dal.find(Actividad.TODOS_ACTIVIDADES, new Object[]{}, Actividad.class);
+        Collection<Actividad> actividades = BaseDeDatos.getBD().getActividades();
         Iterator<Actividad> it = actividades.iterator();
         Actividad actividad = null;
         while (it.hasNext()) {
@@ -232,39 +241,39 @@ Usuario usuario;
 
     }
 
-    private void cargarListaDesafios() {
-        dataDesafios = null;
-        dataDesafios = FXCollections.observableArrayList();
-        //Dal dal = Dal.getDal();
-        
-        int mesActual = fecha.getMonthOfYear();
-        int diaActual = fecha.getDayOfMonth();
-        int añoActual = fecha.getYear();
-        boolean error = false;
-        //To change body of generated methods, choose Tools | Templates.
-        for (Desafio desafio : desafios) {
-            if (desafio.getEstado() == 0) {
-                String fechaDesafio[] = desafio.getFechaFin().split("/");
-                int año = Integer.parseInt(fechaDesafio[2]);
-                int mes = Integer.parseInt(fechaDesafio[1]);
-                int dia = Integer.parseInt(fechaDesafio[0]);
-
-                if (añoActual > año) {
-                    error = true;
-                } else if (añoActual <= año && mesActual > mes) {
-                    error = true;
-                } else if (añoActual <= año & mesActual <= mes && diaActual > dia) {
-                    error = true;
-                }
-                if (!error) {
-                    dataDesafios.add(desafio.getId() + "-" + desafio.getNombre() + " Te ha desafiado: " + desafio.getRival().getApellidos() + "  Fecha límite: " + desafio.getFechaFin());
-                }
-            }
-
-        }
-        listaDesafios.setItems(dataDesafios);
-
-    }
+//    private void cargarListaDesafios() {
+//        dataDesafios = null;
+//        dataDesafios = FXCollections.observableArrayList();
+//        //Dal dal = Dal.getDal();
+//        
+//        int mesActual = fecha.getMonthOfYear();
+//        int diaActual = fecha.getDayOfMonth();
+//        int añoActual = fecha.getYear();
+//        boolean error = false;
+//        //To change body of generated methods, choose Tools | Templates.
+//        for (Desafio desafio : desafios) {
+//            if (desafio.getEstado() == 0) {
+//                String fechaDesafio[] = desafio.getFechaFin().split("/");
+//                int año = Integer.parseInt(fechaDesafio[2]);
+//                int mes = Integer.parseInt(fechaDesafio[1]);
+//                int dia = Integer.parseInt(fechaDesafio[0]);
+//
+//                if (añoActual > año) {
+//                    error = true;
+//                } else if (añoActual <= año && mesActual > mes) {
+//                    error = true;
+//                } else if (añoActual <= año & mesActual <= mes && diaActual > dia) {
+//                    error = true;
+//                }
+//                if (!error) {
+//                    dataDesafios.add(desafio.getId() + "-" + desafio.getNombre() + " Te ha desafiado: " + desafio.getRival().getApellidos() + "  Fecha límite: " + desafio.getFechaFin());
+//                }
+//            }
+//
+//        }
+//        listaDesafios.setItems(dataDesafios);
+//
+//    }
     //To change body of generated methods, choose Tools | Templates.
 
     //Metodos barra de botones
@@ -351,9 +360,9 @@ Usuario usuario;
         rivalColumn.setCellValueFactory(
                 new PropertyValueFactory<Desafio, String>("nombreRival"));
         estadoColumn.setCellValueFactory(
-                new PropertyValueFactory<Desafio, String>("estado"));
+                new PropertyValueFactory<Desafio, String>("realState"));
         puntosRivalColumn.setCellValueFactory(
-                new PropertyValueFactory<Desafio, String>("misPuntos"));
+                new PropertyValueFactory<Desafio, String>("susPuntos"));
         nombreColumn.setCellValueFactory(
                 new PropertyValueFactory<Desafio, String>("nombre"));
         
@@ -363,26 +372,54 @@ Usuario usuario;
         int mesActual = fecha.getMonthOfYear();
         int diaActual = fecha.getDayOfMonth();
         int añoActual = fecha.getYear();
-        boolean error = false;
+        
         //To change body of generated methods, choose Tools | Templates.
         for (Desafio desafio : desafios) {
             if (desafio.getEstado() == 0) {
+                boolean error = false;
                 String fechaDesafio[] = desafio.getFechaFin().split("/");
                 int año = Integer.parseInt(fechaDesafio[2]);
                 int mes = Integer.parseInt(fechaDesafio[1]);
                 int dia = Integer.parseInt(fechaDesafio[0]);
 
                 if (añoActual > año) {
-                    error = true;
+                    desafio.setEstado(4);
+                    Dal.getDal().update(desafio);
+               
                 } else if (añoActual <= año && mesActual > mes) {
-                    error = true;
+                    System.out.println("mes: "+mes);
+                    desafio.setEstado(4);
+                    Dal.getDal().update(desafio);
+                   
                 } else if (añoActual <= año & mesActual <= mes && diaActual > dia) {
-                    error = true;
+                    System.out.println("dia");
+                    desafio.setEstado(4);
+                    Dal.getDal().update(desafio);
+                   
                 }
-                if (!error) {
-                    listDetalles.add(desafio);
-                }
-            }}    
+          
+                    
+
+            }
+        listDetalles.add(desafio);
+        }    
+        System.out.println(desafios.size());
     tabla.setItems(listDetalles);
+    }
+    
+    @FXML
+    public void seleccionDesafio(MouseEvent t){
+        TableView tabla = ((TableView)t.getSource());
+        if(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()!=-1){
+        Desafio d = ((Desafio)tabla.getItems().get(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()));
+        System.out.println("Seleccionado: "+d.getId());
+        
+        if(d.getEstado()==0 || d.getEstado()==2){
+            //goButton.setDisable(false);
+            recurso.putObject("desafio", d);
+        }else{
+        //goButton.setDisable(true);
+        }
+        }
     }
 }

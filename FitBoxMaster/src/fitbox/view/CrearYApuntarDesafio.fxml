@@ -18,20 +18,35 @@
       <tabs>
         <Tab onSelectionChanged="#tabCambia" text="Detalles desafio">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="fondo" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="tabla" layoutX="97.0" layoutY="51.0" prefHeight="304.0" prefWidth="559.0">
+                <TableView fx:id="tabla" layoutX="31.0" layoutY="25.0" onMouseClicked="#seleccionDesafio" prefHeight="453.0" prefWidth="639.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Nombre Desafio" fx:id="nombreColumn" />
-                    <TableColumn prefWidth="75.0" text="Actividad" fx:id="actividadColumn" />
-                    <TableColumn prefWidth="75.0" text="Fecha Limite" fx:id="fechaLimiteColumn" />
-                    <TableColumn prefWidth="75.0" text="Rival" fx:id="rivalColumn" />
-                    <TableColumn prefWidth="75.0" text="Tus puntos" fx:id="tusPuntosColumn" />
-                    <TableColumn prefWidth="75.0" text="Puntos Rival" fx:id="puntosRivalColumn" />
-                    <TableColumn prefWidth="75.0" text="Estado" fx:id="estadoColumn" />
+                    <TableColumn maxWidth="5000.0" minWidth="102.0" prefWidth="102.0" text="Nombre Desafio" fx:id="nombreColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Actividad" fx:id="actividadColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Fecha Limite" fx:id="fechaLimiteColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Rival" fx:id="rivalColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Tus puntos" fx:id="tusPuntosColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Puntos Rival" fx:id="puntosRivalColumn" />
+                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Estado" fx:id="estadoColumn" />
                   </columns>
                 </TableView>
+                <Button disable="true" layoutX="699.0" layoutY="390.0" minHeight="80.0" minWidth="155.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="155.00009999999747" text="Go!">
+                  <font>
+                    <Font name="Tahoma Bold" size="20.0" />
+                  </font>
+                  <graphic>
+                    <ImageView fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../../imagenes/Swords-icon.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
               </children>
+              <stylesheets>
+                <URL value="@realizardesafio.css" />
+              </stylesheets>
             </AnchorPane>
           </content>
         </Tab>

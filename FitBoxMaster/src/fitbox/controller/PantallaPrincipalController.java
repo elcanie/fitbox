@@ -6,7 +6,6 @@
  */
 package fitbox.controller;
 
-import fitbox.controller.dao.Dal;
 import fitbox.model.BaseDeDatos;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
@@ -21,7 +20,7 @@ import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -125,7 +124,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     @FXML
-    public void Actualizar(MouseEvent event) throws IOException, SQLException {
+    public void Actualizar(MouseEvent event)  {
           myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         actualizar();
     }
@@ -181,11 +180,9 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         cargarNoticias();
         cargarEventos();
         cargarResumen();
-        try {
+        
             cargarTablaActividades();
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
@@ -202,16 +199,16 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
          
          Collection<Evento> datosE = BaseDeDatos.getBD().getEventosUsuarioIniciado(user);
          //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
-         Iterator<Evento> itdatosE = datosE.iterator();
-         Collection<String> eventosString = new ArrayList();
-         Evento e;
-         System.out.println("tallaEventos: "+datosE.size());
-         while(itdatosE.hasNext()){
-             e=itdatosE.next();
-            eventosString.add(e.toString());
-         }
+//         Iterator<Evento> itdatosE = datosE.iterator();
+//         Collection<String> eventosString = new ArrayList();
+//         Evento e;
+//         System.out.println("tallaEventos: "+datosE.size());
+//         while(itdatosE.hasNext()){
+//             e=itdatosE.next();
+//            eventosString.add(e.toString());
+//         }
             
-         ObservableList<String> eventos =FXCollections.observableArrayList(eventosString);
+         ObservableList<Evento> eventos =FXCollections.observableArrayList(datosE);
          listaEventos.setItems(eventos);
        
          
@@ -219,14 +216,14 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     
     private void cargarNoticias() {
 
-         Collection<Noticia> datos = BaseDeDatos.getBD().getNoticias();
-         Iterator<Noticia> itdatos = datos.iterator();
-         Collection<String> noticiasString = new ArrayList();
-         while(itdatos.hasNext()){
-         noticiasString.add(itdatos.next().toString());
-         }
+         List<Noticia> datos = BaseDeDatos.getBD().getNoticias();
+//         Iterator<Noticia> itdatos = datos.iterator();
+////         Collection<String> noticiasString = new ArrayList();
+////         while(itdatos.hasNext()){
+////         noticiasString.add(itdatos.next().toString());
+////         }
     
-         ObservableList<String> noticias =FXCollections.observableArrayList(noticiasString);
+         ObservableList<Noticia> noticias =FXCollections.observableArrayList(datos);
          listaNews.setItems(noticias);
         
     }
@@ -272,7 +269,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         
     }
 
-    public void cargarTablaActividades() throws SQLException {
+    public void cargarTablaActividades() {
 //        Dal dal = Dal.getDal(); 
         
         List<TablaActividad> actividades = BaseDeDatos.getBD().getTablaActividadesUsuario(user.getId());
@@ -285,12 +282,14 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     }
 
     public void inicioReloj() {
+        if(clock==null){
         clock = new Clock(Color.rgb(57, 168, 155), Color.rgb(53, 64, 62));
         clock.setLayoutX(10);
         clock.setLayoutY(30);
         clock.getTransforms().add(new Scale(0.4f, 0.4f, 0, 0));
         zonaReloj.getChildren().add(clock);
         clock.play();
+        }
     }
 
     public void inicioGaleria() {
@@ -355,7 +354,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
     @FXML
-    private void actualizar() throws SQLException{
+    private void actualizar() {
         System.out.println("Actualizando ventana principal");
         cargarNoticias();
         cargarEventos();
