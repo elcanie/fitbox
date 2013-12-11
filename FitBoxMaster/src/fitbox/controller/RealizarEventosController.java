@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package fitbox.controller;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
+import jfx.messagebox.MessageBox;
 
 /**
  *
@@ -61,80 +63,104 @@ public class RealizarEventosController implements Initializable, ControlledScree
 
     private Usuario user;
     private Recurso recurso;
-    
+    private Conexion conexion;
+    private Connection conectar;
+    int idEventoSeleccionado;
 
     public void mostrarPuntuaciones(int id) {
-        String consulta="select * from puntuacion_evento where idEvento="+id+";";
-        
-       Connection conexion = (Connection) Conexion.getConexion();
+        String consulta1 = "select * from puntuacion_evento where idEvento=" + id + ";";
+        int idJug;
+
         try {
-            Statement s = conexion.createStatement();
-            ResultSet rs = rs = s.executeQuery(consulta);
-            
-            
-            
- 
-            //List<Evento> eventos = dal.find(consulta, new Object[]{user.getId()}, Evento.class);
-            //Dal dal = Dal.getDal(); List<Evento> eventos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO, new Object[]{user.getId()}, Evento.class);
-            //ObservableList<Evento> datos = FXCollections.observableArrayList(eventos);
-            //listaPuntuacion.setItems(datos);
-            
-            
-            /*
-            ---Ejemplo con listView
-            Dal dal = Dal.getDal();
-            Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO,new Object[]{user.getId()},Evento.class);
-            //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
-            Iterator<Evento> itdatosE = datosE.iterator();
-            Collection<String> eventosString = new ArrayList();
-            Evento e;
-            System.out.println("tallaEventos: "+datosE.size());
-            while(itdatosE.hasNext()){
-            e=itdatosE.next();
-            eventosString.add(e.toString());
+
+            Statement s = conectar.createStatement();
+            Statement s1 = conectar.createStatement();
+
+            ResultSet rs = s.executeQuery(consulta1);
+            Collection<String> puntuaciones = new ArrayList();
+
+            while (rs.next()) {
+                //Cojo el id del jugador y su puntuacion
+                idJug = rs.getInt("idJugador");
+                Double punt = rs.getDouble("puntuacion");
+                //Busco el nombre del jugador
+                String consulta2 = "select nombre from usuario where id=" + idJug + ";";
+                ResultSet rs1 = s1.executeQuery(consulta2);
+                rs1.next();
+                String nombre = rs1.getString("nombre");
+                //Junto en una cadena el nombre y su puntuacion
+                String cadena = nombre + "\t" + punt;
+                //Añado a la lista
+                puntuaciones.add(cadena);
             }
-            
-            ObservableList<String> eventos =FXCollections.observableArrayList(eventosString);
-            listaEventos.setItems(eventos);
-            */
+
+            ObservableList<String> p = FXCollections.observableArrayList(puntuaciones);
+            listaPuntuacion.setItems(p);
+
         } catch (SQLException ex) {
             System.out.println("Fallo en mostrar puntuaciones (RealizarEventoController)");
+            ex.printStackTrace();
         }
     }
 
     public void mostrarEventos() {
+        //los eventos salen repetidos
         Dal dal = Dal.getDal();
         List<Evento> eventos = dal.find(Evento.TODOS_EVENTOS_USUARIOINICIADO, new Object[]{user.getId()}, Evento.class);
         ObservableList<Evento> datos = FXCollections.observableArrayList(eventos);
+
+        for (int i = 0; i < datos.size(); i++) {
+            int n = datos.get(i).getId();
+            for (int j = 0; j < datos.size(); j++) {
+                if (datos.get(j).getId() == n && i != j) {
+                    datos.remove(j);
+                }
+            }
+        }
+
         tablaEventos.setItems(datos);
     }
-    
+
     @FXML
     private void handleButtonGO(ActionEvent event) {
-    
-    
+        try {
+            String consulta3 = "select * from puntuacion_evento where idEvento=" + idEventoSeleccionado + " and idJugador=" + user.getId() + ";";
+            Statement s = conectar.createStatement();
+            ResultSet rs = s.executeQuery(consulta3);
+            if (!rs.next()) {
+                System.out.println("Puedes participar");
+            } else {
+                MessageBox.show(ScreensFramework.stage,
+                    "Ya has participado en este evento.",
+                    "Information dialog",
+                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RealizarEventosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @FXML
     public void mouseClicked(MouseEvent t) {
-       int id = ((Evento)((TableView) t.getSource()).getItems().get(((TableView) t.getSource()).getSelectionModel().getSelectedIndex())).getId();
-       mostrarPuntuaciones(id);
+        idEventoSeleccionado = ((Evento) ((TableView) t.getSource()).getItems().get(((TableView) t.getSource()).getSelectionModel().getSelectedIndex())).getId();
+        mostrarPuntuaciones(idEventoSeleccionado);
     }
-        
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
-        
+
+        conexion = new Conexion();
+        conectar = conexion.conectar1();
+
         nombreT.setCellValueFactory(new PropertyValueFactory<Evento, String>("nombre"));
         descripcionT.setCellValueFactory(new PropertyValueFactory<Evento, String>("descripcion"));
         fechaT.setCellValueFactory(new PropertyValueFactory<Evento, String>("fecha"));
         ScreensFramework.stage.setWidth(732);
         ScreensFramework.stage.setHeight(425);
-        
-        mostrarEventos();
 
+        mostrarEventos();
     }
 
     @Override

@@ -7,6 +7,7 @@ package fitbox.controller;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Calendario;
+import fitbox.model.Evento;
 
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
@@ -75,10 +76,10 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     }
 
     public void updateVista(int _año, int _mes, int _dia) {
-        System.out.println(_año + " " + _mes + " " + _dia);
+        
         diaLabel.setText("Dia: " + _dia);
         now = new LocalDate(_año, _mes, _dia);
-
+System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDayOfMonth());
         Dal dal = Dal.getDal();
         List<Calendario> calendarios = dal.find(Calendario.CALENDARIOBYJUGADORID, new Object[]{user.getId()}, Calendario.class);
 
@@ -86,10 +87,11 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
         List<Calendario> listDiaStr = new LinkedList<>();
 
 
-        diaListView.setItems(FXCollections.observableArrayList(listDiaStr));
+        
 
 
         for (Calendario cal : calendarios) {
+            System.out.println(now.getYear()+"=="+cal.getFecha().getYear() + " " + now.getMonthOfYear()+"=="+cal.getFecha().getMonthOfYear() + " " + now.getDayOfMonth()+"=="+cal.getFecha().getDayOfMonth());
             if (cal.getFecha().getDayOfMonth() == now.getDayOfMonth() && cal.getFecha().getYear() == now.getYear() && (cal.getFecha().getMonthOfYear() == now.getMonthOfYear())) {
                 listDiaStr.add(cal);
             }
@@ -97,6 +99,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
 
 
         ObservableList<Calendario> listDia = FXCollections.observableArrayList(listDiaStr);
+        System.out.println(listDia.size());
         diaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
@@ -108,12 +111,19 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                         if (item != null) {
                             super.updateItem(item, empty);
                             if (!isEmpty()) {
-
-                                Actividad ac = (Actividad) Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario) item).getIdActividad()}, Actividad.class).get(0);
+                                Actividad ac=null;
+                                Evento ev = null;
+                                List<Actividad> lac =  Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{((Calendario) item).getIdActividad()}, Actividad.class);
+                                if(lac.size()>0) ac = lac.get(0);
+                                else {
+                                List<Evento> lev =  Dal.getDal().find(Evento.ENCONTRAR_EVENTOporID, new Object[]{((Calendario) item).getEvento()}, Evento.class);
+                                
+                                if(lev.size()>0) ev = lev.get(0);
+                                }
                                 if (ac != null) {
-                                    text = new Text(calendario.getFecha().getHourOfDay()+" "+ac.getNombre());
-                                } else {
-                                    text = new Text("");
+                                    text = new Text(ac.getNombre());
+                                } else if(ev !=null){
+                                    text = new Text(ev.getNombre());
                                 }
 
                                 text.setWrappingWidth(diaListView.getPrefWidth());
@@ -126,6 +136,7 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
                 return cell;
             }
         });
+        
         diaListView.setItems(listDia);
 
     }
@@ -168,11 +179,12 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
     public void mouselClicked(MouseEvent t) {
 
         if (t.getClickCount() == 2) {
+            int answer =1;
             System.out.println("Double cliked " + ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             Calendario cal = (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex());
             List<Actividad> acts = Dal.getDal().find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{cal.getIdActividad()}, Actividad.class);
             Actividad act = (acts.size() > 0) ? acts.get(0) : null;
-
+            if(act!=null){
             recurso.putObject("actividad", act);
             List<String> buttonLabels = new ArrayList<>(2);
             buttonLabels.add("Editar Actividad");
@@ -182,8 +194,10 @@ public class ConsultarVistaDiariaController implements Initializable, Controlled
             dialog.setTitleText("Elija una opcion");
             //dialog.setMessage("This is an example of an QUESTION dialog box, created using DialogFX. This also demonstrates the automatic wrapping of text in DialogFX. Would you like to continue?");
             dialog.addButtons(buttonLabels, 0, 1);
-            int answer = dialog.showDialog();
-
+            answer = dialog.showDialog();
+            }else{
+            
+            }
             if (answer == 0) {
                 myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
                 myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);

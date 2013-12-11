@@ -23,7 +23,7 @@ public class Desafio {
     /*
      * Atributos
      */
-    public static final int NUMERO_ATRIBUTOS = 8;
+    public static final int NUMERO_ATRIBUTOS = 10;
     private final SimpleIntegerProperty idDesafio = new SimpleIntegerProperty(0);
     private final SimpleStringProperty nombre = new SimpleStringProperty("");
     private final SimpleStringProperty fechaInicio = new SimpleStringProperty("");
@@ -32,33 +32,37 @@ public class Desafio {
     private Jugador jugador = null;
     private Jugador rival = null;
     private Actividad actividad = null;
-    public static final String desafioPorId = "select * from `desafio` j WHERE j.idRival = ? and estado=0";
-    public static final String UPDATE_DESAFIO = "UPDATE `desafio` c SET `idDesafio`= ? ,`nombre`= ? ,`fechaInicio`= ? ,`fechaFin`= ? ,`estado`= ? ,`idUsuario`=?, `idRival`= ? ,`idActividad`= ? ";
+    public static final String desafioPorIdDondeSoyRival = "select * from `desafio` j WHERE j.idRival = ?";
+        public static final String desafioPorIdCreadosPorMi = "select * from `desafio` j WHERE j.idUsuario = ?";
+    public static final String UPDATE_DESAFIO = "UPDATE `desafio` c SET idDesafio = ? , `nombre`= ? ,`fechaInicio`= ? ,`fechaFin`= ? ,`estado`= ? ,`idUsuario`=?, "
+            + "`idRival`= ? ,`idActividad`= ?,`puntosUsuario` = ? , `puntosRival` = ? WHERE idDesafio = ?";
     public static final String desafioPorIdDesafio = "select * from desafio j WHERE j.idDesafio = ?";
     private String valores[] = new String[NUMERO_ATRIBUTOS];
+    public boolean alReves=false;
 
     public Desafio() {
-        this(new Integer(0), "", "", "", 0, -1, -1,-1);
+        this(new Integer(0), "", "", "", 0, -1, -1,-1,0,0);
 
     }
 
     public Desafio(LinkedList array) {
-        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (String) array.get(3), (int) array.get(4), (int) array.get(5), (int) array.get(6), (int) array.get(7));
+        this((int) array.get(0), (String) array.get(1), (String) array.get(2), (String) array.get(3), (int) array.get(4), 
+                (int) array.get(5), (int) array.get(6), (int) array.get(7),(float) array.get(8), (float) array.get(9));
     }
 
-    public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, int idJugador, int idRival, int idActividad) {
+    public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, int idJugador, int idRival, int idActividad,float puntosUsuario,float puntosRival) {
         if (idJugador != -1 && idRival != -1 && idActividad != -1) {
             Dal dal = Dal.getDal();
-            List<Jugador> usuarios = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idJugador}, Jugador.class);
+            Jugador j1 = BaseDeDatos.getBD().getJugador(idJugador);
 
-            List<Jugador> usuarios2 = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idRival}, Jugador.class);
+            Jugador j2 = BaseDeDatos.getBD().getJugador(idRival);
 
             List<Actividad> actividades = dal.find(Actividad.ENCONTRAR_ACTIVIDADporID, new Object[]{idActividad}, Actividad.class);
-            setJugador(usuarios.get(0));
-            setRival(usuarios2.get(0));
+            setJugador(j1);
+            setRival(j2);
             setActividad(actividades.get(0));
         }
-        setValores(id, nombre, fechaInicio, fechaFin, estado, getJugador(), getRival(), getActividad());
+        setValores(id, nombre, fechaInicio, fechaFin, estado, getJugador(), getRival(), getActividad(),puntosUsuario,puntosRival);
         setId(id);
         setNombre(nombre);
         setFechaInicio(fechaInicio);
@@ -69,18 +73,19 @@ public class Desafio {
 
 
     }
-        public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, Jugador jugador, Jugador rival, Actividad actividad) {
-            System.out.println(jugador.getId());
-        setValores(id, nombre, fechaInicio, fechaFin, estado,jugador, rival, actividad);
-        setId(id);
-        setNombre(nombre);
-        setFechaInicio(fechaInicio);
-        setFechaFin(fechaFin);
-        setEstado(estado);
-        setJugador(jugador);
-        setRival(rival);
-        setActividad(actividad);
-            }
+//        public Desafio(int id, String nombre, String fechaInicio, String fechaFin, int estado, Jugador jugador, Jugador rival, Actividad actividad) {
+//            System.out.println(jugador.getId());
+//        setValores(id, nombre, fechaInicio, fechaFin, estado,jugador, 
+//                rival, actividad,0,0);
+//        setId(id);
+//        setNombre(nombre);
+//        setFechaInicio(fechaInicio);
+//        setFechaFin(fechaFin);
+//        setEstado(estado);
+//        setJugador(jugador);
+//        setRival(rival);
+//        setActividad(actividad);
+//            }
 
     /**
      *
@@ -100,7 +105,7 @@ public class Desafio {
 
     public void setEstado(int fName) {
         this.estado.set(fName);
-        setValores(idDesafio.get(), nombre.get(), fechaInicio.get(), fechaFin.get(), estado.get(),jugador, rival, actividad);
+    valores[4]=fName+"";    
     }
 
     public String getFechaFin() {
@@ -160,7 +165,8 @@ public class Desafio {
         return nombre.get();
     }
 
-    private void setValores(int id, String nombre, String fechaInicio, String fechaFin, int estado, Jugador jugador, Jugador rival, Actividad actividad) {
+    private void setValores(int id, String nombre, String fechaInicio, String fechaFin, int estado, Jugador jugador, Jugador rival, 
+            Actividad actividad,float puntosUsuario,float puntosRival) {
         valores[0] = id + "";
         valores[1] = nombre + "";
         valores[2] = fechaInicio + "";
@@ -169,11 +175,51 @@ public class Desafio {
         valores[5] = jugador.getId() + "";
         valores[6] = rival.getId() + "";
         valores[7] = actividad.getId() + "";
-
+        valores[8] = puntosUsuario+"";
+        valores[9] = puntosRival+"";
 
     }
 
     public String[] getValores() {
         return valores;
+    }
+    
+    public String getMisPuntos(){
+        if(alReves) return valores[9];
+    return valores[8];
+    }
+    
+    public String getSusPuntos(){
+        if(alReves) return valores[8];
+    return valores[9];
+    }
+    
+    
+    
+    public String getNombreRival(){
+        if(alReves)return jugador.getApellidos();
+    return rival.getApellidos();
+    }
+    
+    public String getRealState(){
+    switch(getEstado()){
+        case 0:
+            return "Sin realizar";
+        case 1:
+            return "Esperando";
+        case 2:
+            return "Pendiente";
+        case 3:
+            return "Acabado";
+        case 4:
+            return "Fuera de plazo";
+    }
+    return "Null";
+    
+    }
+
+    public void setPuntosRR(double puntos) {
+        if(alReves) valores[8]=puntos+"";
+        else valores[9]=puntos+"";
     }
 }

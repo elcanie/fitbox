@@ -21,6 +21,7 @@ import fitbox.Cronometro;
 import fitbox.ObjetoWebCam;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
+import fitbox.model.Desafio;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.model.Video;
@@ -167,8 +168,13 @@ public class RealizarActividadController implements Initializable, ControlledScr
                 ScreensFramework.stage.setHeight(590);
                 puntos = puntos + j.getPuntos();
                 j.getValores()[6] = puntos;
+                Desafio d = (Desafio) recurso.getObject("desafio");
+                if(d!=null) {
+                d.setPuntosRR(crono.getPuntos());
+                }
+                
                 dal.update(j);
-
+                
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                 //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
