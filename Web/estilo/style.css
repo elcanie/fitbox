@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6
     font-family:Rockwell, 'GeoSlb712MdBTMedium',"Courier Bold", Courier, Georgia, Times, "Times New Roman", serif
 }
 h1{
-    font-size: 32px !important;
+    font-size: 30px !important;
     color: #007;
     font-style: normal !important;
 }
@@ -86,27 +86,11 @@ a:hover
 }
 
 /* RUBEN */
-#feedback { font-size: 1.4em; float: left;}
-#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; float: right; }
-#selectable li { margin: 3px; padding: 0.4em; font-size: 1em;}
-#rival { float: left;}
-#seleccionarRival {
-    width: 300px;
-}
-#selRival{
-    float: right;
-    visibility: hidden !important;
-    height: 1px !important;
-}
-#selUsuario{
-    visibility: hidden;
-    height: 1px !important;
-    float: right;
-}
-
-#fechaDesafio{
-    float: left;
-}
+#feedback { font-size: 1.4em; }
+#selectable .ui-selecting { background: #FECA40; }
+#selectable .ui-selected { background: #F39814; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
 
 
 #textoPr{
@@ -115,7 +99,7 @@ a:hover
 }
 #form1{
     height: 350px;
-    width: 700px;
+    width: 560px;
     margin-left: 100px;
     float: left;
     margin-top: 60px;
@@ -186,37 +170,8 @@ input[id=fechaInicio]{
     margin-left: 5px;
     margin-right:5px;
 }
-#foro div{
-width: 100%;
-float: left;
-margin-left: 50px;
-margin-top: 10px;
-border-radius: 5px;
-border:solid;
-}
-h3{
-	position:relative;
-	left:55px;
-
-}
-#foro,#subForo{
-	width: 80%;
-	float: left;
-	margin-left: 50px;
-	margin-top: 50px;
-	
-}
-/*Ruben dialogo abrir tema*/
-#dialogAbrirTema{
-	visibility:none;
-
-}
 
 /** ::: ALEX   ::: */
-#botones{
-
-    margin-left: 250px;
-}
 #textodialogo{
     margin-top: 8px;
     margin-left: 20px;
@@ -226,7 +181,7 @@ h3{
     width: 100%;
     float: left;
     margin-top: 50px;
-    margin-left: 100px;
+    margin-left: 80px;
     max-width: 800px;
     max-height: 390px;
 }
@@ -238,14 +193,6 @@ th{
 }
 #eventos{
     margin-bottom: 30px;
-    border: thin solid #000;
-    background-color: #EEEEFF;
-}
-thead{
-    border-bottom: thin solid #000;
-    background-color: #111144;
-    color: #EEE;
-
 }
 
 #izqEvento{
@@ -286,20 +233,16 @@ input[id=fechaE]{
     text-align: right;
 }
 
-.ui-selecting { background: #2296c6;}
-.ui-selected {background: #1185B5; color: #00273D;}
+.ui-selecting { background: #FECA40;}
+.ui-selected {background: #F39814; color: red;}
 
-#contrata{
-    float: right;
-    margin-right: 15px;
-}
 
 /* ::: CAROUSEL :::*/
 
 #carousel{
     width: 500px;
     float: right;
-    margin-top: 42px;
+    margin-top: 45px;
     margin-bottom: 10px;
     margin-right: 30px;
 }
@@ -447,8 +390,8 @@ nav.navegacion_principal ul li a:hover
     padding-top:25px;
 }
 .tituloright{
-    padding-top:30px;
-    padding-right: 60px;
+    padding-top:25px;
+    padding-right: 120px;
     height: 60px;
     float:right;
     width: 500px;
@@ -550,29 +493,18 @@ footer
     margin-top: 30px !important;
 }
 h3{
-    font-style:normal;
-    color: #007;
+    font-style:italic;
+    color: #FF8C00;
     font-size: 80px;
     line-height:30px;
 }
 h4{
     font-style: normal;
-    color: #247;
-    font-size: 32px;
+    color: #244;
+    font-size: 22px;
 }
 h5{
     font-style: normal;
     color: #09A;
     }
-#ev{
-visibility:hidden;
-}
-#de{
-visibility:hidden;
-}
-#fo{
-visibility:hidden;
-}
-#re{
-visibility:hidden;
-}
+
