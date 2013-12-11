@@ -9,7 +9,7 @@ public class Conexion {
     private static Conexion conexion;
     private Connection connection;
 
-    private Conexion() {
+    public Conexion() {
         conectar();
     }
 
@@ -18,6 +18,29 @@ public class Conexion {
             conexion = new Conexion();
         }
         return conexion;
+    }
+    
+     public Connection conectar1() {
+        try {
+            Logger.getLogger("Conexion").info("Intentando cargar el conector...");
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //Intentamos conectarnos a la base de Datos en este caso una base
+            Logger.getLogger("Conexion").info("Conectando a la base...");
+            connection = DriverManager.getConnection(
+              //      "jdbc:mysql://localhost/fitbox", "root", "");
+                 "jdbc:mysql://db4free.net:3306/fitboxdb", "fitboxuser", "fitboxPass");
+            Logger.getLogger("Conexion").info("Conexion a BD establecida");
+            
+
+        } catch (SQLException ex) {
+            System.out.println("Error de mysql");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
+        return connection;
     }
 
     private void conectar() {
