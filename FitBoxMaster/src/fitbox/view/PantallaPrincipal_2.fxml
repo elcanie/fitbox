@@ -39,7 +39,7 @@
     </VBox>
     <HBox id="HBox" alignment="CENTER" padding="$x3" prefHeight="104.99999986419425" prefWidth="331.0" spacing="5.0" style="#-fx-background-color: violet" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
       <children>
-        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#abrirDesafios" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
           <effect>
             <DropShadow />
           </effect>
@@ -138,6 +138,18 @@
             <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" onMouseClicked="#abrirEventos" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/evento.png" />
               </image>
             </ImageView>
           </graphic>
