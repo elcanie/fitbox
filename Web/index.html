@@ -24,6 +24,7 @@ if(logueado!=null){
 $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
+$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
 
 $('#re').click(function(){
@@ -31,6 +32,7 @@ $.removeCookie("logueado");
 $('#ev').css("visibility","hidden");
 $('#de').css("visibility","hidden");
 $('#re').css("visibility","hidden");
+$('#fo').css("visibility","hidden");
 $('#login').css("visibility","visible");
 $(location).attr('href','index.html');
 });
@@ -85,6 +87,7 @@ $( "#mensaje-error-login" ).dialog({
       $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
+$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
         }
       }
@@ -129,7 +132,7 @@ $('#login').css("visibility","hidden");
                <li><b>Home</b></li>
                <li id="ev"><a href="eventos.html">Eventos</a></li>
                <li id="de"><a href="desafios.html">Desafíos</a></li>
-               <li id="fo"><a href="#">Foro</a></li>
+               <li id="fo"><a href="foro.html">Foro</a></li>
           </ul>
       </nav>
       <nav class="navegacion_principal right">
