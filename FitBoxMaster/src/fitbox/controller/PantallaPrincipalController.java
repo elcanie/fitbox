@@ -8,7 +8,7 @@ package fitbox.controller;
 
 
 import fitbox.controller.dao.Dal;
-//import fitbox.model.BaseDeDatos;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Calendario;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
@@ -211,7 +211,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     }
 
-    @FXML
+    @FXML //es cerrarSesion
     public void abrirAjustes(MouseEvent event) throws IOException {
 
 

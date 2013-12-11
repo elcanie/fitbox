@@ -105,6 +105,16 @@ public class ScreensController extends StackPane {
         }
 
       }
+      
+      public void ponerLimitesMinimosCero(){
+         ScreensFramework.stage.setMinWidth(0);
+        ScreensFramework.stage.setMinHeight(0);
+      }
+      
+       public void ponerLimitesMinimos(){
+        ScreensFramework.stage.setMinWidth(950);
+        ScreensFramework.stage.setMinHeight(580);
+      }
 
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
