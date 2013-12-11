@@ -58,7 +58,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     @FXML
     private ListView listaRival, listaDesafios;
     @FXML
-    private Button btnDesafiar;
+    private Button btnDesafiar,goButton;
     @FXML
     private HBox hBoxFin;
     private Recurso recurso;
@@ -411,15 +411,22 @@ Usuario usuario;
     public void seleccionDesafio(MouseEvent t){
         TableView tabla = ((TableView)t.getSource());
         if(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()!=-1){
-        Desafio d = ((Desafio)tabla.getItems().get(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()));
-        System.out.println("Seleccionado: "+d.getId());
+        dSelected = ((Desafio)tabla.getItems().get(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()));
+        System.out.println("Seleccionado: "+dSelected.getId());
         
-        if(d.getEstado()==0 || d.getEstado()==2){
-            //goButton.setDisable(false);
-            recurso.putObject("desafio", d);
+        if(dSelected.getEstado()==0 || dSelected.getEstado()==2){
+            goButton.setDisable(false);
+            
         }else{
-        //goButton.setDisable(true);
+        goButton.setDisable(true);
         }
         }
+    }
+    Desafio dSelected;
+    @FXML
+    public void goClick(){
+    recurso.putObject("desafio", dSelected);
+    myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD,
+            ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
     }
 }

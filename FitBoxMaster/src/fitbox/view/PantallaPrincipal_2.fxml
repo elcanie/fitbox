@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.000022070315" prefWidth="932.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.000022070315" prefWidth="932.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.PantallaPrincipalController">
   <children>
     <VBox id="VBox" fx:id="VBOXhorario" alignment="CENTER" prefWidth="329.7929068969752" spacing="5.0" style="#-fx-background-color: yellow" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="64.0">
       <children>
@@ -39,7 +39,7 @@
     </VBox>
     <HBox id="HBox" alignment="CENTER" padding="$x3" prefHeight="104.99999986419425" prefWidth="331.0" spacing="5.0" style="#-fx-background-color: violet" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
       <children>
-        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
+        <Button fx:id="botonEvento" defaultButton="false" minHeight="36.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#abrirDesafios" onMouseEntered="#girarImagenDesafiosOn" onMouseExited="#girarImagenDesafioOf" prefHeight="87.0" prefWidth="99.0" text="" textOverrun="ELLIPSIS">
           <effect>
             <DropShadow />
           </effect>
