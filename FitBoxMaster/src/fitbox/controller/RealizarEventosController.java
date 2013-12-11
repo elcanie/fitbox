@@ -19,6 +19,7 @@ import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -66,6 +67,7 @@ public class RealizarEventosController implements Initializable, ControlledScree
     private Conexion conexion;
     private Connection conectar;
     int idEventoSeleccionado;
+    
 
     public void mostrarPuntuaciones(int id) {
         String consulta1 = "select * from puntuacion_evento where idEvento=" + id + ";";
@@ -129,11 +131,19 @@ public class RealizarEventosController implements Initializable, ControlledScree
             ResultSet rs = s.executeQuery(consulta3);
             if (!rs.next()) {
                 System.out.println("Puedes participar");
+                int[] identificadores = new int[2];
+                identificadores[0] = user.getId();
+                identificadores[1] = idEventoSeleccionado;
+                recurso.putObject("puntuaciones", identificadores);
+                recurso.putObject("conexionn", conexion);
+                recurso.putObject("connectionn", conectar);
+                myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
             } else {
                 MessageBox.show(ScreensFramework.stage,
-                    "Ya has participado en este evento.",
-                    "Information dialog",
-                    MessageBox.ICON_INFORMATION | MessageBox.OK);
+                        "Ya has participado en este evento.",
+                        "Information dialog",
+                        MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } catch (SQLException ex) {
             Logger.getLogger(RealizarEventosController.class.getName()).log(Level.SEVERE, null, ex);

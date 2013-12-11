@@ -19,6 +19,7 @@ import java.io.File;
 import java.net.URL;
 import fitbox.Cronometro;
 import fitbox.ObjetoWebCam;
+import fitbox.controller.dao.Conexion;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
 import fitbox.model.Desafio;
@@ -30,6 +31,9 @@ import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -68,6 +72,12 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private String MEDIA_URL;
     private String nombreVideo;
     private int answer2;
+
+    private boolean evento = false;
+    private Conexion conexion;
+    private Connection conectar;
+    int[] identificadores;
+    double p;
 
     @FXML
     public void grabar() {
@@ -128,7 +138,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     YouTubeMediaGroup mg = newEntry.getOrCreateMediaGroup();
 
                     mg.addCategory(new MediaCategory(YouTubeNamespace.CATEGORY_SCHEME, "Sports"));
-                    mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME,j.getId()+""));
+                    mg.addCategory(new MediaCategory(YouTubeNamespace.DEVELOPER_TAG_SCHEME, j.getId() + ""));
                     mg.setPrivate(false);
                     mg.setTitle(new MediaTitle());
                     mg.getTitle().setPlainTextContent(webcam.getNombreVideo());
@@ -144,11 +154,11 @@ public class RealizarActividadController implements Initializable, ControlledScr
                         VideoEntry createdEntry = service.insert(new URL(uploadUrl), newEntry);
                         YouTubeMediaGroup mediaGroup2 = createdEntry.getMediaGroup();
                         String url = mediaGroup2.getVideoId();
-                     
+
                         dal = Dal.getDal();
                         Video videoSubido = new Video(0, nombreVideo, url, j.getId());
                         dal.insert(videoSubido);
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(RealizarActividadController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ServiceException ex) {
@@ -162,19 +172,31 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     "Genial!! Has acumulado " + puntos + "\nAcumula puntos y gana puestos en el ranking!!",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
-
+            p = puntos;
             if (answer == MessageBox.OK) {
                 ScreensFramework.stage.setWidth(921);
                 ScreensFramework.stage.setHeight(590);
                 puntos = puntos + j.getPuntos();
                 j.getValores()[6] = puntos;
-                Desafio d = (Desafio) recurso.getObject("desafio");
-                if(d!=null) {
-                d.setPuntosRR(crono.getPuntos());
+                try {
+                    Desafio d = (Desafio) recurso.getObject("desafio");
+                    if (d != null) {
+                        d.setPuntosRR(crono.getPuntos());
+                    }
+                } catch (Exception e) {
                 }
-                
+
+                try {
+                    conexion = (Conexion) recurso.getObject("conexionn");
+                    conectar = (Connection) recurso.getObject("connectionn");
+                    String consulta3 = "insert into puntuacion_evento (idJugador,idEvento,puntuacion) values(" + identificadores[0] + "," + identificadores[1] + "," + p + ");";
+                    Statement s = conectar.createStatement();
+                    s.executeUpdate(consulta3);
+                } catch (Exception e) {
+                    System.out.println("----Error eventos----");
+                }
                 dal.update(j);
-                
+
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                 //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
@@ -212,8 +234,19 @@ public class RealizarActividadController implements Initializable, ControlledScr
         usuario = (Usuario) recurso.getObject("usuario");
         List<Jugador> jugadores = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class);
         j = jugadores.get(0);
-        actividad = (Actividad) recurso.getObject("actividad");
-        URL = actividad.getVideo();
+        try {
+            actividad = (Actividad) recurso.getObject("actividad");
+            URL = actividad.getVideo();
+        } catch (Exception e) {
+            System.out.println("No es actividad");
+        }
+        try {
+            identificadores = (int[]) recurso.getObject("puntuaciones");
+            evento = true;
+        } catch (Exception e) {
+            System.out.println("Error recurso ,realizar eventos");
+            e.printStackTrace();
+        }
 
         myController.ponerLimitesMinimosCero();
         ScreensFramework.stage.setWidth(791);

@@ -30,12 +30,16 @@ $(location).attr('href','index.html');
 $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
+$('#cl').css("visibility","visible");
+$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
 $('#re').click(function(){
 $.removeCookie("logueado");
 $('#ev').css("visibility","hidden");
 $('#de').css("visibility","hidden");
 $('#re').css("visibility","hidden");
+$('#cl').css("visibilty","hidden");
+$('#fo').css("visibility","hidden");
 $('#login').css("visibility","visible");
 $(location).attr('href','index.html');
 });
@@ -145,7 +149,8 @@ $( "#mensaje-inscribirse" ).dialog({
                <li><a href="index.html">Home</a></li>
                <li id="ev"><a href="eventos.html">Eventos</a></li>
                <li id="de"><b>Desafíos</b></li>
-               <li id="fo"><a href="#">Foro</a></li>
+               <li id="fo"><a href="foro.html">Foro</a></li>
+               <li id="cl"><a href="clasificacion.html">Clasificación</a></li>
           </ul>
       </nav>
       <nav class="navegacion_principal right">

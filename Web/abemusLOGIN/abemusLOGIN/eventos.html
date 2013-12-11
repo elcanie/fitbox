@@ -13,7 +13,6 @@
   <script src="jquery-ui-1.10.3/jquery.min.js"></script>
   <script src="jquery-ui-1.10.3/jquery-ui.min.js"></script>
   <script src="jqueryCookie/jquery.cookie.js"></script>
-  
 
   <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
 
@@ -40,16 +39,12 @@ $(location).attr('href','index.html');
 $('#ev').css("visibility","visible");
 $('#de').css("visibility","visible");
 $('#re').css("visibility","visible");
-$('#cl').css("visibility","visible");
-$('#fo').css("visibility","visible");
 $('#login').css("visibility","hidden");
 $('#re').click(function(){
 $.removeCookie("logueado");
 $('#ev').css("visibility","hidden");
 $('#de').css("visibility","hidden");
 $('#re').css("visibility","hidden");
-$('#cl').css("visibilty","hidden");
-$('#fo').css("visibility","hidden");
 $('#login').css("visibility","visible");
 $(location).attr('href','index.html');
 });
@@ -76,7 +71,9 @@ $(location).attr('href','index.html');
     //Guardo la cookie
           $.cookie("logueado",JSON.stringify(d[0]));
 
-          logueado = d[0];   
+          logueado = d[0];
+          hayLogueado();
+		  
         }
       }
 
@@ -117,15 +114,14 @@ $(location).attr('href','index.html');
        <nav class="navegacion_principal" >
           <ul>
                <li><a href="index.html">Home</a></li>
-               <li id="ev"><b>Eventos</b></li>
-               <li id="de"><a href="desafios.html">Desafíos</a></li>
-               <li id="fo"><a href="foro.html">Foro</a></li>
-               <li id="cl"><a href="clasificacion.html">Clasificación</a></li>
+               <li><b>Eventos</b></li>
+               <li><a href="desafios.html">Desafíos</a></li>
+               <li><a href="#">Foro</a></li>
           </ul>
       </nav>
       <nav class="navegacion_principal right">
           <ul>
-              <li ><a id="login" href="#">Login</a></li>
+                 <li ><a id="login" href="#">Login</a></li>
               <li>&bull;</li>
               <li id="re"><a href="#">Logout</a></li>
           </ul>
@@ -189,7 +185,7 @@ $(location).attr('href','index.html');
   </p>
 <div id="mensaje-crear-fallido" title="Creación de evento">
   <p>
-    <span class="ui-icon ui-icon-circle-close" style="float: left; margin: 0 7px 50px 0;"></span>
+    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
     No se ha podido crear el evento, rellene todos los campos.
   </p>
 </div>
@@ -291,8 +287,8 @@ $.ajax({
         }
       }
     });
-  
-  $( "#mensaje-crear-fallido" ).dialog({
+	
+	$( "#mensaje-crear-fallido" ).dialog({
       modal: true,
     autoOpen:false,
     width:400,
@@ -306,18 +302,18 @@ $.ajax({
     $("#dialogcrearevento").dialog({autoOpen:false,width:500,modal:true, 
     buttons: {
         "Aceptar": function() {
-    if($("#nombreE").val()!='' && $("#descripcionE").val()!='' && $("#fechaE").val()!='' ){
+		if($("#nombreE").val()!='' && $("#descripcionE").val()!='' && $("#fechaE").val()!='' ){
 $.ajax({
     type: "POST",
     url: "other.php",
     data: {consulta:"INSERT INTO eventos(nombre, descripcion, fecha) VALUES ('"+$("#nombreE").val()+"','"+$("#descripcionE").val()+"','"+$("#fechaE").val()+"');"},
     success:function(data){
-  //selectable
+	//selectable
   $("#tt").html('');
   update();
   $("#mensaje-crear").dialog("open");
     }
-  
+	
 });
 } else{ $("#mensaje-crear-fallido").dialog("open");}  
       $( this ).dialog("close");
@@ -331,6 +327,7 @@ $.ajax({
   });
   </script>
       </div>
+
 
   </section>
 
