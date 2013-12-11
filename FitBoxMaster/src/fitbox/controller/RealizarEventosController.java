@@ -61,14 +61,13 @@ public class RealizarEventosController implements Initializable, ControlledScree
     @FXML
     private ListView listaPuntuacion;
     @FXML
-    private TableColumn nombreT, descripcionT, fechaT;
+    private TableColumn nombreT, descripcionT, fechaT, realizado;
 
     private Usuario user;
     private Recurso recurso;
     private Conexion conexion;
     private Connection conectar;
     int idEventoSeleccionado;
-    
 
     public void mostrarPuntuaciones(int id) {
         String consulta1 = "select * from puntuacion_evento where idEvento=" + id + ";";
@@ -114,6 +113,19 @@ public class RealizarEventosController implements Initializable, ControlledScree
 
         for (int i = 0; i < datos.size(); i++) {
             int n = datos.get(i).getId();
+            String consulta4 = "select * from puntuacion_evento where idEvento=" + datos.get(i).getId() + " and idJugador=" + user.getId() + ";";
+            Statement s;
+            try {
+                s = conectar.createStatement();
+                ResultSet rs = s.executeQuery(consulta4);
+                if (rs.next()) {
+                    datos.get(i).setRealizado("Realizado");
+                }else {datos.get(i).setRealizado("No realizado");}
+
+            } catch (SQLException ex) {
+                Logger.getLogger(RealizarEventosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             for (int j = 0; j < datos.size(); j++) {
                 if (datos.get(j).getId() == n && i != j) {
                     datos.remove(j);
@@ -168,6 +180,8 @@ public class RealizarEventosController implements Initializable, ControlledScree
         nombreT.setCellValueFactory(new PropertyValueFactory<Evento, String>("nombre"));
         descripcionT.setCellValueFactory(new PropertyValueFactory<Evento, String>("descripcion"));
         fechaT.setCellValueFactory(new PropertyValueFactory<Evento, String>("fecha"));
+        realizado.setCellValueFactory(new PropertyValueFactory<Evento, String>("realizado"));
+
         ScreensFramework.stage.setWidth(732);
         ScreensFramework.stage.setHeight(425);
 
@@ -180,4 +194,3 @@ public class RealizarEventosController implements Initializable, ControlledScree
     }
 
 }
-

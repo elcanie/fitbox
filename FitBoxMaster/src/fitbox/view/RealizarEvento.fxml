@@ -14,8 +14,9 @@
     <TableView fx:id="tablaEventos" layoutX="32.0" layoutY="62.0" onMouseClicked="#mouseClicked" prefHeight="240.0" prefWidth="427.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Nombre" fx:id="nombreT" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="189.0" text="Descripción" fx:id="descripcionT" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Fecha" fx:id="fechaT" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="107.0" text="Descripción" fx:id="descripcionT" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Fecha" fx:id="fechaT" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Realizado" fx:id="realizado" />
       </columns>
     </TableView>
     <Button fx:id="botonGO" layoutX="182.0" layoutY="312.0" minHeight="73.999755859375" minWidth="88.0" mnemonicParsing="false" onAction="#handleButtonGO" prefHeight="73.999755859375" prefWidth="116.0" text="Go!">
