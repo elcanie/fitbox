@@ -213,15 +213,30 @@ $(function(){
       });
       document.location.reload(true);
     } else {
-      
+      $('#mensaje-error-comentarioVacio').dialog("open");
     }
   });
 });
 </script>
 
-<link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
-<link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
-<link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
+<script>
+$(function(){
+  $( "#mensaje-error-comentarioVacio" ).dialog({
+    modal: true,
+    autoOpen:false,
+    width:400,
+    buttons: {
+      Ok: function() {
+       $( this ).dialog( "close" );
+     }
+   }
+ });
+});
+  </script>
+
+  <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
+  <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
+  <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
 </head>
 
 <body>
@@ -317,8 +332,13 @@ $(function(){
       </p>
 
     </div>
+    <div id="mensaje-error-comentarioVacio" title="Campos sin rellenar">
+      <p>
+        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+        ¡Debes escribir algo en tu comentario!
+      </p>
 
 
-  </body>
+    </body>
 
-  </html>
+    </html>
