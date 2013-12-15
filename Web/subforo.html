@@ -9,404 +9,86 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 -->
-  <link rel="stylesheet" href="estilo/jquery-ui.css"/>
-  <script src="js/jquery-1.9.1.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
-  <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
-
-  <script src="jqueryCookie/jquery.cookie.js"></script>
-  <link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
-
-<script>
- var logueado;
-  $(function() {
-  var leerString = $.cookie("logueado");
-  if(leerString!=null)
-       logueado = JSON.parse(leerString);
-if(logueado!=null){
-$('#ev').css("visibility","visible");
-$('#de').css("visibility","visible");
-$('#re').css("visibility","visible");
-$('#fo').css("visibility","visible");
-$('#cl').css("visibility","visible");
-$('#login').css("visibility","hidden");
-
-$('#re').click(function(){
-$.removeCookie("logueado");
-$('#ev').css("visibility","hidden");
-$('#de').css("visibility","hidden");
-$('#re').css("visibility","hidden");
-$('#fo').css("visibility","hidden");
-$('#cl').css("visibility","hidden");
-$('#login').css("visibility","visible");
-$(location).attr('href','index.html');
-});
-}
-
-$( "#mensaje-error-login" ).dialog({
-      modal: true,
-    autoOpen:false,
-    width:400,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-
-    $( "#dialoglogin" ).dialog({
-      autoOpen: false,
-      height: 300,
-      width: 450,
-      modal: true,
-      buttons: {
-"Loguear":function(){
-  
-  console.log('quillo mete las credenciales!');
-  if(($("#password").val()=="") || ($("#name").val()=="")) {
-        console.log('quillo mete las credenciales!');
-        $( this ).dialog( "close" );
-        $( "#mensaje-error-login" ).dialog("open");   
-      }   
-  else if(logueado==null){
-      
-    $.ajax({
-      type: "POST",
-      url: "other.php",
-      data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
-      success:function(data){
-    console.log('Consulta OK');
-        d=JSON.parse(data);
-        f=d[0].password;
-        if(f==$("#password").val()){
-    //Si se loguea con exito
-    //Guardo la cookie
-    $.cookie("logueado",JSON.stringify(d[0]));
-    //Ahora todas las ventanas tienen acceso a la cookie
-    //¿Como leerla?
-    var leerString = $.cookie("logueado");
-    var logueado = JSON.parse(leerString);
-    console.log(logueado);
-          logueado = d[0];
-       $.cookie("logueado",JSON.stringify(d[0]));
-      $('#ev').css("visibility","visible");
-$('#de').css("visibility","visible");
-$('#re').css("visibility","visible");
-$('#fo').css("visibility","visible");
-$('#cl').css("visibility","visible");
-$('#login').css("visibility","hidden");
-        }
-      }
-
-    });
-
-  }
-  
-  $( this ).dialog( "close" );
-}
-      }
-    });
-
-    $("#login").click(function() {
-      $( "#dialoglogin" ).dialog("open");
-      });
-    });
-
-  </script>
-  <script>
-        var arrayTemas=[];
-        var arrayTemasVisitas=[];
-        var leerForoGuardad = $.cookie("subForo");
-        var subforoGuardado;
-
-        $(function(){
-                                                var d;
-                                                $.ajax({
-                                                  type: "POST",
-                                                  async:false,
-                                                  url: "other.php",
-                                                  data: {consulta:"SELECT * from subforo where nombre='"+leerForoGuardad+"';"},
-                                                  success:function(data){
-                                                  d = JSON.parse(data);
-                                                  for(var i=0;i<d.length;i++){
-                                                                        console.log(d[i]);
-                                                                        subforoGuardado=d[i];
-                                                   }
-                                                  }
-                                                });
-                                });
-  </script>
+<link rel="stylesheet" href="estilo/jquery-ui.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="estilo/style.css" />
+<link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
+<link href="imagenes/iconohuella.ico" type="image/icon" rel="shortcut icon" />
 
 
-        <script>
-                $(function(){
-                        var contenidoString=$('#urlSubForo').html();
-                        contenidoString+=" "+subforoGuardado.nombre;
-                        $('#urlSubForo').html(contenidoString);
-                });
-        </script>
-<script>
-    var numTemas=0;
-                                         $(function(){
-                                                var d;
-                                                $.ajax({
-                                                  type: "POST",
-                                                  url: "other.php",
-                                                  async:false,
-                                                  /*where `idSubforo`="+subforoGuardado.idSubforo+";*/
-                                                  data: {consulta:"SELECT * from `temas` where `idSubforo`="+subforoGuardado.idSubforo+";"},
-                                                  success:function(data){
-                                                    try{
-                                                      d = JSON.parse(data);
-                                                      for(var i=0;i<d.length;i++){
-                                                        console.log(d[i]); 
-                                                        $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
-                                                        $('#filaTema'+numTemas).append('<td><a href="#">'+d[i].nombre+'</a> </td><td id="visitas">'+ d[i].visitas+' </td>');
-                                                        arrayTemas[numTemas]=d[i].nombre;
-                                                        arrayTemasVisitas[numTemas]=d[i].visitas;
-                                                        numTemas++;
-                                                      }
-                                                    }catch(error){console.log("No hay temas en el subforo");}
-                                                  
-                                                  }
-                                                });
-                                });
-                        
-        </script>
-        <script>
-                $(function(){
-                                
-                                        $( "#mensaje-error-abrirTema" ).dialog({
-                                                modal: true,
-                                                autoOpen:false,
-                                                width:400,
-                                                buttons: {
-                                                Ok: function() {
-                                                 $( this ).dialog( "close" );
-                                                 $( "#dialogAbrirTema" ).dialog("open");
-
-                                                }
-                                          }
-                                        });
-                                                $( "#mensaje-error-abrirTemaRepetido" ).dialog({
-                                                modal: true,
-                                                autoOpen:false,
-                                                width:400,
-                                                buttons: {
-                                                Ok: function() {
-                                                 $( this ).dialog( "close" );
-                                                 $( "#dialogAbrirTemaRepetido" ).dialog("open");
-
-                                                }
-                                          }
-                                        });
-                                
-                                $( "#dialogAbrirTema" ).dialog({
-                                        autoOpen: false,
-                                        height: 400,
-                                        width: 500,
-                                        modal: true,
-                                        buttons: {
-                                        "Crear tema":function(){
-                                                var existe=false;
-                                                var nombreTema=$('#nameTema').val();
-                                                var primerComentario=$('textarea').val().trim();
-                                                if(primerComentario!="" && nombreTema!=""){
-                                                        for(var i=0;i<arrayTemas.length;i++){
-                                                                if(arrayTemas[i]==nombreTema) existe=true;
-                                                        
-                                                        }
-                                                        
-                                                        if(!existe){
-                                                         $.ajax({
-                                                                type: "POST",
-                                                                url: "other.php",
-                                                                async: false,
-                                                                data: {consulta: "insert into `temas` (`idTema`, `nombre`, `visitas`,`idSubforo`) VALUES(null,'"+$('#nameTema').val()+"',0,"+subforoGuardado.idSubforo+");"},    
-                                                                success:function(data){
-                                                                                console.log('Consulta OK');
-                                                                                $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
-                                                                                $('#filaTema'+numTemas).append('<td><a href="#">'+$('#nameTema').val()+'</a> </td><td id="visitas">0</td>');
-                                                                                arrayTemas[numTemas]=$('#nameTema').val();
-                                                                                arrayTemasVisitas[numTemas]=0;
-                                                                                numTemas++;
-                                                                                
-                                                                                
-                                                                                
-
-                                                                }
-                                                                });
-                                                                var f=new Date();
-                                                                var fechaFormat=f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear();
-                                                                $.ajax({
-                                                                type: "POST",
-                                                                url: "other.php",
-                                                                async: false,
-                                                                data: {consulta: "insert into `comentario` (`idComentario`, `idJugador`, `fecha`,`mensaje`,`idTema`) VALUES(null,"+logueado.id+",'"+fechaFormat+"','"+$('textarea').val()+"',numTemas);"},    
-                                                                success:function(data){
-                                                                                console.log('Introducido comentario OK');
-                                                                                
-                                                                                
-                                                                                
-
-                                                                }
-                                                                });
-                                                                $(this).dialog( "close" );
-
-                                                                }
-                                                        else{
-                                                        $( this ).dialog( "close" );
-                                                        $( "#mensaje-error-abrirTemaRepetido" ).dialog("open");
-                                                                
-                                                        }
-                                                
-                
-                                        
-                                                        
-                                                }else{
-                                                $( this ).dialog( "close" );
-                                                $( "#mensaje-error-abrirTema" ).dialog("open");
-                                                }
-                                }
-                        }
-                                        
-                                        
-                                        
-                        
-                        
-                                
-                                
-                                
-                                
-                                });
-                                
-                                $('#abrirTema').click(function(){
-                                                $("#dialogAbrirTema").dialog("open");
-                                                console.log("Entro en abrir tema");
-                                        
-                                        
-                                        });
-                });
-                
-        </script>
-        <script>
-                
-                        function encontrarTema(nombre){
-                                
-                                for(var i=0;i<arrayTemas.length;i++){
-                                        if(arrayTemas[i]==nombre) return i;
-                                                        
-                                }
-                                return -1;
-                                                        
-                                
-                        }
-        </script>
-        <script>
-        
-        $(function(){
-                        $('a').click(function (){
-                        console.log("Aaaaaaaaaaaaaaaaaaaaaa");
-                                                                var temaSelec=this.text;
-                                                                var leerString = $.cookie("tema");
-                                                                if(leerString==null){
-                                                                        $.removeCookie("tema");
-                                                                        }
-                                                                                                        
-                                                                $.cookie("tema",this.text);
-                                                                console.log(this.text);
-                                                                var posicion=encontrarTema(this.text);
-                                                                console.log(posicion);
-                                                                var visitas=parseInt(arrayTemasVisitas[posicion]);
-                                                                visitas+=1;
-                                                                console.log(visitas);
-                                                                $.ajax({
-                                                                          type: "POST",
-                                                                          url: "other.php",
-                                                                          async:false,
-                                                                          data: {consulta:"update `temas` SET `visitas`="+(visitas)+" where `nombre`='"+this.text+"';"},
-                                                                                success:function(data){
-                                                                                arrayTemasVisitas[numTemas]+=1;
-                                                                                }
-                                                                        });
-                });
-                });
-        </script>
 </head>
 
 <body>
 
   <div class="container">
-  <header class="principal">
-  <div class="portada">
-      <div class="titulo">
+    <header class="principal">
+      <div class="portada">
+        <div class="titulo">
           <img src="./imagenes/portada2.png">
-      </div>
-      <div class="logofito">
-        <a href="#" class="logo_principal">FitBox</a>
-      </div>
-  </div> 
-     <div class="navegacion"> 
-       <nav class="navegacion_principal" >
-          <ul>
-               <li><a href="index.html">Home</a></li>
-               <li id="ev"><a href="eventos.html">Eventos</a></li>
-               <li id="de"><a href="desafios.html">Desafíos</a></li>
-               <li id="fo"><a href="foro.html">Foro</a></li>
-               <li id="cl"><a href="clasificacion.html">Clasificación</a></li>
-               
-          </ul>
-      </nav>
-      <nav class="navegacion_principal right">
-          <ul>
-              <li ><a id="login" href="#">Login</a></li>
-              <li>&bull;</li>
-              <li id="re"><a href="#">Logout</a></li>
-          </ul>
-      </nav>
-    </div>
-  </header>
-
-  <section class="cuerpo">
-    <div class="titulocuerpo">
-      <h1>Foro</h1>
-    </div>
-    <div class="tituloright">         
-      <h4> Tu entrenador personal en línea</h4>
-    </div>
-   
-        <div class="contenido">
-                <div id="subForo">
-
-                                <p><a href="../../sprint%203/fitbox/foro.html">Foro</a> >> <a id="urlSubForo"> Subforo </a> </p>
-                                <p>
-                                        <button id="abrirTema" class="btn btn-large btn-primary" type="button">Abrir tema</button>
-                                </p>
-                        
-                                <div id="listaTemas">
-                                        <table class="table table-hover" id="tabla">
-                                                <thead>
-                                                        <tr>
-                                                                <td> Nombre tema</td>
-                                                                <td> Visitas</td>
-                                                        </tr>
-                                                
-                                                </thead>
-                                                <tbody>
-                                                
-                                                </tbody>
-                                        
-                                        </table>
-                                        
-                                </div>
-                </div>
         </div>
+        <div class="logofito">
+          <a href="#" class="logo_principal">FitBox</a>
+        </div>
+      </div> 
+      <div class="navegacion"> 
+       <nav class="navegacion_principal" >
+        <ul>
+         <li><a href="index.html">Home</a></li>
+         <li id="ev"><a href="eventos.html">Eventos</a></li>
+         <li id="de"><a href="desafios.html">Desafíos</a></li>
+         <li id="fo"><b>Foro</b></li>
+         <li id="cl"><a href="clasificacion.html">Clasificación</a></li>
+
+       </ul>
+     </nav>
+     <nav class="navegacion_principal right">
+      <ul>
+        <li ><a id="login" href="#">Login</a></li>
+        <li>&bull;</li>
+        <li id="re"><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="cuerpo">
+  <div class="titulocuerpo">
+    <h1>Foro</h1>
+  </div>
+  <div class="tituloright">         
+    <h4> Tu entrenador personal en línea</h4>
+  </div>
+
+  <div class="contenido">
+    <div id="subForo">
+
+      <p><a href="../../Web/foro.html">Foro</a> >> <a id="urlSubForo"> Subforo </a> </p>
+      <p>
+        <button id="abrirTema" class="btn btn-large btn-primary" type="button">Abrir tema</button>
+      </p>
+
+      <div id="listaTemas">
+        <table class="table table-hover" id="tabla">
+          <thead>
+            <tr>
+              <td> Nombre tema</td>
+              <td> Visitas</td>
+            </tr>
+
+          </thead>
+          <tbody>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
 
 
 
-  </section>
-  
+</section>
+
 <footer>
   <div class="footer">
     <div class="redes">
@@ -416,69 +98,365 @@ $('#login').css("visibility","hidden");
       <h5>FitBox S.A. blablabla</h5>
       <p/>
       <h5>981291320</h4>
+      </div>
+      <div class="enlaces">
+      </div>
     </div>
-    <div class="enlaces">
-    </div>
-  </div>
 
-</footer>
+  </footer>
 </div>
 <div id="dialoglogin" title="Login">
   <p id="textodialogo"> Introduce nombre de usuario y password para indentificarte </p>
   <form>
-  <fieldset>
-    <div id="izq">
-      <label for="name">Nombre de Usuario</label>
-      <label for="password">Password</label>
+    <fieldset>
+      <div id="izq">
+        <label for="name">Nombre de Usuario</label>
+        <label for="password">Password</label>
+      </div>
+      <div id="der">
+        <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" required/>
+
+        <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" required/>
+      </div>
+      <div id="botlogin">
+
+      </div>
     </div>
-    <div id="der">
-      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" required/>
-    
-      <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" required/>
-    </div>
-    <div id="botlogin">
+    <div id="mensaje-error-login" title="Indentificación incorrecta">
+      <p>
+        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+        ¡Debes escribir tanto nombre de usuario como contraseña!
+      </p>
 
     </div>
-  </div>
-  <div id="mensaje-error-login" title="Indentificación incorrecta">
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-    ¡Debes escribir tanto nombre de usuario como contraseña!
-  </p>
-  
-</div>
-<div id="dialogAbrirTema" title="Abrir tema">
-  <p id="textodialogo"> Introduce nombre de tema y un primer comentario </p>
-    <div id="izq">
-      <label for="name">Nombre de Tema</label>
-      <label for="password">Comentario</label>
-    </div>
-    <div id="derT">
-      <input type="text" name="name" id="nameTema" class="text ui-widget-content ui-corner-all" />
-    </div>
-    <textarea id="comentarioTema" rows="6" value="" cols="50" class="text ui-widget-content ui-corner-all" >
-        </textarea>
-        
+    <div id="dialogAbrirTema" title="Abrir tema">
+      <p id="textodialogo"> Introduce nombre de tema y un primer comentario </p>
+      <div id="izq">
+        <label for="name">Nombre de Tema</label>
+        <label for="password">Comentario</label>
+      </div>
+      <div id="derT">
+        <input type="text" name="name" id="nameTema" class="text ui-widget-content ui-corner-all" />
+      </div>
+      <textarea id="comentarioTema" rows="6" value="" cols="50" class="text ui-widget-content ui-corner-all" >
+      </textarea>
+
     </div>
     <div id="botAbrirTema">
 
     </div>
   </div>
- <div id="mensaje-error-abrirTema" title="Campos sin rellenar">
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-    ¡Debes escribir tanto el nombre del tema como el primer comentario !
-  </p>
-  
-</div>
-<div id="mensaje-error-abrirTemaRepetido" title="Campo incorrecto">
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-    ¡Este tema ya existe !
-  </p>
-  
-</div>
+  <div id="mensaje-error-abrirTema" title="Campos sin rellenar">
+    <p>
+      <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+      ¡Debes escribir tanto el nombre del tema como el primer comentario !
+    </p>
+
+  </div>
+  <div id="mensaje-error-abrirTemaRepetido" title="Campo incorrecto">
+    <p>
+      <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+      ¡Este tema ya existe !
+    </p>
+
+  </div>
 
 </body>
+
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="jqueryCookie/jquery.cookie.js"></script>
+
+
+<script>
+var logueado;
+$(function() {
+  var leerString = $.cookie("logueado");
+  if(leerString!=null)
+   logueado = JSON.parse(leerString);
+ if(logueado!=null){
+  $('#ev').css("visibility","visible");
+  $('#de').css("visibility","visible");
+  $('#re').css("visibility","visible");
+  $('#fo').css("visibility","visible");
+  $('#cl').css("visibility","visible");
+  $('#login').css("visibility","hidden");
+
+  $('#re').click(function(){
+    $.removeCookie("logueado");
+    $('#ev').css("visibility","hidden");
+    $('#de').css("visibility","hidden");
+    $('#re').css("visibility","hidden");
+    $('#fo').css("visibility","hidden");
+    $('#cl').css("visibility","hidden");
+    $('#login').css("visibility","visible");
+    $(location).attr('href','index.html');
+  });
+}
+
+$( "#mensaje-error-login" ).dialog({
+  modal: true,
+  autoOpen:false,
+  width:400,
+  buttons: {
+    Ok: function() {
+      $( this ).dialog( "close" );
+    }
+  }
+});
+
+$( "#dialoglogin" ).dialog({
+  autoOpen: false,
+  height: 300,
+  width: 450,
+  modal: true,
+  buttons: {
+    "Loguear":function(){
+      if(($("#password").val()=="") || ($("#name").val()=="")) {
+        $( this ).dialog( "close" );
+        $( "#mensaje-error-login" ).dialog("open");   
+      }   
+      else if(logueado==null){
+
+        $.ajax({
+          type: "POST",
+          url: "other.php",
+          data: {consulta: "SELECT * FROM usuario where nombre='"+$("#name").val()+"';"},    
+          success:function(data){
+            console.log('Consulta OK');
+            d=JSON.parse(data);
+            f=d[0].password;
+            if(f==$("#password").val()){
+    //Si se loguea con exito
+    //Guardo la cookie
+    $.cookie("logueado",JSON.stringify(d[0]));
+    //Ahora todas las ventanas tienen acceso a la cookie
+    //¿Como leerla?
+    var leerString = $.cookie("logueado");
+    var logueado = JSON.parse(leerString);
+    logueado = d[0];
+    $.cookie("logueado",JSON.stringify(d[0]));
+    $('#ev').css("visibility","visible");
+    $('#de').css("visibility","visible");
+    $('#re').css("visibility","visible");
+    $('#fo').css("visibility","visible");
+    $('#cl').css("visibility","visible");
+    $('#login').css("visibility","hidden");
+  }
+}
+
+});
+
+      }
+
+      $( this ).dialog( "close" );
+    }
+  }
+});
+
+$("#login").click(function() {
+  $( "#dialoglogin" ).dialog("open");
+});
+});
+
+</script>
+<script>
+var arrayTemas=[];
+var arrayTemasVisitas=[];
+var leerForoGuardad = $.cookie("subForo");
+var subforoGuardado;
+
+$(function(){
+  var d;
+  $.ajax({
+    type: "POST",
+    async:false,
+    url: "other.php",
+    data: {consulta:"SELECT * from subforo where nombre='"+leerForoGuardad+"';"},
+    success:function(data){
+      d = JSON.parse(data);
+      for(var i=0;i<d.length;i++){
+        subforoGuardado=d[i];
+      }
+    }
+  });
+});
+</script>
+
+
+<script>
+$(function(){
+  var contenidoString=$('#urlSubForo').html();
+  contenidoString+=" "+subforoGuardado.nombre;
+  $('#urlSubForo').html(contenidoString);
+});
+</script>
+<script>
+var numTemas=0;
+$(function(){
+  var d;
+  $.ajax({
+    type: "POST",
+    url: "other.php",
+    async:false,
+    /*where `idSubforo`="+subforoGuardado.idSubforo+";*/
+    data: {consulta:"SELECT * from `temas` where `idSubforo`="+subforoGuardado.idSubforo+";"},
+    success:function(data){
+      try{
+        d = JSON.parse(data);
+        for(var i=0;i<d.length;i++){
+          $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
+          $('#filaTema'+numTemas).append('<td><a href="tema.html">'+d[i].nombre+'</a> </td><td id="visitas">'+ d[i].visitas+' </td>');
+          arrayTemas[numTemas]=d[i].nombre;
+          arrayTemasVisitas[numTemas]=d[i].visitas;
+          numTemas++;
+        }
+      }catch(error){console.log("No hay temas en el subforo");}
+
+    }
+  });
+});
+
+</script>
+<script>
+$(function(){
+
+  $( "#mensaje-error-abrirTema" ).dialog({
+    modal: true,
+    autoOpen:false,
+    width:400,
+    buttons: {
+      Ok: function() {
+       $( this ).dialog( "close" );
+       $( "#dialogAbrirTema" ).dialog("open");
+
+     }
+   }
+ });
+  $( "#mensaje-error-abrirTemaRepetido" ).dialog({
+    modal: true,
+    autoOpen:false,
+    width:400,
+    buttons: {
+      Ok: function() {
+       $( this ).dialog( "close" );
+       $( "#dialogAbrirTemaRepetido" ).dialog("open");
+
+     }
+   }
+ });
+
+  $( "#dialogAbrirTema" ).dialog({
+    autoOpen: false,
+    height: 400,
+    width: 500,
+    modal: true,
+    buttons: {
+      "Crear tema":function(){
+        var existe=false;
+        var nombreTema=$('#nameTema').val();
+        var primerComentario=$('textarea').val().trim();
+        if(primerComentario!="" && nombreTema!=""){
+          for(var i=0;i<arrayTemas.length;i++){
+            if(arrayTemas[i]==nombreTema) existe=true;
+
+          }
+
+          if(!existe){
+           $.ajax({
+            type: "POST",
+            url: "other.php",
+            async: false,
+            data: {consulta: "insert into `temas` (`idTema`, `nombre`, `visitas`,`idSubforo`) VALUES(null,'"+$('#nameTema').val()+"',0,"+subforoGuardado.idSubforo+");"},    
+            success:function(data){
+              console.log('Consulta OK');
+              $('#tabla tbody').append('<tr id="filaTema'+numTemas+'"> </tr>');
+              $('#filaTema'+numTemas).append('<td><a href="tema.html">'+$('#nameTema').val()+'</a> </td><td id="visitas">0</td>');
+              arrayTemas[numTemas]=$('#nameTema').val();
+              arrayTemasVisitas[numTemas]=0;
+              numTemas++;
+
+
+
+
+            }
+          });
+           var f=new Date();
+           var fechaFormat=f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear();
+           $.ajax({
+            type: "POST",
+            url: "other.php",
+            async: false,
+            data: {consulta: "insert into `comentario` (`idComentario`, `idJugador`, `fecha`,`mensaje`,`idTema`) VALUES(null,"+logueado.id+",'"+fechaFormat+"','"+$('textarea').val()+"',numTemas);"},    
+            success:function(data){
+              console.log('Introducido comentario OK');
+
+
+
+
+            }
+          });
+           $(this).dialog( "close" );
+
+         }
+         else{
+          $( this ).dialog( "close" );
+          $( "#mensaje-error-abrirTemaRepetido" ).dialog("open");
+
+        }
+
+      }else{
+        $( this ).dialog( "close" );
+        $( "#mensaje-error-abrirTema" ).dialog("open");
+      }
+    }
+  }
+});
+
+$('#abrirTema').click(function(){
+  $("#dialogAbrirTema").dialog("open");
+});
+});
+
+</script>
+<script>
+
+function encontrarTema(nombre){
+
+  for(var i=0;i<arrayTemas.length;i++){
+    if(arrayTemas[i]==nombre) return i;
+
+  }
+  return -1;
+
+
+}
+</script>
+<script>
+
+$(function(){
+  $('a').click(function (){
+    var temaSelec=this.text;
+    var leerString = $.cookie("tema");
+    if(leerString==null){
+      $.removeCookie("tema");
+    }
+
+    $.cookie("tema",this.text);
+    var posicion=encontrarTema(this.text);
+    var visitas=parseInt(arrayTemasVisitas[posicion]);
+    visitas+=1;
+    $.ajax({
+      type: "POST",
+      url: "other.php",
+      async:false,
+      data: {consulta:"update `temas` SET `visitas`="+(visitas)+" where `nombre`='"+this.text+"';"},
+      success:function(data){
+        arrayTemasVisitas[numTemas]+=1;
+      }
+    });
+  });
+});
+</script>
 
 </html>
