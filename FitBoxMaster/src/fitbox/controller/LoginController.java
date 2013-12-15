@@ -150,4 +150,7 @@ public class LoginController implements Initializable, ControlledScreen {
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
 }

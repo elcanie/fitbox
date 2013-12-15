@@ -5,9 +5,11 @@
 package fitbox.view;
 
 import fitbox.controller.ScreensController;
+import java.util.HashMap;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -60,7 +62,7 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_EVENTO = "Realizar evento";
     public static final String PANTALLA_EVENTO_FXML = "/fitbox/view/RealizarEvento.fxml";
     public static String tituloVentanaNombreUsuario = "";
-    
+    public static HashMap<String, Scene> pantallas = new HashMap<>();
 
     @Override
     public void start(Stage primeraPantalla) throws Exception {
@@ -121,4 +123,6 @@ public class ScreensFramework extends Application {
         stage.setMinWidth(950);
         stage.setMinHeight(580);
       }
+       
+       
 }

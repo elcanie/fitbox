@@ -207,23 +207,13 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     }
 
-    @FXML //es cerrarSesion
+    //es cerrarSesion
+    @FXML 
     public void abrirAjustes(MouseEvent event) throws IOException {
-
-            stageClasificacion.close();
-            stageEquipo.close();
+//        if(stageClasificacion != null) stageClasificacion.close();
+//        if(stageEquipo != null) stageEquipo.close();
+        System.out.println("cerrar sesion pulsado");
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
-            
-        
-        //     myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
-        //        Parent root = FXMLLoader.load(getClass().getResource("PantallaPrincipal_2.fxml"));
-//        
-//        Scene scene = new Scene(root);
-//        
-//        Stage stage = new Stage();
-//                stage.setScene(scene);
-//        stage.show();
-        //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
 
     }
 

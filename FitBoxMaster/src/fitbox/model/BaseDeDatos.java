@@ -92,4 +92,7 @@ for(Jugador jugador : getJugadores())
         
         }return desafiosDondeSoyRivalBD;
     }
+    
+    
+    
 }
