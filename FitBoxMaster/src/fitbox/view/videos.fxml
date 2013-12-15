@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1365.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.videosController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="783.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.videosController">
   <children>
     <TabPane prefHeight="680.0" prefWidth="526.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
       <tabs>
@@ -19,15 +19,19 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo">
               <children>
-                <Label prefHeight="40.0" prefWidth="659.0" text="Vídeos de demostración de ejercicios" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+                <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="40.0" prefWidth="621.0" text="Vídeos de demostracion de ejercicios" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" wrapText="false" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+                  <effect>
+                    <DropShadow>
+                      <color>
+                        <Color blue="0.929" green="1.000" red="0.400" fx:id="x1" />
+                      </color>
+                    </DropShadow>
+                  </effect>
                   <font>
-                    <Font name="System Bold" size="30.0" fx:id="x1" />
+                    <Font size="30.0" fx:id="x2" />
                   </font>
-                  <textFill>
-                    <Color blue="0.000" green="0.800" red="0.255" fx:id="x2" />
-                  </textFill>
                 </Label>
-                <ScrollPane prefHeight="554.0" prefWidth="679.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                <ScrollPane prefHeight="554.0" prefWidth="679.0" styleClass="fondo" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
                   <content>
                     <VBox fx:id="vBoxGrande" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
                   </content>
@@ -46,8 +50,12 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo">
               <children>
-                <Label font="$x1" prefHeight="40.0" prefWidth="659.0" text="Mis vídeos" textFill="$x2" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0" />
-                <ScrollPane prefHeight="554.0" prefWidth="679.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                <Label alignment="CENTER" contentDisplay="LEFT" font="$x2" prefHeight="40.0" prefWidth="158.0" text="Mis vídeos" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" visible="true" wrapText="false" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="20.0">
+                  <effect>
+                    <DropShadow color="$x1" />
+                  </effect>
+                </Label>
+                <ScrollPane prefHeight="554.0" prefWidth="679.0" styleClass="fondo" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
                   <content>
                     <VBox id="vBoxGrande" fx:id="vBoxGrandeS" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
                   </content>
@@ -152,14 +160,26 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+        <Button id="botonCalendario" cancelButton="false" disable="false" font="$x3" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" onMouseClicked="#abrirEventos" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/evento.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
           <effect>
             <DropShadow />
           </effect>
           <graphic>
             <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+                <Image url="@../../imagenes/logout_256.png" />
               </image>
             </ImageView>
           </graphic>

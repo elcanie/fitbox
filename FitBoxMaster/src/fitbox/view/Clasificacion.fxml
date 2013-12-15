@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="919.0" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.ConsultarClasificacionController">
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="418.0" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.ConsultarClasificacionController">
   <children>
-    <TableView fx:id="tabla" layoutX="239.0" layoutY="171.0" prefHeight="273.0" prefWidth="384.0" />
-    <Button id="botonPerfil" cancelButton="false" disable="true" graphicTextGap="4.0" layoutX="14.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="General">
+    <Button id="botonPerfil" cancelButton="false" disable="true" graphicTextGap="4.0" layoutX="14.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="General" visible="false">
       <effect>
         <DropShadow />
       </effect>
@@ -31,7 +30,7 @@
         </ImageView>
       </graphic>
     </Button>
-    <Button id="botonPerfil" cancelButton="false" font="$x1" graphicTextGap="4.0" layoutX="181.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="Amigos">
+    <Button id="botonPerfil" cancelButton="false" font="$x1" graphicTextGap="4.0" layoutX="181.0" layoutY="69.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="135.9998779296875" text="Amigos" visible="false">
       <effect>
         <DropShadow />
       </effect>
@@ -46,88 +45,31 @@
         </ImageView>
       </graphic>
     </Button>
-    <ToolBar id="toolBar" prefHeight="56.0" prefWidth="920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <items>
-        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#home" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
-          <graphic>
-            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0">
-              <image>
-                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
-              </image>
-            </ImageView>
-          </graphic>
-          <stylesheets>
-            <URL value="@style.css" />
-          </stylesheets>
-        </Button>
-        <Button id="botonPerfil" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="135.9998779296875" text="PERFIL">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
-              <effect>
-                <DropShadow />
-              </effect>
-              <image>
-                <Image url="@../../imagenes/Profile-icon32px.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-        <Button id="botonActividades" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-        <Button id="botonEstadisticas" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../imagenes/Play-icon.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-        <Button id="botonCalendario" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../imagenes/Calendar-icon32px.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-      </items>
-      <stylesheets>
-        <URL value="@StyleDialog.css" />
-      </stylesheets>
-    </ToolBar>
+    <TabPane prefHeight="560.0" prefWidth="418.0" rotateGraphic="false" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <tabs>
+        <Tab text="General">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo">
+              <children>
+                <TableView id="tabla" fx:id="tablaGeneral" prefHeight="529.0" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+              <stylesheets>
+                <URL value="@style.css" />
+              </stylesheets>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Amigos">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView id="tabla" fx:id="tablaAmigos" prefHeight="529.0" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
   </children>
   <stylesheets>
     <URL value="@StyleDialog.css" />

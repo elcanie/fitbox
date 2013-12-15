@@ -210,24 +210,20 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
     }
     
     //Metodos barra de botones
-    
-      @FXML
+    @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
 
 
     }
@@ -235,43 +231,30 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
-
 
     }
 
     @FXML
-    public void Actualizar(MouseEvent event) throws IOException{
-        
+    public void Actualizar(MouseEvent event) throws IOException {
+    }
+    
+     @FXML
+    public void abrirEventos(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
-    @FXML
-    public void abrirEquipo(MouseEvent event) throws IOException {
-        // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
-    }
-
-    @FXML
-    public void abrirDesafios(MouseEvent event) throws IOException {
-         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
-    }
-
-    @FXML
-    public void abrirClasificacion(ActionEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
-    }
-
-    @FXML
+    @FXML //es cerrarSesion
     public void abrirAjustes(MouseEvent event) throws IOException {
-        //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
     }
-   
+
     @FXML
-    private void home(){
+    private void home() {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);    
     }
+    
+    //FIN METODOS BARRA BOTONES
+
     
     
 }

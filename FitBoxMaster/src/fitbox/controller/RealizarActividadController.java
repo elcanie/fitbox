@@ -248,7 +248,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
             e.printStackTrace();
         }
 
-        myController.ponerLimitesMinimosCero();
+        ScreensFramework.ponerLimitesMinimosCero();
         ScreensFramework.stage.setWidth(791);
         ScreensFramework.stage.setHeight(578);
         MEDIA_URL = "<iframe width=\"508\" height=\"419\" src=\"http://www.youtube.com/embed/" + URL + "\" frameborder=\"0\" allowfullscreen></iframe>";
@@ -270,7 +270,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
         if (answer == MessageBox.OK) {
 //            ScreensFramework.stage.setWidth(921);
 //            ScreensFramework.stage.setHeight(590);
-            myController.ponerLimitesMinimos();
+            ScreensFramework.ponerLimitesMinimos();
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
             //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         } else if (answer == MessageBox.CANCEL) {

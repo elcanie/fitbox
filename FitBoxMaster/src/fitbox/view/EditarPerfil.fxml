@@ -13,8 +13,9 @@
 
 <AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.EditarPerfil">
   <children>
-    <HBox id="HBox" alignment="CENTER" prefHeight="504.0" prefWidth="919.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+    <HBox id="HBox" alignment="CENTER" prefHeight="590.0" prefWidth="919.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
       <children>
+        <AnchorPane fx:id="panelIzq" prefHeight="200.0" prefWidth="200.0" style="" HBox.hgrow="ALWAYS" />
         <AnchorPane id="AnchorPane" minHeight="504.0" prefHeight="504.0" prefWidth="400.0" style="-fx-background-color: grey" HBox.hgrow="NEVER">
           <children>
             <Label fx:id="errorGenero" layoutX="282.0" layoutY="142.0" opacity="1.0" text="" />
@@ -162,6 +163,7 @@
             </VBox>
           </children>
         </AnchorPane>
+        <AnchorPane fx:id="panelDer" prefHeight="200.0" prefWidth="200.0" style="" HBox.hgrow="ALWAYS" />
       </children>
       <padding>
         <Insets bottom="10.0" top="10.0" />
@@ -247,14 +249,26 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+        <Button id="botonCalendario" cancelButton="false" disable="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" onMouseClicked="#abrirEventos" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/evento.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
           <effect>
             <DropShadow />
           </effect>
           <graphic>
             <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+                <Image url="@../../imagenes/logout_256.png" />
               </image>
             </ImageView>
           </graphic>

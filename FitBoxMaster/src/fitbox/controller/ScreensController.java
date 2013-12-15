@@ -42,6 +42,7 @@ public class ScreensController extends StackPane {
 
     public boolean loadScreen(String name, String resource, Recurso recurso) {
         try {
+            
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),recurso);
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
@@ -49,6 +50,7 @@ public class ScreensController extends StackPane {
             addScreen(name, loadScreen);
             Scene escene = new Scene(loadScreen);
             ScreensFramework.stage.setScene(escene);
+            ScreensFramework.stage.setTitle(name+" " + ScreensFramework.tituloVentanaNombreUsuario);
             
             return true;
         } catch (Exception e) {
@@ -106,15 +108,7 @@ public class ScreensController extends StackPane {
 
       }
       
-      public void ponerLimitesMinimosCero(){
-         ScreensFramework.stage.setMinWidth(0);
-        ScreensFramework.stage.setMinHeight(0);
-      }
       
-       public void ponerLimitesMinimos(){
-        ScreensFramework.stage.setMinWidth(950);
-        ScreensFramework.stage.setMinHeight(580);
-      }
 
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {

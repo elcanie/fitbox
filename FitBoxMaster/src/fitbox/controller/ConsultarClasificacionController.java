@@ -32,7 +32,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Jose
  */
-public class ConsultarClasificacionController implements Initializable, ControlledScreen {
+public class ConsultarClasificacionController implements Initializable {
 
     private ScreensController myController;
     private List<Usuario> usuarios;
@@ -40,16 +40,13 @@ public class ConsultarClasificacionController implements Initializable, Controll
     private List<Jugador> j;
     private Dal dal;
     @FXML
-    private TableView tabla;
+    private TableView tablaGeneral;
+    @FXML
+    private TableView tablaAmigos;
+    
 
-    @Override
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent; //To change body of generated methods, choose Tools | Templates.
-    }
 
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(921);
-        ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         dal = Dal.getDal();
         List<Usuario> usuarios = dal.find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);
@@ -66,18 +63,16 @@ public class ConsultarClasificacionController implements Initializable, Controll
         puntosColumn.setCellValueFactory(
                 new PropertyValueFactory<Ranking, Double>("puntos"));
         
-        ScreensFramework.stage.setWidth(921);
-        ScreensFramework.stage.setHeight(590);
-        tabla.getColumns().addAll(nombreColumn,puntosColumn);
+        tablaGeneral.getColumns().addAll(nombreColumn,puntosColumn);
           
          
          ObservableList<Ranking> datosRanking = FXCollections.observableArrayList(rankingList);
-         tabla.setItems(datosRanking);
+         tablaGeneral.setItems(datosRanking);
 
 
         //usuarios = (List<Usuario>) recurso.getObject("usuario");
         //j = (List<Jugador>)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{"*"}, Jugador.class).get(0);
-        //Seleccionar tabla y realizar consulta.
+        //Seleccionar tablaGeneral y realizar consulta.
     }
 
     public void amigos() {
@@ -88,74 +83,7 @@ public class ConsultarClasificacionController implements Initializable, Controll
         //Realizar consulta SQL from=*
     }
 
-    public void cerrar() {
-        ScreensFramework.stage.setWidth(921);
-        ScreensFramework.stage.setHeight(590);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-    }
+
     
-     //Metodos barra de botones
-    
-      @FXML
-    public void abrirPerfil(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
-    }
-
-    @FXML
-    public void abrirActividades(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
-
-    }
-
-    @FXML
-    public void abrirCalendario(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
-
-
-    }
-
-    @FXML
-    public void abrirVideos(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
-
-
-    }
-
-    @FXML
-    public void Actualizar(MouseEvent event) throws IOException{
-        
-    }
-
-    @FXML
-    public void abrirEquipo(MouseEvent event) throws IOException {
-        // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
-    }
-
-    @FXML
-    public void abrirDesafios(MouseEvent event) throws IOException {
-         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
-    }
-
-    @FXML
-    public void abrirClasificacion(ActionEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-         myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
-    }
-
-    @FXML
-    public void abrirAjustes(MouseEvent event) throws IOException {
-        //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
-    }
-   
-    @FXML
-    private void home(){
-        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);    
-    }
     
 }

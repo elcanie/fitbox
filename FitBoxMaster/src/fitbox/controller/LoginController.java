@@ -6,6 +6,7 @@ package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
 import fitbox.model.BaseDeDatos;
+import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -89,6 +90,8 @@ public class LoginController implements Initializable, ControlledScreen {
     private void iniciarSesion(ActionEvent event) {
         //Conexión SQL para comprobar los datos.
 
+       // Jugador _jugador = (Jugador) dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{u.getId()}, Jugador.class).get(0);
+
         
         //Dal dal=Dal.getDal();
         String nombreUser=fieldUser.getText();
@@ -115,7 +118,7 @@ public class LoginController implements Initializable, ControlledScreen {
             Recurso recurso=new Recurso();
 
             recurso.putObject("usuario", user);
-
+            ScreensFramework.tituloVentanaNombreUsuario = "( "+user.getNombre()+" )";
 
 //                    Parent root = null;
 //                    try {

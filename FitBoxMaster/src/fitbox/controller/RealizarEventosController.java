@@ -18,6 +18,7 @@ import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
 import fitbox.view.ScreensFramework;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Array;
 import java.sql.Statement;
@@ -138,7 +139,7 @@ public class RealizarEventosController implements Initializable, ControlledScree
                 recurso.putObject("conexionn", conexion);
                 recurso.putObject("connectionn", conectar);
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
             } else {
                 MessageBox.show(ScreensFramework.stage,
                         "Ya has participado en este evento.",
@@ -167,12 +168,59 @@ public class RealizarEventosController implements Initializable, ControlledScree
         nombreT.setCellValueFactory(new PropertyValueFactory<Evento, String>("nombre"));
         descripcionT.setCellValueFactory(new PropertyValueFactory<Evento, String>("descripcion"));
         fechaT.setCellValueFactory(new PropertyValueFactory<Evento, String>("fecha"));
-        ScreensFramework.stage.setWidth(732);
-        ScreensFramework.stage.setHeight(425);
+        ScreensFramework.stage.sizeToScene();
 
         mostrarEventos();
     }
 
+        //Metodos barra de botones
+    @FXML
+    public void abrirPerfil(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
+    }
+
+    @FXML
+    public void abrirActividades(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
+
+    }
+
+    @FXML
+    public void abrirCalendario(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
+
+
+    }
+
+    @FXML
+    public void abrirVideos(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
+
+    }
+
+    @FXML
+    public void Actualizar(MouseEvent event) throws IOException {
+    }
+    
+     @FXML
+    public void abrirEventos(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+    }
+
+    @FXML //es cerrarSesion
+    public void abrirAjustes(MouseEvent event) throws IOException {
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
+    }
+
+    @FXML
+    private void home() {
+        myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+    }
+    
+    //FIN METODOS BARRA BOTONES
+
+    
+    
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;

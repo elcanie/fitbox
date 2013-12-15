@@ -5,42 +5,164 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="fondo" prefHeight="399.9998779296875" prefWidth="732.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.RealizarEventosController">
+<AnchorPane id="fondo" prefHeight="498.9998779296875" prefWidth="865.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.RealizarEventosController">
   <children>
-    <TableView fx:id="tablaEventos" layoutX="32.0" layoutY="62.0" onMouseClicked="#mouseClicked" prefHeight="240.0" prefWidth="427.0">
-      <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Nombre" fx:id="nombreT" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="189.0" text="Descripción" fx:id="descripcionT" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Fecha" fx:id="fechaT" />
-      </columns>
-    </TableView>
-    <Button fx:id="botonGO" layoutX="182.0" layoutY="312.0" minHeight="73.999755859375" minWidth="88.0" mnemonicParsing="false" onAction="#handleButtonGO" prefHeight="73.999755859375" prefWidth="116.0" text="Go!">
-      <font>
-        <Font name="System Bold" size="12.0" />
-      </font>
-      <graphic>
-        <ImageView fitHeight="64.0" fitWidth="64.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../../imagenes/Button-Next-icon.png" />
-          </image>
-        </ImageView>
-      </graphic>
-    </Button>
-    <Label layoutX="60.0" layoutY="26.0" prefHeight="22.0" prefWidth="137.0" text="Mis eventos" textFill="WHITE" underline="false" wrapText="false">
-      <font>
-        <Font name="System Bold" size="20.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label font="$x1" layoutX="559.0" layoutY="26.0" text="Resultados" textFill="WHITE" />
-    <ScrollPane id="ScrollPane" layoutX="503.0" layoutY="62.0" prefViewportHeight="240.0" prefViewportWidth="202.0">
-      <content>
-        <ListView fx:id="listaPuntuacion" prefHeight="240.0" prefWidth="202.0" />
-      </content>
-    </ScrollPane>
+    <HBox id="HBox" alignment="CENTER" prefHeight="323.9998779296875" prefWidth="786.0" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="73.0">
+      <children>
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+          <children>
+            <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="40.0" prefWidth="158.0" text="Mis eventos" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" visible="true" wrapText="false">
+              <effect>
+                <DropShadow>
+                  <color>
+                    <Color blue="0.929" green="1.000" red="0.400" fx:id="x1" />
+                  </color>
+                </DropShadow>
+              </effect>
+              <font>
+                <Font size="20.0" fx:id="x3" />
+              </font>
+            </Label>
+            <TableView fx:id="tablaEventos" onMouseClicked="#mouseClicked" prefHeight="240.0" prefWidth="427.0" VBox.vgrow="SOMETIMES">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Nombre" fx:id="nombreT" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="187.0" text="Descripción" fx:id="descripcionT" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Fecha" fx:id="fechaT" />
+              </columns>
+            </TableView>
+            <Button fx:id="botonGO" minHeight="73.999755859375" minWidth="88.0" mnemonicParsing="false" onAction="#handleButtonGO" prefHeight="73.999755859375" prefWidth="116.0" text="Go!" VBox.vgrow="NEVER">
+              <font>
+                <Font name="System Bold" size="12.0" />
+              </font>
+              <graphic>
+                <ImageView fitHeight="64.0" fitWidth="64.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../imagenes/Button-Next-icon.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </VBox>
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+          <children>
+            <Label alignment="CENTER" contentDisplay="LEFT" font="$x3" prefHeight="40.0" prefWidth="158.0" text="Mis vídeos" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" visible="true" wrapText="false">
+              <effect>
+                <DropShadow color="$x1" />
+              </effect>
+            </Label>
+            <ListView fx:id="listaPuntuacion" prefHeight="240.0" prefWidth="202.0" VBox.vgrow="ALWAYS" />
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="116.0" VBox.vgrow="NEVER" />
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+    <ToolBar id="toolBar" prefHeight="65.0" prefWidth="957.999977929685" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <Button id="botonhome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#home" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0" onMouseClicked="#home">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="155.0" text="PERFIL">
+          <effect>
+            <DropShadow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="10.0" fx:id="x2" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="41.5" fitWidth="41.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <effect>
+                <DropShadow />
+              </effect>
+              <image>
+                <Image url="@../../imagenes/Profile-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActividades" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirActividades" prefHeight="46.0" prefWidth="154.00009999999747" text="ACTIVIDADES">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="68.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Sport-dumbbell-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonEstadisticas" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirVideos" prefHeight="45.5" prefWidth="155.0" text="VIDEOS">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="51.00000762939453" fitWidth="51.00000762939453" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Play-icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="CALENDARIO">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Calendar-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonCalendario" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" styleClass="fondo" text="Eventos">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" onMouseClicked="#abrirEventos" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/evento.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/logout_256.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </items>
+      <stylesheets>
+        <URL value="@StyleDialog.css" />
+      </stylesheets>
+    </ToolBar>
   </children>
   <stylesheets>
     <URL value="@realizarevento.css" />
