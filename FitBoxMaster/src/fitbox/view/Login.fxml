@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.99998474121094" prefWidth="542.0001220703125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.LoginController">
+<AnchorPane id="background" fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.99998474121094" prefWidth="542.0001220703125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.LoginController">
   <children>
-    <AnchorPane prefHeight="281.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="109.96" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="7.04">
+    <AnchorPane prefHeight="299.99998474121094" prefWidth="542.0001220703125" AnchorPane.bottomAnchor="109.96" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <ImageView id="portada2.png" fitHeight="101.99999237060547" fitWidth="279.0" layoutX="2.0" layoutY="4.0">
           <image>
@@ -26,7 +26,7 @@
           </font>
         </Label>
         <TextField fx:id="fieldUser" layoutX="58.0" layoutY="148.0" prefHeight="22.0" prefWidth="427.0" />
-        <PasswordField fx:id="fieldPassword" layoutX="58.0" layoutY="225.0" onKeyPressed="#leerEnter" prefWidth="427.0" />
+        <PasswordField fx:id="fieldPassword" layoutX="58.0" layoutY="225.0" onKeyPressed="#mostrarLabelEnter" onKeyReleased="#leerEnter" prefWidth="427.0" />
         <Label id="labelContraseña" font="$x1" layoutX="58.0" layoutY="192.0" prefHeight="22.0" prefWidth="103.0" text="Contraseña" textFill="WHITE" />
         <Line endX="-1.5" endY="-0.0399932861328125" layoutX="165.0" layoutY="217.0" startX="-105.0" startY="0.0">
           <stroke>
@@ -34,26 +34,28 @@
           </stroke>
         </Line>
         <Line endX="58.5" endY="-1.0399932861328125" layoutX="159.0" layoutY="134.0" startX="-100.0" stroke="$x2" />
+        <ProgressIndicator fx:id="progreso" layoutX="14.0" layoutY="14.0" progress="-0.49" visible="false" />
+        <Label fx:id="labelAutenticando" alignment="CENTER" contentDisplay="LEFT" layoutX="164.0" layoutY="266.0" prefWidth="216.0" text="Autenticando . . ." textAlignment="CENTER" textFill="#fff966" visible="false" wrapText="false">
+          <effect>
+            <DropShadow color="WHITE" />
+          </effect>
+          <font>
+            <Font size="15.0" />
+          </font>
+          <labelFor>
+            <Button fx:id="buttonLogin" layoutX="162.0" layoutY="14.0" minHeight="38.99998474121094" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#iniciarSesion" onMousePressed="#mostrarLabel" prefHeight="67.99998474121094" prefWidth="217.0001220703125" text="Iniciar sesión" />
+          </labelFor>
+        </Label>
       </children>
     </AnchorPane>
-    <AnchorPane prefHeight="130.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.5" AnchorPane.rightAnchor="-1.5" AnchorPane.topAnchor="282.0">
+    <AnchorPane prefHeight="130.99998474121094" prefWidth="556.000022070315" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="282.0">
       <children>
-        <Button fx:id="buttonLogin" minHeight="38.99998474121094" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="56.99998474121094" prefWidth="216.5" text="Iniciar sesión" AnchorPane.bottomAnchor="49.5" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="311.5" AnchorPane.topAnchor="49.5">
-          <stylesheets>
-            <URL value="@Login.css" />
-          </stylesheets>
-        </Button>
-        <Label id="labelDatosIncorrrectos" fx:id="labelDatosIncorrectos" alignment="CENTER" layoutX="134.0" layoutY="7.0" prefHeight="22.0" prefWidth="278.5" text="" textFill="WHITE" underline="true">
+        <fx:reference source="buttonLogin" />
+        <Hyperlink layoutX="207.0" layoutY="90.0" onAction="#registrar" style="-fx-font-weigth: underline" text="Crear una cuenta" textAlignment="CENTER" textFill="#66ffed" underline="true" visited="false" wrapText="true">
           <font>
-            <Font size="12.0" />
+            <Font size="16.0" />
           </font>
-        </Label>
-        <Button id="buttonLogin" fx:id="btnRegistro" layoutX="285.0" layoutY="50.0" minHeight="38.99998474121094" mnemonicParsing="false" onAction="#registrar" prefHeight="56.99998474121094" prefWidth="216.5" text="Registrarse">
-          <stylesheets>
-            <URL value="@Login.css" />
-          </stylesheets>
-        </Button>
-        <ProgressIndicator fx:id="progreso" layoutX="238.0" layoutY="-7.0" progress="-0.49" />
+        </Hyperlink>
       </children>
       <stylesheets>
         <URL value="@Login.css" />

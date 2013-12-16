@@ -76,7 +76,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         usuario = (Usuario) recurso.getObject("usuario");
         jugador = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
         fxcalendar = new FXCalendar();
-        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+        //ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         hPanel.getChildren().clear();
         hPanel.getChildren().addAll(fxcalendar);
         hPanel.setSpacing(15);
@@ -289,6 +289,19 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     public void abrirAjustes(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
     }
+    
+    @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        abrirEventos(null);   
+    }
+    @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        abrirAjustes(null); 
+      }
+    @FXML
+    public void ActualizarACT(ActionEvent event) throws IOException {
+        Actualizar(null);
+      }
 
     @FXML
     private void home() {

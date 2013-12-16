@@ -178,7 +178,7 @@ Usuario usuario;
         // TODO
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
-        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+//        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         fecha = new LocalDate();
         fxcalendar2 = new FXCalendar();
         fechaIni.setText(fecha.getDayOfMonth() + "/" + fecha.getMonthOfYear() + "/" + fecha.getYear());
@@ -320,6 +320,18 @@ Usuario usuario;
     public void abrirAjustes(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
     }
+    @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        abrirEventos(null);   
+    }
+    @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        abrirAjustes(null); 
+      }
+    @FXML
+    public void ActualizarACT(ActionEvent event) throws IOException {
+        Actualizar(null);
+      }
 
     @FXML
     private void home() {

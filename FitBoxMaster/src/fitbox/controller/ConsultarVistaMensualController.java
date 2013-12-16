@@ -332,6 +332,18 @@ DateTime dateTime = new DateTime();
        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     }
+    @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        abrirEventos(null);   
+    }
+    @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        abrirAjustes(null); 
+      }
+    @FXML
+    public void ActualizarACT(ActionEvent event) throws IOException {
+        Actualizar(null);
+      }
     
     //FIN METODOS BARRA BOTONES
     

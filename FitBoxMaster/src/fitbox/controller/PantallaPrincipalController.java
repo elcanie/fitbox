@@ -97,7 +97,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private FadeTransition fadeTransition3;
     private PauseTransition pauseTransition;
     private SequentialTransition sequentialTransition;
-    ScreensController myController;
+    ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Recurso recurso;
     private Usuario user;
     private Clock clock;
@@ -131,9 +131,6 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     public void abrirPerfil(MouseEvent event) throws IOException {
        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-        
-     
-
     }
 
     @FXML
@@ -165,7 +162,10 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException, SQLException {
-
+        actualizar();
+    }
+    @FXML
+    public void ActualizarAction(ActionEvent event) throws IOException, SQLException {
         actualizar();
     }
 
@@ -204,15 +204,29 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         
 
     }
+    
+     @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+    }
+      @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        if(stageClasificacion != null) stageClasificacion.close();
+        if(stageEquipo != null) stageEquipo.close();
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
+    }
 
     //es cerrarSesion
     @FXML 
     public void abrirAjustes(MouseEvent event) throws IOException {
-//        if(stageClasificacion != null) stageClasificacion.close();
-//        if(stageEquipo != null) stageEquipo.close();
+        if(stageClasificacion != null) stageClasificacion.close();
+        if(stageEquipo != null) stageEquipo.close();
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
 
     }
+    @FXML
+    public void home(){}
 
     public void setMain(ScreensFramework main) {
     }
@@ -238,7 +252,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
 
         ScreensFramework.stage.setResizable(true);
-        ScreensFramework.stage.sizeToScene();
+        //ScreensFramework.stage.sizeToScene();
         //ScreensFramework.stage.centerOnScreen();
 
         ScreensFramework.stage.setMinWidth(970);

@@ -84,7 +84,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
         ScreensFramework.stage.setHeight(590);
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
-        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+    //    ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         consultarVistaSemanal = this;
         fxcalendar = new FXCalendar();
         hPanel.getChildren().addAll(fxcalendar);
@@ -441,6 +441,18 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
     public void abrirAjustes(MouseEvent event) throws IOException {
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
     }
+    @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        abrirEventos(null);   
+    }
+    @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        abrirAjustes(null); 
+      }
+    @FXML
+    public void ActualizarACT(ActionEvent event) throws IOException {
+        Actualizar(null);
+      }
 
     @FXML
     private void home() {

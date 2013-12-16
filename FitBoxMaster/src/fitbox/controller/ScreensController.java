@@ -49,6 +49,13 @@ public class ScreensController extends StackPane {
             myScreenControler.setScreenParent(this);
             addScreen(name, loadScreen);
             Scene escene = new Scene(loadScreen);
+            if(!name.equals(ScreensFramework.PANTALLA_LOGIN)) ScreensFramework.pantallas.put(name, escene);
+            else {
+            loadScreenInicial(name, resource, recurso);
+            ScreensFramework.stage.close(); 
+            ScreensFramework.inicialStage.show();
+            return true;
+            }
             ScreensFramework.stage.setScene(escene);
             ScreensFramework.stage.setTitle(name+" " + ScreensFramework.tituloVentanaNombreUsuario);
             
@@ -108,6 +115,25 @@ public class ScreensController extends StackPane {
 
       }
       
+      
+      public boolean loadScreenInicial(String name, String resource, Recurso recurso) {
+        try {
+            
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),recurso);
+            Parent loadScreen = (Parent) myLoader.load();
+            ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
+            myScreenControler.setScreenParent(this);
+            addScreen(name, loadScreen);
+            Scene escene = new Scene(loadScreen);
+            ScreensFramework.inicialStage.setScene(escene);
+            ScreensFramework.inicialStage.setTitle(name);
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
       
 
     public boolean unloadScreen(String name) {

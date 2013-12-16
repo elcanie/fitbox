@@ -57,7 +57,7 @@ public class perfil2Controller implements Initializable, ControlledScreen {
     @FXML
     private CheckBox categoria4;
     private datosUsuario usuario;
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.inicialStage);
     private Recurso recurso;
 
     @FXML
@@ -69,14 +69,14 @@ public class perfil2Controller implements Initializable, ControlledScreen {
             diasE = Integer.parseInt(diasT.getText());
             if (diasE <= 0) {
                 valido = false;
-                answer = MessageBox.show(ScreensFramework.stage,
+                answer = MessageBox.show(ScreensFramework.inicialStage,
                         "Formado de días no válido. Introduzca valor numérico",
                         "Information dialog",
                         MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } catch (Exception e) {
             valido = false;
-            answer = MessageBox.show(ScreensFramework.stage,
+            answer = MessageBox.show(ScreensFramework.inicialStage,
                     "Formado de días no válido. Introduzca valor numérico",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -98,8 +98,8 @@ public class perfil2Controller implements Initializable, ControlledScreen {
             usuario.setCategoria4(categoria4.isSelected());
 
             recurso.putObject("usuario", usuario);
-            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
+            myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
+//            myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
 
         }
 
@@ -115,7 +115,7 @@ public class perfil2Controller implements Initializable, ControlledScreen {
             diasE = Integer.parseInt(diasT.getText());
             if (diasE <= 0) {
                 valido = false;
-                answer = MessageBox.show(ScreensFramework.stage,
+                answer = MessageBox.show(ScreensFramework.inicialStage,
                         "Formado de días no válido. Introduzca valor numérico",
                         "Information dialog",
                         MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -140,8 +140,8 @@ public class perfil2Controller implements Initializable, ControlledScreen {
             usuario.setCategoria3(categoria3.isSelected());
             usuario.setCategoria4(categoria4.isSelected());
 
-            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
+            myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, recurso);
+//            myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
         }
     }
 

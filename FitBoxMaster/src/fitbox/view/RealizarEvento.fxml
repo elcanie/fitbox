@@ -131,7 +131,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonCalendario" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" styleClass="fondo" text="Eventos">
+        <Button id="botonCalendario" cancelButton="false" disable="true" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#abrirEventosACT" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" styleClass="fondo" text="Eventos">
           <effect>
             <DropShadow />
           </effect>
@@ -146,7 +146,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#ActualizarACT" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
           <effect>
             <DropShadow />
           </effect>
@@ -158,7 +158,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
+        <Button id="botonAjustes" mnemonicParsing="false" onAction="#abrirAjustesACT" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
           <effect>
             <DropShadow />
           </effect>

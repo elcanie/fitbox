@@ -21,7 +21,7 @@ import javafx.scene.control.Label;
  */
 public class perfilController4 implements Initializable, ControlledScreen {
 
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.inicialStage);
     private datosUsuario usuario;
     private Recurso recurso;
     @FXML
@@ -42,15 +42,15 @@ public class perfilController4 implements Initializable, ControlledScreen {
     @FXML
     private void handleButtonAction(ActionEvent event) {
          recurso.putObject("usuario", usuario);
-        myController.loadScreen(ScreensFramework.PANTALLA_PERFIL5, ScreensFramework.PANTALLA_PERFIL5_FXML, recurso);
-           myController.setScreen(ScreensFramework.PANTALLA_PERFIL5);
+        myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL5, ScreensFramework.PANTALLA_PERFIL5_FXML, recurso);
+//           myController.setScreen(ScreensFramework.PANTALLA_PERFIL5);
     }
 
     @FXML
     private void handleButtonAnterior(ActionEvent event) {
         recurso.putObject("usuario", usuario);
-        myController.loadScreen(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
+        myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL3, ScreensFramework.PANTALLA_PERFIL3_FXML, recurso);
+//        myController.setScreen(ScreensFramework.PANTALLA_PERFIL3);
     }
 
     @Override
