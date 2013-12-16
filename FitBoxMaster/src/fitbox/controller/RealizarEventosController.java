@@ -205,6 +205,7 @@ public class RealizarEventosController implements Initializable, ControlledScree
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
+        mostrarEventos();
     }
     
      @FXML

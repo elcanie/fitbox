@@ -224,6 +224,8 @@ public class videosController implements Initializable, ControlledScreen {
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
+        insertarvideosV();
+        insertarvideosS();
     }
     
      @FXML

@@ -209,6 +209,10 @@ public class AccederActividadesController implements Initializable, ControlledSc
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
+        
+        cargarCategorias();
+        listaCategorias.getSelectionModel().selectFirst();
+        cargarActividades(null);
     }
     
      @FXML

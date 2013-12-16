@@ -71,14 +71,13 @@ public class EditarPerfil implements Initializable, ControlledScreen {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ScreensFramework.stage.setWidth(921);
-        ScreensFramework.stage.setHeight(590);
         System.out.println("ok");
         recurso = (Recurso) rb;
         usuario = (Usuario) recurso.getObject("usuario");
         jugador = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
         fxcalendar = new FXCalendar();
         ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+        hPanel.getChildren().clear();
         hPanel.getChildren().addAll(fxcalendar);
         hPanel.setSpacing(15);
 //        FXCalendar.dateTxtField.setText(jugador.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
@@ -259,6 +258,25 @@ public class EditarPerfil implements Initializable, ControlledScreen {
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
+        
+        jugador = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
+        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+//        FXCalendar.dateTxtField.setText(jugador.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
+        nombreText.setText(usuario.getNombre());
+        apellidosText.setText(jugador.getApellidos());
+        alturaText.setText("" + jugador.getAltura());
+        fxcalendar.getTextField().setText("19/19/2013");
+        pesoText.setText(jugador.getPeso() + "");
+        correoText.setText(jugador.getCorreo());
+        correo2Text.setText(jugador.getCorreo());
+        fxcalendar.getTextField().setText(jugador.getNacimiento());
+        if (jugador.getGenero().trim().equalsIgnoreCase("mujer")) {
+            mujerRadio.setSelected(true);
+        }
+        if (jugador.getGenero().trim().equalsIgnoreCase("hombre")) {
+            hombreRadio.setSelected(true);
+        }
+        
     }
     
      @FXML
