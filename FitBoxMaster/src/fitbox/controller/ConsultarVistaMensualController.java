@@ -251,7 +251,7 @@ DateTime dateTime = new DateTime();
         if (t.getClickCount() == 2) {
             recurso.putObject("calendario", (Calendario) ((ListView) t.getSource()).getItems().get(((ListView) t.getSource()).getSelectionModel().getSelectedIndex()));
             myController.loadScreen(ScreensFramework.PANTALLA_VISTADIARIA, ScreensFramework.PANTALLA_VISTADIARIA_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_VISTADIARIA);
+            //myController.setScreen(ScreensFramework.PANTALLA_VISTADIARIA);
         }
     }
 
@@ -272,31 +272,34 @@ DateTime dateTime = new DateTime();
     @FXML
     public void vistaSemanal(ActionEvent a) {
         myController.loadScreen(ScreensFramework.PANTALLA_VISTASEMANAL, ScreensFramework.PANTALLA_VISTASEMANAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
     }
 
     @FXML
     public void menuPrincipal(ActionEvent a) {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
-    ScreensController myController;
+    ScreensController myController = new ScreensController(ScreensFramework.stage);
 
     
-    //Metodos barra de botones
+        //Metodos barra de botones
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
 
 
@@ -304,6 +307,7 @@ DateTime dateTime = new DateTime();
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
 
     }
@@ -314,7 +318,8 @@ DateTime dateTime = new DateTime();
     
      @FXML
     public void abrirEventos(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
     @FXML //es cerrarSesion
@@ -324,11 +329,11 @@ DateTime dateTime = new DateTime();
 
     @FXML
     private void home() {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     }
     
     //FIN METODOS BARRA BOTONES
-
     
     
     @Override

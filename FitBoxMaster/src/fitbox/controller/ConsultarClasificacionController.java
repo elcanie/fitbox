@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class ConsultarClasificacionController implements Initializable {
 
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     private List<Usuario> usuarios;
     private Recurso recurso;
     private List<Jugador> j;

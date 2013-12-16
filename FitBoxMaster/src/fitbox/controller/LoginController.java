@@ -118,25 +118,15 @@ public class LoginController implements Initializable, ControlledScreen {
             Recurso recurso=new Recurso();
 
             recurso.putObject("usuario", user);
-            ScreensFramework.tituloVentanaNombreUsuario = "( "+user.getNombre()+" )";
-
-//                    Parent root = null;
-//                    try {
-//                        recurso.putObject("controller", myController);
-//                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/PantallaPrincipal_2.fxml"), recurso);
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    
-//                    Scene scene = new Scene(root);
-//                    ScreensFramework.stage.setScene(scene);
-
-            //s.show();
+            ScreensFramework.tituloVentanaNombreUsuario = " ("+user.getNombre()+")";
+            
 
 
+            cargarPantallas(recurso);
+            if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-            //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
-
+            ScreensFramework.stage.centerOnScreen();
+            
         } else {
             MessageBox.show(ScreensFramework.stage,
                     "Introduzca un usuario y contraseña correctos",
@@ -151,6 +141,77 @@ public class LoginController implements Initializable, ControlledScreen {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    private void cargarPantallas(Recurso r){
+        try {
+            //PantallaPrincipal
+            String name = ScreensFramework.PANTALLA_PRINCIPAL;
+            String resource = ScreensFramework.PANTALLA_PRINCIPAL_FXML;
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            Parent loadScreen = (Parent) myLoader.load();
+            Scene scenePrincipal = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, scenePrincipal);
+            
+            //PantallaPerfil
+            name = ScreensFramework.PANTALLA_EDITARPERFIL;
+            resource = ScreensFramework.PANTALLA_EDITARPERFIL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene scenePerfil = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, scenePerfil);
+            
+            //PantallaActividades
+            name = ScreensFramework.PANTALLA_ACTIVIDADES;
+            resource = ScreensFramework.PANTALLA_ACTIVIDADES_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneActividades = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneActividades);
+            
+            //PantallaVideos
+            name = ScreensFramework.PANTALLA_SEGUIMIENTO;
+            resource = ScreensFramework.PANTALLA_SEGUIMIENTO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneVideos = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneVideos);
+            
+            //PantallaEventos
+            name = ScreensFramework.PANTALLA_EVENTO;
+            resource = ScreensFramework.PANTALLA_EVENTO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneEventos = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneEventos);
+            
+            //PantallaDesafios
+            name = ScreensFramework.PANTALLA_DESAFIO;
+            resource = ScreensFramework.PANTALLA_DESAFIO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneDesafios = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneDesafios);
+            
+            //PantallaCalendarioMensual
+            name = ScreensFramework.PANTALLA_VISTAMENSUAL;
+            resource = ScreensFramework.PANTALLA_VISTAMENSUAL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneCalendarioMensual = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneCalendarioMensual);
+            
+             //PantallaCalendarioSemanal
+            name = ScreensFramework.PANTALLA_VISTASEMANAL;
+            resource = ScreensFramework.PANTALLA_VISTASEMANAL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneCalendarioSemanal = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneCalendarioSemanal);
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

@@ -51,7 +51,7 @@ import javax.swing.JOptionPane;
 
 public class RealizarActividadController implements Initializable, ControlledScreen {
 
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     @FXML
     private WebView videoMuestra;
     @FXML

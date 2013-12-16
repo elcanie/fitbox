@@ -140,7 +140,7 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
         diaListView.setItems(listDia);
 
     }
-    ScreensController myController;
+    ScreensController myController = new ScreensController(ScreensFramework.stage);
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
@@ -209,20 +209,23 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
         }
     }
     
-    //Metodos barra de botones
+       //Metodos barra de botones
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
 
 
@@ -230,6 +233,7 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
 
     }
@@ -240,7 +244,8 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
     
      @FXML
     public void abrirEventos(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
     @FXML //es cerrarSesion
@@ -250,11 +255,11 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
 
     @FXML
     private void home() {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     }
     
     //FIN METODOS BARRA BOTONES
-
     
     
 }

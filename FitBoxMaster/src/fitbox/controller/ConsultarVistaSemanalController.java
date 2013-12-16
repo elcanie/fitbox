@@ -380,11 +380,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
 
             if (answer == 0) {
          myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
             }
             if (answer == 1) {
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
             }
         }
     }
@@ -393,25 +393,28 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
     public void vistaMensual(ActionEvent a) {
         System.out.println("Mensual");
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
     }
-    ScreensController myController;
+    ScreensController myController = new ScreensController(ScreensFramework.stage);
 
     
-    //Metodos barra de botones
+       //Metodos barra de botones
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
 
 
@@ -419,6 +422,7 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
 
     }
@@ -429,7 +433,8 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
     
      @FXML
     public void abrirEventos(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
     @FXML //es cerrarSesion
@@ -439,11 +444,11 @@ public class ConsultarVistaSemanalController implements Initializable, Controlle
 
     @FXML
     private void home() {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     }
     
     //FIN METODOS BARRA BOTONES
-
     
     @Override
     public void setScreenParent(ScreensController screenParent) {

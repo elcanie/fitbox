@@ -42,7 +42,7 @@ public class EditarFechaActividadController implements Initializable, Controlled
     HBox hPanel;
     static FXCalendar fxcalendar;
     private Recurso recurso;
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Actividad actividad;
 
     @Override

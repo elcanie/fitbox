@@ -124,5 +124,20 @@ public class ScreensFramework extends Application {
         stage.setMinHeight(580);
       }
        
+       public static void añadirPantaña(String name, Scene pantalla){ 
+           pantallas.put(name, pantalla);
+       }
        
+       public static boolean cargarPantalla(String name){ 
+           Scene s = pantallas.get(name);
+           if(s!=null){
+           stage.setScene(s);
+           stage.setTitle(name + tituloVentanaNombreUsuario);
+           stage.setWidth(stage.getWidth()+5);
+           return true;
+           }else{
+               return false;
+           }
+       
+       }
 }

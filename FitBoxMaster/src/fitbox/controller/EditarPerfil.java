@@ -56,7 +56,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     @FXML ImageView imagenDer;
     static FXCalendar fxcalendar;
     private Recurso recurso;
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Usuario usuario;
     private Jugador jugador;
     private String genero;
@@ -115,7 +115,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
             Dal.getDal().update(jugador);
             System.out.println(fxcalendar.getTextField().getText()+"pantalla");
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+            //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         }
     }
 
@@ -135,7 +135,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     @FXML
     public void cancelar(ActionEvent event) {
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+       // myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
 
     private boolean comprobarCampos() {
@@ -231,17 +231,20 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     //Metodos barra de botones
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
 
 
@@ -249,6 +252,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
 
     }
@@ -259,7 +263,8 @@ public class EditarPerfil implements Initializable, ControlledScreen {
     
      @FXML
     public void abrirEventos(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
     @FXML //es cerrarSesion
@@ -269,6 +274,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
 
     @FXML
     private void home() {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
     }
     

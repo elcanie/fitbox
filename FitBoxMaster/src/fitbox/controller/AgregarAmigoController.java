@@ -10,6 +10,7 @@ import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
+import fitbox.view.ScreensFramework;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class AgregarAmigoController implements Initializable, ControlledScreen {
     /**
      * Initializes the controller class.
      */
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Recurso recurso;
     private Usuario jugador;
     @FXML
