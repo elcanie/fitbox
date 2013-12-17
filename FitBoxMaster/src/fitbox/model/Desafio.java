@@ -19,7 +19,8 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Desafio {
 
-    public static final String INSERT_DESAFIO = " INSERT INTO  `desafio` (`nombre` ,`fechaInicio` ,`fechaFin` ,`estado`,`idUsuario` ,`idRival`, `idActividad`) VALUES ( ";
+    public static final String INSERT_DESAFIO = " INSERT INTO  `desafio` (`nombre` ,`fechaInicio` ,`fechaFin` ,`estado`,`idUsuario` ,"
+            + "`idRival`, `idActividad` , `puntosUsuario`, `puntosRival`) VALUES ( ";
     /*
      * Atributos
      */
@@ -219,7 +220,7 @@ public class Desafio {
     }
 
     public void setPuntosRR(double puntos) {
-        if(alReves) valores[8]=puntos+"";
-        else valores[9]=puntos+"";
+        if(alReves) valores[9]=puntos+"";
+        else valores[8]=puntos+"";
     }
 }
