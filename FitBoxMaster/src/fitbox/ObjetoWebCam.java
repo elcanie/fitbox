@@ -47,7 +47,7 @@ public class ObjetoWebCam implements Runnable {
 
     public void run() {
         window = new JFrame("Test Webcam Panel");
-        window.setUndecorated(true);
+        //window.setUndecorated(true);
         Webcam webcam = Webcam.getDefault();
         if (webcam == null) {
             JOptionPane.showMessageDialog(null, "No se ha encontrado ningún dispositivo webcam.");
@@ -100,4 +100,9 @@ public class ObjetoWebCam implements Runnable {
             this.window.dispose();
         }
     }
+    
+    public void cambiarPos(double x, double y){
+        window.setLocation((int)x,(int)y);
+    }
+    
 }

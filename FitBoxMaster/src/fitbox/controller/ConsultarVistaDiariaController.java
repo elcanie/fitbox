@@ -151,14 +151,14 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
     public void vistaSemanal(ActionEvent a) {
         System.out.println("Semanal");
         myController.loadScreen(ScreensFramework.PANTALLA_VISTASEMANAL, ScreensFramework.PANTALLA_VISTASEMANAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
+       // myController.setScreen(ScreensFramework.PANTALLA_VISTASEMANAL);
     }
 
     @FXML
     public void vistaMensual(ActionEvent a) {
         System.out.println("Mensual");
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
     }
 
     @FXML
@@ -200,11 +200,11 @@ System.out.println(now.getYear() + " " + now.getMonthOfYear() + " " + now.getDay
             }
             if (answer == 0) {
                 myController.loadScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD, ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_EDITARFECHAACTIVIDAD);
             }
             if (answer == 1) {
                 myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-                myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+                //myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
             }
         }
     }

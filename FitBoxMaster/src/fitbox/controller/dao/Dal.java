@@ -12,12 +12,14 @@ import fitbox.model.Desafio;
 import fitbox.model.Evento;
 import fitbox.model.Jugador;
 import fitbox.model.Noticia;
+import fitbox.model.Ranking;
 import fitbox.model.TablaActividad;
 import fitbox.model.Usuario;
 import fitbox.model.Video;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -73,4 +75,9 @@ public class Dal {
         Dao dao = daos.get(objeto.getClass().getSimpleName());
         dao.updateRuben(objeto);
     }
+    
+     public ObservableList<Ranking> getPuntuacionesAmigos(String consulta){
+         Dao dao = new Dao();
+         return dao.getPuntuacionesAmigos(consulta);
+     }
 }

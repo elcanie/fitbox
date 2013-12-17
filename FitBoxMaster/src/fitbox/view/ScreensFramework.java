@@ -8,12 +8,18 @@ import fitbox.controller.ScreensController;
 import java.util.HashMap;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 /**
  *
@@ -23,7 +29,10 @@ import javafx.stage.StageStyle;
  * @author RUBEN
  */
 public class ScreensFramework extends Application {
-
+    
+    static Group  padre = new Group();
+    public static VBox anchorPantalla = new VBox();
+    private static boolean bool = true;
     public static final String PANTALLA_PRINCIPAL = "Pantalla principal";
     //public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal.fxml";
     public static final String PANTALLA_PRINCIPAL_FXML = "/fitbox/view/PantallaPrincipal_2.fxml";
@@ -65,7 +74,7 @@ public class ScreensFramework extends Application {
     public static final String PANTALLA_EVENTO_FXML = "/fitbox/view/RealizarEvento.fxml";
     public static String tituloVentanaNombreUsuario = "";
     public static HashMap<String, Scene> pantallas = new HashMap<>();
-
+    public static HashMap<String, AnchorPane> paneles = new HashMap<>();
     @Override
     public void start(Stage primeraPantalla) throws Exception {
         //To change body of generated methods, choose Tools | Templates.
@@ -76,7 +85,6 @@ public class ScreensFramework extends Application {
         
         //this.stage = primeraPantalla;
         this.inicialStage = primeraPantalla;
-        
         /*
          ScreensController mainContainer = new ScreensController(stage);
          mainContainer.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL,
@@ -106,7 +114,11 @@ public class ScreensFramework extends Application {
         stage.getIcons().add(new Image("/imagenes/fito5.png"));
         //ScreensFramework.inicialStage.initStyle(StageStyle.UNDECORATED);
         inicialStage.show();
+        inicialStage.toFront();
 
+        redimensionarStage();
+        
+        
     }
 
     public static void main(String[] args) {
@@ -140,11 +152,37 @@ public class ScreensFramework extends Application {
            if(s!=null){
            stage.setScene(s);
            stage.setTitle(name + tituloVentanaNombreUsuario);
-           stage.setWidth(stage.getWidth()+5);
            return true;
            }else{
                return false;
            }
+//           AnchorPane ap = paneles.get(name);
+//           if(ap!=null){    
+//           anchorPantalla.getChildren().clear();
+//           anchorPantalla.getChildren().add(ap);
+//           anchorPantalla.setStyle("-fx-background-color: red");
+//           ap.setVisible(true);
+//           stage.setTitle(name + tituloVentanaNombreUsuario);
+//           return true;
+//           }else{
+//               return false;
+//           }
+           
+       }
        
+       private void redimensionarStage(){
+           stage.sceneProperty().addListener(new ChangeListener<Scene>(){
+
+               @Override
+               public void changed(ObservableValue<? extends Scene> ov, Scene t, Scene t1) {
+                   if(bool){ stage.setWidth(stage.getWidth()+1);stage.setHeight(stage.getHeight()+1);}
+           else {stage.setWidth(stage.getWidth()-1);stage.setHeight(stage.getHeight()-1);}
+           bool = !bool;
+               }
+           
+       });
+           
+           
+           
        }
 }

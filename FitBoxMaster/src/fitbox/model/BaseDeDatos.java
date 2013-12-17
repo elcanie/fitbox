@@ -4,9 +4,12 @@
  */
 package fitbox.model;
 
+import com.mysql.jdbc.PreparedStatement;
+import fitbox.controller.dao.Conexion;
 import fitbox.controller.dao.Dal;
 import java.util.Collection;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -91,6 +94,13 @@ for(Jugador jugador : getJugadores())
         for(Desafio d : desafiosDondeSoyRivalBD)d.alReves = true;
         
         }return desafiosDondeSoyRivalBD;
+    }
+
+    public ObservableList<Ranking> getPuntuacionesAmigos(int user) {
+        String sql = "SELECT U.nombre, J.puntos FROM jugador J, usuario U WHERE U.id = J.id AND J.id IN (SELECT idAmigo FROM amigo WHERE IdJugador = "+user+")ORDER BY J.puntos desc";
+        return Dal.getDal().getPuntuacionesAmigos(sql);
+       
+        
     }
     
     

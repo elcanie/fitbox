@@ -35,7 +35,7 @@ public class DescripcionActividadController implements Initializable,ControlledS
     @FXML
     Label nombreActividad;
     private Recurso recurso;
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
 
     /**
      * Initializes the controller class.

@@ -40,9 +40,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -60,6 +63,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
     private Label crono2;
     @FXML
     private Pane zonaVideo;
+    @FXML AnchorPane videoCaptura;
     private Cronometro crono;
     double puntos = 0;
     double puntosAct;
@@ -277,5 +281,25 @@ public class RealizarActividadController implements Initializable, ControlledScr
         } else if (answer == MessageBox.CANCEL) {
         }
     }
+    
+    private void redimensionarWebCam(){
+//         videoCaptura.layoutXProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
+//                webcam.cambiarPos(videoCaptura.getLayoutX(), videoCaptura.getLayoutY());
+//            }
+//        });
+//
+//        panelGaleria.heightProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
+//                image.setFitHeight(panelGaleria.getHeight());
+//                image1.setFitHeight(panelGaleria.getHeight());
+//                image2.setFitHeight(panelGaleria.getHeight());
+//            }
+//        });
+    
+    }
+    
 }
 
