@@ -182,8 +182,10 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     Desafio d = (Desafio) recurso.getObject("desafio");
                     if (d != null) {
                         d.setPuntosRR(crono.getPuntos());
+                        Dal.getDal().update(d);
                     }
                 } catch (Exception e) {
+                    System.out.println("No es desafio");
                 }
 
                 try {

@@ -195,9 +195,9 @@ Usuario usuario;
         System.out.println("D-->"+desafios.size());
         for(Desafio desafio : desafios)
             System.out.println("->"+desafio.getFechaInicio()+"vs"+desafio.getFechaFin());
-        //inicializarActividades();
-        //cargarAmigos();
-       // cargarListaDesafios();
+        inicializarActividades();
+        cargarAmigos();
+       //cargarListaDesafios();
         cargarTabDetalles();
         segundaVez = true;
 
