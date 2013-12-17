@@ -375,25 +375,29 @@ $(function(){
               arrayTemas[numTemas]=$('#nameTema').val();
               arrayTemasVisitas[numTemas]=0;
               numTemas++;
-
-
-
-
             }
           });
+           var temaRecienCreado;
+           console.log(nombreTema);
+           $.ajax({
+            type: "POST",
+            url: "other.php",
+            async:false,
+            data: {consulta: "SELECT * from temas where nombre='"+nombreTema+"';"},
+            success:function(data){
+              temaRecienCreado = JSON.parse(data);
+            }
+          });
+
            var f=new Date();
-           var fechaFormat=f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear();
+           var fechaFormat=f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear();
            $.ajax({
             type: "POST",
             url: "other.php",
             async: false,
-            data: {consulta: "insert into `comentario` (`idComentario`, `idJugador`, `fecha`,`mensaje`,`idTema`) VALUES(null,"+logueado.id+",'"+fechaFormat+"','"+$('textarea').val()+"',numTemas);"},    
+            data: {consulta: "insert into `comentario` (`idComentario`, `idJugador`, `fecha`,`mensaje`,`idTema`) VALUES(null,"+logueado.id+",'"+fechaFormat+"','"+$('textarea').val()+"', "+ temaRecienCreado[0].idTema+");"},    
             success:function(data){
               console.log('Introducido comentario OK');
-
-
-
-
             }
           });
            $(this).dialog( "close" );
