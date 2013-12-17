@@ -6,6 +6,7 @@ package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
 import fitbox.model.BaseDeDatos;
+import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
 import fitbox.view.Recurso;
@@ -23,6 +24,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -31,12 +33,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javax.jws.soap.SOAPBinding;
 import jfx.messagebox.MessageBox;
 
 /**
@@ -45,7 +52,8 @@ import jfx.messagebox.MessageBox;
  * @author Lluis
  */
 public class LoginController implements Initializable, ControlledScreen {
-
+    @FXML Label labelAutenticando;
+    @FXML AnchorPane panel;
     @FXML
     private ProgressIndicator progreso;
     @FXML
@@ -56,24 +64,25 @@ public class LoginController implements Initializable, ControlledScreen {
     private Button buttonLogin;
     @FXML
     private Button btnRegistro;
-    private ScreensController myController;
-    
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
-        progreso.setVisible(false);
-        ScreensFramework.stage.setWidth(543);
-        ScreensFramework.stage.setHeight(438);
-        ScreensFramework.stage.setResizable(false);
-        ScreensFramework.stage.sizeToScene();
-        ScreensFramework.stage.setMinHeight(0);
-        ScreensFramework.stage.setMinWidth(0);
+        ScreensFramework.inicialStage.setWidth(543);
+        ScreensFramework.inicialStage.setHeight(440);
+        ScreensFramework.inicialStage.setResizable(false);
+        ScreensFramework.inicialStage.sizeToScene();
+        
+        
+        
     }
 
     @FXML
     private void registrar(ActionEvent event) {
-        myController.loadScreen(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, null);
+        myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL1, ScreensFramework.PANTALLA_PERFIL1_FXML, null);
+
+        
         //myController.setScreen(ScreensFramework.PANTALLA_PERFIL1);
 
     }
@@ -84,55 +93,53 @@ public class LoginController implements Initializable, ControlledScreen {
             iniciarSesion(null);
         }
     }
+    
+     @FXML
+    private void mostrarLabelEnter(KeyEvent k) {
+        if (KeyCode.ENTER == k.getCode()) {
+            mostrarLabel();
+        }
+    }
 
     @FXML
-    private void iniciarSesion(ActionEvent event) {
-        //Conexión SQL para comprobar los datos.
-
+    private void iniciarSesion(MouseEvent event) {
+ 
         
-        //Dal dal=Dal.getDal();
-        String nombreUser=fieldUser.getText();
-        String pass=fieldPassword.getText();
-        if(nombreUser.equals("") || pass.equals("")){
-                 MessageBox.show(ScreensFramework.stage,
-
+        String nombreUser = fieldUser.getText();
+        String pass = fieldPassword.getText();
+        if (nombreUser.equals("") || pass.equals("")) {
+            MessageBox.show(ScreensFramework.stage,
                     "Por favor, rellena los campos",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
+            labelAutenticando.setVisible(false);
             return;
         }
 
-        //Collection<Usuario> datos=dal.find(Usuario.USUARIOSBYNOMBREYPASS, new Object[]{nombreUser,pass}, Usuario.class);
-          //      Collection<Usuario> datos=dal.find(Usuario.TODOS_USUARIOS, null, Usuario.class);
-        
-//        Iterator<Usuario> it=
-                
-        Usuario user=BaseDeDatos.getBD().getUsuarioByPassANDName(nombreUser, pass);
-//        if(it.hasNext())
-//            user=it.next();
-        
-        if(user!=null){
-            Recurso recurso=new Recurso();
+
+
+        Usuario user = BaseDeDatos.getBD().getUsuarioByPassANDName(nombreUser, pass);
+
+
+        if (user != null) {
+            Recurso recurso = new Recurso();
 
             recurso.putObject("usuario", user);
+            Jugador j = BaseDeDatos.getBD().getJugador(user.getId());
+            //ScreensFramework.tituloVentanaNombreUsuario = " (" + user.getNombre() + ")";
+            ScreensFramework.tituloVentanaNombreUsuario = " (" + user.getNombre() + " " + j.getApellidos() + ")";
 
 
-//                    Parent root = null;
-//                    try {
-//                        recurso.putObject("controller", myController);
-//                        root = FXMLLoader.load(getClass().getResource("/fitbox/view/PantallaPrincipal_2.fxml"), recurso);
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(PantallaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    
-//                    Scene scene = new Scene(root);
-//                    ScreensFramework.stage.setScene(scene);
 
-            //s.show();
+            cargarPantallas(recurso);
+           
 
-
-            myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-            //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+            if (!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL)) {
+                myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
+            }
+            ScreensFramework.inicialStage.close();
+            ScreensFramework.stage.show();
+            ScreensFramework.stage.setResizable(true);
 
         } else {
             MessageBox.show(ScreensFramework.stage,
@@ -140,6 +147,8 @@ public class LoginController implements Initializable, ControlledScreen {
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
         }
+        
+        labelAutenticando.setVisible(false);
 
     }
 
@@ -147,4 +156,81 @@ public class LoginController implements Initializable, ControlledScreen {
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void cargarPantallas(final Recurso r) {
+        try {
+//PantallaPrincipal
+            String name = ScreensFramework.PANTALLA_PRINCIPAL;
+            String resource = ScreensFramework.PANTALLA_PRINCIPAL_FXML;
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            Parent loadScreen = (Parent) myLoader.load();
+            Scene scenePrincipal = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, scenePrincipal);
+            
+            //PantallaPerfil
+            name = ScreensFramework.PANTALLA_EDITARPERFIL;
+            resource = ScreensFramework.PANTALLA_EDITARPERFIL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene scenePerfil = new Scene(loadScreen);
+            scenePerfil.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+            ScreensFramework.pantallas.put(name, scenePerfil);
+            
+            //PantallaActividades
+            name = ScreensFramework.PANTALLA_ACTIVIDADES;
+            resource = ScreensFramework.PANTALLA_ACTIVIDADES_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneActividades = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneActividades);
+            
+            //PantallaVideos
+            name = ScreensFramework.PANTALLA_SEGUIMIENTO;
+            resource = ScreensFramework.PANTALLA_SEGUIMIENTO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneVideos = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneVideos);
+            
+            //PantallaEventos
+            name = ScreensFramework.PANTALLA_EVENTO;
+            resource = ScreensFramework.PANTALLA_EVENTO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneEventos = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneEventos);
+            
+            //PantallaDesafios
+            name = ScreensFramework.PANTALLA_DESAFIO;
+            resource = ScreensFramework.PANTALLA_DESAFIO_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneDesafios = new Scene(loadScreen);
+            sceneDesafios.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+            ScreensFramework.pantallas.put(name, sceneDesafios);
+            
+            //PantallaCalendarioMensual
+            name = ScreensFramework.PANTALLA_VISTAMENSUAL;
+            resource = ScreensFramework.PANTALLA_VISTAMENSUAL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneCalendarioMensual = new Scene(loadScreen);
+            ScreensFramework.pantallas.put(name, sceneCalendarioMensual);
+            
+             //PantallaCalendarioSemanal
+            name = ScreensFramework.PANTALLA_VISTASEMANAL;
+            resource = ScreensFramework.PANTALLA_VISTASEMANAL_FXML;
+            myLoader = new FXMLLoader(getClass().getResource(resource),r);
+            loadScreen = (Parent) myLoader.load();
+            Scene sceneCalendarioSemanal = new Scene(loadScreen);
+            sceneCalendarioSemanal.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+            ScreensFramework.pantallas.put(name, sceneCalendarioSemanal);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    @FXML
+    public void mostrarLabel(){labelAutenticando.setVisible(true);}
+    
 }

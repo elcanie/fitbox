@@ -36,7 +36,7 @@ public class perfil3Controller implements Initializable, ControlledScreen{
     @FXML
     private CheckBox domingoCB;
     
-    private ScreensController myController;
+    private ScreensController myController  = new ScreensController(ScreensFramework.inicialStage);
     private datosUsuario usuario;
     private Recurso recurso;
     
@@ -53,8 +53,8 @@ public class perfil3Controller implements Initializable, ControlledScreen{
            usuario.setDomingoCB(domingoCB.isSelected());
            
            recurso.putObject("usuario", usuario);   
-           myController.loadScreen(ScreensFramework.PANTALLA_PERFIL4, ScreensFramework.PANTALLA_PERFIL4_FXML, recurso);
-           myController.setScreen(ScreensFramework.PANTALLA_PERFIL4);
+           myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL4, ScreensFramework.PANTALLA_PERFIL4_FXML, recurso);
+           //myController.setScreen(ScreensFramework.PANTALLA_PERFIL4);
         
 
     }
@@ -70,8 +70,8 @@ public class perfil3Controller implements Initializable, ControlledScreen{
            usuario.setSabadoCB(sabadoCB.isSelected());
            usuario.setDomingoCB(domingoCB.isSelected());
   
-            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
+            myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
+//            myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
     }
 
     @Override

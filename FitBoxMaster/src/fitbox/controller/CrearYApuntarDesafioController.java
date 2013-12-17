@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -50,7 +51,7 @@ import org.joda.time.LocalDate;
  */
 public class CrearYApuntarDesafioController implements Initializable, ControlledScreen {
 
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.stage);
     @FXML
     private TextField textNombre, fechaIni;
     @FXML
@@ -58,7 +59,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     @FXML
     private ListView listaRival, listaDesafios;
     @FXML
-    private Button btnDesafiar,goButton;
+    private Button btnDesafiar;
     @FXML
     private HBox hBoxFin;
     private Recurso recurso;
@@ -73,7 +74,7 @@ boolean segundaVez=false;
     public void atras(ActionEvent event) {
 
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
     }
 
@@ -177,7 +178,7 @@ Usuario usuario;
         // TODO
         ScreensFramework.stage.setWidth(921);
         ScreensFramework.stage.setHeight(590);
-        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
+//        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         fecha = new LocalDate();
         fxcalendar2 = new FXCalendar();
         fechaIni.setText(fecha.getDayOfMonth() + "/" + fecha.getMonthOfYear() + "/" + fecha.getYear());
@@ -276,67 +277,69 @@ Usuario usuario;
 //    }
     //To change body of generated methods, choose Tools | Templates.
 
-    //Metodos barra de botones
+        //Metodos barra de botones
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
 
 
     }
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
-
 
     }
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
     }
-
-    @FXML
-    public void abrirEquipo(MouseEvent event) throws IOException {
-        // myController.setScreen(ScreensFramework.PANTALLA_EQUIPO);
+    
+     @FXML
+    public void abrirEventos(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
     }
 
-    @FXML
-    public void abrirDesafios(MouseEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
-    }
-
-    @FXML
-    public void abrirClasificacion(ActionEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
-    }
-
-    @FXML
+    @FXML //es cerrarSesion
     public void abrirAjustes(MouseEvent event) throws IOException {
-        //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
     }
+    @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        abrirEventos(null);   
+    }
+    @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        abrirAjustes(null); 
+      }
+    @FXML
+    public void ActualizarACT(ActionEvent event) throws IOException {
+        Actualizar(null);
+      }
 
     @FXML
     private void home() {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_PRINCIPAL))
         myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
+    
+    //FIN METODOS BARRA BOTONES
     
     
     @FXML
@@ -411,22 +414,20 @@ Usuario usuario;
     public void seleccionDesafio(MouseEvent t){
         TableView tabla = ((TableView)t.getSource());
         if(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()!=-1){
-        dSelected = ((Desafio)tabla.getItems().get(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()));
-        System.out.println("Seleccionado: "+dSelected.getId());
+        Desafio d = ((Desafio)tabla.getItems().get(((TableView)t.getSource()).getSelectionModel().getSelectedIndex()));
+        System.out.println("Seleccionado: "+d.getId());
         
-        if(dSelected.getEstado()==0 || dSelected.getEstado()==2){
-            goButton.setDisable(false);
-            
+        if(d.getEstado()==0 || d.getEstado()==2){
+            //goButton.setDisable(false);
+            recurso.putObject("desafio", d);
         }else{
-        goButton.setDisable(true);
+        //goButton.setDisable(true);
         }
         }
     }
-    Desafio dSelected;
-    @FXML
-    public void goClick(){
-    recurso.putObject("desafio", dSelected);
-    myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD,
-            ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-    }
+    
+    
+    
+    
 }
+

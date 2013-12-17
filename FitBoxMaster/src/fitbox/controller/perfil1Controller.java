@@ -88,14 +88,14 @@ public class perfil1Controller implements Initializable, ControlledScreen {
     private String repPass;
     private String sexo;
     private datosUsuario usuario;
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.inicialStage);
     private Recurso recurso;
 
     @FXML
     private void handleButtonAnterior(ActionEvent event) {
 
-        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+        myController.loadScreenInicial(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
+        //myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
 
     }
 
@@ -149,7 +149,7 @@ public class perfil1Controller implements Initializable, ControlledScreen {
                 || altura.equals("") || peso.equals("") || correo.equals("") || pass.equals("")
                 || repPass.equals("") || sexo.equals("")) {
 
-            int answer = MessageBox.show(ScreensFramework.stage,
+            int answer = MessageBox.show(ScreensFramework.inicialStage,
                     "Por favor, rellena todos los campos.",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -198,14 +198,14 @@ public class perfil1Controller implements Initializable, ControlledScreen {
             altE = Integer.parseInt(altura);
             if (altE <= 0) {
                 valido = false;
-                answer = MessageBox.show(ScreensFramework.stage,
+                answer = MessageBox.show(ScreensFramework.inicialStage,
                         "Altura no válida.",
                         "Information dialog",
                         MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } catch (Exception e) {
             valido = false;
-            answer = MessageBox.show(ScreensFramework.stage,
+            answer = MessageBox.show(ScreensFramework.inicialStage,
                     "Altura no válida.",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -219,14 +219,14 @@ public class perfil1Controller implements Initializable, ControlledScreen {
             pesoE = Float.parseFloat(peso);
             if (pesoE <= 0) {
                 valido = false;
-                ans = MessageBox.show(ScreensFramework.stage,
+                ans = MessageBox.show(ScreensFramework.inicialStage,
                         "Peso no válido.",
                         "Information dialog",
                         MessageBox.ICON_INFORMATION | MessageBox.OK);
             }
         } catch (Exception e) {
             valido = false;
-            ans = MessageBox.show(ScreensFramework.stage,
+            ans = MessageBox.show(ScreensFramework.inicialStage,
                     "Peso no válido.",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -294,7 +294,7 @@ public class perfil1Controller implements Initializable, ControlledScreen {
         System.out.println("Fecha actual:"+diaActual+"/"+mesActual+"/"+anyoActual);
         System.out.println("Fecha registro:"+diaR+"/"+mesR+"/"+anyoR);
         if (mostrarAvisoFecha == true) {
-            int a = MessageBox.show(ScreensFramework.stage,
+            int a = MessageBox.show(ScreensFramework.inicialStage,
                     "Fecha invalida.",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -318,8 +318,8 @@ public class perfil1Controller implements Initializable, ControlledScreen {
             //siguiente
             recurso = new Recurso();
             recurso.putObject("usuario", usuario);
-            myController.loadScreen(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
-            myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
+            myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL2, ScreensFramework.PANTALLA_PERFIL2_FXML, recurso);
+            //myController.setScreen(ScreensFramework.PANTALLA_PERFIL2);
         }
 
 
@@ -370,8 +370,8 @@ public class perfil1Controller implements Initializable, ControlledScreen {
         }
 
 
-        ScreensFramework.stage.setWidth(718);
-        ScreensFramework.stage.setHeight(400);
+        ScreensFramework.inicialStage.setWidth(718);
+        ScreensFramework.inicialStage.setHeight(400);
     }
 
     @Override

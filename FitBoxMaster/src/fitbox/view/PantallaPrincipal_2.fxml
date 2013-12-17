@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.000022070315" prefWidth="932.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.PantallaPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="ventana" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.000022070315" prefWidth="957.999977929685" style="" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.PantallaPrincipalController">
   <children>
     <VBox id="VBox" fx:id="VBOXhorario" alignment="CENTER" prefWidth="329.7929068969752" spacing="5.0" style="#-fx-background-color: yellow" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="64.0">
       <children>
@@ -76,7 +76,19 @@
     </HBox>
     <ToolBar fx:id="toolBar" prefHeight="65.0" prefWidth="834.0000999999975" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <Button fx:id="botonPerfil" cancelButton="false" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="155.0" text="PERFIL">
+        <Button id="botonhome" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="41.5" prefWidth="51.0" style="" text="" underline="false">
+          <graphic>
+            <ImageView id="Home-icon.png" fitHeight="46.0" fitWidth="51.0" onMouseClicked="#home">
+              <image>
+                <Image url="@../../imagenes/Home-icon.png" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
+          </graphic>
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Button>
+        <Button fx:id="botonPerfil" cancelButton="false" focusTraversable="true" graphicTextGap="4.0" minHeight="46.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirPerfil" prefHeight="46.0" prefWidth="155.0" text="PERFIL">
           <effect>
             <DropShadow />
           </effect>
@@ -130,19 +142,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
-          <effect>
-            <DropShadow />
-          </effect>
-          <graphic>
-            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
-              </image>
-            </ImageView>
-          </graphic>
-        </Button>
-        <Button id="botonCalendario" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirCalendario" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
+        <Button id="botonCalendario" cancelButton="false" disable="false" font="$x1" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
           <effect>
             <DropShadow />
           </effect>
@@ -154,7 +154,19 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
+        <Button fx:id="botonActualiza" cancelButton="false" font="$x1" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#ActualizarAction" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="botonAjustes" mnemonicParsing="false" onAction="#abrirAjustesACT" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
           <effect>
             <DropShadow />
           </effect>

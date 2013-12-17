@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="fondo" prefHeight="560.0" prefWidth="920.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
+<AnchorPane id="fondo" prefHeight="560.0" prefWidth="920.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.CrearYApuntarDesafioController">
   <children>
     <TabPane prefHeight="485.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
       <tabs>
@@ -20,7 +20,7 @@
           <content>
             <AnchorPane id="fondo" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="tabla" layoutX="31.0" layoutY="25.0" onMouseClicked="#seleccionDesafio" prefHeight="453.0" prefWidth="639.0">
+                <TableView fx:id="tabla" editable="false" onMouseClicked="#seleccionDesafio" prefHeight="453.0" prefWidth="639.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="25.0">
                   <columns>
                     <TableColumn maxWidth="5000.0" minWidth="102.0" prefWidth="102.0" text="Nombre Desafio" fx:id="nombreColumn" />
                     <TableColumn minWidth="75.0" prefWidth="75.0" text="Actividad" fx:id="actividadColumn" />
@@ -28,10 +28,10 @@
                     <TableColumn minWidth="75.0" prefWidth="75.0" text="Rival" fx:id="rivalColumn" />
                     <TableColumn minWidth="75.0" prefWidth="75.0" text="Tus puntos" fx:id="tusPuntosColumn" />
                     <TableColumn minWidth="75.0" prefWidth="75.0" text="Puntos Rival" fx:id="puntosRivalColumn" />
-                    <TableColumn minWidth="75.0" prefWidth="75.0" text="Estado" fx:id="estadoColumn" />
+                    <TableColumn maxWidth="5000.0" minWidth="75.0" prefWidth="139.0" text="Estado" fx:id="estadoColumn" />
                   </columns>
                 </TableView>
-                <Button fx:id="goButton" disable="true" layoutX="699.0" layoutY="390.0" minHeight="80.0" minWidth="155.0" mnemonicParsing="false" onAction="#goClick" prefHeight="80.0" prefWidth="155.00009999999747" text="Go!">
+                <Button disable="true" minHeight="80.0" minWidth="155.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="156.0" text="Go!" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="34.0">
                   <font>
                     <Font name="Tahoma Bold" size="20.0" />
                   </font>
@@ -56,13 +56,13 @@
               <children>
                 <VBox id="VBox" alignment="CENTER" prefHeight="510.0" prefWidth="889.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
-                    <Label prefHeight="18.0" prefWidth="122.0" text="Desafios" textFill="WHITE">
+                    <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="40.0" prefWidth="158.0" text="Desafíos" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" underline="false" visible="true" wrapText="false">
+                      <effect>
+                        <DropShadow color="#66ffed" />
+                      </effect>
                       <font>
-                        <Font name="Broadway" size="22.0" />
+                        <Font size="22.0" />
                       </font>
-                      <VBox.margin>
-                        <Insets top="10.0" />
-                      </VBox.margin>
                     </Label>
                     <ListView fx:id="listaDesafios" prefHeight="560.0" prefWidth="920.0">
                       <VBox.margin>
@@ -100,7 +100,7 @@
                                 <TextField fx:id="textNombre" prefWidth="200.0" />
                               </children>
                             </HBox>
-                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                            <HBox id="HBox" alignment="CENTER" spacing="20.0">
                               <children>
                                 <Label font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="13.0" prefHeight="16.0" prefWidth="72.0" text="Actividad" textFill="WHITE" wrapText="false" />
                                 <ComboBox id="comboCategoria" fx:id="comboActividad" prefHeight="21.0" prefWidth="200.0">
@@ -114,7 +114,7 @@
                                 </ComboBox>
                               </children>
                             </HBox>
-                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                            <HBox id="HBox" alignment="CENTER" spacing="12.0">
                               <children>
                                 <Label font="$x1" text="Fecha inicio" textFill="WHITE" wrapText="false" />
                                 <TextField fx:id="fechaIni" editable="false" prefWidth="200.0" />
@@ -220,14 +220,38 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button id="botonAjustes" mnemonicParsing="false" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="AJUSTES">
+        <Button id="botonCalendario" cancelButton="false" disable="false" font="$x2" graphicTextGap="4.0" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" onAction="#abrirEventosACT" onMouseClicked="#abrirEventos" prefHeight="46.0" prefWidth="136.00009999999747" text="Eventos">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500091552734375" fitWidth="38.500091552734375" mouseTransparent="true" onMouseClicked="#abrirEventos" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/evento.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonActualiza" cancelButton="false" font="$x2" graphicTextGap="4.0" minHeight="45.5" minWidth="-1.0" mnemonicParsing="false" onAction="#ActualizarACT" onMouseClicked="#Actualizar" prefHeight="46.0" prefWidth="155.0" text="ACTUALIZA">
+          <effect>
+            <DropShadow />
+          </effect>
+          <graphic>
+            <ImageView fitHeight="38.500144958496094" fitWidth="38.500144958496094" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../../imagenes/Button-Refresh-icon32px.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="botonAjustes" mnemonicParsing="false" onAction="#abrirAjustesACT" onMouseClicked="#abrirAjustes" prefWidth="136.0" text="Cerrar Sesión">
           <effect>
             <DropShadow />
           </effect>
           <graphic>
             <ImageView fitHeight="40.5" fitWidth="40.5" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../imagenes/Categories-preferences-system-icon32px.png" />
+                <Image url="@../../imagenes/logout_256.png" />
               </image>
             </ImageView>
           </graphic>

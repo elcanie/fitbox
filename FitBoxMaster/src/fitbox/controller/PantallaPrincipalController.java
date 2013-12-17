@@ -1,11 +1,8 @@
-
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package fitbox.controller;
-
 
 import fitbox.controller.dao.Dal;
 import fitbox.model.BaseDeDatos;
@@ -92,17 +89,18 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     /**
      * Initializes the controller class.
      */
+    private Stage stageEquipo;
+    private Stage stageClasificacion;
     private FadeTransition fadeTransition;
     private FadeTransition fadeTransition1;
     private FadeTransition fadeTransition2;
     private FadeTransition fadeTransition3;
     private PauseTransition pauseTransition;
     private SequentialTransition sequentialTransition;
-    ScreensController myController;
+    ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Recurso recurso;
     private Usuario user;
     private Clock clock;
-
     private ImageView image;
     private ImageView image1;
     private ImageView image2;
@@ -116,7 +114,6 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private ImageView ImagenAmigos;
     @FXML
     private Label labelActualizada;
-
     @FXML
     Parent root;
     @FXML
@@ -132,108 +129,104 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     public void abrirPerfil(MouseEvent event) throws IOException {
+       if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EDITARPERFIL))
         myController.loadScreen(ScreensFramework.PANTALLA_EDITARPERFIL, ScreensFramework.PANTALLA_EDITARPERFIL_FXML, recurso);
-
-        //myController.setScreen(ScreensFramework.PANTALLA_EDITARPERFIL);
-
     }
 
     @FXML
     public void abrirActividades(MouseEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_ACTIVIDADES))
         myController.loadScreen(ScreensFramework.PANTALLA_ACTIVIDADES, ScreensFramework.PANTALLA_ACTIVIDADES_FXML, recurso);
+        
 
-        //myController.setScreen(ScreensFramework.PANTALLA_ACTIVIDADES);
 
 
     }
 
     @FXML
     public void abrirCalendario(MouseEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_VISTAMENSUAL))
         myController.loadScreen(ScreensFramework.PANTALLA_VISTAMENSUAL, ScreensFramework.PANTALLA_VISTAMENSUAL_FXML, recurso);
-
-        // myController.setScreen(ScreensFramework.PANTALLA_VISTAMENSUAL);
-
-//        myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-//        myController.setScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD);
+ 
 
 
     }
 
     @FXML
     public void abrirVideos(MouseEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_SEGUIMIENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
-
-        //myController.setScreen(ScreensFramework.PANTALLA_SEGUIMIENTO);
-
-
+        
 
     }
 
     @FXML
-
     public void Actualizar(MouseEvent event) throws IOException, SQLException {
-        //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
+        actualizar();
+    }
+    @FXML
+    public void ActualizarAction(ActionEvent event) throws IOException, SQLException {
         actualizar();
     }
 
     @FXML
     public void abrirEquipo(MouseEvent event) throws IOException {
-
-        Stage s = new Stage();
-        Parent root = null;
-        try {
-            recurso.putObject("controller", myController);
-            root = FXMLLoader.load(getClass().getResource("/fitbox/view/AgregarAmigo.fxml"), recurso);
-        } catch (IOException ex) {
-            Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Scene scene = new Scene(root);
-        s.setScene(scene);
-        s.show();
-        ScreensFramework.stage.toBack();
-
+        if (stageEquipo == null) cargarEquipo();
+        
+            stageEquipo.show();
+            stageEquipo.toFront();
+       
     }
 
     @FXML
     public void abrirDesafios(MouseEvent event) throws IOException {
-
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_DESAFIO))
         myController.loadScreen(ScreensFramework.PANTALLA_DESAFIO, ScreensFramework.PANTALLA_DESAFIO_FXML, recurso);
-        //myController.setScreen(ScreensFramework.PANTALLA_DESAFIO);
-
+        
+        
+        
     }
 
     @FXML
     public void abrirClasificacion(ActionEvent event) throws IOException {
-        myController.loadScreen(ScreensFramework.PANTALLA_CLASIFICACION, ScreensFramework.PANTALLA_CLASIFICACION_FXML, recurso);
 
-        //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+        if (stageClasificacion == null) cargarClasificacion();
+       
+            stageClasificacion.show();
+            stageClasificacion.toFront();
 
     }
-     @FXML
-    public void abrirEventos(ActionEvent event) throws IOException {
+
+    @FXML
+    public void abrirEventos(MouseEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
         myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
-
-        //myController.setScreen(ScreensFramework.PANTALLA_CLASIFICACION);
+        
 
     }
-
-    @FXML //es cerrarSesion
-    public void abrirAjustes(MouseEvent event) throws IOException {
-
-
+    
+     @FXML
+    public void abrirEventosACT(ActionEvent event) throws IOException {
+        if(!ScreensFramework.cargarPantalla(ScreensFramework.PANTALLA_EVENTO))
+        myController.loadScreen(ScreensFramework.PANTALLA_EVENTO, ScreensFramework.PANTALLA_EVENTO_FXML, recurso);
+    }
+      @FXML 
+    public void abrirAjustesACT(ActionEvent event) throws IOException {
+        if(stageClasificacion != null) stageClasificacion.close();
+        if(stageEquipo != null) stageEquipo.close();
         myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
-        //     myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
-        //        Parent root = FXMLLoader.load(getClass().getResource("PantallaPrincipal_2.fxml"));
-//        
-//        Scene scene = new Scene(root);
-//        
-//        Stage stage = new Stage();
-//                stage.setScene(scene);
-//        stage.show();
-        //myController.setScreen(ScreensFramework.PANTALLA_AJUSTES);
+    }
+
+    //es cerrarSesion
+    @FXML 
+    public void abrirAjustes(MouseEvent event) throws IOException {
+        if(stageClasificacion != null) stageClasificacion.close();
+        if(stageEquipo != null) stageEquipo.close();
+        myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, recurso);
 
     }
+    @FXML
+    public void home(){}
 
     public void setMain(ScreensFramework main) {
     }
@@ -247,7 +240,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         this.user = (Usuario) recurso.getObject("usuario");
 
 
-         inicioReloj();
+        inicioReloj();
 
         inicioGaleria();
         cargarNoticias();
@@ -256,12 +249,13 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
         cargarTablaActividades();
 
-        ScreensFramework.stage.setTitle("Pantalla Principal - (" + user.getNombre() + ")");
+
+
         ScreensFramework.stage.setResizable(true);
-        ScreensFramework.stage.sizeToScene();
-        ScreensFramework.stage.centerOnScreen();
-        
-        ScreensFramework.stage.setMinWidth(950);
+        //ScreensFramework.stage.sizeToScene();
+        //ScreensFramework.stage.centerOnScreen();
+
+        ScreensFramework.stage.setMinWidth(970);
         ScreensFramework.stage.setMinHeight(580);
 
 
@@ -271,11 +265,8 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     public void cargarEventos() {
 
 
-             
-
-         
-         Collection<Evento> datosE = BaseDeDatos.getBD().getEventosUsuarioIniciado(user);
-         //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
+        Collection<Evento> datosE = BaseDeDatos.getBD().getEventosUsuarioIniciado(user);
+        //Collection<Evento> datosE = dal.find(Evento.TODOS_EVENTOS,new Object[]{},Evento.class);
 //         Iterator<Evento> itdatosE = datosE.iterator();
 //         Collection<String> eventosString = new ArrayList();
 //         Evento e;
@@ -284,25 +275,25 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 //             e=itdatosE.next();
 //            eventosString.add(e.toString());
 //         }
-            
-         ObservableList<Evento> eventos =FXCollections.observableArrayList(datosE);
-         listaEventos.setItems(eventos);
-       
-         
+
+        ObservableList<Evento> eventos = FXCollections.observableArrayList(datosE);
+        listaEventos.setItems(eventos);
+
+
     }
-    
+
     private void cargarNoticias() {
 
-         List<Noticia> datos = BaseDeDatos.getBD().getNoticias();
+        List<Noticia> datos = BaseDeDatos.getBD().getNoticias();
 //         Iterator<Noticia> itdatos = datos.iterator();
 ////         Collection<String> noticiasString = new ArrayList();
 ////         while(itdatos.hasNext()){
 ////         noticiasString.add(itdatos.next().toString());
 ////         }
-    
-         ObservableList<Noticia> noticias =FXCollections.observableArrayList(datos);
-         listaNews.setItems(noticias);
-        
+
+        ObservableList<Noticia> noticias = FXCollections.observableArrayList(datos);
+        listaNews.setItems(noticias);
+
     }
 
     public void cargarResumen() {
@@ -311,61 +302,66 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 //        Iterator<Jugador> itjugador = listjugador.iterator();
 //        Jugador jugador = null;
 //        if(itjugador.hasNext()) jugador = itjugador.next();
-                
+
         //Hoy tienes X actividades para realizar y has realizado Y.
         LocalDate f = new LocalDate();
-        String a = f.getYear()+"/"+f.getMonthOfYear()+"/"+f.getDayOfMonth()+"%";
+        String a = f.getYear() + "/" + f.getMonthOfYear() + "/" + f.getDayOfMonth() + "%";
         List<Calendario> calendarios = BaseDeDatos.getBD().getCALENDARIOSPORAÑODIAYJUGADOR(a, user.getId());
         Iterator<Calendario> it = calendarios.iterator();
         Calendario cal = null;
-        System.out.println("talla: "+calendarios.size());
-        
+        System.out.println("talla: " + calendarios.size());
+
         int ActPorHacer = 0;
         int ActHechas = 0;
-        while(it.hasNext()){
-        cal=it.next();
-        cal.getFecha();
-        if(cal.getEstadoActividad()==0) ActPorHacer++;
-        else ActHechas++;
-        
+        while (it.hasNext()) {
+            cal = it.next();
+            cal.getFecha();
+            if (cal.getEstadoActividad() == 0) {
+                ActPorHacer++;
+            } else {
+                ActHechas++;
+            }
+
         }
         String texto;
-        if(calendarios.isEmpty()){
-            texto= "No tienes actividades programadas para hoy.";
+        if (calendarios.isEmpty()) {
+            texto = "No tienes actividades programadas para hoy.";
+        } else {
+            texto = "Hoy tienes " + calendarios.size() + " actividades para realizar y has realizado " + ActHechas + ".";
+            if (ActPorHacer != 0) {
+                texto = texto + "\nRealiza las " + ActPorHacer + " actividades restantes!";
+            } else {
+                texto = texto + "\nHas realizado todas las actividades de hoy!";
+            }
         }
-        else{
-         texto = "Hoy tienes "+calendarios.size()+" actividades para realizar y has realizado "+ActHechas+".";
-         if(ActPorHacer != 0) texto = texto+"\nRealiza las "+ActPorHacer+" actividades restantes!";
-         else texto = texto+"\nHas realizado todas las actividades de hoy!";
-        }
-        
+
         DecimalFormat df = new DecimalFormat("#.##");
-        texto = texto+"\nTienes "+df.format(jugador.getPuntos())+" puntos de jugador.";
-        
+        texto = texto + "\nTienes " + df.format(jugador.getPuntos()) + " puntos de jugador.";
+
         textoResumen.setText(texto);
-        
+
     }
 
     public void cargarTablaActividades() {
 //        Dal dal = Dal.getDal(); 
-        
+
         List<TablaActividad> actividades = BaseDeDatos.getBD().getTablaActividadesUsuario(user.getId());
-       
-         ObservableList<TablaActividad> datos=FXCollections.observableArrayList(actividades);
-         columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario,String>("fecha"));         
-         columnaActividad.setCellValueFactory(new PropertyValueFactory<ResultSet,String>("nombre"));
-         tablaActividad.setItems(datos);
-         
+
+        ObservableList<TablaActividad> datos = FXCollections.observableArrayList(actividades);
+        columnaHora.setCellValueFactory(new PropertyValueFactory<Calendario, String>("fecha"));
+        columnaActividad.setCellValueFactory(new PropertyValueFactory<ResultSet, String>("nombre"));
+        tablaActividad.setItems(datos);
+
     }
 
     public void inicioReloj() {
-        if(clock==null){
-        clock = new Clock(Color.rgb(57, 168, 155), Color.rgb(53, 64, 62));
-        clock.setLayoutX(10);
-        clock.setLayoutY(30);
-        clock.getTransforms().add(new Scale(0.4f, 0.4f, 0, 0));
-        zonaReloj.getChildren().add(clock);
-        clock.play();
+        if (clock == null) {
+            clock = new Clock(Color.rgb(57, 168, 155), Color.rgb(53, 64, 62));
+            clock.setLayoutX(10);
+            clock.setLayoutY(30);
+            clock.getTransforms().add(new Scale(0.4f, 0.4f, 0, 0));
+            zonaReloj.getChildren().add(clock);
+            clock.play();
         }
     }
 
@@ -404,7 +400,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
         panelGaleria.getChildren().addAll(image, image1, image2);
         panelGaleria.toFront();
-        
+
         fadeTransition = FadeTransitionBuilder.create()
                 .duration(Duration.seconds(5))
                 .node(image2)
@@ -440,16 +436,13 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     private void goToMain(ActionEvent event) {
-
-        
         //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
     }
 
-    
     private void actualizar() throws SQLException {
-        
 
-        
+
+
         System.out.println("Actualizando ventana principal");
         cargarNoticias();
         cargarEventos();
@@ -457,7 +450,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         cargarTablaActividades();
         System.out.println("Ventana principal Actualizada");
 
-        
+
         labelActualizada.toFront();
         labelActualizada.setVisible(true);
         new AnimationTimer() {
@@ -481,14 +474,13 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         }.start();
 
 
-        
+
     }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent; //To change body of generated methods, choose Tools | Templates.
     }
-        
 
     @FXML
     private void redimensionarImagenes() {
@@ -541,6 +533,41 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     private void girarImagenClasifOf() {
         ImagenClasif.setRotate(0);
     }
+
+    private void cargarClasificacion() {
+
+        stageClasificacion = new Stage();
+        Parent root = null;
+        try {
+            recurso.putObject("controller", myController);
+            root = FXMLLoader.load(getClass().getResource(ScreensFramework.PANTALLA_CLASIFICACION_FXML), recurso);
+        } catch (IOException ex) {
+            Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Scene scene = new Scene(root);
+        stageClasificacion.setScene(scene);
+        //stageClasificacion.setResizable(false);
+        stageClasificacion.setMinHeight(560);
+        stageClasificacion.setMinWidth(420);
+        stageClasificacion.setTitle("Clasificación " + ScreensFramework.tituloVentanaNombreUsuario);
+        stageClasificacion.getIcons().add(new Image("/imagenes/Podium-icon.png"));
+    }
+
+    private void cargarEquipo() {
+        stageEquipo = new Stage();
+        Parent root = null;
+        try {
+            recurso.putObject("controller", myController);
+            root = FXMLLoader.load(getClass().getResource("/fitbox/view/AgregarAmigo.fxml"), recurso);
+        } catch (IOException ex) {
+            Logger.getLogger(AgregarAmigoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Scene scene = new Scene(root);
+        stageEquipo.setScene(scene);
+        stageEquipo.setResizable(false);
+        stageEquipo.setTitle("Agregar Amigos " + ScreensFramework.tituloVentanaNombreUsuario);
+        stageEquipo.getIcons().add(new Image("/imagenes/Groups-Meeting-Dark-icon.png"));
+    }
 }
-
-

@@ -112,4 +112,12 @@ public class Evento {
     public String[] getValores() {
         return valores;
     }
+    
+    private String realizado;
+    public String getRealizado() { 
+        return realizado;
+    }
+     public void setRealizado(String r) { 
+        realizado=r;
+    }
 }

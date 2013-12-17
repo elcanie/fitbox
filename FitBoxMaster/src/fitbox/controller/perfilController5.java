@@ -26,7 +26,7 @@ import jfx.messagebox.MessageBox;
  */
 public class perfilController5 implements Initializable, ControlledScreen {
 
-    private ScreensController myController;
+    private ScreensController myController = new ScreensController(ScreensFramework.inicialStage);
     private datosUsuario usuario;
     private Recurso recurso;
     @FXML
@@ -72,11 +72,11 @@ public class perfilController5 implements Initializable, ControlledScreen {
                     usuario.getAnyo()+"/"+usuario.getMes()+"/"+usuario.getDia());
             Dal.getDal().insertConId(j);
             
-            myController.loadScreen(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, null);
-            myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
+            myController.loadScreenInicial(ScreensFramework.PANTALLA_LOGIN, ScreensFramework.PANTALLA_LOGIN_FXML, null);
+//            myController.setScreen(ScreensFramework.PANTALLA_LOGIN);
         }else{
             
-        int answer = MessageBox.show(ScreensFramework.stage,
+        int answer = MessageBox.show(ScreensFramework.inicialStage,
                     "Debe aceptar los términos del contrato para poder registrarse.",
                     "Information dialog",
                     MessageBox.ICON_INFORMATION | MessageBox.OK);
@@ -97,8 +97,8 @@ public class perfilController5 implements Initializable, ControlledScreen {
         usuario.setMostrarLogros(logros.isSelected());
         usuario.setAceptar(aceptar.isSelected());
         recurso.putObject("usuario", usuario);
-        myController.loadScreen(ScreensFramework.PANTALLA_PERFIL4, ScreensFramework.PANTALLA_PERFIL4_FXML, recurso);
-        myController.setScreen(ScreensFramework.PANTALLA_PERFIL4);
+        myController.loadScreenInicial(ScreensFramework.PANTALLA_PERFIL4, ScreensFramework.PANTALLA_PERFIL4_FXML, recurso);
+//        myController.setScreen(ScreensFramework.PANTALLA_PERFIL4);
     }
 
     @Override
