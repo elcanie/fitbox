@@ -59,7 +59,7 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     @FXML
     private ListView listaRival, listaDesafios;
     @FXML
-    private Button btnDesafiar;
+    private Button btnDesafiar,goButton;
     @FXML
     private HBox hBoxFin;
     private Recurso recurso;
@@ -418,10 +418,12 @@ Usuario usuario;
         System.out.println("Seleccionado: "+d.getId());
         
         if(d.getEstado()==0 || d.getEstado()==2){
-            //goButton.setDisable(false);
+            goButton.setDisable(false);
             recurso.putObject("desafio", d);
+myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+
         }else{
-        //goButton.setDisable(true);
+        goButton.setDisable(true);
         }
         }
     }

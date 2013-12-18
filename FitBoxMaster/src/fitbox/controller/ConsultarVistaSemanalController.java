@@ -59,6 +59,7 @@ import org.joda.time.LocalDate;
  */
 public class ConsultarVistaSemanalController implements Initializable, ControlledScreen {
 
+
     @FXML
     ListView lunesList, martesList, miercolesList, juevesList, viernesList, sabadoList, domingoList;
     @FXML

@@ -1,6 +1,7 @@
 package com.sai.javafx.calendar;
 
 import fitbox.controller.ConsultarVistaSemanalController;
+import fitbox.view.ScreensFramework;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -138,6 +139,7 @@ public class FXCalendar extends HBox {
 						valueProperty().set(cu.convertStringtoDate(d));
 					}
 					setTriggered(false);
+                                        if(ScreensFramework.stage.getScene() == ScreensFramework.pantallas.get(ScreensFramework.PANTALLA_VISTASEMANAL))
                                         ConsultarVistaSemanalController.cambiarFecha();
 				}
 			}
