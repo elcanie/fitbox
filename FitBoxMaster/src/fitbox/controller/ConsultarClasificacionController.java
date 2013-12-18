@@ -6,6 +6,8 @@
 package fitbox.controller;
 
 import fitbox.controller.dao.Dal;
+import fitbox.controller.dao.Dao;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Jugador;
 import fitbox.model.Ranking;
 import fitbox.model.Usuario;
@@ -43,12 +45,13 @@ public class ConsultarClasificacionController implements Initializable {
     private TableView tablaGeneral;
     @FXML
     private TableView tablaAmigos;
-    
+    private Usuario user;
 
 
     public void initialize(URL url, ResourceBundle rb) {
         this.recurso = (Recurso) rb;
         dal = Dal.getDal();
+        this.user = (Usuario) recurso.getObject("usuario");
         List<Usuario> usuarios = dal.find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);
         List<Ranking> rankingList = new LinkedList<>();
         for (Usuario u : usuarios) {
@@ -69,7 +72,7 @@ public class ConsultarClasificacionController implements Initializable {
          ObservableList<Ranking> datosRanking = FXCollections.observableArrayList(rankingList);
          tablaGeneral.setItems(datosRanking);
 
-
+         amigos();
         //usuarios = (List<Usuario>) recurso.getObject("usuario");
         //j = (List<Jugador>)dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{"*"}, Jugador.class).get(0);
         //Seleccionar tablaGeneral y realizar consulta.
@@ -77,6 +80,20 @@ public class ConsultarClasificacionController implements Initializable {
 
     public void amigos() {
         //Realizar consulta SQL from=amigos
+        String sql = "SELECT U.nombre, J.puntos FROM jugador J, usuario U WHERE U.id = J.id AND J.id IN (SELECT idAmigo FROM amigo WHERE IdJugador = "+user.getId()+")ORDER BY J.puntos desc";
+        Dao dao = new Dao();
+        ObservableList<Ranking> datosRanking = dao.getPuntuacionesAmigos(sql);
+        
+        TableColumn nombreColumn = new TableColumn("Nombre");
+        TableColumn puntosColumn = new TableColumn("Puntos");
+        nombreColumn.setCellValueFactory(
+                new PropertyValueFactory<Ranking, String>("nombre"));
+        puntosColumn.setCellValueFactory(
+                new PropertyValueFactory<Ranking, Double>("puntos"));
+        
+        tablaAmigos.getColumns().addAll(nombreColumn,puntosColumn);
+        
+        tablaAmigos.setItems(datosRanking);
     }
 
     public void general() {

@@ -6,6 +6,7 @@
 package fitbox.controller.dao;
 
 import com.mysql.jdbc.PreparedStatement;
+import fitbox.model.Ranking;
 import fitbox.model.Usuario;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -20,6 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -32,6 +35,10 @@ public class Dao<T extends Object> {
 
     public Dao(Class<T> claseT) {
         this.claseT = claseT;
+        conexion = Conexion.getConexion();
+    }
+    
+    public Dao() {
         conexion = Conexion.getConexion();
     }
 
@@ -206,5 +213,27 @@ public class Dao<T extends Object> {
         } catch (InvocationTargetException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ObservableList<Ranking> getPuntuacionesAmigos(String consulta) {
+
+        PreparedStatement s = (PreparedStatement) conexion.createStatement(consulta);
+        
+        
+        ResultSet rs;
+        List<Ranking> datos = new LinkedList<>();
+        try {
+            rs = s.executeQuery();
+            
+            while(rs.next()){
+            Ranking rk = new Ranking(rs.getString(1),rs.getDouble(2));
+            datos.add(rk);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ObservableList<Ranking> datosRanking = FXCollections.observableArrayList(datos);
+        return datosRanking;
     }
 }

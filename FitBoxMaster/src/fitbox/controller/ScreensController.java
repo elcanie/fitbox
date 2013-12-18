@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,7 +40,7 @@ public class ScreensController extends StackPane {
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }
-
+   
     public boolean loadScreen(String name, String resource, Recurso recurso) {
         try {
             
@@ -57,8 +58,8 @@ public class ScreensController extends StackPane {
             return true;
             }
             ScreensFramework.stage.setScene(escene);
+            //ScreensFramework.stage.sizeToScene();
             ScreensFramework.stage.setTitle(name+" " + ScreensFramework.tituloVentanaNombreUsuario);
-            
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

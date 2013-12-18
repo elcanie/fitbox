@@ -74,7 +74,7 @@ public class LoginController implements Initializable, ControlledScreen {
         ScreensFramework.inicialStage.setResizable(false);
         ScreensFramework.inicialStage.sizeToScene();
         
-        
+        fieldUser.setFocusTraversable(true);
         
     }
 
@@ -164,67 +164,83 @@ public class LoginController implements Initializable, ControlledScreen {
             String resource = ScreensFramework.PANTALLA_PRINCIPAL_FXML;
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource),r);
             Parent loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorPrincipal =  (AnchorPane) loadScreen; 
             Scene scenePrincipal = new Scene(loadScreen);
             ScreensFramework.pantallas.put(name, scenePrincipal);
+            ScreensFramework.paneles.put(name, anchorPrincipal);
             
             //PantallaPerfil
             name = ScreensFramework.PANTALLA_EDITARPERFIL;
             resource = ScreensFramework.PANTALLA_EDITARPERFIL_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorPerfil =  (AnchorPane) loadScreen;
             Scene scenePerfil = new Scene(loadScreen);
             scenePerfil.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
             ScreensFramework.pantallas.put(name, scenePerfil);
+            ScreensFramework.paneles.put(name, anchorPerfil);
             
             //PantallaActividades
             name = ScreensFramework.PANTALLA_ACTIVIDADES;
             resource = ScreensFramework.PANTALLA_ACTIVIDADES_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorActividades =  (AnchorPane) loadScreen;
             Scene sceneActividades = new Scene(loadScreen);
             ScreensFramework.pantallas.put(name, sceneActividades);
+            ScreensFramework.paneles.put(name, anchorActividades);
             
             //PantallaVideos
             name = ScreensFramework.PANTALLA_SEGUIMIENTO;
             resource = ScreensFramework.PANTALLA_SEGUIMIENTO_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorVideos =  (AnchorPane) loadScreen;
             Scene sceneVideos = new Scene(loadScreen);
             ScreensFramework.pantallas.put(name, sceneVideos);
+            ScreensFramework.paneles.put(name, anchorVideos);
             
             //PantallaEventos
             name = ScreensFramework.PANTALLA_EVENTO;
             resource = ScreensFramework.PANTALLA_EVENTO_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorEventos =  (AnchorPane) loadScreen;
             Scene sceneEventos = new Scene(loadScreen);
             ScreensFramework.pantallas.put(name, sceneEventos);
+            ScreensFramework.paneles.put(name, anchorEventos);
             
             //PantallaDesafios
             name = ScreensFramework.PANTALLA_DESAFIO;
             resource = ScreensFramework.PANTALLA_DESAFIO_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorDesafios =  (AnchorPane) loadScreen;
             Scene sceneDesafios = new Scene(loadScreen);
             sceneDesafios.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
             ScreensFramework.pantallas.put(name, sceneDesafios);
+            ScreensFramework.paneles.put(name, anchorDesafios);
             
             //PantallaCalendarioMensual
             name = ScreensFramework.PANTALLA_VISTAMENSUAL;
             resource = ScreensFramework.PANTALLA_VISTAMENSUAL_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorCalendarioMensual =  (AnchorPane) loadScreen;
             Scene sceneCalendarioMensual = new Scene(loadScreen);
             ScreensFramework.pantallas.put(name, sceneCalendarioMensual);
+            ScreensFramework.paneles.put(name, anchorCalendarioMensual);
             
              //PantallaCalendarioSemanal
             name = ScreensFramework.PANTALLA_VISTASEMANAL;
             resource = ScreensFramework.PANTALLA_VISTASEMANAL_FXML;
             myLoader = new FXMLLoader(getClass().getResource(resource),r);
             loadScreen = (Parent) myLoader.load();
+            AnchorPane anchorCalendarioSemanal =  (AnchorPane) loadScreen;
             Scene sceneCalendarioSemanal = new Scene(loadScreen);
             sceneCalendarioSemanal.getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
             ScreensFramework.pantallas.put(name, sceneCalendarioSemanal);
+            ScreensFramework.paneles.put(name, anchorCalendarioSemanal);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
