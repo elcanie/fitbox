@@ -4,11 +4,8 @@
  */
 package fitbox.controller;
 
-import com.sai.javafx.calendar.FXCalendar;
-import static fitbox.controller.ConsultarVistaSemanalController.fxcalendar;
+
 import fitbox.controller.dao.Dal;
-import fitbox.model.Actividad;
-import fitbox.model.Calendario;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
 import fitbox.view.ControlledScreen;
@@ -17,22 +14,16 @@ import fitbox.view.ScreensFramework;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import org.joda.time.DateTime;
+
 
 /**
  * FXML Controller class
@@ -43,18 +34,15 @@ public class EditarPerfil implements Initializable, ControlledScreen {
 
     @FXML
     TextField nombreText, apellidosText, alturaText, pesoText,
-            correoText, correo2Text, contraseñaText, contraseña2Text;
+            correoText, correo2Text, contraseñaText, contraseña2Text, fechaText;
     @FXML
     RadioButton hombreRadio, mujerRadio;
     @FXML
     Label errorGenero;
-    @FXML
-    HBox hPanel;
     @FXML AnchorPane panelIzq;
     @FXML AnchorPane panelDer;
     @FXML ImageView imagenIzq;
     @FXML ImageView imagenDer;
-    static FXCalendar fxcalendar;
     private Recurso recurso;
     private ScreensController myController = new ScreensController(ScreensFramework.stage);
     private Usuario usuario;
@@ -75,20 +63,17 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         recurso = (Recurso) rb;
         usuario = (Usuario) recurso.getObject("usuario");
         jugador = (Jugador) Dal.getDal().find(Jugador.JUGADORBYUSUARIO, new Object[]{usuario.getId()}, Jugador.class).get(0);
-        fxcalendar = new FXCalendar();
+
         //ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
-        hPanel.getChildren().clear();
-        hPanel.getChildren().addAll(fxcalendar);
-        hPanel.setSpacing(15);
+
 //        FXCalendar.dateTxtField.setText(jugador.getFecha().getYear() + "/" + cal.getFecha().getMonthOfYear() + "/" + cal.getFecha().getDayOfMonth());
         nombreText.setText(usuario.getNombre());
         apellidosText.setText(jugador.getApellidos());
         alturaText.setText("" + jugador.getAltura());
-        fxcalendar.getTextField().setText("19/19/2013");
+        fechaText.setText(jugador.getNacimiento());
         pesoText.setText(jugador.getPeso() + "");
         correoText.setText(jugador.getCorreo());
         correo2Text.setText(jugador.getCorreo());
-        fxcalendar.getTextField().setText(jugador.getNacimiento());
         if (jugador.getGenero().trim().equalsIgnoreCase("mujer")) {
             mujerRadio.setSelected(true);
         }
@@ -108,11 +93,10 @@ public class EditarPerfil implements Initializable, ControlledScreen {
             jugador.setPeso(Double.parseDouble(pesoText.getText()));
             jugador.setGenero(genero);
             jugador.setCorreo(correoText.getText());
-            jugador.setNacimiento(fxcalendar.getTextField().getText());
+            jugador.setNacimiento(fechaText.getText());
             jugador.setApellidos(apellidosText.getText());
             Dal.getDal().update(usuario);
             Dal.getDal().update(jugador);
-            System.out.println(fxcalendar.getTextField().getText()+"pantalla");
             myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
             //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
         }
@@ -139,6 +123,10 @@ public class EditarPerfil implements Initializable, ControlledScreen {
 
     private boolean comprobarCampos() {
         boolean response = true;
+        if(!fechaText.getText().matches("\\d{4}/\\d{2}/\\d{2}")){
+        fechaText.setStyle("-fx-background-color: red");
+        response = false;
+        }else{fechaText.setStyle("-fx-background-color: white");}
         if (nombreText.getText().trim().equals("") ){
             
             nombreText.setStyle("-fx-background-color: red");
@@ -149,7 +137,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
                 nombreText.setStyle("-fx-background-color: red");
             response=false;
             }else
-            nombreText.setStyle("-fx-background-color: grey");
+            nombreText.setStyle("-fx-background-color: white");
         }
         if (apellidosText.getText().trim().equals("")) {
             apellidosText.setStyle("-fx-background-color: red");
@@ -160,7 +148,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
                 apellidosText.setStyle("-fx-background-color: red");
             response=false;
             }else
-            apellidosText.setStyle("-fx-background-color: grey");
+            apellidosText.setStyle("-fx-background-color: white");
         }
         if (alturaText.getText().trim().equals("")) {
             alturaText.setStyle("-fx-background-color: red");
@@ -168,7 +156,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         } else {
             try {
                 Double.parseDouble(alturaText.getText());
-                alturaText.setStyle("-fx-background-color: grey");
+                alturaText.setStyle("-fx-background-color: white");
             } catch (java.lang.NumberFormatException e) {
                 alturaText.setStyle("-fx-background-color: red");
                 response = false;
@@ -181,7 +169,7 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         } else {
             try {
                 Double.parseDouble(pesoText.getText());
-                pesoText.setStyle("-fx-background-color: grey");
+                pesoText.setStyle("-fx-background-color: white");
             } catch (java.lang.NumberFormatException e) {
                 pesoText.setStyle("-fx-background-color: red");
                 response = false;
@@ -198,22 +186,22 @@ public class EditarPerfil implements Initializable, ControlledScreen {
             response = false;
             }
             else
-            correoText.setStyle("-fx-background-color: grey");
+            correoText.setStyle("-fx-background-color: white");
         }
         if (correo2Text.getText().trim().equals("")
                 || !correoText.getText().equals(correo2Text.getText())) {
             correo2Text.setStyle("-fx-background-color: red");
             response = false;
         } else {
-            correo2Text.setStyle("-fx-background-color: grey");
+            correo2Text.setStyle("-fx-background-color: white");
         }
         if (!contraseñaText.getText().equals(contraseña2Text.getText())) {
             contraseña2Text.setStyle("-fx-background-color: red");
             contraseñaText.setStyle("-fx-background-color: red");
             response = false;
         } else {
-            contraseña2Text.setStyle("-fx-background-color: grey");
-            contraseñaText.setStyle("-fx-background-color: grey");
+            contraseña2Text.setStyle("-fx-background-color: white");
+            contraseñaText.setStyle("-fx-background-color: white");
         }
         if (!hombreRadio.isSelected() && !mujerRadio.isSelected()) {
             errorGenero.setText("Elija su genero");
@@ -265,11 +253,10 @@ public class EditarPerfil implements Initializable, ControlledScreen {
         nombreText.setText(usuario.getNombre());
         apellidosText.setText(jugador.getApellidos());
         alturaText.setText("" + jugador.getAltura());
-        fxcalendar.getTextField().setText("19/19/2013");
         pesoText.setText(jugador.getPeso() + "");
         correoText.setText(jugador.getCorreo());
         correo2Text.setText(jugador.getCorreo());
-        fxcalendar.getTextField().setText(jugador.getNacimiento());
+        fechaText.setText(jugador.getNacimiento());
         if (jugador.getGenero().trim().equalsIgnoreCase("mujer")) {
             mujerRadio.setSelected(true);
         }

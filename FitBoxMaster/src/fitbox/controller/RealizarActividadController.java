@@ -307,6 +307,7 @@ import fitbox.ObjetoWebCam;
 import fitbox.controller.dao.Conexion;
 import fitbox.controller.dao.Dal;
 import fitbox.model.Actividad;
+import fitbox.model.BaseDeDatos;
 import fitbox.model.Desafio;
 import fitbox.model.Jugador;
 import fitbox.model.Usuario;
@@ -467,7 +468,16 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     Desafio d = (Desafio) recurso.getObject("desafio");
                     if (d != null) {
                         d.setPuntosRR(crono.getPuntos());
+                        switch(d.getEstado()){
+                            case 0:
+                                d.setEstado(1);
+                                break;
+                            case 2:
+                                d.setEstado(3);
+                                break;
+                        }
                         Dal.getDal().update(d);
+                        
                     }
                 } catch (Exception e) {
                 }
@@ -482,7 +492,7 @@ public class RealizarActividadController implements Initializable, ControlledScr
                     System.out.println("----Error eventos----");
                 }
                 dal.update(j);
-
+BaseDeDatos.getBD().reset();
                 myController.loadScreen(ScreensFramework.PANTALLA_PRINCIPAL, ScreensFramework.PANTALLA_PRINCIPAL_FXML, recurso);
                 //myController.setScreen(ScreensFramework.PANTALLA_PRINCIPAL);
 
@@ -531,7 +541,6 @@ public class RealizarActividadController implements Initializable, ControlledScr
             evento = true;
         } catch (Exception e) {
             System.out.println("Error recurso ,realizar eventos");
-            e.printStackTrace();
         }
 
         ScreensFramework.ponerLimitesMinimosCero();

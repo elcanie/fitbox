@@ -305,9 +305,24 @@ Usuario usuario;
         myController.loadScreen(ScreensFramework.PANTALLA_SEGUIMIENTO, ScreensFramework.PANTALLA_SEGUIMIENTO_FXML, recurso);
 
     }
+    
+    @FXML
+    public void boton(MouseEvent event) throws IOException {
+        goButton.setDisable(true);
+    myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
+    }
 
     @FXML
     public void Actualizar(MouseEvent event) throws IOException {
+        BaseDeDatos.getBD().reset();
+         desafiosMios = BaseDeDatos.getBD().getDesafiosCreadosPorMi(usuario.getId());
+        System.out.println("--->"+desafiosMios.size());
+        desafiosDondeEstoy = BaseDeDatos.getBD().getdesafiosDondeSoyRivalBD(usuario.getId());
+        System.out.println("--->"+desafiosDondeEstoy.size());
+        desafios = new LinkedList<>();
+        desafios.addAll(desafiosMios);
+        desafios.addAll(desafiosDondeEstoy);
+        cargarTabDetalles();
     }
     
      @FXML
@@ -354,6 +369,7 @@ Usuario usuario;
     }
 
     private void cargarTabDetalles() {
+        tabla.setItems(null);
         tusPuntosColumn.setCellValueFactory(
                 new PropertyValueFactory<Desafio, String>("misPuntos"));
         actividadColumn.setCellValueFactory(
@@ -420,8 +436,6 @@ Usuario usuario;
         if(d.getEstado()==0 || d.getEstado()==2){
             goButton.setDisable(false);
             recurso.putObject("desafio", d);
-myController.loadScreen(ScreensFramework.PANTALLA_REALIZARACTIVIDAD, ScreensFramework.PANTALLA_REALIZARACTIVIDAD_FXML, recurso);
-
         }else{
         goButton.setDisable(true);
         }

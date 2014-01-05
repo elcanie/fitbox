@@ -236,7 +236,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
+        
 
         this.recurso = (Recurso) rb;
         this.user = (Usuario) recurso.getObject("usuario");
@@ -256,7 +256,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
         ScreensFramework.stage.setResizable(true);
         //ScreensFramework.stage.sizeToScene();
         //ScreensFramework.stage.centerOnScreen();
-
+        
         ScreensFramework.stage.setMinWidth(970);
         ScreensFramework.stage.setMinHeight(580);
 
@@ -443,7 +443,7 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     private void actualizar() throws SQLException {
 
-
+BaseDeDatos.getBD().reset();
 
         System.out.println("Actualizando ventana principal");
         cargarNoticias();
@@ -486,12 +486,14 @@ public class PantallaPrincipalController implements Initializable, ControlledScr
 
     @FXML
     private void redimensionarImagenes() {
+        
         panelGaleria.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
                 image.setFitWidth(panelGaleria.getWidth());
                 image1.setFitWidth(panelGaleria.getWidth());
                 image2.setFitWidth(panelGaleria.getWidth());
+                System.out.println(ScreensFramework.stage.getWidth());
             }
         });
 

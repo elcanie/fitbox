@@ -103,6 +103,12 @@ for(Jugador jugador : getJugadores())
         
     }
     
-    
+    public void reset(){
+    jugadoresBD=null;
+    actividadesBD=null;
+    CALENDARIOSPORAÑODIAYJUGADOR=null;
+    misNoticias=null;
+   desafiosCreadosPorMiBD=null;desafiosDondeSoyRivalBD=null;eventosUsuarioIniciadoBD=null;
+    }
     
 }

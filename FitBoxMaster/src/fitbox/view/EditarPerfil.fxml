@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.EditarPerfil">
+<AnchorPane fx:id="ventana" prefHeight="560.0" prefWidth="919.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.EditarPerfil">
   <children>
     <HBox id="HBox" alignment="CENTER" prefHeight="590.0" prefWidth="919.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
       <children>
@@ -52,11 +52,7 @@
                 <HBox id="HBox" alignment="CENTER_LEFT" spacing="80.0">
                   <children>
                     <Label font="$x1" text="Nacimiento :" textFill="WHITE" />
-                    <HBox id="HBox" alignment="CENTER" spacing="5.0">
-                      <children>
-                        <HBox fx:id="hPanel" prefHeight="29.0" prefWidth="149.0" />
-                      </children>
-                    </HBox>
+                    <TextField fx:id="fechaText" prefWidth="200.0" promptText="aaaa/mm/dd" />
                   </children>
                 </HBox>
                 <HBox id="HBox" alignment="CENTER_LEFT" spacing="60.0">

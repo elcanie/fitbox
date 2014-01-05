@@ -29,7 +29,8 @@ import javafx.stage.Window;
  * @author RUBEN
  */
 public class ScreensFramework extends Application {
-    
+    public static float width=0;
+    public static float height=0;
     static Group  padre = new Group();
     public static VBox anchorPantalla = new VBox();
     private static boolean bool = true;
