@@ -61,9 +61,9 @@ public class CrearYApuntarDesafioController implements Initializable, Controlled
     @FXML
     private Button btnDesafiar,goButton;
     @FXML
-    private HBox hBoxFin;
+    private TextField fechaText;
     private Recurso recurso;
-    private FXCalendar fxcalendar2;
+
     ObservableList<String> dataDesafios;
     LocalDate fecha;
 boolean segundaVez=false;
@@ -129,12 +129,13 @@ boolean segundaVez=false;
             List<Jugador> listaJugador = dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{idRival}, Jugador.class);
             Jugador jugador = listaJugador.get(0);
             String fechaFormat[] = fechaIni.getText().split("/");
+            String fechaFormat2[] = fechaText.getText().split("/");
             int añoInicio = Integer.parseInt(fechaFormat[2]);
-            int añoFin = fxcalendar2.getSelectedYear();
+int añoFin = Integer.parseInt(fechaFormat2[2]);
             int mesInicio = Integer.parseInt(fechaFormat[1]);
-            int mesFin = fxcalendar2.getSelectedMonth() + 1;
+            int mesFin = Integer.parseInt(fechaFormat2[1]);
             int diaInicio = Integer.parseInt(fechaFormat[0]);
-            int diaFin = fxcalendar2.getSelectedDate();
+            int diaFin = Integer.parseInt(fechaFormat2[0]);
             String fechaInicio = diaInicio + "/" + mesInicio + "/" + añoInicio;
             boolean error = false;
             String fechaFin = diaFin + "/" + mesFin + "/" + añoFin;
@@ -180,9 +181,9 @@ Usuario usuario;
         ScreensFramework.stage.setHeight(590);
 //        ScreensFramework.getStage2().getScene().getStylesheets().add("/com/sai/javafx/calendar/styles/calendar_styles.css");
         fecha = new LocalDate();
-        fxcalendar2 = new FXCalendar();
+
         fechaIni.setText(fecha.getDayOfMonth() + "/" + fecha.getMonthOfYear() + "/" + fecha.getYear());
-        hBoxFin.getChildren().addAll(fxcalendar2);
+
         recurso = (Recurso) rb;
         dataDesafios = FXCollections.observableArrayList();
         usuario = (Usuario) recurso.getObject("usuario");

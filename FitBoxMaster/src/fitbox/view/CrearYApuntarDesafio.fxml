@@ -93,6 +93,7 @@
                             <HBox fx:id="hBoxFin" prefHeight="22.0" prefWidth="92.0" spacing="60.0">
                               <children>
                                 <Label font="$x1" prefWidth="61.0" text="Fecha fin" textFill="WHITE" wrapText="false" />
+                                <TextField fx:id="fechaText" prefWidth="200.0" />
                               </children>
                             </HBox>
                           </children>
