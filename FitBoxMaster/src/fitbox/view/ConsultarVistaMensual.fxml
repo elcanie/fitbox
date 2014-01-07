@@ -10,14 +10,14 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="560.0" prefWidth="920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fitbox.controller.ConsultarVistaMensualController">
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="560.0" prefWidth="920.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fitbox.controller.ConsultarVistaMensualController">
   <children>
     <ListView fx:id="semana1List" layoutX="233.0" layoutY="191.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
     <ListView fx:id="semana2List" layoutX="233.0" layoutY="255.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
     <ListView fx:id="semana3List" layoutX="233.0" layoutY="319.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
     <ListView fx:id="semana4List" layoutX="233.0" layoutY="383.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
     <ListView fx:id="semana5List" layoutX="233.0" layoutY="447.0" onMouseClicked="#mouselClicked" orientation="HORIZONTAL" prefHeight="65.0" prefWidth="434.0" />
-    <Label layoutX="441.0" layoutY="137.0" prefWidth="51.0" text="Label" textFill="WHITE">
+    <Label fx:id="label" layoutX="441.0" layoutY="137.0" prefWidth="51.0" text="Label" textFill="WHITE">
       <font>
         <Font size="18.0" />
       </font>

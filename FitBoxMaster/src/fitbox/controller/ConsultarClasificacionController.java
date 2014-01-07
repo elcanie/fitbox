@@ -55,9 +55,11 @@ public class ConsultarClasificacionController implements Initializable {
         List<Usuario> usuarios = dal.find(Usuario.TODOS_USUARIOS, new Object[]{}, Usuario.class);
         List<Ranking> rankingList = new LinkedList<>();
         for (Usuario u : usuarios) {
+            try{
             Jugador _jugador = (Jugador) dal.find(Jugador.JUGADORBYUSUARIO, new Object[]{u.getId()}, Jugador.class).get(0);
             rankingList.add(new Ranking(u.getNombre(), _jugador.getPuntos()));
-        }
+            }catch(Exception e){}
+            }
 
         TableColumn nombreColumn = new TableColumn("Nombre");
         TableColumn puntosColumn = new TableColumn("Puntos");

@@ -57,6 +57,8 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
     LocalDate now;
     private Recurso recurso;
     private Usuario user;
+    @FXML
+    Label label;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,6 +68,7 @@ public class ConsultarVistaMensualController implements Initializable, Controlle
         this.user = (Usuario) recurso.getObject("usuario");
         LocalDate hoy = new LocalDate();
         updateVista(hoy.getYear(), hoy.getMonthOfYear(), hoy.getDayOfMonth());
+        label.setText(hoy.getMonthOfYear() +"/"+hoy.getYear());
     }
 DateTime dateTime = new DateTime();
     public void updateVista(int _año, int _mes, int _dia) {
@@ -260,6 +263,7 @@ DateTime dateTime = new DateTime();
         now = now.minusMonths(1);
         dateTime = dateTime.minusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
+        label.setText(now.getMonthOfYear() +"/"+now.getYear());
     }
 
     @FXML
@@ -267,6 +271,7 @@ DateTime dateTime = new DateTime();
         now = now.plusMonths(1);
         dateTime = dateTime.plusMonths(1);
         updateVista(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth());
+         label.setText(now.getMonthOfYear() +"/"+now.getYear());
     }
 
     @FXML
